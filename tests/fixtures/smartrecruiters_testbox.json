@@ -1,0 +1,48 @@
+{
+  "content": [
+    {
+      "id": "743999111111",
+      "uuid": "sr-uuid-1",
+      "name": "Senior Software Engineer, Backend",
+      "ref": "https://jobs.smartrecruiters.com/TestBox/743999111111",
+      "releasedDate": "2026-05-15T09:00:00Z",
+      "location": {
+        "city": "Redwood City",
+        "region": "CA",
+        "country": "us",
+        "remote": false
+      },
+      "department": {"label": "Engineering"},
+      "function": {"label": "R&D"},
+      "typeOfEmployment": {"label": "Full-time"},
+      "jobAd": {
+        "sections": {
+          "jobDescription": {"text": "<p>Build great products with 5-8 years of experience.</p>"},
+          "qualifications": {"text": "<p>Python, SQL, distributed systems.</p>"}
+        }
+      }
+    },
+    {
+      "id": "743999222222",
+      "uuid": "sr-uuid-2",
+      "name": "Staff ML Engineer",
+      "releasedDate": "2026-05-20T12:00:00Z",
+      "location": {
+        "city": "",
+        "region": "",
+        "country": "us",
+        "remote": true
+      },
+      "department": {"label": "Machine Learning"},
+      "typeOfEmployment": {"label": "Full-time"},
+      "jobAd": {
+        "sections": {
+          "jobDescription": {"text": "Remote role, minimum 7 years of experience."}
+        }
+      }
+    }
+  ],
+  "totalFound": 2,
+  "offset": 0,
+  "limit": 100
+}

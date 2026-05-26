@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<workzag-jobs>
+  <position>
+    <id>1001</id>
+    <subcompany>HQ</subcompany>
+    <office>Munich</office>
+    <department>Engineering</department>
+    <recruitingCategory>Backend</recruitingCategory>
+    <name>Senior Backend Engineer (m/f/d)</name>
+    <jobDescriptions>
+      <jobDescription>
+        <name>Your role</name>
+        <value>&lt;p&gt;Build distributed systems. 5-8 years of experience.&lt;/p&gt;</value>
+      </jobDescription>
+      <jobDescription>
+        <name>Requirements</name>
+        <value>&lt;p&gt;Python, Go, Kubernetes.&lt;/p&gt;</value>
+      </jobDescription>
+    </jobDescriptions>
+    <employmentType>permanent</employmentType>
+    <seniority>senior</seniority>
+    <schedule>full-time</schedule>
+    <yearsOfExperience>5-8</yearsOfExperience>
+    <keywords>python,go,distributed</keywords>
+    <occupation>Software Developer</occupation>
+    <createdAt>2026-05-08T07:00:00Z</createdAt>
+  </position>
+  <position>
+    <id>1002</id>
+    <office>Remote</office>
+    <department>Design</department>
+    <name>Product Designer</name>
+    <jobDescriptions>
+      <jobDescription>
+        <name>Your role</name>
+        <value>Design beautiful interfaces.</value>
+      </jobDescription>
+    </jobDescriptions>
+    <employmentType>permanent</employmentType>
+    <seniority>mid</seniority>
+    <schedule>full-time</schedule>
+    <yearsOfExperience>2-4</yearsOfExperience>
+    <createdAt>2026-05-17T07:00:00Z</createdAt>
+  </position>
+</workzag-jobs>

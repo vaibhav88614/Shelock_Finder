@@ -1,0 +1,34 @@
+{
+  "offers": [
+    {
+      "id": 5551,
+      "slug": "senior-product-manager",
+      "title": "Senior Product Manager",
+      "city": "Amsterdam",
+      "country": "Netherlands",
+      "careers_url": "https://testrecruitee.recruitee.com/o/senior-product-manager",
+      "careers_apply_url": "https://testrecruitee.recruitee.com/o/senior-product-manager/c/new",
+      "description": "<p>Lead product. 6+ years.</p>",
+      "requirements": "<p>Strong communication.</p>",
+      "department": "Product",
+      "employment_type_code": "permanent",
+      "remote": false,
+      "published_at": "2026-05-12T10:00:00Z"
+    },
+    {
+      "id": 5552,
+      "slug": "remote-customer-success",
+      "title": "Customer Success Manager (Remote)",
+      "city": "",
+      "country": "",
+      "careers_url": "https://testrecruitee.recruitee.com/o/remote-customer-success",
+      "careers_apply_url": "https://testrecruitee.recruitee.com/o/remote-customer-success/c/new",
+      "description": "<p>Talk to customers. 2-4 years.</p>",
+      "department": "Customer Success",
+      "employment_type_code": "permanent",
+      "remote": true,
+      "published_at": "2026-05-21T10:00:00Z"
+    }
+  ],
+  "count": 2
+}

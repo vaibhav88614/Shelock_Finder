@@ -1,0 +1,20 @@
+{
+  "jobPostings": [
+    {
+      "title": "Senior Software Engineer, Compute",
+      "externalPath": "/job/Santa-Clara/Senior-Software-Engineer-Compute_JR-100001",
+      "locationsText": "Santa Clara, CA, United States",
+      "postedOn": "Posted 3 Days Ago",
+      "bulletFields": ["JR-100001"],
+      "startDate": "2026-05-20"
+    },
+    {
+      "title": "Staff GPU Compiler Engineer",
+      "externalPath": "/job/Remote/Staff-GPU-Compiler-Engineer_JR-100002",
+      "locationsText": "Remote, USA",
+      "postedOn": "Posted Yesterday",
+      "bulletFields": ["JR-100002"]
+    }
+  ],
+  "total": 2
+}

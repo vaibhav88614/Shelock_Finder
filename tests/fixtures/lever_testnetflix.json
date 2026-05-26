@@ -1,0 +1,36 @@
+[
+  {
+    "id": "8a7b6c5d-1111-2222-3333-444455556666",
+    "text": "Senior Backend Engineer, Platform",
+    "hostedUrl": "https://jobs.lever.co/testnetflix/8a7b6c5d-1111-2222-3333-444455556666",
+    "applyUrl": "https://jobs.lever.co/testnetflix/8a7b6c5d-1111-2222-3333-444455556666/apply",
+    "categories": {
+      "location": "Los Gatos, CA",
+      "commitment": "Full-time",
+      "team": "Platform Engineering",
+      "department": "Engineering",
+      "allLocations": ["Los Gatos, CA", "Remote - US"]
+    },
+    "createdAt": 1779235200000,
+    "descriptionPlain": "Join our platform team. 6+ years of experience with Java or Scala required. Strong systems background.",
+    "description": "<p>Join our platform team.</p>",
+    "lists": [
+      {"text": "Requirements", "content": "<ul><li>6+ years</li><li>JVM</li></ul>"}
+    ],
+    "additionalPlain": "Bonus: experience with c++ or Rust.",
+    "workplaceType": "hybrid"
+  },
+  {
+    "id": "9b8c7d6e-aaaa-bbbb-cccc-ddddeeeeffff",
+    "text": "Data Scientist (Remote)",
+    "hostedUrl": "https://jobs.lever.co/testnetflix/9b8c7d6e-aaaa-bbbb-cccc-ddddeeeeffff",
+    "categories": {
+      "location": "Remote - Worldwide",
+      "commitment": "Full-time",
+      "team": "Data Science"
+    },
+    "createdAt": 1779408000000,
+    "descriptionPlain": "Help us build recommendation models. 3-5 years experience with Python and ML.",
+    "workplaceType": "remote"
+  }
+]

@@ -1,0 +1,43 @@
+{
+  "jobs": [
+    {
+      "id": 4567890,
+      "internal_job_id": 123456,
+      "title": "Senior Software Engineer, Payments",
+      "updated_at": "2026-05-20T17:33:48-04:00",
+      "requisition_id": "REQ-101",
+      "location": {"name": "San Francisco, CA"},
+      "absolute_url": "https://boards.greenhouse.io/teststripe/jobs/4567890",
+      "metadata": [
+        {"id": 1, "name": "Employment Type", "value": "Full Time", "value_type": "single_select"}
+      ],
+      "content": "<p>We are looking for a <strong>Senior Software Engineer</strong> with 5-8 years of experience building distributed systems.</p><p>You will work on Stripe's payments platform.</p>",
+      "departments": [{"id": 11, "name": "Engineering"}],
+      "offices": [{"id": 1, "name": "San Francisco"}]
+    },
+    {
+      "id": 4567891,
+      "title": "Staff Machine Learning Engineer (Remote)",
+      "updated_at": "2026-05-22T09:10:00-04:00",
+      "location": {"name": "Remote - North America"},
+      "absolute_url": "https://boards.greenhouse.io/teststripe/jobs/4567891",
+      "metadata": [],
+      "content": "<p>Minimum 7 years of ML engineering experience required. Python and PyTorch a must.</p>",
+      "departments": [{"id": 12, "name": "Machine Learning"}],
+      "offices": []
+    },
+    {
+      "id": 4567892,
+      "title": "New Grad Software Engineer",
+      "updated_at": "2026-05-23T11:00:00-04:00",
+      "location": {"name": "New York, NY (Hybrid)"},
+      "absolute_url": "https://boards.greenhouse.io/teststripe/jobs/4567892",
+      "metadata": [
+        {"name": "Employment Type", "value": "Full Time"}
+      ],
+      "content": "<p>Entry-level role for recent graduates. No prior industry experience required.</p>",
+      "departments": [{"id": 11, "name": "Engineering"}]
+    }
+  ],
+  "meta": {"total": 3}
+}

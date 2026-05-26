@@ -1,0 +1,27 @@
+{
+  "jobs": [
+    {
+      "id": "tt-1",
+      "title": "Senior Marketing Manager",
+      "pitch": "Lead our growth.",
+      "body": "<p>5-8 years of marketing experience.</p>",
+      "department": "Marketing",
+      "location": "Stockholm, Sweden",
+      "remote_status": "none",
+      "employment_type": "Full-time",
+      "published_at": "2026-05-09T08:00:00Z",
+      "careersite_job_url": "https://testtt.teamtailor.com/jobs/tt-1-senior-marketing-manager"
+    },
+    {
+      "id": "tt-2",
+      "title": "Junior Recruiter",
+      "body": "<p>Entry-level talent acquisition role.</p>",
+      "department": "People",
+      "location": "Remote",
+      "remote_status": "fully",
+      "employment_type": "Full-time",
+      "published_at": "2026-05-21T08:00:00Z",
+      "careersite_job_url": "https://testtt.teamtailor.com/jobs/tt-2-junior-recruiter"
+    }
+  ]
+}

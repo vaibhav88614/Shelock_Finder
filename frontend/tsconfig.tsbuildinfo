@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/api.ts","./src/main.tsx","./src/types.ts","./src/components/addcompanymodal.tsx","./src/components/adminpage.tsx","./src/components/filters.tsx","./src/components/jobdrawer.tsx","./src/components/jobtable.tsx","./src/components/statsbar.tsx"],"version":"5.9.3"}

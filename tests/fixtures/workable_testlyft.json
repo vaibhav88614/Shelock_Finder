@@ -1,0 +1,32 @@
+{
+  "total": 2,
+  "results": [
+    {
+      "id": "wk-1",
+      "shortcode": "ABC123",
+      "title": "Senior Data Engineer",
+      "full_title": "Senior Data Engineer (Berlin)",
+      "url": "https://apply.workable.com/testlyft/j/ABC123",
+      "location": {"city": "Berlin", "region": "", "country": "Germany"},
+      "department": "Data",
+      "employment_type": "Full-time",
+      "telecommuting": false,
+      "description": "<p>Build data pipelines. 5-8 years.</p>",
+      "requirements": "<p>Python, Spark, Kafka.</p>",
+      "published_on": "2026-05-10"
+    },
+    {
+      "id": "wk-2",
+      "shortcode": "DEF456",
+      "title": "Remote DevOps Engineer",
+      "url": "https://apply.workable.com/testlyft/j/DEF456",
+      "location": {"city": "", "region": "", "country": "Worldwide"},
+      "department": "Infrastructure",
+      "employment_type": "Full-time",
+      "telecommuting": true,
+      "description": "<p>Kubernetes, Terraform.</p>",
+      "requirements": "<p>3-5 years experience.</p>",
+      "published_on": "2026-05-19"
+    }
+  ]
+}
