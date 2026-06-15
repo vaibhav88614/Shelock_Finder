@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { fetchCompanyHealth, fetchRuns, triggerScrape } from "../api";
+import { fetchCompanyHealth, fetchRuns, triggerScrape, triggerScrapeAll } from "../api";
 import type { CompanyHealth, ScrapeRun } from "../types";
 
 type SortKey = "failures" | "name" | "last_success" | "jobs_active";
@@ -52,7 +52,17 @@ export function AdminPage() {
   const [filterText, setFilterText] = useState("");
 
   const health = useQuery({ queryKey: ["company-health"], queryFn: fetchCompanyHealth });
-  const runs = useQuery({ queryKey: ["runs", "admin"], queryFn: () => fetchRuns(25) });
+  const runs = useQuery({
+    queryKey: ["runs", "admin"],
+    queryFn: () => fetchRuns(25),
+    // Poll while a run is in-flight so the UI catches the finished_at update.
+    refetchInterval: (q) => {
+      const data = q.state.data as ScrapeRun[] | undefined;
+      return data?.some((r) => r.finished_at === null) ? 3000 : false;
+    },
+  });
+
+  const inFlight = (runs.data ?? []).find((r) => r.finished_at === null) ?? null;
 
   const scrape = useMutation({
     mutationFn: (id: number) => triggerScrape(id),
@@ -63,6 +73,22 @@ export function AdminPage() {
     },
   });
 
+  const scrapeAll = useMutation({
+    mutationFn: (opts: { noPlaywright: boolean }) =>
+      triggerScrapeAll({ noPlaywright: opts.noPlaywright }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["runs"] });
+      qc.invalidateQueries({ queryKey: ["company-health"] });
+      qc.invalidateQueries({ queryKey: ["stats"] });
+    },
+  });
+
+  const onScrapeAll = (noPlaywright: boolean) => {
+    const label = noPlaywright ? "all companies (skipping Playwright sites)" : "all 219 companies";
+    if (!window.confirm(`Start a full scrape of ${label}? This takes 1–5 minutes.`)) return;
+    scrapeAll.mutate({ noPlaywright });
+  };
+
   const rows = sortHealth(health.data ?? [], sortKey).filter((r) =>
     !filterText ? true : r.name.toLowerCase().includes(filterText.toLowerCase())
   );
@@ -72,6 +98,46 @@ export function AdminPage() {
 
   return (
     <div className="space-y-5">
+      <section className="bg-white border border-slate-200 rounded-lg p-4 shadow-sm flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h2 className="text-sm font-semibold text-slate-700">Scrape control</h2>
+          <p className="text-xs text-slate-500">
+            {inFlight
+              ? `Run #${inFlight.id} in progress — started ${fmtAgo(inFlight.started_at)} ago.`
+              : "No scrape is currently running."}
+          </p>
+        </div>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            disabled={!!inFlight || scrapeAll.isPending}
+            onClick={() => onScrapeAll(false)}
+            className="text-sm bg-slate-900 text-white rounded px-3 py-1.5 hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            title="Scrape every active company"
+          >
+            {inFlight
+              ? "Scraping…"
+              : scrapeAll.isPending
+              ? "Queueing…"
+              : "Scrape all"}
+          </button>
+          <button
+            type="button"
+            disabled={!!inFlight || scrapeAll.isPending}
+            onClick={() => onScrapeAll(true)}
+            className="text-xs border border-slate-300 rounded px-3 py-1.5 hover:bg-slate-100 disabled:opacity-50 disabled:cursor-not-allowed"
+            title="Skip Playwright-tier sites (faster)"
+          >
+            Scrape all (no Playwright)
+          </button>
+        </div>
+        {scrapeAll.isError && (
+          <div className="basis-full text-xs text-red-700">
+            {(scrapeAll.error as Error).message}
+          </div>
+        )}
+      </section>
+
       <section className="bg-white border border-slate-200 rounded-lg p-4 shadow-sm">
         <h2 className="text-sm font-semibold text-slate-700 mb-3">Per-company health</h2>
         <div className="flex flex-wrap items-end gap-3 mb-3">

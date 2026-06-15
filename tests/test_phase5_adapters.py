@@ -336,8 +336,10 @@ async def test_workday_happy(load_fixture, fake_company):
         j1 = jobs[0]
         assert j1.external_id == "JR-100001"
         assert j1.title == "Senior Software Engineer, Compute"
+        # apply_url must include /en-US/<site> prefix so it lands on the
+        # specific posting page (without it, Workday redirects to careers home).
         assert j1.apply_url == (
-            f"https://{host}/job/Santa-Clara/Senior-Software-Engineer-Compute_JR-100001"
+            f"https://{host}/en-US/Careers/job/Santa-Clara/Senior-Software-Engineer-Compute_JR-100001"
         )
         assert j1.location == "Santa Clara, CA, United States"
         # startDate wins over relative postedOn

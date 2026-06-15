@@ -74,6 +74,21 @@ class WorkdayAdapter(BaseAdapter):
     async def fetch(self, company) -> list[RawJob]:  # noqa: ANN001
         host, tenant, site = _parse_workday_identifier(company.ats_identifier)
         url = f"https://{host}/wday/cxs/{tenant}/{site}/jobs"
+        # Many Workday tenants reject the bare API call with HTTP 422 unless the
+        # request looks like it came from their own JS shell. Origin + Referer +
+        # a browser-class UA satisfies the server-side CSRF/XHR check.
+        site_root = f"https://{host}/en-US/{site}"
+        req_headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Origin": f"https://{host}",
+            "Referer": site_root,
+            "User-Agent": (
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/124.0.0.0 Safari/537.36"
+            ),
+        }
         out: list[RawJob] = []
         offset = 0
         while True:
@@ -84,11 +99,7 @@ class WorkdayAdapter(BaseAdapter):
                 "searchText": "",
             }
             try:
-                resp = await self.client.post(
-                    url,
-                    json=payload,
-                    headers={"Accept": "application/json", "Content-Type": "application/json"},
-                )
+                resp = await self.client.post(url, json=payload, headers=req_headers)
             except httpx.HTTPError as e:
                 raise AdapterError(f"Workday fetch failed for {tenant}/{site}: {e}") from e
             if resp.status_code == 404:
@@ -104,10 +115,11 @@ class WorkdayAdapter(BaseAdapter):
             page = data.get("jobPostings")
             if not isinstance(page, list):
                 raise AdapterError(f"Workday {tenant}/{site} missing 'jobPostings' list")
-            # Stamp host so normalize() can build absolute apply URLs without re-parsing.
+            # Stamp host+site so normalize() can build absolute apply URLs without re-parsing.
             for entry in page:
                 if isinstance(entry, dict):
                     entry["__host"] = host
+                    entry["__site"] = site
             out.extend(page)
             total = int(data.get("total") or 0)
             offset += len(page)
@@ -118,6 +130,7 @@ class WorkdayAdapter(BaseAdapter):
 
     def normalize(self, raw: RawJob, company) -> NormalizedJob:  # noqa: ANN001
         host = raw.get("__host") or ""
+        site = raw.get("__site") or ""
         bullets = raw.get("bulletFields") or []
         external_id = None
         if isinstance(bullets, list) and bullets:
@@ -129,7 +142,19 @@ class WorkdayAdapter(BaseAdapter):
 
         title = (raw.get("title") or "").strip()
         ext_path = (raw.get("externalPath") or "").strip()
-        apply_url = f"https://{host}{ext_path}" if host and ext_path else ext_path
+        # Workday's externalPath is usually `/job/<Location>/<slug>_R-12345`
+        # (NO locale/site prefix). The user-facing URL needs `/en-US/<site>`
+        # in front, otherwise the link lands on the generic careers home.
+        if not ext_path:
+            apply_url = ""
+        elif "/en-" in ext_path[:8] or (site and f"/{site}/" in ext_path):
+            # Already absolute-ish (some tenants return the full path).
+            apply_url = f"https://{host}{ext_path}" if host else ext_path
+        else:
+            apply_url = (
+                f"https://{host}/en-US/{site}{ext_path}" if host and site else
+                (f"https://{host}{ext_path}" if host else ext_path)
+            )
 
         location = (raw.get("locationsText") or "").strip() or None
 
@@ -167,5 +192,5 @@ class WorkdayAdapter(BaseAdapter):
             experience_min=exp_min,
             experience_max=exp_max,
             posted_date=posted_date,
-            raw_payload={k: v for k, v in raw.items() if k != "__host"},
+            raw_payload={k: v for k, v in raw.items() if k not in ("__host", "__site")},
         )

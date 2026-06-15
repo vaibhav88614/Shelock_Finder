@@ -48,7 +48,12 @@ def get_settings() -> Settings:
         retention_days=int(os.environ.get("JOBPULSE_RETENTION_DAYS", "15")),
         user_agent=os.environ.get(
             "JOBPULSE_USER_AGENT",
-            "JobPulseBot/1.0 (+https://github.com/local/jobpulse)",
+            # Browser-class UA to avoid blanket CDN/Cloudflare bot blocks
+            # (Personio, Teamtailor, some Workday tenants 403/429 generic bot UAs).
+            # Override with JOBPULSE_USER_AGENT to identify yourself explicitly.
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/124.0.0.0 Safari/537.36",
         ),
     )
 

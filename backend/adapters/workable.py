@@ -2,9 +2,9 @@
 
 Public POST endpoint, no auth required:
     POST https://apply.workable.com/api/v3/accounts/<subdomain>/jobs
-    body: {"query": "", "limit": 100, "offset": N}
+    body: {"query": ""}             # newer accounts REJECT limit/offset with HTTP 400
 
-Returns `{results: [...], total: N}`.
+Returns `{results: [...], total: N, nextPage?: "<token>"}`.
 
 Each result entry contains:
     id, title, shortcode, code, full_title, location: {city, country, region, ...},
@@ -30,7 +30,7 @@ from .base import AdapterError, BaseAdapter, NormalizedJob, RawJob
 class WorkableAdapter(BaseAdapter):
     ats_type = "workable"
     BASE_URL = "https://apply.workable.com/api/v3/accounts"
-    PAGE_LIMIT = 100
+    MAX_PAGES = 50  # safety cap (~5000 jobs at typical page size)
 
     async def fetch(self, company) -> list[RawJob]:  # noqa: ANN001
         sub = (company.ats_identifier or "").strip()
@@ -40,13 +40,10 @@ class WorkableAdapter(BaseAdapter):
             )
         url = f"{self.BASE_URL}/{sub}/jobs"
         out: list[RawJob] = []
-        offset = 0
-        while True:
+        body: dict[str, Any] = {"query": ""}
+        for _ in range(self.MAX_PAGES):
             try:
-                resp = await self.client.post(
-                    url,
-                    json={"query": "", "limit": self.PAGE_LIMIT, "offset": offset},
-                )
+                resp = await self.client.post(url, json=body)
             except httpx.HTTPError as e:
                 raise AdapterError(f"Workable fetch failed for {sub!r}: {e}") from e
             if resp.status_code == 404:
@@ -61,10 +58,13 @@ class WorkableAdapter(BaseAdapter):
             if not isinstance(page, list):
                 raise AdapterError(f"Workable {sub!r} missing 'results' list")
             out.extend(page)
-            total = int(data.get("total") or 0)
-            offset += len(page)
-            if not page or offset >= total or len(out) >= 5000:
+            if len(out) >= 5000:
                 break
+            # Workable's cursor pagination: response carries nextPage when more rows exist.
+            token = data.get("nextPage") or data.get("next_page")
+            if not token:
+                break
+            body = {"query": "", "token": str(token)}
         logger.debug("Workable[{}]: {} jobs", sub, len(out))
         return out
 

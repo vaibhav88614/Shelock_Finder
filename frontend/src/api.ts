@@ -59,6 +59,21 @@ export async function triggerScrape(companyId: number): Promise<void> {
   if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
 }
 
+export async function triggerScrapeAll(opts: { noPlaywright?: boolean } = {}): Promise<void> {
+  const qs = opts.noPlaywright ? "?no_playwright=true" : "";
+  const r = await fetch(`${API}/scrape-runs${qs}`, { method: "POST" });
+  if (!r.ok) {
+    let msg = `${r.status} ${r.statusText}`;
+    try {
+      const body = await r.json();
+      if (body?.detail) msg = `${r.status}: ${body.detail}`;
+    } catch {
+      /* ignore */
+    }
+    throw new Error(msg);
+  }
+}
+
 export const detectAts = (url: string) =>
   getJson<DetectAtsResult>(`${API}/companies/detect?url=${encodeURIComponent(url)}`);
 
