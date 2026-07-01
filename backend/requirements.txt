@@ -18,7 +18,6 @@ playwright==1.48.0
 # Utilities
 loguru==0.7.2
 python-dateutil==2.9.0.post0
-tenacity==9.0.0
 typer==0.13.1
 rich==13.9.4
 

@@ -12,11 +12,13 @@ from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from ..db import get_session
-from ..models import Company, Job
+from ..models import Company, Job, utcnow_naive
 from .filters import (
     JobFilters,
+    POSTED_WITHIN_DAYS_MAX,
     build_jobs_query,
     cursor_for_row,
+    encode_cursor,
     matched_keywords,
 )
 from .schemas import JobOut, JobsListOut
@@ -82,7 +84,7 @@ def list_jobs(
     keyword_logic: str = Query(default="or", pattern="^(and|or)$"),
     experience_min: int | None = Query(default=None, ge=0, le=30),
     experience_max: int | None = Query(default=None, ge=0, le=30),
-    posted_within_days: int = Query(default=15, ge=1, le=15),
+    posted_within_days: int = Query(default=15, ge=1, le=POSTED_WITHIN_DAYS_MAX),
     location: str | None = Query(default=None, max_length=200),
     remote_only: bool | None = Query(default=None),
     sort: str = Query(default="posted_date", pattern="^(posted_date|company|title|first_seen)$"),
@@ -119,7 +121,23 @@ def list_jobs(
     next_cursor = None
     if len(rows) > limit:
         last_job, last_company = page[-1]
-        next_cursor = cursor_for_row(filters, last_job, last_company)
+        peek_job, _ = rows[limit]
+
+        # Phase 4.2: at the non-null → NULL transition (sort=posted_date only,
+        # since first_seen_at is NOT NULL), emit a null-tail cursor so the
+        # next-page query can use the cheap `sort_col IS NULL AND id < ...`
+        # branch instead of re-scanning every NULL row.
+        if (
+            sort == "posted_date"
+            and last_job.posted_date is not None
+            and peek_job.posted_date is None
+        ):
+            # `id < peek_job.id + 1` includes peek_job (the first NULL row).
+            # Sort order within the NULL tail is `id DESC`, and peek_job has
+            # the highest id among NULL rows by construction.
+            next_cursor = encode_cursor(None, peek_job.id + 1)
+        else:
+            next_cursor = cursor_for_row(filters, last_job, last_company)
 
     total: int | None = None
     if include_total:
@@ -152,7 +170,7 @@ def export_jobs_csv(
     keyword_logic: str = Query(default="or", pattern="^(and|or)$"),
     experience_min: int | None = Query(default=None, ge=0, le=30),
     experience_max: int | None = Query(default=None, ge=0, le=30),
-    posted_within_days: int = Query(default=15, ge=1, le=15),
+    posted_within_days: int = Query(default=15, ge=1, le=POSTED_WITHIN_DAYS_MAX),
     location: str | None = Query(default=None, max_length=200),
     remote_only: bool | None = Query(default=None),
     sort: str = Query(default="posted_date", pattern="^(posted_date|company|title|first_seen)$"),
@@ -211,7 +229,7 @@ def export_jobs_csv(
             )
             yield buf.getvalue().encode("utf-8")
 
-    filename = f"jobpulse_export_{datetime.utcnow():%Y%m%d_%H%M}.csv"
+    filename = f"jobpulse_export_{utcnow_naive():%Y%m%d_%H%M}.csv"
     headers = {"Content-Disposition": f'attachment; filename="{filename}"'}
     return StreamingResponse(_row_iter(), media_type="text/csv", headers=headers)
 

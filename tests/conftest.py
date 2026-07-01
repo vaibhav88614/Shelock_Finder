@@ -28,6 +28,65 @@ def load_fixture():
 
 
 @pytest.fixture
+def lever_payload_now(load_fixture):
+    """Lever fixture with `createdAt` ms-epochs anchored to "now - N days".
+
+    The on-disk fixture pins `createdAt` to fixed timestamps in May 2026, which
+    ages out as wall-clock advances and used to cause `test_scrape_full_dedupe_lifecycle`
+    to time-rot. This wrapper rewrites the two timestamps to 3 days ago and 2
+    days ago at fixture-load time — well within the 15-day retention window.
+    """
+    from backend.models import utcnow_naive
+
+    raw = load_fixture("lever_testnetflix.json")
+    now_ms = int(utcnow_naive().timestamp() * 1000)
+    one_day_ms = 86_400_000
+    for i, job in enumerate(raw):
+        days_ago = 3 - i  # job[0]=3d ago, job[1]=2d ago
+        job["createdAt"] = now_ms - days_ago * one_day_ms
+    return raw
+
+
+@pytest.fixture
+def stepping_clock(monkeypatch):
+    """Monkey-patch `backend.scrape.utcnow_naive` with a per-call stepping clock.
+
+    Each call returns a timestamp 1 second later than the previous one. Lets
+    tests run successive `run_scrape` invocations without `time.sleep`
+    waiting for the CSV-filename timestamp to roll over.
+    """
+    state = {"t": datetime(2026, 6, 1, 12, 0, 0)}
+
+    def _now() -> datetime:
+        cur = state["t"]
+        state["t"] = cur + timedelta(seconds=1)
+        return cur
+
+    monkeypatch.setattr("backend.scrape.utcnow_naive", _now)
+    return state
+
+
+@pytest.fixture
+def captured_logs():
+    """Capture loguru log records for assertions.
+
+    pytest's built-in `caplog` works on stdlib logging; the backend uses
+    loguru. We add a temporary sink that appends rendered messages to a list,
+    then remove it after the test.
+    """
+    from loguru import logger
+
+    messages: list[str] = []
+    handler_id = logger.add(
+        lambda m: messages.append(str(m)),
+        level="WARNING",
+        format="{level}|{message}",
+    )
+    yield messages
+    logger.remove(handler_id)
+
+
+@pytest.fixture
 def fake_company():
     """A duck-typed stand-in for the SQLAlchemy `Company` model.
 
@@ -98,10 +157,10 @@ def seeded_db(api_env):
     """Seed 3 companies + 8 jobs covering every filter axis used by /jobs tests."""
     from backend.adapters.base import fingerprint
     from backend.db import session_scope
-    from backend.models import Company, Job, ScrapeRun
+    from backend.models import Company, Job, ScrapeRun, utcnow_naive
 
     client, settings_ = api_env
-    now = datetime.utcnow()
+    now = utcnow_naive()
 
     with session_scope() as s:
         stripe = Company(

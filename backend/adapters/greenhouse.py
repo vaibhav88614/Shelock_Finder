@@ -75,7 +75,7 @@ class GreenhouseAdapter(BaseAdapter):
             )
         url = f"{self.BASE_URL}/{token}/jobs?content=true"
         try:
-            resp = await self.client.get(url)
+            resp = await self.request("GET", url)
         except httpx.HTTPError as e:
             raise AdapterError(f"Greenhouse fetch failed for {token!r}: {e}") from e
         if resp.status_code == 404:

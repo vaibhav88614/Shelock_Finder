@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import FocusLock from "react-focus-lock";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   bulkImportCompanies,
@@ -6,6 +7,7 @@ import {
   detectAts,
   type CreateCompanyPayload,
 } from "../api";
+import { useEscapeToClose } from "../hooks/useEscapeToClose";
 import type { BulkImportResult, DetectAtsResult } from "../types";
 
 interface Props {
@@ -20,13 +22,15 @@ function deriveName(url: string): string {
   try {
     const u = new URL(url);
     const host = u.hostname.replace(/^www\./, "");
-    return host.split(".")[0].replace(/[-_]+/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+    const first = host.split(".")[0] ?? host;
+    return first.replace(/[-_]+/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
   } catch {
     return "";
   }
 }
 
 export function AddCompanyModal({ onClose }: Props) {
+  useEscapeToClose(onClose);
   const qc = useQueryClient();
   const [tab, setTab] = useState<Tab>("single");
 
@@ -71,6 +75,7 @@ export function AddCompanyModal({ onClose }: Props) {
 
   // ---- bulk-import state --------------------------------------------------
   const [file, setFile] = useState<File | null>(null);
+  const bulkCloseRef = useRef<HTMLButtonElement>(null);
   const bulk = useMutation({
     mutationFn: (f: File) => bulkImportCompanies(f),
     onSuccess: () => {
@@ -78,6 +83,12 @@ export function AddCompanyModal({ onClose }: Props) {
       qc.invalidateQueries({ queryKey: ["jobs"] });
     },
   });
+
+  // Move keyboard focus to the close button once the bulk result lands so
+  // screen-reader / keyboard users get a clear path out of the modal.
+  useEffect(() => {
+    if (bulk.data) bulkCloseRef.current?.focus();
+  }, [bulk.data]);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -111,11 +122,12 @@ export function AddCompanyModal({ onClose }: Props) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center" role="dialog" aria-modal="true">
-      <div className="absolute inset-0 bg-slate-900/40" onClick={onClose} />
-      <div className="relative bg-white rounded-lg shadow-xl w-full max-w-xl mx-4 overflow-hidden">
-        <div className="flex items-center justify-between border-b border-slate-200 px-5 py-3">
-          <h2 className="text-lg font-semibold">Add company</h2>
+    <FocusLock returnFocus>
+      <div className="fixed inset-0 z-50 flex items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="add-company-title">
+        <div className="absolute inset-0 bg-slate-900/40" onClick={onClose} aria-hidden="true" />
+        <div className="relative bg-white rounded-lg shadow-xl w-full max-w-xl mx-4 overflow-hidden">
+          <div className="flex items-center justify-between border-b border-slate-200 px-5 py-3">
+            <h2 id="add-company-title" className="text-lg font-semibold">Add company</h2>
           <button
             onClick={onClose}
             className="text-slate-500 hover:text-slate-900 text-2xl leading-none px-2"
@@ -244,19 +256,22 @@ export function AddCompanyModal({ onClose }: Props) {
               onChange={(e) => setFile(e.target.files?.[0] ?? null)}
               className="block text-sm"
             />
-            {bulk.isError && (
-              <div className="text-xs text-red-700 bg-red-50 border border-red-200 rounded p-2">
-                {(bulk.error as Error).message}
-              </div>
-            )}
-            {bulk.data && <BulkResultBlock result={bulk.data} />}
+            <div aria-live="polite" aria-atomic="true">
+              {bulk.isError && (
+                <div className="text-xs text-red-700 bg-red-50 border border-red-200 rounded p-2">
+                  {(bulk.error as Error).message}
+                </div>
+              )}
+              {bulk.data && <BulkResultBlock result={bulk.data} />}
+            </div>
             <div className="flex justify-end gap-2 pt-2">
               <button
+                ref={bulkCloseRef}
                 type="button"
                 onClick={onClose}
                 className="text-sm border border-slate-300 rounded px-3 py-1.5 hover:bg-slate-100"
               >
-                Close
+                {bulk.data ? "Done — close" : "Close"}
               </button>
               <button
                 type="button"
@@ -271,6 +286,7 @@ export function AddCompanyModal({ onClose }: Props) {
         )}
       </div>
     </div>
+    </FocusLock>
   );
 }
 

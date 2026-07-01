@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import type { JobFilters, SortOption } from "../types";
 
 interface Props {
@@ -16,25 +16,33 @@ const SORTS: { label: string; value: SortOption }[] = [
 
 // Local debounced state so typing in keyword/location doesn't refetch on
 // every keystroke. We propagate up after 300ms of inactivity.
-export function Filters({ value, onChange, onExport }: Props) {
+export const Filters = memo(function Filters({ value, onChange, onExport }: Props) {
   const [keywordText, setKeywordText] = useState(value.keywords.join(", "));
   const [location, setLocation] = useState(value.location);
 
+  // Refs let the debounced timeout read the *current* filter snapshot without
+  // listing `value` / `onChange` as deps (which would reset the timer on
+  // every parent re-render). Closure-stale bugs are why this exists.
+  const valueRef = useRef(value);
+  const onChangeRef = useRef(onChange);
+  valueRef.current = value;
+  onChangeRef.current = onChange;
+
   useEffect(() => {
     const t = setTimeout(() => {
+      const v = valueRef.current;
       const kws = keywordText
         .split(",")
         .map((s) => s.trim())
         .filter(Boolean);
       if (
-        kws.join("|") !== value.keywords.join("|") ||
-        location !== value.location
+        kws.join("|") !== v.keywords.join("|") ||
+        location !== v.location
       ) {
-        onChange({ ...value, keywords: kws, location });
+        onChangeRef.current({ ...v, keywords: kws, location });
       }
     }, 300);
     return () => clearTimeout(t);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keywordText, location]);
 
   const set = <K extends keyof JobFilters>(k: K, v: JobFilters[K]) =>
@@ -161,4 +169,4 @@ export function Filters({ value, onChange, onExport }: Props) {
       </div>
     </div>
   );
-}
+});

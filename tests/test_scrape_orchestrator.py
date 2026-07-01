@@ -92,14 +92,14 @@ def _csv_row_count(path: Path) -> int:
         return max(0, sum(1 for _ in csv.reader(fh)) - 1)  # minus header
 
 
-def test_scrape_full_dedupe_lifecycle(temp_db, load_fixture):
+def test_scrape_full_dedupe_lifecycle(temp_db, load_fixture, lever_payload_now, stepping_clock):
     """Run #1 ingests 5, run #2 ingests 0, run #3 marks 1 inactive."""
     from backend.db import session_scope
     from backend.models import Company, Job, ScrapeRun, ScrapeRunCompany
     from backend.scrape import run_scrape
 
     gh_payload = load_fixture("greenhouse_teststripe.json")  # 3 jobs
-    lever_payload = load_fixture("lever_testnetflix.json")    # 2 jobs
+    lever_payload = lever_payload_now  # 2 jobs with fresh createdAt timestamps
 
     _seed_companies()
 
@@ -131,9 +131,9 @@ def test_scrape_full_dedupe_lifecycle(temp_db, load_fixture):
     assert _csv_row_count(csv1) == 5, "first run's delta CSV must contain all 5 jobs"
 
     # --- Run #2: same upstream → zero new --------------------------------
-    # Sleep a hair so the started_at timestamp differs and we get a distinct CSV.
-    import time
-    time.sleep(1.1)
+    # `stepping_clock` advances `utcnow_naive` per call, so run #2's started_at
+    # is already at least 1s after run #1's last call — distinct CSV filename
+    # without `time.sleep`.
 
     with respx.mock(assert_all_called=True) as router:
         router.get(gh_url).mock(return_value=httpx.Response(200, json=gh_payload))
@@ -157,7 +157,6 @@ def test_scrape_full_dedupe_lifecycle(temp_db, load_fixture):
     assert _csv_row_count(csv2) == 0, "second delta CSV must be empty"
 
     # --- Run #3: one Lever job disappears upstream -----------------------
-    time.sleep(1.1)
     shrunk_lever = lever_payload[:1]  # drop the second posting
     with respx.mock(assert_all_called=True) as router:
         router.get(gh_url).mock(return_value=httpx.Response(200, json=gh_payload))

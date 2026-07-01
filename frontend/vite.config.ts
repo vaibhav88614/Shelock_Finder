@@ -17,5 +17,17 @@ export default defineConfig({
     outDir: "dist",
     emptyOutDir: true,
     sourcemap: false,
+    rollupOptions: {
+      output: {
+        // Split vendor libs into their own chunks for better browser caching
+        // — app code churns far more often than React / React-Query / the
+        // focus-lock dep, so users only re-download what actually changed.
+        manualChunks: {
+          react: ["react", "react-dom"],
+          query: ["@tanstack/react-query"],
+          focuslock: ["react-focus-lock"],
+        },
+      },
+    },
   },
 });

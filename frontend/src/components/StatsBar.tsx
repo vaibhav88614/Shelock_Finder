@@ -1,3 +1,4 @@
+import { memo } from "react";
 import type { ScrapeRun, Stats } from "../types";
 
 interface Props {
@@ -26,7 +27,7 @@ function Tile({ label, value, sub }: { label: string; value: string | number; su
   );
 }
 
-export function StatsBar({ stats, runs }: Props) {
+export const StatsBar = memo(function StatsBar({ stats, runs }: Props) {
   const lastRun = runs?.[0] ?? stats?.last_run ?? null;
   return (
     <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
@@ -49,4 +50,4 @@ export function StatsBar({ stats, runs }: Props) {
       />
     </div>
   );
-}
+});

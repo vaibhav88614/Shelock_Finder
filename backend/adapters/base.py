@@ -23,7 +23,9 @@ Design notes
 """
 from __future__ import annotations
 
+import asyncio
 import hashlib
+import random
 import re
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
@@ -31,6 +33,7 @@ from datetime import datetime
 from typing import Any
 
 import httpx
+from loguru import logger
 
 from ..config import settings
 
@@ -116,6 +119,17 @@ class BaseAdapter(ABC):
 
     ats_type: str = ""
 
+    # -- Retry policy (shared by every adapter's HTTP calls) ---------------
+    # Retry transient throttling / server errors; 404 and other 4xx are
+    # terminal and never retried. Retry-After (seconds form) is honored but
+    # capped so a hostile header can't blow past the orchestrator's 60s
+    # per-company timeout.
+    RETRY_STATUSES: frozenset[int] = frozenset({429, 500, 502, 503, 504})
+    MAX_RETRIES: int = 3
+    BACKOFF_BASE_S: float = 0.5
+    BACKOFF_CAP_S: float = 8.0
+    RETRY_AFTER_CAP_S: float = 20.0
+
     def __init__(self, client: httpx.AsyncClient | None = None) -> None:
         # The orchestrator passes in a shared client so connection pooling
         # works across companies. Tests can omit it; we lazily create one.
@@ -138,6 +152,67 @@ class BaseAdapter(ABC):
         if self._owns_client and self._client is not None:
             await self._client.aclose()
             self._client = None
+
+    # -- Resilient request wrapper -----------------------------------------
+
+    def _backoff_delay(self, attempt: int) -> float:
+        """Full-jitter exponential backoff for retry `attempt` (0-indexed)."""
+        ceiling = min(self.BACKOFF_CAP_S, self.BACKOFF_BASE_S * (2 ** attempt))
+        return ceiling + random.uniform(0.0, self.BACKOFF_BASE_S)
+
+    @staticmethod
+    def _parse_retry_after(resp: httpx.Response) -> float | None:
+        """Return the Retry-After delay in seconds if given as an integer.
+
+        HTTP-date forms return None (we fall back to computed backoff).
+        """
+        raw = resp.headers.get("Retry-After")
+        if not raw:
+            return None
+        try:
+            secs = float(raw.strip())
+        except ValueError:
+            return None
+        return secs if secs >= 0 else None
+
+    async def request(self, method: str, url: str, **kwargs: Any) -> httpx.Response:
+        """Issue an HTTP request with retry on 429/5xx and transport errors.
+
+        Non-retryable responses (2xx, 3xx, 404, other 4xx) are returned to the
+        caller unchanged so existing per-adapter status handling still applies.
+        """
+        attempt = 0
+        while True:
+            try:
+                resp = await self.client.request(method, url, **kwargs)
+            except (httpx.TimeoutException, httpx.TransportError) as exc:
+                if attempt >= self.MAX_RETRIES:
+                    raise
+                delay = self._backoff_delay(attempt)
+                logger.debug(
+                    "{} {} transport error ({}); retry {}/{} in {:.2f}s",
+                    method, url, type(exc).__name__, attempt + 1, self.MAX_RETRIES, delay,
+                )
+                await asyncio.sleep(delay)
+                attempt += 1
+                continue
+
+            if resp.status_code in self.RETRY_STATUSES and attempt < self.MAX_RETRIES:
+                retry_after = self._parse_retry_after(resp)
+                delay = (
+                    min(retry_after, self.RETRY_AFTER_CAP_S)
+                    if retry_after is not None
+                    else self._backoff_delay(attempt)
+                )
+                logger.debug(
+                    "{} {} -> HTTP {}; retry {}/{} in {:.2f}s",
+                    method, url, resp.status_code, attempt + 1, self.MAX_RETRIES, delay,
+                )
+                await asyncio.sleep(delay)
+                attempt += 1
+                continue
+
+            return resp
 
     # -- Contract -----------------------------------------------------------
 

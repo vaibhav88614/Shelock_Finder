@@ -134,20 +134,26 @@ Delete `data/jobpulse.db*` to start over; rerun `migrate` + `seed`.
 ## HTTP API (selected)
 
 All endpoints are under `/api/v1`. Local-only by default; set `JOBPULSE_API_KEY`
-to require an `X-API-Key` header.
+to require an `X-API-Key` header on every mutating endpoint (POST/PATCH/DELETE).
+The dashboard reads the key from `localStorage` (settable from the Admin page)
+or from a `VITE_API_KEY` build-time env var.
 
 | Method | Path | Notes |
 |---|---|---|
-| `GET` | `/jobs` | Filter + cursor-paginate jobs. Supports `q`, `location`, `remote`, `company_id`, `since`, `keyword_any`, `keyword_all`, `sort`, `cursor`, `limit`, `include_total`. |
-| `GET` | `/jobs/export.csv` | Streaming CSV of the same filtered set. |
+| `GET` | `/jobs` | Filter + cursor-paginate jobs. Query params: `keywords` (repeat), `keyword_logic=and\|or`, `location`, `remote_only`, `company_ids` (repeat), `experience_min`, `experience_max`, `posted_within_days` (1-15 by default; widen via `JOBPULSE_POSTED_WITHIN_DAYS_MAX`), `sort=posted_date\|company\|title\|first_seen`, `cursor`, `limit` (≤200), `new_since` (ISO), `new_in_last_run`, `include_total`. Tokenizable keywords use FTS5; punctuation-bearing terms (`c++`, `.net`, multi-word phrases) fall back to LIKE automatically. |
+| `GET` | `/jobs/export.csv` | Streaming CSV of the same filtered set. Accepts the same query params as `/jobs` (no `cursor` / `limit` — emits the full set). |
+| `GET` | `/jobs/{id}` | Single job by id (404 if missing). |
 | `GET` | `/companies` | List all companies. |
-| `POST` | `/companies` | Create a company (single URL, with optional selectors for `custom`/`playwright`). |
-| `POST` | `/companies/bulk` | Upload a CSV of companies. |
+| `POST` | `/companies` | Create a company (single URL, with optional selectors for `custom`/`playwright`). Auth required. |
+| `PATCH` | `/companies/{id}` | Update fields. Auth required. |
+| `DELETE` | `/companies/{id}` | Remove company + cascade jobs. Auth required. |
+| `POST` | `/companies/bulk-import` | Upload a CSV of companies (multipart `file`). Auth required. |
 | `GET` | `/companies/detect?url=...` | Auto-detect ATS family. |
-| `POST` | `/companies/{id}/scrape` | Queue an immediate per-company rescrape (in-process background task). |
+| `POST` | `/companies/{id}/scrape` | Queue an immediate per-company rescrape (in-process background task). Auth required. |
 | `GET` | `/stats` | Totals + last scrape run. |
 | `GET` | `/stats/companies` | Per-company health (active jobs, last success, failure streak). |
 | `GET` | `/scrape-runs?limit=N` | Recent runs (newest first). |
+| `POST` | `/scrape-runs` | Trigger a full scrape across all active companies. Returns 202 + `{status:"queued"}`; 409 if another run is in-flight (`finished_at IS NULL`). Optional `?ats=greenhouse` and `?no_playwright=true`. Auth required. |
 | `GET` | `/health` | Liveness probe. |
 
 ## Adding a custom adapter (per-company, no code)

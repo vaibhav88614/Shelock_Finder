@@ -34,7 +34,7 @@ class TeamtailorAdapter(BaseAdapter):
             )
         url = f"https://{sub}.teamtailor.com/jobs.json"
         try:
-            resp = await self.client.get(url)
+            resp = await self.request("GET", url)
         except httpx.HTTPError as e:
             raise AdapterError(f"Teamtailor fetch failed for {sub!r}: {e}") from e
         if resp.status_code == 404:

@@ -9,7 +9,67 @@ import type {
   Stats,
 } from "./types";
 
-const API = "/api/v1";
+const API = (import.meta.env.VITE_API_BASE as string | undefined) ?? "/api/v1";
+
+// --- API key handling ----------------------------------------------------
+// The backend requires X-API-Key on mutating endpoints when JOBPULSE_API_KEY
+// is set on the server. We read from localStorage first (user-settable via the
+// admin settings panel), then fall back to a Vite build-time env var.
+const API_KEY_STORAGE_KEY = "jobpulse_api_key";
+
+export function getApiKey(): string | null {
+  try {
+    const stored = localStorage.getItem(API_KEY_STORAGE_KEY);
+    if (stored) return stored;
+  } catch {
+    /* localStorage unavailable */
+  }
+  const fromEnv = (import.meta.env.VITE_API_KEY as string | undefined) ?? null;
+  return fromEnv && fromEnv.length > 0 ? fromEnv : null;
+}
+
+export function setApiKey(key: string): void {
+  const trimmed = key.trim();
+  if (!trimmed) {
+    clearApiKey();
+    return;
+  }
+  try {
+    localStorage.setItem(API_KEY_STORAGE_KEY, trimmed);
+  } catch {
+    /* ignore */
+  }
+}
+
+export function clearApiKey(): void {
+  try {
+    localStorage.removeItem(API_KEY_STORAGE_KEY);
+  } catch {
+    /* ignore */
+  }
+}
+
+function mutateHeaders(extra: Record<string, string> = {}): Record<string, string> {
+  const headers: Record<string, string> = { ...extra };
+  const key = getApiKey();
+  if (key) headers["X-API-Key"] = key;
+  return headers;
+}
+
+async function readErrorMessage(r: Response): Promise<string> {
+  let msg = `${r.status} ${r.statusText}`;
+  try {
+    const body = await r.json();
+    if (body?.detail) {
+      const detail =
+        typeof body.detail === "string" ? body.detail : JSON.stringify(body.detail);
+      msg = `${r.status}: ${detail}`;
+    }
+  } catch {
+    /* ignore */
+  }
+  return msg;
+}
 
 function buildJobParams(filters: JobFilters, extra: Record<string, string> = {}): URLSearchParams {
   const p = new URLSearchParams();
@@ -49,29 +109,41 @@ export function exportCsvUrl(filters: JobFilters): string {
   return `${API}/jobs/export.csv?${buildJobParams(filters).toString()}`;
 }
 
+export async function downloadJobsCsv(filters: JobFilters): Promise<void> {
+  const url = exportCsvUrl(filters);
+  const r = await fetch(url, { headers: { Accept: "text/csv" } });
+  if (!r.ok) throw new Error(await readErrorMessage(r));
+  const blob = await r.blob();
+  const objUrl = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = objUrl;
+  a.download = `jobpulse_export_${new Date().toISOString().slice(0, 10)}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(objUrl);
+}
+
 export const fetchStats = () => getJson<Stats>(`${API}/stats`);
 export const fetchCompanies = () => getJson<Company[]>(`${API}/companies`);
 export const fetchRuns = (limit = 5) => getJson<ScrapeRun[]>(`${API}/scrape-runs?limit=${limit}`);
 export const fetchCompanyHealth = () => getJson<CompanyHealth[]>(`${API}/stats/companies`);
 
 export async function triggerScrape(companyId: number): Promise<void> {
-  const r = await fetch(`${API}/companies/${companyId}/scrape`, { method: "POST" });
-  if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+  const r = await fetch(`${API}/companies/${companyId}/scrape`, {
+    method: "POST",
+    headers: mutateHeaders(),
+  });
+  if (!r.ok) throw new Error(await readErrorMessage(r));
 }
 
 export async function triggerScrapeAll(opts: { noPlaywright?: boolean } = {}): Promise<void> {
   const qs = opts.noPlaywright ? "?no_playwright=true" : "";
-  const r = await fetch(`${API}/scrape-runs${qs}`, { method: "POST" });
-  if (!r.ok) {
-    let msg = `${r.status} ${r.statusText}`;
-    try {
-      const body = await r.json();
-      if (body?.detail) msg = `${r.status}: ${body.detail}`;
-    } catch {
-      /* ignore */
-    }
-    throw new Error(msg);
-  }
+  const r = await fetch(`${API}/scrape-runs${qs}`, {
+    method: "POST",
+    headers: mutateHeaders(),
+  });
+  if (!r.ok) throw new Error(await readErrorMessage(r));
 }
 
 export const detectAts = (url: string) =>
@@ -88,26 +160,24 @@ export interface CreateCompanyPayload {
 export async function createCompany(payload: CreateCompanyPayload): Promise<Company> {
   const r = await fetch(`${API}/companies`, {
     method: "POST",
-    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    headers: mutateHeaders({
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    }),
     body: JSON.stringify(payload),
   });
-  if (!r.ok) {
-    let detail = `${r.status} ${r.statusText}`;
-    try {
-      const body = await r.json();
-      if (body?.detail) detail = typeof body.detail === "string" ? body.detail : JSON.stringify(body.detail);
-    } catch {
-      /* ignore */
-    }
-    throw new Error(detail);
-  }
+  if (!r.ok) throw new Error(await readErrorMessage(r));
   return (await r.json()) as Company;
 }
 
 export async function bulkImportCompanies(file: File): Promise<BulkImportResult> {
   const form = new FormData();
   form.append("file", file);
-  const r = await fetch(`${API}/companies/bulk-import`, { method: "POST", body: form });
-  if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+  const r = await fetch(`${API}/companies/bulk-import`, {
+    method: "POST",
+    headers: mutateHeaders(),
+    body: form,
+  });
+  if (!r.ok) throw new Error(await readErrorMessage(r));
   return (await r.json()) as BulkImportResult;
 }

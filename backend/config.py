@@ -27,6 +27,9 @@ class Settings:
     port: int
     api_key: str | None
     retention_days: int
+    posted_within_days_max: int
+    store_raw_payload: bool
+    extra_cors_origins: tuple[str, ...]
     user_agent: str
 
     @property
@@ -46,6 +49,26 @@ def get_settings() -> Settings:
         port=int(os.environ.get("JOBPULSE_PORT", "8000")),
         api_key=os.environ.get("JOBPULSE_API_KEY") or None,
         retention_days=int(os.environ.get("JOBPULSE_RETENTION_DAYS", "15")),
+        # Upper bound for the `posted_within_days` API filter. Default 15
+        # matches the dashboard's rolling-window UX; power users / scripts
+        # can widen via env var without touching code.
+        posted_within_days_max=int(
+            os.environ.get("JOBPULSE_POSTED_WITHIN_DAYS_MAX", "15")
+        ),
+        # Opt-in retention of raw adapter payloads on each `jobs` row
+        # (truncated to 200 KB). Off by default to keep the DB lean —
+        # nothing in the read path consumes this column. Set to `1`/`true`
+        # if debugging adapter normalization.
+        store_raw_payload=os.environ.get("JOBPULSE_STORE_RAW_PAYLOAD", "").lower()
+        in {"1", "true", "yes", "on"},
+        # Extra CORS origins (comma-separated) for contributors running the
+        # dashboard on a non-default port. The defaults in `serve.py` already
+        # cover the standard Vite ports.
+        extra_cors_origins=tuple(
+            o.strip()
+            for o in os.environ.get("JOBPULSE_DEV_ORIGINS", "").split(",")
+            if o.strip()
+        ),
         user_agent=os.environ.get(
             "JOBPULSE_USER_AGENT",
             # Browser-class UA to avoid blanket CDN/Cloudflare bot blocks

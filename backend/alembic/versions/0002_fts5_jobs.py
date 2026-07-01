@@ -7,6 +7,7 @@ Create Date: 2026-05-23
 from __future__ import annotations
 
 from alembic import op
+from sqlalchemy import text
 
 
 revision = "0002_fts5_jobs"
@@ -16,22 +17,33 @@ depends_on = None
 
 
 def upgrade() -> None:
-    # External-content FTS5 table backed by the `jobs` table.
-    op.execute(
-        """
-        CREATE VIRTUAL TABLE jobs_fts USING fts5(
-            title,
-            description,
-            content='jobs',
-            content_rowid='id',
-            tokenize='porter unicode61'
-        )
-        """
+    conn = op.get_bind()
+    has_fts = (
+        conn.execute(
+            text(
+                "SELECT name FROM sqlite_master WHERE type='table' AND name='jobs_fts'"
+            )
+        ).first()
+        is not None
     )
-    # Keep FTS5 in sync with the base table.
+    if not has_fts:
+        # External-content FTS5 table backed by the `jobs` table.
+        op.execute(
+            """
+            CREATE VIRTUAL TABLE jobs_fts USING fts5(
+                title,
+                description,
+                content='jobs',
+                content_rowid='id',
+                tokenize='porter unicode61'
+            )
+            """
+        )
+    # Keep FTS5 in sync with the base table. `IF NOT EXISTS` guards make the
+    # upgrade re-runnable (e.g. after a partial migration or manual recovery).
     op.execute(
         """
-        CREATE TRIGGER jobs_ai AFTER INSERT ON jobs BEGIN
+        CREATE TRIGGER IF NOT EXISTS jobs_ai AFTER INSERT ON jobs BEGIN
             INSERT INTO jobs_fts(rowid, title, description)
             VALUES (new.id, new.title, COALESCE(new.description, ''));
         END
@@ -39,7 +51,7 @@ def upgrade() -> None:
     )
     op.execute(
         """
-        CREATE TRIGGER jobs_ad AFTER DELETE ON jobs BEGIN
+        CREATE TRIGGER IF NOT EXISTS jobs_ad AFTER DELETE ON jobs BEGIN
             INSERT INTO jobs_fts(jobs_fts, rowid, title, description)
             VALUES('delete', old.id, old.title, COALESCE(old.description, ''));
         END
@@ -47,7 +59,7 @@ def upgrade() -> None:
     )
     op.execute(
         """
-        CREATE TRIGGER jobs_au AFTER UPDATE ON jobs BEGIN
+        CREATE TRIGGER IF NOT EXISTS jobs_au AFTER UPDATE ON jobs BEGIN
             INSERT INTO jobs_fts(jobs_fts, rowid, title, description)
             VALUES('delete', old.id, old.title, COALESCE(old.description, ''));
             INSERT INTO jobs_fts(rowid, title, description)

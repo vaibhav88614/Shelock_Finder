@@ -28,6 +28,7 @@ import httpx
 from dateutil import parser as dateparser
 from loguru import logger
 
+from ..models import utcnow_naive
 from ._experience import parse_experience
 from ._text import detect_remote_type
 from .base import AdapterError, BaseAdapter, NormalizedJob, RawJob
@@ -52,7 +53,7 @@ def _parse_workday_identifier(ats_identifier: str | None) -> tuple[str, str, str
 def _parse_relative_posted(s: str | None, now: datetime | None = None) -> datetime | None:
     if not s:
         return None
-    base = now or datetime.utcnow()
+    base = now or utcnow_naive()
     text = s.strip()
     if _TODAY_RE.search(text):
         return base
@@ -99,7 +100,7 @@ class WorkdayAdapter(BaseAdapter):
                 "searchText": "",
             }
             try:
-                resp = await self.client.post(url, json=payload, headers=req_headers)
+                resp = await self.request("POST", url, json=payload, headers=req_headers)
             except httpx.HTTPError as e:
                 raise AdapterError(f"Workday fetch failed for {tenant}/{site}: {e}") from e
             if resp.status_code == 404:

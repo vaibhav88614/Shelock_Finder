@@ -42,14 +42,14 @@ from typing import Iterable
 
 import httpx
 from loguru import logger
-from sqlalchemy import and_, delete, or_, select, update
+from sqlalchemy import and_, delete, select, update
 
 from .adapters import ADAPTERS, AdapterError, NormalizedJob, get_adapter_cls
 from .adapters.base import BaseAdapter, fingerprint
 from .config import settings
-from .db import SessionLocal, session_scope
+from .db import SessionLocal, engine, session_scope
 from .migrations import upgrade_to_head
-from .models import Company, Job, ScrapeRun, ScrapeRunCompany
+from .models import Company, Job, ScrapeRun, ScrapeRunCompany, utcnow_naive
 from .rate_limit import RateLimiterGroup
 
 
@@ -159,7 +159,7 @@ def _parse_since(since: str | None) -> datetime | None:
 
 
 async def _orchestrate(company_ids: list[int]) -> int:
-    started_at = datetime.utcnow()
+    started_at = utcnow_naive()
 
     with session_scope() as s:
         run = ScrapeRun(started_at=started_at, status="running")
@@ -182,13 +182,42 @@ async def _orchestrate(company_ids: list[int]) -> int:
             cls = get_adapter_cls(ats_type)
             adapter_cache[ats_type] = cls(client=client)
 
-        tasks = [
-            asyncio.create_task(
-                _scrape_one(cid, run_id, started_at, adapter_cache, semaphore, buckets)
+        try:
+            tasks = [
+                asyncio.create_task(
+                    _scrape_one(cid, run_id, started_at, adapter_cache, semaphore, buckets)
+                )
+                for cid in company_ids
+            ]
+            raw_results = await asyncio.gather(*tasks, return_exceptions=True)
+        finally:
+            # Best-effort cleanup of adapter-owned httpx clients. Adapters
+            # created with a shared client (current default) treat aclose()
+            # as a no-op; this covers the lazy-init path used outside the
+            # orchestrator (and any future adapter that opens its own client).
+            await asyncio.gather(
+                *(a.aclose() for a in adapter_cache.values()),
+                return_exceptions=True,
             )
-            for cid in company_ids
-        ]
-        results = await asyncio.gather(*tasks, return_exceptions=False)
+
+    # Backstop: convert any exception that escaped `_scrape_one`'s own
+    # try/except wrappers into a recorded failure so totals stay consistent
+    # and one broken company can never abort the whole run (spec §6).
+    results: list[_PerCompanyResult] = []
+    for cid, r in zip(company_ids, raw_results):
+        if isinstance(r, BaseException):
+            logger.exception(
+                "unhandled exception escaped _scrape_one for company id={}: {!r}",
+                cid,
+                r,
+            )
+            results.append(
+                await asyncio.to_thread(
+                    _record_company_failure, run_id, cid, f"unhandled: {r!r}"
+                )
+            )
+        else:
+            results.append(r)
 
     total_found = sum(r.jobs_found for r in results)
     total_new = sum(r.jobs_new for r in results)
@@ -246,7 +275,13 @@ async def _scrape_one(
     semaphore: asyncio.Semaphore,
     buckets: RateLimiterGroup,
 ) -> _PerCompanyResult:
-    company_snapshot = await asyncio.to_thread(_load_company_snapshot, company_id)
+    try:
+        company_snapshot = await asyncio.to_thread(_load_company_snapshot, company_id)
+    except Exception as e:  # noqa: BLE001 — isolate per spec §6
+        logger.exception("company id={} snapshot load failed", company_id)
+        return await asyncio.to_thread(
+            _record_company_failure, run_id, company_id, f"snapshot load failed: {e!r}"
+        )
     if company_snapshot is None:
         return _PerCompanyResult(company_id, "failed", 0, 0, "company missing")
 
@@ -282,9 +317,15 @@ async def _scrape_one(
         except Exception as e:  # noqa: BLE001
             logger.warning("company id={} normalize() failed for one entry: {}", company_id, e)
 
-    return await asyncio.to_thread(
-        _persist_company, run_id, company_id, started_at, normalized
-    )
+    try:
+        return await asyncio.to_thread(
+            _persist_company, run_id, company_id, started_at, normalized
+        )
+    except Exception as e:  # noqa: BLE001 — isolate per spec §6
+        logger.exception("company id={} persist failed", company_id)
+        return await asyncio.to_thread(
+            _record_company_failure, run_id, company_id, f"persist failed: {e!r}"
+        )
 
 
 # ---------------------------------------------------------------------------
@@ -339,7 +380,7 @@ def _record_company_failure(run_id: int, company_id: int, error: str) -> _PerCom
         )
         c = s.get(Company, company_id)
         if c is not None:
-            c.last_scraped_at = datetime.utcnow()
+            c.last_scraped_at = utcnow_naive()
             c.consecutive_failures = (c.consecutive_failures or 0) + 1
             if c.consecutive_failures >= AUTO_DEACTIVATE_AFTER:
                 c.active = False
@@ -367,68 +408,82 @@ def _persist_company(
     by_fp: dict[str, NormalizedJob] = {}
     for nj in normalized:
         if not nj.title or not nj.apply_url:
+            logger.warning(
+                "dropped job missing title/apply_url: company_id={}, external_id={!r}, title={!r}",
+                company_id,
+                nj.external_id,
+                nj.title,
+            )
             continue
         fp = fingerprint(company_id, nj.external_id, nj.title, nj.location, nj.apply_url)
         by_fp[fp] = nj
-    fps = list(by_fp.keys())
+    items = list(by_fp.items())
 
     with session_scope() as s:
-        existing: dict[str, Job] = {}
-        for chunk in _chunks(fps, 500):
-            rows = s.scalars(
+        # Process in 500-job chunks so memory and writer lock-hold stay
+        # bounded for large boards (Workday tenants, Stripe — 1000+ postings).
+        # The existing-row SELECT is bounded by the chunk size; new rows are
+        # added incrementally and flushed each chunk to push pending state
+        # out of the unit-of-work map.
+        for chunk_start in range(0, len(items), 500):
+            chunk = items[chunk_start : chunk_start + 500]
+            chunk_fps = [fp for fp, _ in chunk]
+            existing_rows = s.scalars(
                 select(Job).where(
-                    and_(Job.company_id == company_id, Job.fingerprint.in_(chunk))
+                    and_(Job.company_id == company_id, Job.fingerprint.in_(chunk_fps))
                 )
             ).all()
-            for j in rows:
-                existing[j.fingerprint] = j
+            existing = {j.fingerprint: j for j in existing_rows}
 
-        for fp, nj in by_fp.items():
-            row = existing.get(fp)
-            if row is None:
-                s.add(
-                    Job(
-                        company_id=company_id,
-                        external_id=nj.external_id,
-                        fingerprint=fp,
-                        title=nj.title,
-                        description=nj.description,
-                        location=nj.location,
-                        remote_type=nj.remote_type,
-                        department=nj.department,
-                        employment_type=nj.employment_type,
-                        experience_min=nj.experience_min,
-                        experience_max=nj.experience_max,
-                        posted_date=nj.posted_date,
-                        apply_url=nj.apply_url,
-                        raw_payload=(
-                            json.dumps(nj.raw_payload, default=str)[:200_000]
-                            if nj.raw_payload
-                            else None
-                        ),
-                        first_seen_at=started_at,
-                        last_seen_at=started_at,
-                        is_active=True,
+            for fp, nj in chunk:
+                row = existing.get(fp)
+                if row is None:
+                    s.add(
+                        Job(
+                            company_id=company_id,
+                            external_id=nj.external_id,
+                            fingerprint=fp,
+                            title=nj.title,
+                            description=nj.description,
+                            location=nj.location,
+                            remote_type=nj.remote_type,
+                            department=nj.department,
+                            employment_type=nj.employment_type,
+                            experience_min=nj.experience_min,
+                            experience_max=nj.experience_max,
+                            posted_date=nj.posted_date,
+                            apply_url=nj.apply_url,
+                            raw_payload=(
+                                json.dumps(nj.raw_payload, default=str)[:200_000]
+                                if nj.raw_payload and settings.store_raw_payload
+                                else None
+                            ),
+                            first_seen_at=started_at,
+                            last_seen_at=started_at,
+                            is_active=True,
+                        )
                     )
-                )
-                jobs_new += 1
-            else:
-                # Refresh mutable fields; never bump first_seen_at.
-                row.title = nj.title
-                row.description = nj.description
-                row.location = nj.location
-                row.remote_type = nj.remote_type
-                row.department = nj.department
-                row.employment_type = nj.employment_type
-                if nj.experience_min is not None:
-                    row.experience_min = nj.experience_min
-                if nj.experience_max is not None:
-                    row.experience_max = nj.experience_max
-                if nj.posted_date is not None:
-                    row.posted_date = nj.posted_date
-                row.apply_url = nj.apply_url
-                row.last_seen_at = started_at
-                row.is_active = True
+                    jobs_new += 1
+                else:
+                    # Refresh mutable fields; never bump first_seen_at.
+                    row.title = nj.title
+                    row.description = nj.description
+                    row.location = nj.location
+                    row.remote_type = nj.remote_type
+                    row.department = nj.department
+                    row.employment_type = nj.employment_type
+                    if nj.experience_min is not None:
+                        row.experience_min = nj.experience_min
+                    if nj.experience_max is not None:
+                        row.experience_max = nj.experience_max
+                    if nj.posted_date is not None:
+                        row.posted_date = nj.posted_date
+                    row.apply_url = nj.apply_url
+                    row.last_seen_at = started_at
+                    row.is_active = True
+            # Flush each chunk's pending writes so SA can release intermediate
+            # state. Single outer transaction preserved for atomicity.
+            s.flush()
 
         s.add(
             ScrapeRunCompany(
@@ -442,7 +497,7 @@ def _persist_company(
 
         c = s.get(Company, company_id)
         if c is not None:
-            now = datetime.utcnow()
+            now = utcnow_naive()
             c.last_scraped_at = now
             c.last_success_at = now
             c.consecutive_failures = 0
@@ -474,20 +529,27 @@ def _finalize_run(
             .values(is_active=False)
         )
 
-        # Retention prune (spec §4.5).
-        cutoff = datetime.utcnow() - timedelta(days=settings.retention_days)
+        # Retention prune (spec §4.5): keep inactive jobs for `retention_days`
+        # AFTER they last appeared upstream, then drop. Keyed on `last_seen_at`
+        # so retention is independent of upstream `posted_date` quality (some
+        # ATSes omit it; old prune wiped those rows the instant they went
+        # inactive). The just-marked-inactive UPDATE above sets is_active=False
+        # but leaves last_seen_at at the *previous* run's started_at, so a job
+        # only gets deleted here once that previous run is itself older than
+        # `retention_days`.
+        cutoff = utcnow_naive() - timedelta(days=settings.retention_days)
         s.execute(
             delete(Job).where(
                 and_(
                     Job.is_active.is_(False),
-                    or_(Job.posted_date.is_(None), Job.posted_date < cutoff),
+                    Job.last_seen_at < cutoff,
                 )
             )
         )
 
         run = s.get(ScrapeRun, run_id)
         if run is not None:
-            run.finished_at = datetime.utcnow()
+            run.finished_at = utcnow_naive()
             run.companies_scraped = len(company_ids)
             run.jobs_found_total = total_found
             run.jobs_new_total = total_new
@@ -499,6 +561,17 @@ def _finalize_run(
                 run.status = "partial"
             if n_fail:
                 run.error_summary = f"{n_fail} of {len(company_ids)} companies failed"
+
+    # Reclaim WAL bytes and update SQLite planner stats after a writer-heavy
+    # run. Non-fatal if the connection is busy; the auto-checkpoint will pick
+    # up later writes anyway. `optimize` is a one-shot statistics refresh that
+    # benefits the planner for subsequent reads.
+    try:
+        with engine.connect() as conn:
+            conn.exec_driver_sql("PRAGMA wal_checkpoint(TRUNCATE)")
+            conn.exec_driver_sql("PRAGMA optimize")
+    except Exception:  # noqa: BLE001 — ops housekeeping, never abort a run
+        logger.exception("WAL checkpoint/optimize after _finalize_run failed (non-fatal)")
 
 
 CSV_COLUMNS = [
@@ -537,8 +610,10 @@ def _write_delta_csv(
                 )
             )
             .order_by(Company.name, Job.title)
+            .execution_options(yield_per=500)
         )
-        for job, company_name in s.execute(stmt).all():
+        # Stream rows in chunks so memory stays bounded even on a 10k-row delta.
+        for job, company_name in s.execute(stmt):
             writer.writerow(
                 [
                     company_name,
@@ -562,8 +637,3 @@ def _write_delta_csv(
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
-
-
-def _chunks(lst, size: int):
-    for i in range(0, len(lst), size):
-        yield lst[i : i + size]

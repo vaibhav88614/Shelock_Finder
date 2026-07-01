@@ -14,7 +14,7 @@ Notes:
 """
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 from sqlalchemy import (
     Boolean,
@@ -29,8 +29,18 @@ from sqlalchemy import (
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
-def _utcnow() -> datetime:
-    return datetime.utcnow()
+def utcnow_naive() -> datetime:
+    """Naive UTC datetime — single source of truth.
+
+    `datetime.utcnow()` is deprecated in Python 3.13. Every timestamp column
+    in this schema stores naive UTC, so we strip tzinfo from
+    `datetime.now(timezone.utc)` to preserve that convention.
+    """
+    return datetime.now(timezone.utc).replace(tzinfo=None)
+
+
+# Backwards-compatible alias used by column defaults below.
+_utcnow = utcnow_naive
 
 
 class Base(DeclarativeBase):

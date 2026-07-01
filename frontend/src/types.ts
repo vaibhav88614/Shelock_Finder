@@ -41,11 +41,13 @@ export interface Company {
   created_at: string;
 }
 
+export type ScrapeRunStatus = "running" | "ok" | "partial" | "failed";
+
 export interface ScrapeRun {
   id: number;
   started_at: string;
   finished_at: string | null;
-  status: string;
+  status: ScrapeRunStatus;
   companies_scraped: number;
   jobs_found_total: number;
   jobs_new_total: number;

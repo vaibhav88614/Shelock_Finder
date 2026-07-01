@@ -73,7 +73,7 @@ class LeverAdapter(BaseAdapter):
             )
         url = f"{self.BASE_URL}/{slug}?mode=json"
         try:
-            resp = await self.client.get(url)
+            resp = await self.request("GET", url)
         except httpx.HTTPError as e:
             raise AdapterError(f"Lever fetch failed for {slug!r}: {e}") from e
         if resp.status_code == 404:

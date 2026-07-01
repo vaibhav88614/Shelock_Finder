@@ -1,14 +1,14 @@
 """/api/v1/stats — dashboard header + admin/health summary."""
 from __future__ import annotations
 
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 from fastapi import APIRouter, Depends
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from ..db import get_session
-from ..models import Company, Job, ScrapeRun
+from ..models import Company, Job, ScrapeRun, utcnow_naive
 from .schemas import CompanyHealth, ScrapeRunOut, StatsOut
 
 
@@ -17,7 +17,7 @@ router = APIRouter(prefix="/stats", tags=["stats"])
 
 @router.get("", response_model=StatsOut)
 def get_stats(s: Session = Depends(get_session)) -> StatsOut:
-    cutoff_15d = datetime.utcnow() - timedelta(days=15)
+    cutoff_15d = utcnow_naive() - timedelta(days=15)
 
     jobs_total = s.scalar(select(func.count()).select_from(Job)) or 0
     jobs_active = s.scalar(

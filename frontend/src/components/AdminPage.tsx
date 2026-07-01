@@ -1,9 +1,26 @@
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { fetchCompanyHealth, fetchRuns, triggerScrape, triggerScrapeAll } from "../api";
+import {
+  clearApiKey,
+  fetchCompanyHealth,
+  fetchRuns,
+  getApiKey,
+  setApiKey,
+  triggerScrape,
+  triggerScrapeAll,
+} from "../api";
 import type { CompanyHealth, ScrapeRun } from "../types";
 
 type SortKey = "failures" | "name" | "last_success" | "jobs_active";
+
+// Module-scoped so the `refetchInterval` option keeps a stable identity
+// across renders — React-Query treats new option identities as a fresh
+// config and would otherwise thrash polling timers on every parent render.
+function runsRefetchInterval(q: {
+  state: { data: ScrapeRun[] | undefined };
+}): number | false {
+  return q.state.data?.some((r) => r.finished_at === null) ? 3000 : false;
+}
 
 function fmtAgo(iso: string | null): string {
   if (!iso) return "never";
@@ -50,16 +67,18 @@ export function AdminPage() {
   const qc = useQueryClient();
   const [sortKey, setSortKey] = useState<SortKey>("failures");
   const [filterText, setFilterText] = useState("");
+  const [apiKeyDraft, setApiKeyDraft] = useState("");
+  const [apiKeyMessage, setApiKeyMessage] = useState<string | null>(null);
+  const [apiKeyConfigured, setApiKeyConfigured] = useState<boolean>(
+    () => getApiKey() !== null
+  );
 
   const health = useQuery({ queryKey: ["company-health"], queryFn: fetchCompanyHealth });
   const runs = useQuery({
     queryKey: ["runs", "admin"],
     queryFn: () => fetchRuns(25),
     // Poll while a run is in-flight so the UI catches the finished_at update.
-    refetchInterval: (q) => {
-      const data = q.state.data as ScrapeRun[] | undefined;
-      return data?.some((r) => r.finished_at === null) ? 3000 : false;
-    },
+    refetchInterval: runsRefetchInterval,
   });
 
   const inFlight = (runs.data ?? []).find((r) => r.finished_at === null) ?? null;
@@ -87,6 +106,27 @@ export function AdminPage() {
     const label = noPlaywright ? "all companies (skipping Playwright sites)" : "all 219 companies";
     if (!window.confirm(`Start a full scrape of ${label}? This takes 1–5 minutes.`)) return;
     scrapeAll.mutate({ noPlaywright });
+  };
+
+  const onSaveApiKey = () => {
+    const v = apiKeyDraft.trim();
+    if (v) {
+      setApiKey(v);
+      setApiKeyConfigured(true);
+      setApiKeyMessage("API key saved to this browser.");
+    } else {
+      clearApiKey();
+      setApiKeyConfigured(false);
+      setApiKeyMessage("API key cleared.");
+    }
+    setApiKeyDraft("");
+  };
+
+  const onClearApiKey = () => {
+    clearApiKey();
+    setApiKeyDraft("");
+    setApiKeyConfigured(false);
+    setApiKeyMessage("API key cleared.");
   };
 
   const rows = sortHealth(health.data ?? [], sortKey).filter((r) =>
@@ -139,6 +179,51 @@ export function AdminPage() {
       </section>
 
       <section className="bg-white border border-slate-200 rounded-lg p-4 shadow-sm">
+        <h2 className="text-sm font-semibold text-slate-700">API key</h2>
+        <p className="text-xs text-slate-500 mb-2">
+          Required only when the server is started with{" "}
+          <code className="bg-slate-100 px-1 rounded">JOBPULSE_API_KEY</code> set. Stored locally in this browser only.
+          {apiKeyConfigured && (
+            <span className="ml-1 text-emerald-700">• a key is currently configured</span>
+          )}
+        </p>
+        <div className="flex flex-wrap items-end gap-2">
+          <label className="text-xs text-slate-600 flex flex-col flex-1 min-w-[240px]">
+            X-API-Key
+            <input
+              type="password"
+              autoComplete="off"
+              spellCheck={false}
+              className="mt-1 border border-slate-300 rounded px-2 py-1.5 text-sm font-mono"
+              value={apiKeyDraft}
+              onChange={(e) => setApiKeyDraft(e.target.value)}
+              placeholder={apiKeyConfigured ? "•••••• (key configured — paste a new one to replace)" : "paste key here"}
+            />
+          </label>
+          <button
+            type="button"
+            onClick={onSaveApiKey}
+            className="text-sm bg-slate-900 text-white rounded px-3 py-1.5 hover:bg-slate-700"
+          >
+            Save
+          </button>
+          <button
+            type="button"
+            onClick={onClearApiKey}
+            disabled={!apiKeyConfigured}
+            className="text-xs border border-slate-300 rounded px-3 py-1.5 hover:bg-slate-100 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            Clear
+          </button>
+        </div>
+        {apiKeyMessage && (
+          <div className="text-xs text-emerald-700 mt-2" aria-live="polite">
+            {apiKeyMessage}
+          </div>
+        )}
+      </section>
+
+      <section className="bg-white border border-slate-200 rounded-lg p-4 shadow-sm">
         <h2 className="text-sm font-semibold text-slate-700 mb-3">Per-company health</h2>
         <div className="flex flex-wrap items-end gap-3 mb-3">
           <label className="text-xs text-slate-600 flex flex-col">
@@ -153,6 +238,7 @@ export function AdminPage() {
           <label className="text-xs text-slate-600 flex flex-col">
             Sort
             <select
+              aria-label="Sort company health table"
               className="mt-1 border border-slate-300 rounded px-2 py-1.5 text-sm"
               value={sortKey}
               onChange={(e) => setSortKey(e.target.value as SortKey)}
@@ -274,8 +360,10 @@ export function AdminPage() {
                   <td className="px-3 py-2">
                     <span
                       className={
-                        r.status === "success"
+                        r.status === "ok"
                           ? "text-emerald-700"
+                          : r.status === "partial"
+                          ? "text-amber-700"
                           : r.status === "running"
                           ? "text-slate-700"
                           : "text-red-700"

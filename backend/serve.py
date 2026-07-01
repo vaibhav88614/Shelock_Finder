@@ -26,13 +26,15 @@ def create_app() -> FastAPI:
     # Local-only by default. CORS is permissive on localhost so the Vite dev
     # server (port 5173) can hit the API during frontend development. In
     # production we serve the built frontend from the same origin so CORS is
-    # effectively unused.
+    # effectively unused. Additional dev origins can be added via the
+    # `JOBPULSE_DEV_ORIGINS` env var (comma-separated).
     app.add_middleware(
         CORSMiddleware,
         allow_origins=[
             "http://localhost:5173",
             "http://127.0.0.1:5173",
             f"http://{settings.host}:{settings.port}",
+            *settings.extra_cors_origins,
         ],
         allow_credentials=False,
         allow_methods=["*"],

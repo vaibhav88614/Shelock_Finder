@@ -1,229 +1,1316 @@
 [
-  { "name": "Airbnb",              "careers_url": "https://boards.greenhouse.io/airbnb",              "ats_type": "greenhouse", "ats_identifier": "airbnb" },
-  { "name": "Stripe",              "careers_url": "https://boards.greenhouse.io/stripe",              "ats_type": "greenhouse", "ats_identifier": "stripe" },
-  { "name": "Anthropic",           "careers_url": "https://boards.greenhouse.io/anthropic",           "ats_type": "greenhouse", "ats_identifier": "anthropic" },
-  { "name": "Brex",                "careers_url": "https://boards.greenhouse.io/brex",                "ats_type": "greenhouse", "ats_identifier": "brex" },
-  { "name": "Ramp",                "careers_url": "https://boards.greenhouse.io/ramp",                "ats_type": "greenhouse", "ats_identifier": "ramp" },
-  { "name": "Plaid",               "careers_url": "https://boards.greenhouse.io/plaid",               "ats_type": "greenhouse", "ats_identifier": "plaid" },
-  { "name": "Mercury",             "careers_url": "https://boards.greenhouse.io/mercury",             "ats_type": "greenhouse", "ats_identifier": "mercury" },
-  { "name": "Supabase",            "careers_url": "https://boards.greenhouse.io/supabase",            "ats_type": "greenhouse", "ats_identifier": "supabase" },
-  { "name": "PostHog",             "careers_url": "https://boards.greenhouse.io/posthog",             "ats_type": "greenhouse", "ats_identifier": "posthog" },
-  { "name": "Replit",              "careers_url": "https://boards.greenhouse.io/replit",              "ats_type": "greenhouse", "ats_identifier": "replit" },
-  { "name": "Scale AI",            "careers_url": "https://boards.greenhouse.io/scaleai",             "ats_type": "greenhouse", "ats_identifier": "scaleai" },
-  { "name": "Cohere",              "careers_url": "https://boards.greenhouse.io/cohere",              "ats_type": "greenhouse", "ats_identifier": "cohere" },
-  { "name": "Hugging Face",        "careers_url": "https://boards.greenhouse.io/huggingface",         "ats_type": "greenhouse", "ats_identifier": "huggingface" },
-  { "name": "Modal",               "careers_url": "https://boards.greenhouse.io/modallabs",           "ats_type": "greenhouse", "ats_identifier": "modallabs" },
-  { "name": "Twilio",              "careers_url": "https://boards.greenhouse.io/twilio",              "ats_type": "greenhouse", "ats_identifier": "twilio" },
-  { "name": "Datadog",             "careers_url": "https://boards.greenhouse.io/datadog",             "ats_type": "greenhouse", "ats_identifier": "datadog" },
-  { "name": "Sentry",              "careers_url": "https://boards.greenhouse.io/sentry",              "ats_type": "greenhouse", "ats_identifier": "sentry" },
-  { "name": "Snyk",                "careers_url": "https://boards.greenhouse.io/snyk",                "ats_type": "greenhouse", "ats_identifier": "snyk" },
-  { "name": "HashiCorp",           "careers_url": "https://boards.greenhouse.io/hashicorp",           "ats_type": "greenhouse", "ats_identifier": "hashicorp" },
-  { "name": "Notion",              "careers_url": "https://boards.greenhouse.io/notion",              "ats_type": "greenhouse", "ats_identifier": "notion" },
-  { "name": "Figma",               "careers_url": "https://boards.greenhouse.io/figma",               "ats_type": "greenhouse", "ats_identifier": "figma" },
-  { "name": "Asana",               "careers_url": "https://boards.greenhouse.io/asana",               "ats_type": "greenhouse", "ats_identifier": "asana" },
-  { "name": "Airtable",            "careers_url": "https://boards.greenhouse.io/airtable",            "ats_type": "greenhouse", "ats_identifier": "airtable" },
-  { "name": "Zapier",              "careers_url": "https://boards.greenhouse.io/zapier",              "ats_type": "greenhouse", "ats_identifier": "zapier" },
-  { "name": "Calendly",            "careers_url": "https://boards.greenhouse.io/calendly",            "ats_type": "greenhouse", "ats_identifier": "calendly" },
-  { "name": "Grammarly",           "careers_url": "https://boards.greenhouse.io/grammarly",           "ats_type": "greenhouse", "ats_identifier": "grammarly" },
-  { "name": "Duolingo",            "careers_url": "https://boards.greenhouse.io/duolingo",            "ats_type": "greenhouse", "ats_identifier": "duolingo" },
-  { "name": "Instacart",           "careers_url": "https://boards.greenhouse.io/instacart",           "ats_type": "greenhouse", "ats_identifier": "instacart" },
-  { "name": "DoorDash",            "careers_url": "https://boards.greenhouse.io/doordash",            "ats_type": "greenhouse", "ats_identifier": "doordash" },
-  { "name": "Robinhood",           "careers_url": "https://boards.greenhouse.io/robinhood",           "ats_type": "greenhouse", "ats_identifier": "robinhood" },
-  { "name": "Coinbase",            "careers_url": "https://boards.greenhouse.io/coinbase",            "ats_type": "greenhouse", "ats_identifier": "coinbase" },
-  { "name": "Discord",             "careers_url": "https://boards.greenhouse.io/discord",             "ats_type": "greenhouse", "ats_identifier": "discord" },
-  { "name": "Roblox",              "careers_url": "https://boards.greenhouse.io/roblox",              "ats_type": "greenhouse", "ats_identifier": "roblox" },
-  { "name": "Pinterest",           "careers_url": "https://boards.greenhouse.io/pinterest",           "ats_type": "greenhouse", "ats_identifier": "pinterest" },
-  { "name": "MongoDB",             "careers_url": "https://boards.greenhouse.io/mongodb",             "ats_type": "greenhouse", "ats_identifier": "mongodb" },
-  { "name": "Elastic",             "careers_url": "https://boards.greenhouse.io/elastic",             "ats_type": "greenhouse", "ats_identifier": "elastic" },
-  { "name": "Confluent",           "careers_url": "https://boards.greenhouse.io/confluent",           "ats_type": "greenhouse", "ats_identifier": "confluent" },
-  { "name": "Cockroach Labs",      "careers_url": "https://boards.greenhouse.io/cockroachlabs",       "ats_type": "greenhouse", "ats_identifier": "cockroachlabs" },
-  { "name": "dbt Labs",            "careers_url": "https://boards.greenhouse.io/dbtlabs",             "ats_type": "greenhouse", "ats_identifier": "dbtlabs" },
-  { "name": "Fivetran",            "careers_url": "https://boards.greenhouse.io/fivetran",            "ats_type": "greenhouse", "ats_identifier": "fivetran" },
-  { "name": "Airbyte",             "careers_url": "https://boards.greenhouse.io/airbyte",             "ats_type": "greenhouse", "ats_identifier": "airbyte" },
-  { "name": "Retool",              "careers_url": "https://boards.greenhouse.io/retool",              "ats_type": "greenhouse", "ats_identifier": "retool" },
-  { "name": "Linear",              "careers_url": "https://boards.greenhouse.io/linear",              "ats_type": "greenhouse", "ats_identifier": "linear" },
-  { "name": "Anduril",             "careers_url": "https://boards.greenhouse.io/anduril",             "ats_type": "greenhouse", "ats_identifier": "anduril" },
-  { "name": "Shield AI",           "careers_url": "https://boards.greenhouse.io/shieldai",            "ats_type": "greenhouse", "ats_identifier": "shieldai" },
-  { "name": "Gusto",               "careers_url": "https://boards.greenhouse.io/gusto",               "ats_type": "greenhouse", "ats_identifier": "gusto" },
-  { "name": "Faire",               "careers_url": "https://boards.greenhouse.io/faire",               "ats_type": "greenhouse", "ats_identifier": "faire" },
-  { "name": "Samsara",             "careers_url": "https://boards.greenhouse.io/samsara",             "ats_type": "greenhouse", "ats_identifier": "samsara" },
-  { "name": "Cloudflare",          "careers_url": "https://boards.greenhouse.io/cloudflare",          "ats_type": "greenhouse", "ats_identifier": "cloudflare" },
-  { "name": "Vercel",              "careers_url": "https://boards.greenhouse.io/vercel",              "ats_type": "greenhouse", "ats_identifier": "vercel" },
-  { "name": "Tailscale",           "careers_url": "https://boards.greenhouse.io/tailscale",           "ats_type": "greenhouse", "ats_identifier": "tailscale" },
-  { "name": "1Password",           "careers_url": "https://boards.greenhouse.io/1password",           "ats_type": "greenhouse", "ats_identifier": "1password" },
-  { "name": "Affirm",              "careers_url": "https://boards.greenhouse.io/affirm",              "ats_type": "greenhouse", "ats_identifier": "affirm" },
-  { "name": "Block",               "careers_url": "https://boards.greenhouse.io/square",              "ats_type": "greenhouse", "ats_identifier": "square" },
-  { "name": "Squarespace",         "careers_url": "https://boards.greenhouse.io/squarespace",         "ats_type": "greenhouse", "ats_identifier": "squarespace" },
-  { "name": "Wealthsimple",        "careers_url": "https://boards.greenhouse.io/wealthsimple",        "ats_type": "greenhouse", "ats_identifier": "wealthsimple" },
-  { "name": "Carta",               "careers_url": "https://boards.greenhouse.io/carta",               "ats_type": "greenhouse", "ats_identifier": "carta" },
-  { "name": "Chime",               "careers_url": "https://boards.greenhouse.io/chime",               "ats_type": "greenhouse", "ats_identifier": "chime" },
-  { "name": "Webflow",             "careers_url": "https://boards.greenhouse.io/webflow",             "ats_type": "greenhouse", "ats_identifier": "webflow" },
-  { "name": "Loom",                "careers_url": "https://boards.greenhouse.io/loom",                "ats_type": "greenhouse", "ats_identifier": "loom" },
-  { "name": "Vimeo",               "careers_url": "https://boards.greenhouse.io/vimeo",               "ats_type": "greenhouse", "ats_identifier": "vimeo" },
-  { "name": "Zoom",                "careers_url": "https://boards.greenhouse.io/zoom",                "ats_type": "greenhouse", "ats_identifier": "zoom" },
-  { "name": "Slack",               "careers_url": "https://boards.greenhouse.io/slack",               "ats_type": "greenhouse", "ats_identifier": "slack" },
-  { "name": "Reddit",              "careers_url": "https://boards.greenhouse.io/reddit",              "ats_type": "greenhouse", "ats_identifier": "reddit" },
-  { "name": "Quora",               "careers_url": "https://boards.greenhouse.io/quora",               "ats_type": "greenhouse", "ats_identifier": "quora" },
-  { "name": "Substack",            "careers_url": "https://boards.greenhouse.io/substack",            "ats_type": "greenhouse", "ats_identifier": "substack" },
-  { "name": "Medium",              "careers_url": "https://boards.greenhouse.io/medium",              "ats_type": "greenhouse", "ats_identifier": "medium" },
-  { "name": "Patreon",             "careers_url": "https://boards.greenhouse.io/patreon",             "ats_type": "greenhouse", "ats_identifier": "patreon" },
-  { "name": "Etsy",                "careers_url": "https://boards.greenhouse.io/etsy",                "ats_type": "greenhouse", "ats_identifier": "etsy" },
-  { "name": "Shopify",             "careers_url": "https://boards.greenhouse.io/shopify",             "ats_type": "greenhouse", "ats_identifier": "shopify" },
-  { "name": "GitLab",              "careers_url": "https://boards.greenhouse.io/gitlab",              "ats_type": "greenhouse", "ats_identifier": "gitlab" },
-  { "name": "Lyft",                "careers_url": "https://boards.greenhouse.io/lyft",                "ats_type": "greenhouse", "ats_identifier": "lyft" },
-  { "name": "Opendoor",            "careers_url": "https://boards.greenhouse.io/opendoor",            "ats_type": "greenhouse", "ats_identifier": "opendoor" },
-  { "name": "Compass",             "careers_url": "https://boards.greenhouse.io/compass",             "ats_type": "greenhouse", "ats_identifier": "compass" },
-  { "name": "Glossier",            "careers_url": "https://boards.greenhouse.io/glossier",            "ats_type": "greenhouse", "ats_identifier": "glossier" },
-  { "name": "Warby Parker",        "careers_url": "https://boards.greenhouse.io/warbyparker",         "ats_type": "greenhouse", "ats_identifier": "warbyparker" },
-  { "name": "Allbirds",            "careers_url": "https://boards.greenhouse.io/allbirds",            "ats_type": "greenhouse", "ats_identifier": "allbirds" },
-  { "name": "Peloton",             "careers_url": "https://boards.greenhouse.io/peloton",             "ats_type": "greenhouse", "ats_identifier": "peloton" },
-  { "name": "ClassPass",           "careers_url": "https://boards.greenhouse.io/classpass",           "ats_type": "greenhouse", "ats_identifier": "classpass" },
-  { "name": "Oscar Health",        "careers_url": "https://boards.greenhouse.io/oscar",               "ats_type": "greenhouse", "ats_identifier": "oscar" },
-  { "name": "Flatiron Health",     "careers_url": "https://boards.greenhouse.io/flatironhealth",      "ats_type": "greenhouse", "ats_identifier": "flatironhealth" },
-  { "name": "Two Sigma",           "careers_url": "https://boards.greenhouse.io/twosigma",            "ats_type": "greenhouse", "ats_identifier": "twosigma" },
-
-  { "name": "Netflix",             "careers_url": "https://jobs.lever.co/netflix",                    "ats_type": "lever",      "ats_identifier": "netflix" },
-  { "name": "Palantir",            "careers_url": "https://jobs.lever.co/palantir",                   "ats_type": "lever",      "ats_identifier": "palantir" },
-  { "name": "Mixpanel",            "careers_url": "https://jobs.lever.co/mixpanel",                   "ats_type": "lever",      "ats_identifier": "mixpanel" },
-  { "name": "KAYAK",               "careers_url": "https://jobs.lever.co/kayak",                      "ats_type": "lever",      "ats_identifier": "kayak" },
-  { "name": "Eventbrite",          "careers_url": "https://jobs.lever.co/eventbrite",                 "ats_type": "lever",      "ats_identifier": "eventbrite" },
-  { "name": "Yelp",                "careers_url": "https://jobs.lever.co/yelp",                       "ats_type": "lever",      "ats_identifier": "yelp" },
-  { "name": "ShipBob",             "careers_url": "https://jobs.lever.co/shipbob",                    "ats_type": "lever",      "ats_identifier": "shipbob" },
-  { "name": "Attentive",           "careers_url": "https://jobs.lever.co/attentive",                  "ats_type": "lever",      "ats_identifier": "attentive" },
-  { "name": "Ironclad",            "careers_url": "https://jobs.lever.co/ironcladapp",                "ats_type": "lever",      "ats_identifier": "ironcladapp" },
-  { "name": "Rippling",            "careers_url": "https://jobs.lever.co/rippling",                   "ats_type": "lever",      "ats_identifier": "rippling" },
-  { "name": "Benchling",           "careers_url": "https://jobs.lever.co/benchling",                  "ats_type": "lever",      "ats_identifier": "benchling" },
-  { "name": "Modern Treasury",     "careers_url": "https://jobs.lever.co/moderntreasury",             "ats_type": "lever",      "ats_identifier": "moderntreasury" },
-  { "name": "Brigit",              "careers_url": "https://jobs.lever.co/hellobrigit",                "ats_type": "lever",      "ats_identifier": "hellobrigit" },
-  { "name": "Vouch",               "careers_url": "https://jobs.lever.co/vouch",                      "ats_type": "lever",      "ats_identifier": "vouch" },
-  { "name": "Hightouch",           "careers_url": "https://jobs.lever.co/hightouch",                  "ats_type": "lever",      "ats_identifier": "hightouch" },
-  { "name": "Census",              "careers_url": "https://jobs.lever.co/getcensus",                  "ats_type": "lever",      "ats_identifier": "getcensus" },
-  { "name": "Crusoe Energy",       "careers_url": "https://jobs.lever.co/crusoeenergy",               "ats_type": "lever",      "ats_identifier": "crusoeenergy" },
-  { "name": "Together AI",         "careers_url": "https://jobs.lever.co/togetherai",                 "ats_type": "lever",      "ats_identifier": "togetherai" },
-  { "name": "Glean",               "careers_url": "https://jobs.lever.co/glean",                      "ats_type": "lever",      "ats_identifier": "glean" },
-  { "name": "Pika Labs",           "careers_url": "https://jobs.lever.co/pika",                       "ats_type": "lever",      "ats_identifier": "pika" },
-  { "name": "Adept",               "careers_url": "https://jobs.lever.co/adept",                      "ats_type": "lever",      "ats_identifier": "adept" },
-  { "name": "Imbue",               "careers_url": "https://jobs.lever.co/imbue",                      "ats_type": "lever",      "ats_identifier": "imbue" },
-  { "name": "Magic",               "careers_url": "https://jobs.lever.co/magic",                      "ats_type": "lever",      "ats_identifier": "magic" },
-  { "name": "Sourcegraph",         "careers_url": "https://jobs.lever.co/sourcegraph",                "ats_type": "lever",      "ats_identifier": "sourcegraph" },
-  { "name": "Knock",               "careers_url": "https://jobs.lever.co/knock",                      "ats_type": "lever",      "ats_identifier": "knock" },
-  { "name": "Pave",                "careers_url": "https://jobs.lever.co/pave",                       "ats_type": "lever",      "ats_identifier": "pave" },
-  { "name": "Deel",                "careers_url": "https://jobs.lever.co/deel",                       "ats_type": "lever",      "ats_identifier": "deel" },
-  { "name": "Remote.com",          "careers_url": "https://jobs.lever.co/remote",                     "ats_type": "lever",      "ats_identifier": "remote" },
-  { "name": "Mux",                 "careers_url": "https://jobs.lever.co/mux",                        "ats_type": "lever",      "ats_identifier": "mux" },
-  { "name": "PolicyGenius",        "careers_url": "https://jobs.lever.co/policygenius",               "ats_type": "lever",      "ats_identifier": "policygenius" },
-  { "name": "Even Financial",      "careers_url": "https://jobs.lever.co/even",                       "ats_type": "lever",      "ats_identifier": "even" },
-  { "name": "Bluecore",            "careers_url": "https://jobs.lever.co/bluecore",                   "ats_type": "lever",      "ats_identifier": "bluecore" },
-  { "name": "Algolia",             "careers_url": "https://jobs.lever.co/algolia",                    "ats_type": "lever",      "ats_identifier": "algolia" },
-  { "name": "Apollo.io",           "careers_url": "https://jobs.lever.co/apollo",                     "ats_type": "lever",      "ats_identifier": "apollo" },
-  { "name": "Postman",             "careers_url": "https://jobs.lever.co/postman",                    "ats_type": "lever",      "ats_identifier": "postman" },
-  { "name": "Front",               "careers_url": "https://jobs.lever.co/front",                      "ats_type": "lever",      "ats_identifier": "front" },
-  { "name": "Klaviyo",             "careers_url": "https://jobs.lever.co/klaviyo",                    "ats_type": "lever",      "ats_identifier": "klaviyo" },
-  { "name": "Quantcast",           "careers_url": "https://jobs.lever.co/quantcast",                  "ats_type": "lever",      "ats_identifier": "quantcast" },
-  { "name": "Chainalysis",         "careers_url": "https://jobs.lever.co/chainalysis",                "ats_type": "lever",      "ats_identifier": "chainalysis" },
-  { "name": "Aledade",             "careers_url": "https://jobs.lever.co/aledade",                    "ats_type": "lever",      "ats_identifier": "aledade" },
-
-  { "name": "OpenAI",              "careers_url": "https://jobs.ashbyhq.com/openai",                  "ats_type": "ashby",      "ats_identifier": "openai" },
-  { "name": "Perplexity",          "careers_url": "https://jobs.ashbyhq.com/perplexity",              "ats_type": "ashby",      "ats_identifier": "perplexity" },
-  { "name": "Ashby",               "careers_url": "https://jobs.ashbyhq.com/ashby",                   "ats_type": "ashby",      "ats_identifier": "ashby" },
-  { "name": "Ramp Network",        "careers_url": "https://jobs.ashbyhq.com/rampnetwork",             "ats_type": "ashby",      "ats_identifier": "rampnetwork" },
-  { "name": "Replicate",           "careers_url": "https://jobs.ashbyhq.com/replicate",               "ats_type": "ashby",      "ats_identifier": "replicate" },
-  { "name": "Pinecone",            "careers_url": "https://jobs.ashbyhq.com/pinecone",                "ats_type": "ashby",      "ats_identifier": "pinecone" },
-  { "name": "LangChain",           "careers_url": "https://jobs.ashbyhq.com/langchain",               "ats_type": "ashby",      "ats_identifier": "langchain" },
-  { "name": "Weaviate",            "careers_url": "https://jobs.ashbyhq.com/weaviate",                "ats_type": "ashby",      "ats_identifier": "weaviate" },
-  { "name": "Chroma",              "careers_url": "https://jobs.ashbyhq.com/trychroma",               "ats_type": "ashby",      "ats_identifier": "trychroma" },
-  { "name": "Vellum",              "careers_url": "https://jobs.ashbyhq.com/vellum",                  "ats_type": "ashby",      "ats_identifier": "vellum" },
-  { "name": "Cresta",              "careers_url": "https://jobs.ashbyhq.com/cresta",                  "ats_type": "ashby",      "ats_identifier": "cresta" },
-  { "name": "Speak",               "careers_url": "https://jobs.ashbyhq.com/speak",                   "ats_type": "ashby",      "ats_identifier": "speak" },
-  { "name": "Watershed",           "careers_url": "https://jobs.ashbyhq.com/watershed",               "ats_type": "ashby",      "ats_identifier": "watershed" },
-  { "name": "Persona",             "careers_url": "https://jobs.ashbyhq.com/persona",                 "ats_type": "ashby",      "ats_identifier": "persona" },
-  { "name": "Bland",               "careers_url": "https://jobs.ashbyhq.com/bland",                   "ats_type": "ashby",      "ats_identifier": "bland" },
-  { "name": "Decagon",             "careers_url": "https://jobs.ashbyhq.com/decagon",                 "ats_type": "ashby",      "ats_identifier": "decagon" },
-  { "name": "Sierra",              "careers_url": "https://jobs.ashbyhq.com/sierra",                  "ats_type": "ashby",      "ats_identifier": "sierra" },
-  { "name": "Suno",                "careers_url": "https://jobs.ashbyhq.com/suno",                    "ats_type": "ashby",      "ats_identifier": "suno" },
-  { "name": "ElevenLabs",          "careers_url": "https://jobs.ashbyhq.com/elevenlabs",              "ats_type": "ashby",      "ats_identifier": "elevenlabs" },
-  { "name": "Codeium",             "careers_url": "https://jobs.ashbyhq.com/codeium",                 "ats_type": "ashby",      "ats_identifier": "codeium" },
-
-  { "name": "Toast",               "careers_url": "https://apply.workable.com/toast/",                "ats_type": "workable",   "ats_identifier": "toast" },
-  { "name": "Workable",            "careers_url": "https://apply.workable.com/workable/",             "ats_type": "workable",   "ats_identifier": "workable" },
-  { "name": "Persado",             "careers_url": "https://apply.workable.com/persado/",              "ats_type": "workable",   "ats_identifier": "persado" },
-  { "name": "Mews",                "careers_url": "https://apply.workable.com/mews/",                 "ats_type": "workable",   "ats_identifier": "mews" },
-  { "name": "Bolt.eu",             "careers_url": "https://apply.workable.com/bolt/",                 "ats_type": "workable",   "ats_identifier": "bolt" },
-  { "name": "Beat",                "careers_url": "https://apply.workable.com/beat/",                 "ats_type": "workable",   "ats_identifier": "beat" },
-  { "name": "Pleo",                "careers_url": "https://apply.workable.com/pleo/",                 "ats_type": "workable",   "ats_identifier": "pleo" },
-  { "name": "Blueground",          "careers_url": "https://apply.workable.com/blueground/",           "ats_type": "workable",   "ats_identifier": "blueground" },
-  { "name": "Welltech",            "careers_url": "https://apply.workable.com/welltech/",             "ats_type": "workable",   "ats_identifier": "welltech" },
-  { "name": "Skroutz",             "careers_url": "https://apply.workable.com/skroutz/",              "ats_type": "workable",   "ats_identifier": "skroutz" },
-  { "name": "Spotawheel",          "careers_url": "https://apply.workable.com/spotawheel/",           "ats_type": "workable",   "ats_identifier": "spotawheel" },
-  { "name": "Causaly",             "careers_url": "https://apply.workable.com/causaly/",              "ats_type": "workable",   "ats_identifier": "causaly" },
-  { "name": "Plum Fintech",        "careers_url": "https://apply.workable.com/plum/",                 "ats_type": "workable",   "ats_identifier": "plum" },
-  { "name": "Marshmallow",         "careers_url": "https://apply.workable.com/marshmallow/",          "ats_type": "workable",   "ats_identifier": "marshmallow" },
-  { "name": "Hopin",               "careers_url": "https://apply.workable.com/hopin/",                "ats_type": "workable",   "ats_identifier": "hopin" },
-
-  { "name": "Box",                 "careers_url": "https://jobs.smartrecruiters.com/Box",             "ats_type": "smartrecruiters", "ats_identifier": "Box" },
-  { "name": "Atlassian",           "careers_url": "https://careers.smartrecruiters.com/Atlassian",    "ats_type": "smartrecruiters", "ats_identifier": "Atlassian" },
-  { "name": "Bosch",               "careers_url": "https://jobs.smartrecruiters.com/Bosch",           "ats_type": "smartrecruiters", "ats_identifier": "Bosch" },
-  { "name": "Visa",                "careers_url": "https://jobs.smartrecruiters.com/Visa",            "ats_type": "smartrecruiters", "ats_identifier": "Visa" },
-  { "name": "Bayer",               "careers_url": "https://jobs.smartrecruiters.com/Bayer",           "ats_type": "smartrecruiters", "ats_identifier": "Bayer" },
-  { "name": "Square Enix",         "careers_url": "https://jobs.smartrecruiters.com/SquareEnix",      "ats_type": "smartrecruiters", "ats_identifier": "SquareEnix" },
-  { "name": "Equinox",             "careers_url": "https://jobs.smartrecruiters.com/EquinoxFitness", "ats_type": "smartrecruiters", "ats_identifier": "EquinoxFitness" },
-  { "name": "Ubisoft",             "careers_url": "https://jobs.smartrecruiters.com/Ubisoft",         "ats_type": "smartrecruiters", "ats_identifier": "Ubisoft" },
-  { "name": "Allianz Direct",      "careers_url": "https://jobs.smartrecruiters.com/AllianzDirect",   "ats_type": "smartrecruiters", "ats_identifier": "AllianzDirect" },
-  { "name": "IKEA",                "careers_url": "https://jobs.smartrecruiters.com/IKEA",            "ats_type": "smartrecruiters", "ats_identifier": "IKEA" },
-  { "name": "LVMH",                "careers_url": "https://jobs.smartrecruiters.com/LVMH",            "ats_type": "smartrecruiters", "ats_identifier": "LVMH" },
-  { "name": "Public",              "careers_url": "https://jobs.smartrecruiters.com/Public",          "ats_type": "smartrecruiters", "ats_identifier": "Public" },
-
-  { "name": "Mollie",              "careers_url": "https://mollie.recruitee.com/",                    "ats_type": "recruitee",  "ats_identifier": "mollie" },
-  { "name": "MessageBird",         "careers_url": "https://messagebird.recruitee.com/",               "ats_type": "recruitee",  "ats_identifier": "messagebird" },
-  { "name": "Picnic",              "careers_url": "https://picnic.recruitee.com/",                    "ats_type": "recruitee",  "ats_identifier": "picnic" },
-  { "name": "Bunq",                "careers_url": "https://bunq.recruitee.com/",                      "ats_type": "recruitee",  "ats_identifier": "bunq" },
-  { "name": "Catawiki",            "careers_url": "https://catawiki.recruitee.com/",                  "ats_type": "recruitee",  "ats_identifier": "catawiki" },
-  { "name": "Albert Heijn",        "careers_url": "https://ah.recruitee.com/",                        "ats_type": "recruitee",  "ats_identifier": "ah" },
-  { "name": "Monday.com",          "careers_url": "https://monday.recruitee.com/",                    "ats_type": "recruitee",  "ats_identifier": "monday" },
-  { "name": "Treatwell",           "careers_url": "https://treatwell.recruitee.com/",                 "ats_type": "recruitee",  "ats_identifier": "treatwell" },
-  { "name": "Tide",                "careers_url": "https://tide.recruitee.com/",                      "ats_type": "recruitee",  "ats_identifier": "tide" },
-  { "name": "Polestar",            "careers_url": "https://polestar.recruitee.com/",                  "ats_type": "recruitee",  "ats_identifier": "polestar" },
-
-  { "name": "Personio",            "careers_url": "https://personio.jobs.personio.de/",               "ats_type": "personio",   "ats_identifier": "personio" },
-  { "name": "Forto",               "careers_url": "https://forto.jobs.personio.de/",                  "ats_type": "personio",   "ats_identifier": "forto" },
-  { "name": "Trade Republic",      "careers_url": "https://traderepublic.jobs.personio.de/",          "ats_type": "personio",   "ats_identifier": "traderepublic" },
-  { "name": "Scalable Capital",    "careers_url": "https://scalable.jobs.personio.de/",               "ats_type": "personio",   "ats_identifier": "scalable" },
-  { "name": "Solaris",             "careers_url": "https://solarisgroup.jobs.personio.de/",           "ats_type": "personio",   "ats_identifier": "solarisgroup" },
-  { "name": "Mambu",               "careers_url": "https://mambu.jobs.personio.de/",                  "ats_type": "personio",   "ats_identifier": "mambu" },
-  { "name": "Raisin",              "careers_url": "https://raisin.jobs.personio.de/",                 "ats_type": "personio",   "ats_identifier": "raisin" },
-  { "name": "CoachHub",            "careers_url": "https://coachhub.jobs.personio.de/",               "ats_type": "personio",   "ats_identifier": "coachhub" },
-
-  { "name": "Spotify",             "careers_url": "https://spotify.teamtailor.com/",                  "ats_type": "teamtailor", "ats_identifier": "spotify" },
-  { "name": "Klarna",              "careers_url": "https://klarna.teamtailor.com/",                   "ats_type": "teamtailor", "ats_identifier": "klarna" },
-  { "name": "Voi",                 "careers_url": "https://voi.teamtailor.com/",                      "ats_type": "teamtailor", "ats_identifier": "voi" },
-  { "name": "Tink",                "careers_url": "https://tink.teamtailor.com/",                     "ats_type": "teamtailor", "ats_identifier": "tink" },
-  { "name": "Northvolt",           "careers_url": "https://northvolt.teamtailor.com/",                "ats_type": "teamtailor", "ats_identifier": "northvolt" },
-  { "name": "Mentimeter",          "careers_url": "https://mentimeter.teamtailor.com/",               "ats_type": "teamtailor", "ats_identifier": "mentimeter" },
-  { "name": "Lendify",             "careers_url": "https://lendify.teamtailor.com/",                  "ats_type": "teamtailor", "ats_identifier": "lendify" },
-  { "name": "Pleo TT",             "careers_url": "https://pleo.teamtailor.com/",                     "ats_type": "teamtailor", "ats_identifier": "pleo" },
-
-  { "name": "NVIDIA",              "careers_url": "https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite",     "ats_type": "workday", "ats_identifier": "nvidia.wd5.myworkdayjobs.com|nvidia|NVIDIAExternalCareerSite" },
-  { "name": "Salesforce",          "careers_url": "https://salesforce.wd12.myworkdayjobs.com/External_Career_Site",   "ats_type": "workday", "ats_identifier": "salesforce.wd12.myworkdayjobs.com|salesforce|External_Career_Site" },
-  { "name": "Workday",             "careers_url": "https://workday.wd5.myworkdayjobs.com/Workday",                    "ats_type": "workday", "ats_identifier": "workday.wd5.myworkdayjobs.com|workday|Workday" },
-  { "name": "Adobe",               "careers_url": "https://adobe.wd5.myworkdayjobs.com/external_experienced",         "ats_type": "workday", "ats_identifier": "adobe.wd5.myworkdayjobs.com|adobe|external_experienced" },
-  { "name": "Cisco",               "careers_url": "https://cisco.wd5.myworkdayjobs.com/External_Career",              "ats_type": "workday", "ats_identifier": "cisco.wd5.myworkdayjobs.com|cisco|External_Career" },
-  { "name": "Capital One",         "careers_url": "https://capitalone.wd1.myworkdayjobs.com/Capital_One",             "ats_type": "workday", "ats_identifier": "capitalone.wd1.myworkdayjobs.com|capitalone|Capital_One" },
-  { "name": "JPMorgan Chase",      "careers_url": "https://jpmc.wd5.myworkdayjobs.com/ExternalCareers",               "ats_type": "workday", "ats_identifier": "jpmc.wd5.myworkdayjobs.com|jpmc|ExternalCareers" },
-  { "name": "Bank of America",     "careers_url": "https://bankofamerica.wd1.myworkdayjobs.com/Lateral-US",           "ats_type": "workday", "ats_identifier": "bankofamerica.wd1.myworkdayjobs.com|bankofamerica|Lateral-US" },
-  { "name": "Goldman Sachs",       "careers_url": "https://goldmansachs.wd1.myworkdayjobs.com/GS_EXP",                "ats_type": "workday", "ats_identifier": "goldmansachs.wd1.myworkdayjobs.com|goldmansachs|GS_EXP" },
-  { "name": "Morgan Stanley",      "careers_url": "https://ms.wd5.myworkdayjobs.com/External",                        "ats_type": "workday", "ats_identifier": "ms.wd5.myworkdayjobs.com|ms|External" },
-  { "name": "Citigroup",           "careers_url": "https://citi.wd5.myworkdayjobs.com/2",                              "ats_type": "workday", "ats_identifier": "citi.wd5.myworkdayjobs.com|citi|2" },
-  { "name": "T-Mobile",            "careers_url": "https://tmobile.wd1.myworkdayjobs.com/External",                   "ats_type": "workday", "ats_identifier": "tmobile.wd1.myworkdayjobs.com|tmobile|External" },
-  { "name": "Verizon",             "careers_url": "https://verizon.wd5.myworkdayjobs.com/careers",                    "ats_type": "workday", "ats_identifier": "verizon.wd5.myworkdayjobs.com|verizon|careers" },
-  { "name": "Walmart",             "careers_url": "https://walmart.wd5.myworkdayjobs.com/WalmartExternal",            "ats_type": "workday", "ats_identifier": "walmart.wd5.myworkdayjobs.com|walmart|WalmartExternal" },
-  { "name": "Target",              "careers_url": "https://target.wd5.myworkdayjobs.com/targetcareers",                "ats_type": "workday", "ats_identifier": "target.wd5.myworkdayjobs.com|target|targetcareers" },
-  { "name": "Best Buy",            "careers_url": "https://bestbuy.wd5.myworkdayjobs.com/External",                   "ats_type": "workday", "ats_identifier": "bestbuy.wd5.myworkdayjobs.com|bestbuy|External" },
-  { "name": "Disney",              "careers_url": "https://disney.wd5.myworkdayjobs.com/disneycareer",                "ats_type": "workday", "ats_identifier": "disney.wd5.myworkdayjobs.com|disney|disneycareer" },
-  { "name": "Warner Bros",         "careers_url": "https://warnerbros.wd5.myworkdayjobs.com/global",                  "ats_type": "workday", "ats_identifier": "warnerbros.wd5.myworkdayjobs.com|warnerbros|global" },
-  { "name": "Paramount",           "careers_url": "https://paramount.wd5.myworkdayjobs.com/ParamountCareers",         "ats_type": "workday", "ats_identifier": "paramount.wd5.myworkdayjobs.com|paramount|ParamountCareers" },
-  { "name": "Comcast",             "careers_url": "https://comcast.wd5.myworkdayjobs.com/Comcast_Careers",            "ats_type": "workday", "ats_identifier": "comcast.wd5.myworkdayjobs.com|comcast|Comcast_Careers" },
-  { "name": "AT&T",                "careers_url": "https://att.wd5.myworkdayjobs.com/ATTExternal",                    "ats_type": "workday", "ats_identifier": "att.wd5.myworkdayjobs.com|att|ATTExternal" },
-  { "name": "IBM",                 "careers_url": "https://ibmglobal.wd5.myworkdayjobs.com/IBMCareers",               "ats_type": "workday", "ats_identifier": "ibmglobal.wd5.myworkdayjobs.com|ibmglobal|IBMCareers" },
-  { "name": "VMware",              "careers_url": "https://vmware.wd1.myworkdayjobs.com/VMware",                      "ats_type": "workday", "ats_identifier": "vmware.wd1.myworkdayjobs.com|vmware|VMware" },
-  { "name": "HPE",                 "careers_url": "https://hpe.wd5.myworkdayjobs.com/Jobsathpe",                       "ats_type": "workday", "ats_identifier": "hpe.wd5.myworkdayjobs.com|hpe|Jobsathpe" }
+  {
+    "name": "Airbnb",
+    "careers_url": "https://boards.greenhouse.io/airbnb",
+    "ats_type": "greenhouse",
+    "ats_identifier": "airbnb"
+  },
+  {
+    "name": "Stripe",
+    "careers_url": "https://boards.greenhouse.io/stripe",
+    "ats_type": "greenhouse",
+    "ats_identifier": "stripe"
+  },
+  {
+    "name": "Anthropic",
+    "careers_url": "https://boards.greenhouse.io/anthropic",
+    "ats_type": "greenhouse",
+    "ats_identifier": "anthropic"
+  },
+  {
+    "name": "Brex",
+    "careers_url": "https://boards.greenhouse.io/brex",
+    "ats_type": "greenhouse",
+    "ats_identifier": "brex"
+  },
+  {
+    "name": "Ramp",
+    "careers_url": "https://jobs.ashbyhq.com/ramp",
+    "ats_type": "ashby",
+    "ats_identifier": "ramp"
+  },
+  {
+    "name": "Plaid",
+    "careers_url": "https://jobs.ashbyhq.com/plaid",
+    "ats_type": "ashby",
+    "ats_identifier": "plaid"
+  },
+  {
+    "name": "Mercury",
+    "careers_url": "https://boards.greenhouse.io/mercury",
+    "ats_type": "greenhouse",
+    "ats_identifier": "mercury"
+  },
+  {
+    "name": "Supabase",
+    "careers_url": "https://jobs.ashbyhq.com/supabase",
+    "ats_type": "ashby",
+    "ats_identifier": "supabase"
+  },
+  {
+    "name": "PostHog",
+    "careers_url": "https://jobs.ashbyhq.com/posthog",
+    "ats_type": "ashby",
+    "ats_identifier": "posthog"
+  },
+  {
+    "name": "Replit",
+    "careers_url": "https://jobs.ashbyhq.com/replit",
+    "ats_type": "ashby",
+    "ats_identifier": "replit"
+  },
+  {
+    "name": "Scale AI",
+    "careers_url": "https://boards.greenhouse.io/scaleai",
+    "ats_type": "greenhouse",
+    "ats_identifier": "scaleai"
+  },
+  {
+    "name": "Cohere",
+    "careers_url": "https://jobs.ashbyhq.com/cohere",
+    "ats_type": "ashby",
+    "ats_identifier": "cohere"
+  },
+  {
+    "name": "Hugging Face",
+    "careers_url": "https://boards.greenhouse.io/huggingface",
+    "ats_type": "greenhouse",
+    "ats_identifier": "huggingface"
+  },
+  {
+    "name": "Modal",
+    "careers_url": "https://jobs.ashbyhq.com/modal",
+    "ats_type": "ashby",
+    "ats_identifier": "modal"
+  },
+  {
+    "name": "Twilio",
+    "careers_url": "https://boards.greenhouse.io/twilio",
+    "ats_type": "greenhouse",
+    "ats_identifier": "twilio"
+  },
+  {
+    "name": "Datadog",
+    "careers_url": "https://boards.greenhouse.io/datadog",
+    "ats_type": "greenhouse",
+    "ats_identifier": "datadog"
+  },
+  {
+    "name": "Sentry",
+    "careers_url": "https://jobs.ashbyhq.com/sentry",
+    "ats_type": "ashby",
+    "ats_identifier": "sentry"
+  },
+  {
+    "name": "Snyk",
+    "careers_url": "https://boards.greenhouse.io/snyk",
+    "ats_type": "greenhouse",
+    "ats_identifier": "snyk"
+  },
+  {
+    "name": "HashiCorp",
+    "careers_url": "https://boards.greenhouse.io/hashicorp",
+    "ats_type": "greenhouse",
+    "ats_identifier": "hashicorp"
+  },
+  {
+    "name": "Notion",
+    "careers_url": "https://jobs.ashbyhq.com/notion",
+    "ats_type": "ashby",
+    "ats_identifier": "notion"
+  },
+  {
+    "name": "Figma",
+    "careers_url": "https://boards.greenhouse.io/figma",
+    "ats_type": "greenhouse",
+    "ats_identifier": "figma"
+  },
+  {
+    "name": "Asana",
+    "careers_url": "https://boards.greenhouse.io/asana",
+    "ats_type": "greenhouse",
+    "ats_identifier": "asana"
+  },
+  {
+    "name": "Airtable",
+    "careers_url": "https://boards.greenhouse.io/airtable",
+    "ats_type": "greenhouse",
+    "ats_identifier": "airtable"
+  },
+  {
+    "name": "Zapier",
+    "careers_url": "https://jobs.ashbyhq.com/zapier",
+    "ats_type": "ashby",
+    "ats_identifier": "zapier"
+  },
+  {
+    "name": "Calendly",
+    "careers_url": "https://boards.greenhouse.io/calendly",
+    "ats_type": "greenhouse",
+    "ats_identifier": "calendly"
+  },
+  {
+    "name": "Grammarly",
+    "careers_url": "https://boards.greenhouse.io/grammarly",
+    "ats_type": "greenhouse",
+    "ats_identifier": "grammarly"
+  },
+  {
+    "name": "Duolingo",
+    "careers_url": "https://boards.greenhouse.io/duolingo",
+    "ats_type": "greenhouse",
+    "ats_identifier": "duolingo"
+  },
+  {
+    "name": "Instacart",
+    "careers_url": "https://boards.greenhouse.io/instacart",
+    "ats_type": "greenhouse",
+    "ats_identifier": "instacart"
+  },
+  {
+    "name": "DoorDash",
+    "careers_url": "https://boards.greenhouse.io/doordash",
+    "ats_type": "greenhouse",
+    "ats_identifier": "doordash"
+  },
+  {
+    "name": "Robinhood",
+    "careers_url": "https://boards.greenhouse.io/robinhood",
+    "ats_type": "greenhouse",
+    "ats_identifier": "robinhood"
+  },
+  {
+    "name": "Coinbase",
+    "careers_url": "https://boards.greenhouse.io/coinbase",
+    "ats_type": "greenhouse",
+    "ats_identifier": "coinbase"
+  },
+  {
+    "name": "Discord",
+    "careers_url": "https://boards.greenhouse.io/discord",
+    "ats_type": "greenhouse",
+    "ats_identifier": "discord"
+  },
+  {
+    "name": "Roblox",
+    "careers_url": "https://boards.greenhouse.io/roblox",
+    "ats_type": "greenhouse",
+    "ats_identifier": "roblox"
+  },
+  {
+    "name": "Pinterest",
+    "careers_url": "https://boards.greenhouse.io/pinterest",
+    "ats_type": "greenhouse",
+    "ats_identifier": "pinterest"
+  },
+  {
+    "name": "MongoDB",
+    "careers_url": "https://boards.greenhouse.io/mongodb",
+    "ats_type": "greenhouse",
+    "ats_identifier": "mongodb"
+  },
+  {
+    "name": "Elastic",
+    "careers_url": "https://boards.greenhouse.io/elastic",
+    "ats_type": "greenhouse",
+    "ats_identifier": "elastic"
+  },
+  {
+    "name": "Confluent",
+    "careers_url": "https://jobs.ashbyhq.com/confluent",
+    "ats_type": "ashby",
+    "ats_identifier": "confluent"
+  },
+  {
+    "name": "Cockroach Labs",
+    "careers_url": "https://boards.greenhouse.io/cockroachlabs",
+    "ats_type": "greenhouse",
+    "ats_identifier": "cockroachlabs"
+  },
+  {
+    "name": "dbt Labs",
+    "careers_url": "https://boards.greenhouse.io/dbtlabs",
+    "ats_type": "greenhouse",
+    "ats_identifier": "dbtlabs"
+  },
+  {
+    "name": "Fivetran",
+    "careers_url": "https://boards.greenhouse.io/fivetran",
+    "ats_type": "greenhouse",
+    "ats_identifier": "fivetran"
+  },
+  {
+    "name": "Airbyte",
+    "careers_url": "https://jobs.ashbyhq.com/airbyte",
+    "ats_type": "ashby",
+    "ats_identifier": "airbyte"
+  },
+  {
+    "name": "Retool",
+    "careers_url": "https://boards.greenhouse.io/retool",
+    "ats_type": "greenhouse",
+    "ats_identifier": "retool"
+  },
+  {
+    "name": "Linear",
+    "careers_url": "https://jobs.ashbyhq.com/linear",
+    "ats_type": "ashby",
+    "ats_identifier": "linear"
+  },
+  {
+    "name": "Anduril",
+    "careers_url": "https://boards.greenhouse.io/anduril",
+    "ats_type": "greenhouse",
+    "ats_identifier": "anduril"
+  },
+  {
+    "name": "Shield AI",
+    "careers_url": "https://jobs.lever.co/shieldai",
+    "ats_type": "lever",
+    "ats_identifier": "shieldai"
+  },
+  {
+    "name": "Gusto",
+    "careers_url": "https://boards.greenhouse.io/gusto",
+    "ats_type": "greenhouse",
+    "ats_identifier": "gusto"
+  },
+  {
+    "name": "Faire",
+    "careers_url": "https://boards.greenhouse.io/faire",
+    "ats_type": "greenhouse",
+    "ats_identifier": "faire"
+  },
+  {
+    "name": "Samsara",
+    "careers_url": "https://boards.greenhouse.io/samsara",
+    "ats_type": "greenhouse",
+    "ats_identifier": "samsara"
+  },
+  {
+    "name": "Cloudflare",
+    "careers_url": "https://boards.greenhouse.io/cloudflare",
+    "ats_type": "greenhouse",
+    "ats_identifier": "cloudflare"
+  },
+  {
+    "name": "Vercel",
+    "careers_url": "https://boards.greenhouse.io/vercel",
+    "ats_type": "greenhouse",
+    "ats_identifier": "vercel"
+  },
+  {
+    "name": "Tailscale",
+    "careers_url": "https://boards.greenhouse.io/tailscale",
+    "ats_type": "greenhouse",
+    "ats_identifier": "tailscale"
+  },
+  {
+    "name": "1Password",
+    "careers_url": "https://jobs.ashbyhq.com/1password",
+    "ats_type": "ashby",
+    "ats_identifier": "1password"
+  },
+  {
+    "name": "Affirm",
+    "careers_url": "https://boards.greenhouse.io/affirm",
+    "ats_type": "greenhouse",
+    "ats_identifier": "affirm"
+  },
+  {
+    "name": "Block",
+    "careers_url": "https://boards.greenhouse.io/block",
+    "ats_type": "greenhouse",
+    "ats_identifier": "block"
+  },
+  {
+    "name": "Squarespace",
+    "careers_url": "https://boards.greenhouse.io/squarespace",
+    "ats_type": "greenhouse",
+    "ats_identifier": "squarespace"
+  },
+  {
+    "name": "Wealthsimple",
+    "careers_url": "https://jobs.ashbyhq.com/wealthsimple",
+    "ats_type": "ashby",
+    "ats_identifier": "wealthsimple"
+  },
+  {
+    "name": "Carta",
+    "careers_url": "https://boards.greenhouse.io/carta",
+    "ats_type": "greenhouse",
+    "ats_identifier": "carta"
+  },
+  {
+    "name": "Chime",
+    "careers_url": "https://boards.greenhouse.io/chime",
+    "ats_type": "greenhouse",
+    "ats_identifier": "chime"
+  },
+  {
+    "name": "Webflow",
+    "careers_url": "https://boards.greenhouse.io/webflow",
+    "ats_type": "greenhouse",
+    "ats_identifier": "webflow"
+  },
+  {
+    "name": "Loom",
+    "careers_url": "https://boards.greenhouse.io/loom",
+    "ats_type": "greenhouse",
+    "ats_identifier": "loom"
+  },
+  {
+    "name": "Vimeo",
+    "careers_url": "https://boards.greenhouse.io/vimeo",
+    "ats_type": "greenhouse",
+    "ats_identifier": "vimeo"
+  },
+  {
+    "name": "Zoom",
+    "careers_url": "https://boards.greenhouse.io/zoom",
+    "ats_type": "greenhouse",
+    "ats_identifier": "zoom"
+  },
+  {
+    "name": "Slack",
+    "careers_url": "https://boards.greenhouse.io/slack",
+    "ats_type": "greenhouse",
+    "ats_identifier": "slack"
+  },
+  {
+    "name": "Reddit",
+    "careers_url": "https://boards.greenhouse.io/reddit",
+    "ats_type": "greenhouse",
+    "ats_identifier": "reddit"
+  },
+  {
+    "name": "Quora",
+    "careers_url": "https://jobs.ashbyhq.com/quora",
+    "ats_type": "ashby",
+    "ats_identifier": "quora"
+  },
+  {
+    "name": "Substack",
+    "careers_url": "https://jobs.ashbyhq.com/substack",
+    "ats_type": "ashby",
+    "ats_identifier": "substack"
+  },
+  {
+    "name": "Medium",
+    "careers_url": "https://boards.greenhouse.io/medium",
+    "ats_type": "greenhouse",
+    "ats_identifier": "medium"
+  },
+  {
+    "name": "Patreon",
+    "careers_url": "https://jobs.ashbyhq.com/patreon",
+    "ats_type": "ashby",
+    "ats_identifier": "patreon"
+  },
+  {
+    "name": "Etsy",
+    "careers_url": "https://boards.greenhouse.io/etsy",
+    "ats_type": "greenhouse",
+    "ats_identifier": "etsy"
+  },
+  {
+    "name": "Shopify",
+    "careers_url": "https://boards.greenhouse.io/shopify",
+    "ats_type": "greenhouse",
+    "ats_identifier": "shopify"
+  },
+  {
+    "name": "GitLab",
+    "careers_url": "https://boards.greenhouse.io/gitlab",
+    "ats_type": "greenhouse",
+    "ats_identifier": "gitlab"
+  },
+  {
+    "name": "Lyft",
+    "careers_url": "https://boards.greenhouse.io/lyft",
+    "ats_type": "greenhouse",
+    "ats_identifier": "lyft"
+  },
+  {
+    "name": "Opendoor",
+    "careers_url": "https://boards.greenhouse.io/opendoor",
+    "ats_type": "greenhouse",
+    "ats_identifier": "opendoor"
+  },
+  {
+    "name": "Compass",
+    "careers_url": "https://boards.greenhouse.io/compass",
+    "ats_type": "greenhouse",
+    "ats_identifier": "compass"
+  },
+  {
+    "name": "Glossier",
+    "careers_url": "https://boards.greenhouse.io/glossier",
+    "ats_type": "greenhouse",
+    "ats_identifier": "glossier"
+  },
+  {
+    "name": "Warby Parker",
+    "careers_url": "https://boards.greenhouse.io/warbyparker",
+    "ats_type": "greenhouse",
+    "ats_identifier": "warbyparker"
+  },
+  {
+    "name": "Allbirds",
+    "careers_url": "https://boards.greenhouse.io/allbirds",
+    "ats_type": "greenhouse",
+    "ats_identifier": "allbirds"
+  },
+  {
+    "name": "Peloton",
+    "careers_url": "https://boards.greenhouse.io/peloton",
+    "ats_type": "greenhouse",
+    "ats_identifier": "peloton"
+  },
+  {
+    "name": "ClassPass",
+    "careers_url": "https://boards.greenhouse.io/classpass",
+    "ats_type": "greenhouse",
+    "ats_identifier": "classpass"
+  },
+  {
+    "name": "Oscar Health",
+    "careers_url": "https://boards.greenhouse.io/oscar",
+    "ats_type": "greenhouse",
+    "ats_identifier": "oscar"
+  },
+  {
+    "name": "Flatiron Health",
+    "careers_url": "https://boards.greenhouse.io/flatironhealth",
+    "ats_type": "greenhouse",
+    "ats_identifier": "flatironhealth"
+  },
+  {
+    "name": "Two Sigma",
+    "careers_url": "https://boards.greenhouse.io/twosigma",
+    "ats_type": "greenhouse",
+    "ats_identifier": "twosigma"
+  },
+  {
+    "name": "Netflix",
+    "careers_url": "https://jobs.lever.co/netflix",
+    "ats_type": "lever",
+    "ats_identifier": "netflix"
+  },
+  {
+    "name": "Palantir",
+    "careers_url": "https://jobs.lever.co/palantir",
+    "ats_type": "lever",
+    "ats_identifier": "palantir"
+  },
+  {
+    "name": "Mixpanel",
+    "careers_url": "https://boards.greenhouse.io/mixpanel",
+    "ats_type": "greenhouse",
+    "ats_identifier": "mixpanel"
+  },
+  {
+    "name": "KAYAK",
+    "careers_url": "https://jobs.ashbyhq.com/kayak",
+    "ats_type": "ashby",
+    "ats_identifier": "kayak"
+  },
+  {
+    "name": "Eventbrite",
+    "careers_url": "https://jobs.lever.co/eventbrite",
+    "ats_type": "lever",
+    "ats_identifier": "eventbrite"
+  },
+  {
+    "name": "Yelp",
+    "careers_url": "https://jobs.lever.co/yelp",
+    "ats_type": "lever",
+    "ats_identifier": "yelp"
+  },
+  {
+    "name": "ShipBob",
+    "careers_url": "https://jobs.lever.co/shipbob",
+    "ats_type": "lever",
+    "ats_identifier": "shipbob"
+  },
+  {
+    "name": "Attentive",
+    "careers_url": "https://boards.greenhouse.io/attentive",
+    "ats_type": "greenhouse",
+    "ats_identifier": "attentive"
+  },
+  {
+    "name": "Ironclad",
+    "careers_url": "https://jobs.lever.co/ironcladapp",
+    "ats_type": "lever",
+    "ats_identifier": "ironcladapp"
+  },
+  {
+    "name": "Rippling",
+    "careers_url": "https://jobs.lever.co/rippling",
+    "ats_type": "lever",
+    "ats_identifier": "rippling"
+  },
+  {
+    "name": "Benchling",
+    "careers_url": "https://jobs.ashbyhq.com/benchling",
+    "ats_type": "ashby",
+    "ats_identifier": "benchling"
+  },
+  {
+    "name": "Modern Treasury",
+    "careers_url": "https://jobs.ashbyhq.com/moderntreasury",
+    "ats_type": "ashby",
+    "ats_identifier": "moderntreasury"
+  },
+  {
+    "name": "Brigit",
+    "careers_url": "https://jobs.ashbyhq.com/brigit",
+    "ats_type": "ashby",
+    "ats_identifier": "brigit"
+  },
+  {
+    "name": "Vouch",
+    "careers_url": "https://jobs.smartrecruiters.com/vouch",
+    "ats_type": "smartrecruiters",
+    "ats_identifier": "vouch"
+  },
+  {
+    "name": "Hightouch",
+    "careers_url": "https://jobs.ashbyhq.com/hightouch",
+    "ats_type": "ashby",
+    "ats_identifier": "hightouch"
+  },
+  {
+    "name": "Census",
+    "careers_url": "https://jobs.lever.co/getcensus",
+    "ats_type": "lever",
+    "ats_identifier": "getcensus"
+  },
+  {
+    "name": "Crusoe Energy",
+    "careers_url": "https://jobs.lever.co/crusoeenergy",
+    "ats_type": "lever",
+    "ats_identifier": "crusoeenergy"
+  },
+  {
+    "name": "Together AI",
+    "careers_url": "https://boards.greenhouse.io/togetherai",
+    "ats_type": "greenhouse",
+    "ats_identifier": "togetherai"
+  },
+  {
+    "name": "Glean",
+    "careers_url": "https://jobs.smartrecruiters.com/glean",
+    "ats_type": "smartrecruiters",
+    "ats_identifier": "glean"
+  },
+  {
+    "name": "Pika Labs",
+    "careers_url": "https://jobs.ashbyhq.com/pika",
+    "ats_type": "ashby",
+    "ats_identifier": "pika"
+  },
+  {
+    "name": "Adept",
+    "careers_url": "https://jobs.lever.co/adept",
+    "ats_type": "lever",
+    "ats_identifier": "adept"
+  },
+  {
+    "name": "Imbue",
+    "careers_url": "https://boards.greenhouse.io/imbue",
+    "ats_type": "greenhouse",
+    "ats_identifier": "imbue"
+  },
+  {
+    "name": "Magic",
+    "careers_url": "https://jobs.lever.co/magic",
+    "ats_type": "lever",
+    "ats_identifier": "magic"
+  },
+  {
+    "name": "Sourcegraph",
+    "careers_url": "https://jobs.lever.co/sourcegraph",
+    "ats_type": "lever",
+    "ats_identifier": "sourcegraph"
+  },
+  {
+    "name": "Knock",
+    "careers_url": "https://jobs.ashbyhq.com/knock",
+    "ats_type": "ashby",
+    "ats_identifier": "knock"
+  },
+  {
+    "name": "Pave",
+    "careers_url": "https://jobs.lever.co/pave",
+    "ats_type": "lever",
+    "ats_identifier": "pave"
+  },
+  {
+    "name": "Deel",
+    "careers_url": "https://jobs.lever.co/deel",
+    "ats_type": "lever",
+    "ats_identifier": "deel"
+  },
+  {
+    "name": "Remote.com",
+    "careers_url": "https://boards.greenhouse.io/remote",
+    "ats_type": "greenhouse",
+    "ats_identifier": "remote"
+  },
+  {
+    "name": "Mux",
+    "careers_url": "https://jobs.ashbyhq.com/mux",
+    "ats_type": "ashby",
+    "ats_identifier": "mux"
+  },
+  {
+    "name": "PolicyGenius",
+    "careers_url": "https://jobs.lever.co/policygenius",
+    "ats_type": "lever",
+    "ats_identifier": "policygenius"
+  },
+  {
+    "name": "Even Financial",
+    "careers_url": "https://jobs.lever.co/even",
+    "ats_type": "lever",
+    "ats_identifier": "even"
+  },
+  {
+    "name": "Bluecore",
+    "careers_url": "https://jobs.lever.co/bluecore",
+    "ats_type": "lever",
+    "ats_identifier": "bluecore"
+  },
+  {
+    "name": "Algolia",
+    "careers_url": "https://boards.greenhouse.io/algolia",
+    "ats_type": "greenhouse",
+    "ats_identifier": "algolia"
+  },
+  {
+    "name": "Apollo.io",
+    "careers_url": "https://boards.greenhouse.io/apolloio",
+    "ats_type": "greenhouse",
+    "ats_identifier": "apolloio"
+  },
+  {
+    "name": "Postman",
+    "careers_url": "https://boards.greenhouse.io/postman",
+    "ats_type": "greenhouse",
+    "ats_identifier": "postman"
+  },
+  {
+    "name": "Front",
+    "careers_url": "https://jobs.lever.co/front",
+    "ats_type": "lever",
+    "ats_identifier": "front"
+  },
+  {
+    "name": "Klaviyo",
+    "careers_url": "https://boards.greenhouse.io/klaviyo",
+    "ats_type": "greenhouse",
+    "ats_identifier": "klaviyo"
+  },
+  {
+    "name": "Quantcast",
+    "careers_url": "https://jobs.lever.co/quantcast",
+    "ats_type": "lever",
+    "ats_identifier": "quantcast"
+  },
+  {
+    "name": "Chainalysis",
+    "careers_url": "https://jobs.lever.co/chainalysis",
+    "ats_type": "lever",
+    "ats_identifier": "chainalysis"
+  },
+  {
+    "name": "Aledade",
+    "careers_url": "https://jobs.lever.co/aledade",
+    "ats_type": "lever",
+    "ats_identifier": "aledade"
+  },
+  {
+    "name": "OpenAI",
+    "careers_url": "https://jobs.ashbyhq.com/openai",
+    "ats_type": "ashby",
+    "ats_identifier": "openai"
+  },
+  {
+    "name": "Perplexity",
+    "careers_url": "https://jobs.ashbyhq.com/perplexity",
+    "ats_type": "ashby",
+    "ats_identifier": "perplexity"
+  },
+  {
+    "name": "Ashby",
+    "careers_url": "https://jobs.ashbyhq.com/ashby",
+    "ats_type": "ashby",
+    "ats_identifier": "ashby"
+  },
+  {
+    "name": "Ramp Network",
+    "careers_url": "https://jobs.ashbyhq.com/rampnetwork",
+    "ats_type": "ashby",
+    "ats_identifier": "rampnetwork"
+  },
+  {
+    "name": "Replicate",
+    "careers_url": "https://jobs.ashbyhq.com/replicate",
+    "ats_type": "ashby",
+    "ats_identifier": "replicate"
+  },
+  {
+    "name": "Pinecone",
+    "careers_url": "https://jobs.ashbyhq.com/pinecone",
+    "ats_type": "ashby",
+    "ats_identifier": "pinecone"
+  },
+  {
+    "name": "LangChain",
+    "careers_url": "https://jobs.ashbyhq.com/langchain",
+    "ats_type": "ashby",
+    "ats_identifier": "langchain"
+  },
+  {
+    "name": "Weaviate",
+    "careers_url": "https://jobs.ashbyhq.com/weaviate",
+    "ats_type": "ashby",
+    "ats_identifier": "weaviate"
+  },
+  {
+    "name": "Chroma",
+    "careers_url": "https://jobs.ashbyhq.com/trychroma",
+    "ats_type": "ashby",
+    "ats_identifier": "trychroma"
+  },
+  {
+    "name": "Vellum",
+    "careers_url": "https://jobs.ashbyhq.com/vellum",
+    "ats_type": "ashby",
+    "ats_identifier": "vellum"
+  },
+  {
+    "name": "Cresta",
+    "careers_url": "https://boards.greenhouse.io/cresta",
+    "ats_type": "greenhouse",
+    "ats_identifier": "cresta"
+  },
+  {
+    "name": "Speak",
+    "careers_url": "https://jobs.ashbyhq.com/speak",
+    "ats_type": "ashby",
+    "ats_identifier": "speak"
+  },
+  {
+    "name": "Watershed",
+    "careers_url": "https://jobs.ashbyhq.com/watershed",
+    "ats_type": "ashby",
+    "ats_identifier": "watershed"
+  },
+  {
+    "name": "Persona",
+    "careers_url": "https://jobs.ashbyhq.com/persona",
+    "ats_type": "ashby",
+    "ats_identifier": "persona"
+  },
+  {
+    "name": "Bland",
+    "careers_url": "https://jobs.ashbyhq.com/bland",
+    "ats_type": "ashby",
+    "ats_identifier": "bland"
+  },
+  {
+    "name": "Decagon",
+    "careers_url": "https://jobs.ashbyhq.com/decagon",
+    "ats_type": "ashby",
+    "ats_identifier": "decagon"
+  },
+  {
+    "name": "Sierra",
+    "careers_url": "https://jobs.ashbyhq.com/sierra",
+    "ats_type": "ashby",
+    "ats_identifier": "sierra"
+  },
+  {
+    "name": "Suno",
+    "careers_url": "https://jobs.ashbyhq.com/suno",
+    "ats_type": "ashby",
+    "ats_identifier": "suno"
+  },
+  {
+    "name": "ElevenLabs",
+    "careers_url": "https://jobs.ashbyhq.com/elevenlabs",
+    "ats_type": "ashby",
+    "ats_identifier": "elevenlabs"
+  },
+  {
+    "name": "Codeium",
+    "careers_url": "https://jobs.ashbyhq.com/codeium",
+    "ats_type": "ashby",
+    "ats_identifier": "codeium"
+  },
+  {
+    "name": "Toast",
+    "careers_url": "https://boards.greenhouse.io/toast",
+    "ats_type": "greenhouse",
+    "ats_identifier": "toast"
+  },
+  {
+    "name": "Workable",
+    "careers_url": "https://apply.workable.com/workable/",
+    "ats_type": "workable",
+    "ats_identifier": "workable"
+  },
+  {
+    "name": "Persado",
+    "careers_url": "https://apply.workable.com/persado/",
+    "ats_type": "workable",
+    "ats_identifier": "persado"
+  },
+  {
+    "name": "Mews",
+    "careers_url": "https://apply.workable.com/mews/",
+    "ats_type": "workable",
+    "ats_identifier": "mews"
+  },
+  {
+    "name": "Bolt.eu",
+    "careers_url": "https://apply.workable.com/bolt/",
+    "ats_type": "workable",
+    "ats_identifier": "bolt"
+  },
+  {
+    "name": "Beat",
+    "careers_url": "https://apply.workable.com/beat/",
+    "ats_type": "workable",
+    "ats_identifier": "beat"
+  },
+  {
+    "name": "Pleo",
+    "careers_url": "https://jobs.ashbyhq.com/pleo",
+    "ats_type": "ashby",
+    "ats_identifier": "pleo"
+  },
+  {
+    "name": "Blueground",
+    "careers_url": "https://apply.workable.com/blueground/",
+    "ats_type": "workable",
+    "ats_identifier": "blueground"
+  },
+  {
+    "name": "Welltech",
+    "careers_url": "https://jobs.ashbyhq.com/welltech",
+    "ats_type": "ashby",
+    "ats_identifier": "welltech"
+  },
+  {
+    "name": "Skroutz",
+    "careers_url": "https://apply.workable.com/skroutz/",
+    "ats_type": "workable",
+    "ats_identifier": "skroutz"
+  },
+  {
+    "name": "Spotawheel",
+    "careers_url": "https://apply.workable.com/spotawheel/",
+    "ats_type": "workable",
+    "ats_identifier": "spotawheel"
+  },
+  {
+    "name": "Causaly",
+    "careers_url": "https://jobs.ashbyhq.com/causaly",
+    "ats_type": "ashby",
+    "ats_identifier": "causaly"
+  },
+  {
+    "name": "Plum Fintech",
+    "careers_url": "https://apply.workable.com/plum/",
+    "ats_type": "workable",
+    "ats_identifier": "plum"
+  },
+  {
+    "name": "Marshmallow",
+    "careers_url": "https://jobs.ashbyhq.com/marshmallow",
+    "ats_type": "ashby",
+    "ats_identifier": "marshmallow"
+  },
+  {
+    "name": "Hopin",
+    "careers_url": "https://apply.workable.com/hopin/",
+    "ats_type": "workable",
+    "ats_identifier": "hopin"
+  },
+  {
+    "name": "Box",
+    "careers_url": "https://jobs.smartrecruiters.com/Box",
+    "ats_type": "smartrecruiters",
+    "ats_identifier": "Box"
+  },
+  {
+    "name": "Atlassian",
+    "careers_url": "https://careers.smartrecruiters.com/Atlassian",
+    "ats_type": "smartrecruiters",
+    "ats_identifier": "Atlassian"
+  },
+  {
+    "name": "Bosch",
+    "careers_url": "https://jobs.smartrecruiters.com/Bosch",
+    "ats_type": "smartrecruiters",
+    "ats_identifier": "Bosch"
+  },
+  {
+    "name": "Visa",
+    "careers_url": "https://jobs.smartrecruiters.com/Visa",
+    "ats_type": "smartrecruiters",
+    "ats_identifier": "Visa"
+  },
+  {
+    "name": "Bayer",
+    "careers_url": "https://jobs.smartrecruiters.com/Bayer",
+    "ats_type": "smartrecruiters",
+    "ats_identifier": "Bayer"
+  },
+  {
+    "name": "Square Enix",
+    "careers_url": "https://jobs.smartrecruiters.com/SquareEnix",
+    "ats_type": "smartrecruiters",
+    "ats_identifier": "SquareEnix"
+  },
+  {
+    "name": "Equinox",
+    "careers_url": "https://jobs.smartrecruiters.com/equinox",
+    "ats_type": "smartrecruiters",
+    "ats_identifier": "equinox"
+  },
+  {
+    "name": "Ubisoft",
+    "careers_url": "https://jobs.smartrecruiters.com/Ubisoft",
+    "ats_type": "smartrecruiters",
+    "ats_identifier": "Ubisoft"
+  },
+  {
+    "name": "Allianz Direct",
+    "careers_url": "https://jobs.smartrecruiters.com/AllianzDirect",
+    "ats_type": "smartrecruiters",
+    "ats_identifier": "AllianzDirect"
+  },
+  {
+    "name": "IKEA",
+    "careers_url": "https://jobs.smartrecruiters.com/IKEA",
+    "ats_type": "smartrecruiters",
+    "ats_identifier": "IKEA"
+  },
+  {
+    "name": "LVMH",
+    "careers_url": "https://jobs.smartrecruiters.com/LVMH",
+    "ats_type": "smartrecruiters",
+    "ats_identifier": "LVMH"
+  },
+  {
+    "name": "Public",
+    "careers_url": "https://boards.greenhouse.io/Public",
+    "ats_type": "greenhouse",
+    "ats_identifier": "Public"
+  },
+  {
+    "name": "Mollie",
+    "careers_url": "https://jobs.ashbyhq.com/mollie",
+    "ats_type": "ashby",
+    "ats_identifier": "mollie"
+  },
+  {
+    "name": "MessageBird",
+    "careers_url": "https://messagebird.recruitee.com/",
+    "ats_type": "recruitee",
+    "ats_identifier": "messagebird"
+  },
+  {
+    "name": "Picnic",
+    "careers_url": "https://jobs.smartrecruiters.com/picnic",
+    "ats_type": "smartrecruiters",
+    "ats_identifier": "picnic"
+  },
+  {
+    "name": "Bunq",
+    "careers_url": "https://bunq.recruitee.com/",
+    "ats_type": "recruitee",
+    "ats_identifier": "bunq"
+  },
+  {
+    "name": "Catawiki",
+    "careers_url": "https://boards.greenhouse.io/catawiki",
+    "ats_type": "greenhouse",
+    "ats_identifier": "catawiki"
+  },
+  {
+    "name": "Albert Heijn",
+    "careers_url": "https://ah.recruitee.com/",
+    "ats_type": "recruitee",
+    "ats_identifier": "ah"
+  },
+  {
+    "name": "Monday.com",
+    "careers_url": "https://monday.recruitee.com/",
+    "ats_type": "recruitee",
+    "ats_identifier": "monday"
+  },
+  {
+    "name": "Treatwell",
+    "careers_url": "https://treatwell.recruitee.com/",
+    "ats_type": "recruitee",
+    "ats_identifier": "treatwell"
+  },
+  {
+    "name": "Tide",
+    "careers_url": "https://boards.greenhouse.io/tide",
+    "ats_type": "greenhouse",
+    "ats_identifier": "tide"
+  },
+  {
+    "name": "Polestar",
+    "careers_url": "https://polestar.recruitee.com/",
+    "ats_type": "recruitee",
+    "ats_identifier": "polestar"
+  },
+  {
+    "name": "Personio",
+    "careers_url": "https://personio.jobs.personio.de/",
+    "ats_type": "personio",
+    "ats_identifier": "personio"
+  },
+  {
+    "name": "Forto",
+    "careers_url": "https://jobs.ashbyhq.com/forto",
+    "ats_type": "ashby",
+    "ats_identifier": "forto"
+  },
+  {
+    "name": "Trade Republic",
+    "careers_url": "https://boards.greenhouse.io/traderepublic",
+    "ats_type": "greenhouse",
+    "ats_identifier": "traderepublic"
+  },
+  {
+    "name": "Scalable Capital",
+    "careers_url": "https://scalable.jobs.personio.de/",
+    "ats_type": "personio",
+    "ats_identifier": "scalable"
+  },
+  {
+    "name": "Solaris",
+    "careers_url": "https://solarisgroup.jobs.personio.de/",
+    "ats_type": "personio",
+    "ats_identifier": "solarisgroup"
+  },
+  {
+    "name": "Mambu",
+    "careers_url": "https://mambu.jobs.personio.de/",
+    "ats_type": "personio",
+    "ats_identifier": "mambu"
+  },
+  {
+    "name": "Raisin",
+    "careers_url": "https://boards.greenhouse.io/raisin",
+    "ats_type": "greenhouse",
+    "ats_identifier": "raisin"
+  },
+  {
+    "name": "CoachHub",
+    "careers_url": "https://coachhub.jobs.personio.de/",
+    "ats_type": "personio",
+    "ats_identifier": "coachhub"
+  },
+  {
+    "name": "Spotify",
+    "careers_url": "https://jobs.lever.co/spotify",
+    "ats_type": "lever",
+    "ats_identifier": "spotify"
+  },
+  {
+    "name": "Klarna",
+    "careers_url": "https://klarna.teamtailor.com/",
+    "ats_type": "teamtailor",
+    "ats_identifier": "klarna"
+  },
+  {
+    "name": "Voi",
+    "careers_url": "https://voi.teamtailor.com/",
+    "ats_type": "teamtailor",
+    "ats_identifier": "voi"
+  },
+  {
+    "name": "Tink",
+    "careers_url": "https://tink.teamtailor.com/",
+    "ats_type": "teamtailor",
+    "ats_identifier": "tink"
+  },
+  {
+    "name": "Northvolt",
+    "careers_url": "https://northvolt.teamtailor.com/",
+    "ats_type": "teamtailor",
+    "ats_identifier": "northvolt"
+  },
+  {
+    "name": "Mentimeter",
+    "careers_url": "https://boards.greenhouse.io/mentimeter",
+    "ats_type": "greenhouse",
+    "ats_identifier": "mentimeter"
+  },
+  {
+    "name": "Lendify",
+    "careers_url": "https://lendify.teamtailor.com/",
+    "ats_type": "teamtailor",
+    "ats_identifier": "lendify"
+  },
+  {
+    "name": "Pleo TT",
+    "careers_url": "https://jobs.ashbyhq.com/pleo",
+    "ats_type": "ashby",
+    "ats_identifier": "pleo"
+  },
+  {
+    "name": "NVIDIA",
+    "careers_url": "https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite",
+    "ats_type": "workday",
+    "ats_identifier": "nvidia.wd5.myworkdayjobs.com|nvidia|NVIDIAExternalCareerSite"
+  },
+  {
+    "name": "Salesforce",
+    "careers_url": "https://salesforce.wd12.myworkdayjobs.com/External_Career_Site",
+    "ats_type": "workday",
+    "ats_identifier": "salesforce.wd12.myworkdayjobs.com|salesforce|External_Career_Site"
+  },
+  {
+    "name": "Workday",
+    "careers_url": "https://workday.wd5.myworkdayjobs.com/Workday",
+    "ats_type": "workday",
+    "ats_identifier": "workday.wd5.myworkdayjobs.com|workday|Workday"
+  },
+  {
+    "name": "Adobe",
+    "careers_url": "https://adobe.wd5.myworkdayjobs.com/external_experienced",
+    "ats_type": "workday",
+    "ats_identifier": "adobe.wd5.myworkdayjobs.com|adobe|external_experienced"
+  },
+  {
+    "name": "Cisco",
+    "careers_url": "https://cisco.wd5.myworkdayjobs.com/External_Career",
+    "ats_type": "workday",
+    "ats_identifier": "cisco.wd5.myworkdayjobs.com|cisco|External_Career"
+  },
+  {
+    "name": "Capital One",
+    "careers_url": "https://capitalone.wd1.myworkdayjobs.com/Capital_One",
+    "ats_type": "workday",
+    "ats_identifier": "capitalone.wd1.myworkdayjobs.com|capitalone|Capital_One"
+  },
+  {
+    "name": "JPMorgan Chase",
+    "careers_url": "https://jpmc.wd5.myworkdayjobs.com/ExternalCareers",
+    "ats_type": "workday",
+    "ats_identifier": "jpmc.wd5.myworkdayjobs.com|jpmc|ExternalCareers"
+  },
+  {
+    "name": "Bank of America",
+    "careers_url": "https://bankofamerica.wd1.myworkdayjobs.com/Lateral-US",
+    "ats_type": "workday",
+    "ats_identifier": "bankofamerica.wd1.myworkdayjobs.com|bankofamerica|Lateral-US"
+  },
+  {
+    "name": "Goldman Sachs",
+    "careers_url": "https://goldmansachs.wd1.myworkdayjobs.com/GS_EXP",
+    "ats_type": "workday",
+    "ats_identifier": "goldmansachs.wd1.myworkdayjobs.com|goldmansachs|GS_EXP"
+  },
+  {
+    "name": "Morgan Stanley",
+    "careers_url": "https://ms.wd5.myworkdayjobs.com/External",
+    "ats_type": "workday",
+    "ats_identifier": "ms.wd5.myworkdayjobs.com|ms|External"
+  },
+  {
+    "name": "Citigroup",
+    "careers_url": "https://citi.wd5.myworkdayjobs.com/2",
+    "ats_type": "workday",
+    "ats_identifier": "citi.wd5.myworkdayjobs.com|citi|2"
+  },
+  {
+    "name": "T-Mobile",
+    "careers_url": "https://tmobile.wd1.myworkdayjobs.com/External",
+    "ats_type": "workday",
+    "ats_identifier": "tmobile.wd1.myworkdayjobs.com|tmobile|External"
+  },
+  {
+    "name": "Verizon",
+    "careers_url": "https://verizon.wd5.myworkdayjobs.com/careers",
+    "ats_type": "workday",
+    "ats_identifier": "verizon.wd5.myworkdayjobs.com|verizon|careers"
+  },
+  {
+    "name": "Walmart",
+    "careers_url": "https://walmart.wd5.myworkdayjobs.com/WalmartExternal",
+    "ats_type": "workday",
+    "ats_identifier": "walmart.wd5.myworkdayjobs.com|walmart|WalmartExternal"
+  },
+  {
+    "name": "Target",
+    "careers_url": "https://target.wd5.myworkdayjobs.com/targetcareers",
+    "ats_type": "workday",
+    "ats_identifier": "target.wd5.myworkdayjobs.com|target|targetcareers"
+  },
+  {
+    "name": "Best Buy",
+    "careers_url": "https://bestbuy.wd5.myworkdayjobs.com/External",
+    "ats_type": "workday",
+    "ats_identifier": "bestbuy.wd5.myworkdayjobs.com|bestbuy|External"
+  },
+  {
+    "name": "Disney",
+    "careers_url": "https://disney.wd5.myworkdayjobs.com/disneycareer",
+    "ats_type": "workday",
+    "ats_identifier": "disney.wd5.myworkdayjobs.com|disney|disneycareer"
+  },
+  {
+    "name": "Warner Bros",
+    "careers_url": "https://warnerbros.wd5.myworkdayjobs.com/global",
+    "ats_type": "workday",
+    "ats_identifier": "warnerbros.wd5.myworkdayjobs.com|warnerbros|global"
+  },
+  {
+    "name": "Paramount",
+    "careers_url": "https://paramount.wd5.myworkdayjobs.com/ParamountCareers",
+    "ats_type": "workday",
+    "ats_identifier": "paramount.wd5.myworkdayjobs.com|paramount|ParamountCareers"
+  },
+  {
+    "name": "Comcast",
+    "careers_url": "https://comcast.wd5.myworkdayjobs.com/Comcast_Careers",
+    "ats_type": "workday",
+    "ats_identifier": "comcast.wd5.myworkdayjobs.com|comcast|Comcast_Careers"
+  },
+  {
+    "name": "AT&T",
+    "careers_url": "https://att.wd5.myworkdayjobs.com/ATTExternal",
+    "ats_type": "workday",
+    "ats_identifier": "att.wd5.myworkdayjobs.com|att|ATTExternal"
+  },
+  {
+    "name": "IBM",
+    "careers_url": "https://ibmglobal.wd5.myworkdayjobs.com/IBMCareers",
+    "ats_type": "workday",
+    "ats_identifier": "ibmglobal.wd5.myworkdayjobs.com|ibmglobal|IBMCareers"
+  },
+  {
+    "name": "VMware",
+    "careers_url": "https://vmware.wd1.myworkdayjobs.com/VMware",
+    "ats_type": "workday",
+    "ats_identifier": "vmware.wd1.myworkdayjobs.com|vmware|VMware"
+  },
+  {
+    "name": "HPE",
+    "careers_url": "https://hpe.wd5.myworkdayjobs.com/Jobsathpe",
+    "ats_type": "workday",
+    "ats_identifier": "hpe.wd5.myworkdayjobs.com|hpe|Jobsathpe"
+  }
 ]

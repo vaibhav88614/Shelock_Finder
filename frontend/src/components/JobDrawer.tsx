@@ -1,3 +1,5 @@
+import FocusLock from "react-focus-lock";
+import { useEscapeToClose } from "../hooks/useEscapeToClose";
 import type { Job } from "../types";
 
 interface Props {
@@ -13,22 +15,27 @@ function fmtDateTime(iso: string | null): string {
 }
 
 export function JobDrawer({ job, onClose }: Props) {
+  // Hooks must be called unconditionally; useEscapeToClose no-ops when job is
+  // null because the listener won't see a meaningful onClose effect (modal
+  // isn't rendered). We early-return after.
+  useEscapeToClose(onClose);
   if (!job) return null;
   return (
-    <div className="fixed inset-0 z-40 flex" role="dialog" aria-modal="true">
-      <div
-        className="absolute inset-0 bg-slate-900/30"
-        onClick={onClose}
-        aria-label="Close"
-      />
-      <div className="ml-auto relative w-full max-w-xl h-full bg-white shadow-xl overflow-y-auto">
-        <div className="sticky top-0 bg-white border-b border-slate-200 px-5 py-3 flex items-start justify-between">
-          <div className="min-w-0">
-            <div className="text-xs text-slate-500">
-              {job.company_name ?? `#${job.company_id}`}
+    <FocusLock returnFocus>
+      <div className="fixed inset-0 z-40 flex" role="dialog" aria-modal="true" aria-labelledby="job-drawer-title">
+        <div
+          className="absolute inset-0 bg-slate-900/30"
+          onClick={onClose}
+          aria-hidden="true"
+        />
+        <div className="ml-auto relative w-full max-w-xl h-full bg-white shadow-xl overflow-y-auto">
+          <div className="sticky top-0 bg-white border-b border-slate-200 px-5 py-3 flex items-start justify-between">
+            <div className="min-w-0">
+              <div className="text-xs text-slate-500">
+                {job.company_name ?? `#${job.company_id}`}
+              </div>
+              <h2 id="job-drawer-title" className="text-lg font-semibold leading-tight truncate">{job.title}</h2>
             </div>
-            <h2 className="text-lg font-semibold leading-tight truncate">{job.title}</h2>
-          </div>
           <button
             type="button"
             onClick={onClose}
@@ -96,6 +103,7 @@ export function JobDrawer({ job, onClose }: Props) {
           )}
         </div>
       </div>
-    </div>
+      </div>
+    </FocusLock>
   );
 }

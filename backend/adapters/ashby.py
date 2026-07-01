@@ -35,7 +35,7 @@ class AshbyAdapter(BaseAdapter):
             )
         url = f"{self.BASE_URL}/{org}?includeCompensation=false"
         try:
-            resp = await self.client.get(url)
+            resp = await self.request("GET", url)
         except httpx.HTTPError as e:
             raise AdapterError(f"Ashby fetch failed for {org!r}: {e}") from e
         if resp.status_code == 404:

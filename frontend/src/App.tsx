@@ -1,12 +1,12 @@
-import { useMemo, useState } from "react";
-import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
+import { useCallback, useMemo, useState } from "react";
+import { useQuery, useInfiniteQuery, useMutation } from "@tanstack/react-query";
 import { AddCompanyModal } from "./components/AddCompanyModal";
 import { AdminPage } from "./components/AdminPage";
 import { Filters } from "./components/Filters";
 import { JobDrawer } from "./components/JobDrawer";
 import { JobTable } from "./components/JobTable";
 import { StatsBar } from "./components/StatsBar";
-import { exportCsvUrl, fetchJobs, fetchRuns, fetchStats } from "./api";
+import { downloadJobsCsv, fetchJobs, fetchRuns, fetchStats } from "./api";
 import { defaultFilters, type Job, type JobFilters } from "./types";
 
 type View = "jobs" | "admin";
@@ -21,7 +21,19 @@ export default function App() {
   const runs = useQuery({ queryKey: ["runs"], queryFn: () => fetchRuns(5) });
 
   const jobs = useInfiniteQuery({
-    queryKey: ["jobs", filters],
+    queryKey: [
+      "jobs",
+      filters.keywords.join(","),
+      filters.keyword_logic,
+      filters.location,
+      filters.remote_only,
+      filters.experience_min,
+      filters.experience_max,
+      filters.posted_within_days,
+      filters.sort,
+      filters.new_in_last_run,
+      filters.company_ids.join(","),
+    ],
     queryFn: ({ pageParam }) => fetchJobs(filters, pageParam as string | null, 50, true),
     initialPageParam: null as string | null,
     getNextPageParam: (last) => last.next_cursor,
@@ -33,6 +45,20 @@ export default function App() {
     [jobs.data]
   );
   const total = jobs.data?.pages?.[0]?.total ?? null;
+
+  // Stable callbacks so the memo'd children don't re-render on every parent
+  // tick (Phase 4.7).
+  const csvExport = useMutation({
+    mutationFn: () => downloadJobsCsv(filters),
+  });
+  const handleExport = useCallback(() => {
+    csvExport.mutate();
+  }, [csvExport]);
+  const handleLoadMore = useCallback(() => {
+    jobs.fetchNextPage();
+  }, [jobs]);
+  const handleAddClose = useCallback(() => setAddOpen(false), []);
+  const handleDrawerClose = useCallback(() => setSelected(null), []);
 
   return (
     <div className="min-h-full">
@@ -70,14 +96,16 @@ export default function App() {
             >
               + Add company
             </button>
-            <a
-              href="/health"
-              target="_blank"
-              rel="noreferrer"
-              className="text-xs text-slate-500 hover:text-slate-900"
-            >
-              /health
-            </a>
+            {import.meta.env.DEV && (
+              <a
+                href="/health"
+                target="_blank"
+                rel="noreferrer"
+                className="text-xs text-slate-500 hover:text-slate-900"
+              >
+                /health
+              </a>
+            )}
           </div>
         </div>
       </header>
@@ -90,14 +118,20 @@ export default function App() {
             <Filters
               value={filters}
               onChange={setFilters}
-              onExport={() => {
-                window.location.href = exportCsvUrl(filters);
-              }}
+              onExport={handleExport}
             />
 
             {jobs.isError && (
               <div className="bg-red-50 border border-red-200 text-red-800 rounded p-3 text-sm">
                 Failed to load jobs: {(jobs.error as Error).message}
+              </div>
+            )}
+            {csvExport.isError && (
+              <div
+                className="bg-red-50 border border-red-200 text-red-800 rounded p-3 text-sm"
+                aria-live="polite"
+              >
+                CSV export failed: {(csvExport.error as Error).message}
               </div>
             )}
 
@@ -106,7 +140,7 @@ export default function App() {
               onSelect={setSelected}
               loading={jobs.isFetching}
               hasMore={Boolean(jobs.hasNextPage)}
-              onLoadMore={() => jobs.fetchNextPage()}
+              onLoadMore={handleLoadMore}
               total={total}
             />
           </>
@@ -115,8 +149,8 @@ export default function App() {
         )}
       </main>
 
-      <JobDrawer job={selected} onClose={() => setSelected(null)} />
-      {addOpen && <AddCompanyModal onClose={() => setAddOpen(false)} />}
+      <JobDrawer job={selected} onClose={handleDrawerClose} />
+      {addOpen && <AddCompanyModal onClose={handleAddClose} />}
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import type { Job } from "../types";
 
 interface Props {
@@ -16,10 +17,17 @@ function fmtDate(iso: string | null): string {
   return d.toISOString().slice(0, 10);
 }
 
-export function JobTable({ jobs, onSelect, loading, hasMore, onLoadMore, total }: Props) {
+export const JobTable = memo(function JobTable({ jobs, onSelect, loading, hasMore, onLoadMore, total }: Props) {
   return (
-    <div className="bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden">
-      <div className="px-4 py-2 border-b border-slate-200 text-xs text-slate-500 flex justify-between">
+    <div
+      className="bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden"
+      aria-busy={loading}
+    >
+      <div
+        className="px-4 py-2 border-b border-slate-200 text-xs text-slate-500 flex justify-between"
+        aria-live="polite"
+        aria-atomic="true"
+      >
         <span>
           {jobs.length} loaded{total !== null ? ` / ${total} matching` : ""}
         </span>
@@ -89,4 +97,4 @@ export function JobTable({ jobs, onSelect, loading, hasMore, onLoadMore, total }
       )}
     </div>
   );
-}
+});

@@ -41,7 +41,7 @@ class SmartRecruitersAdapter(BaseAdapter):
         while True:
             url = f"{self.BASE_URL}/{token}/postings?limit={self.PAGE_LIMIT}&offset={offset}"
             try:
-                resp = await self.client.get(url)
+                resp = await self.request("GET", url)
             except httpx.HTTPError as e:
                 raise AdapterError(f"SmartRecruiters fetch failed for {token!r}: {e}") from e
             if resp.status_code == 404:

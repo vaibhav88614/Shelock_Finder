@@ -99,11 +99,29 @@ def reset(
     typer.echo("DB reset complete.")
 
 
+def _force_utf8_console() -> None:
+    """Ensure stdout/stderr can emit non-ASCII (em dashes, arrows, accents).
+
+    On Windows the console defaults to a legacy code page (cp1252), so log
+    lines containing characters like '—' raise UnicodeEncodeError or print as
+    '?'. Reconfiguring the streams to UTF-8 (with a safe fallback) fixes every
+    such call site at once. No-op on platforms/streams that don't support it.
+    """
+    for stream in (sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if reconfigure is not None:
+            try:
+                reconfigure(encoding="utf-8", errors="replace")
+            except (ValueError, OSError):
+                pass
+
+
 def _configure_logging() -> None:
     logger.remove()
     logger.add(sys.stderr, level="INFO", format="<green>{time:HH:mm:ss}</green> | <level>{level: <7}</level> | {message}")
 
 
 if __name__ == "__main__":
+    _force_utf8_console()
     _configure_logging()
     app()

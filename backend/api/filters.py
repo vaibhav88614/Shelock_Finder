@@ -19,7 +19,15 @@ from typing import Sequence
 from sqlalchemy import Select, and_, func, literal, or_, select, text
 from sqlalchemy.orm import Session, aliased
 
-from ..models import Company, Job
+from ..config import settings as _settings
+from ..models import Company, Job, utcnow_naive
+
+
+# Upper bound for the `posted_within_days` filter — surfaced as a module
+# constant so the FastAPI Query validator in [api/jobs.py](api/jobs.py) and
+# the clamp inside `build_jobs_query` both stay in sync. Captured at module
+# load time from the `JOBPULSE_POSTED_WITHIN_DAYS_MAX` env var.
+POSTED_WITHIN_DAYS_MAX: int = _settings.posted_within_days_max
 
 
 SAFE_TOKEN_RE = re.compile(r"^[\w\-]+$", re.UNICODE)
@@ -37,7 +45,7 @@ class JobFilters:
     keyword_logic: str = "or"  # "and" | "or"
     experience_min: int | None = None
     experience_max: int | None = None
-    posted_within_days: int = 15  # capped at 15
+    posted_within_days: int = 15  # clamped to POSTED_WITHIN_DAYS_MAX in build_jobs_query
     location: str | None = None
     remote_only: bool | None = None
     sort: str = "posted_date"  # "posted_date" | "company" | "title" | "first_seen"
@@ -117,9 +125,11 @@ def build_jobs_query(filters: JobFilters, cursor: str | None = None) -> Select:
     if filters.active_only:
         stmt = stmt.where(Job.is_active.is_(True))
 
-    # posted_within_days (capped at 15 per spec §5 schema)
-    days = min(max(filters.posted_within_days, 1), 15)
-    cutoff = datetime.utcnow() - timedelta(days=days)
+    # posted_within_days — clamp to [1, POSTED_WITHIN_DAYS_MAX]. The max is
+    # captured from JOBPULSE_POSTED_WITHIN_DAYS_MAX (default 15) so the SQL
+    # window stays in sync with the FastAPI Query validators in api/jobs.py.
+    days = min(max(filters.posted_within_days, 1), POSTED_WITHIN_DAYS_MAX)
+    cutoff = utcnow_naive() - timedelta(days=days)
     stmt = stmt.where(or_(Job.posted_date.is_(None), Job.posted_date >= cutoff))
 
     if filters.company_ids:
@@ -224,16 +234,20 @@ def build_jobs_query(filters: JobFilters, cursor: str | None = None) -> Select:
             # Descending: take rows strictly before (sv, last_id).
             cursor_dt = datetime.fromisoformat(sv) if sv else None
             if cursor_dt is None:
-                # NULLs go last in desc nullslast; once we're past them, only
-                # `id < last_id AND sort_col IS NULL` can follow.
+                # NULL-tail phase: emitted by `list_jobs` once the page
+                # boundary crosses the last non-null row. Iterate NULL rows
+                # by `id DESC`.
                 stmt = stmt.where(and_(sort_col.is_(None), Job.id < last_id))
             else:
+                # Non-null phase: standard keyset. NULL rows are explicitly
+                # NOT included here — the transition is handled by emitting a
+                # null-tail cursor from `list_jobs` at the boundary
+                # (Phase 4.2). Avoids the per-page IS NULL scan the prior
+                # implementation paid on every non-null page.
                 stmt = stmt.where(
                     or_(
                         sort_col < cursor_dt,
                         and_(sort_col == cursor_dt, Job.id < last_id),
-                        # NULL sort values come after non-null in desc nullslast.
-                        sort_col.is_(None),
                     )
                 )
         else:

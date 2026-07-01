@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query
+from loguru import logger
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -58,7 +59,7 @@ def trigger_scrape_all(
         try:
             run_scrape(ats=ats, no_playwright=no_playwright)
         except Exception:  # noqa: BLE001
-            pass
+            logger.exception("Background scrape failed (run_id pending)")
 
     background.add_task(_job)
     return {"status": "queued", "ats": ats, "no_playwright": no_playwright}

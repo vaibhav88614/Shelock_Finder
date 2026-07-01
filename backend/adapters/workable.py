@@ -41,9 +41,10 @@ class WorkableAdapter(BaseAdapter):
         url = f"{self.BASE_URL}/{sub}/jobs"
         out: list[RawJob] = []
         body: dict[str, Any] = {"query": ""}
+        hit_cap = False
         for _ in range(self.MAX_PAGES):
             try:
-                resp = await self.client.post(url, json=body)
+                resp = await self.request("POST", url, json=body)
             except httpx.HTTPError as e:
                 raise AdapterError(f"Workable fetch failed for {sub!r}: {e}") from e
             if resp.status_code == 404:
@@ -59,6 +60,7 @@ class WorkableAdapter(BaseAdapter):
                 raise AdapterError(f"Workable {sub!r} missing 'results' list")
             out.extend(page)
             if len(out) >= 5000:
+                hit_cap = True
                 break
             # Workable's cursor pagination: response carries nextPage when more rows exist.
             token = data.get("nextPage") or data.get("next_page")
@@ -66,6 +68,10 @@ class WorkableAdapter(BaseAdapter):
                 break
             body = {"query": "", "token": str(token)}
         logger.debug("Workable[{}]: {} jobs", sub, len(out))
+        if hit_cap:
+            logger.warning(
+                "Workable[{}] hit 5000-job safety cap; results truncated.", sub
+            )
         return out
 
     def normalize(self, raw: RawJob, company) -> NormalizedJob:  # noqa: ANN001

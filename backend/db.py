@@ -33,6 +33,12 @@ def _make_engine() -> Engine:
             cur.execute("PRAGMA foreign_keys=ON")
             cur.execute("PRAGMA busy_timeout=30000")  # 30s
             cur.execute("PRAGMA temp_store=MEMORY")
+            # Explicit checkpoint threshold (SQLite default is also 1000, but
+            # surfacing it here documents intent and lets us tune from one
+            # place). Note: auto-checkpoint copies WAL pages back to the main
+            # DB but doesn't TRUNCATE the .db-wal file. Periodic
+            # `wal_checkpoint(TRUNCATE)` is invoked at the end of a scrape run.
+            cur.execute("PRAGMA wal_autocheckpoint=1000")
         finally:
             cur.close()
 
@@ -68,6 +74,7 @@ def rebind(db_url: str) -> None:
             cur.execute("PRAGMA synchronous=NORMAL")
             cur.execute("PRAGMA foreign_keys=ON")
             cur.execute("PRAGMA busy_timeout=30000")
+            cur.execute("PRAGMA wal_autocheckpoint=1000")
         finally:
             cur.close()
 
