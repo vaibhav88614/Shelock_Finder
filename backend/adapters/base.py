@@ -28,6 +28,7 @@ import hashlib
 import random
 import re
 from abc import ABC, abstractmethod
+from collections.abc import Awaitable, Callable
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Any
@@ -122,19 +123,30 @@ class BaseAdapter(ABC):
     # -- Retry policy (shared by every adapter's HTTP calls) ---------------
     # Retry transient throttling / server errors; 404 and other 4xx are
     # terminal and never retried. Retry-After (seconds form) is honored but
-    # capped so a hostile header can't blow past the orchestrator's 60s
-    # per-company timeout.
+    # capped.
+    #
+    # INVARIANT (see backend/scrape.py PER_COMPANY_TIMEOUT_S = 60s): the total
+    # time spent *sleeping* between retries must stay well under the
+    # orchestrator's per-company timeout, or `asyncio.wait_for` would kill the
+    # coroutine mid-retry and under-count that company's jobs. Worst case is
+    #   MAX_RETRIES * max(BACKOFF_CAP_S, RETRY_AFTER_CAP_S) = 3 * 10 = 30s < 60s,
+    # leaving headroom for the actual request round-trips.
     RETRY_STATUSES: frozenset[int] = frozenset({429, 500, 502, 503, 504})
     MAX_RETRIES: int = 3
     BACKOFF_BASE_S: float = 0.5
     BACKOFF_CAP_S: float = 8.0
-    RETRY_AFTER_CAP_S: float = 20.0
+    RETRY_AFTER_CAP_S: float = 10.0
 
     def __init__(self, client: httpx.AsyncClient | None = None) -> None:
         # The orchestrator passes in a shared client so connection pooling
         # works across companies. Tests can omit it; we lazily create one.
         self._client = client
         self._owns_client = client is None
+        # Optional zero-arg async callable that re-acquires this ATS family's
+        # rate-limit token. The orchestrator sets it so retries back off
+        # *politely* (a server already 429ing shouldn't be hammered). None in
+        # tests / standalone use, where no global limiter exists.
+        self._rate_acquire: Callable[[], Awaitable[None]] | None = None
 
     # -- HTTP plumbing ------------------------------------------------------
 
@@ -175,29 +187,42 @@ class BaseAdapter(ABC):
             return None
         return secs if secs >= 0 else None
 
-    async def request(self, method: str, url: str, **kwargs: Any) -> httpx.Response:
+    async def request_with_retry(
+        self, method: str, url: str, *, retry: bool = True, **kwargs: Any
+    ) -> httpx.Response:
         """Issue an HTTP request with retry on 429/5xx and transport errors.
 
         Non-retryable responses (2xx, 3xx, 404, other 4xx) are returned to the
         caller unchanged so existing per-adapter status handling still applies.
+
+        IDEMPOTENCY: retries re-send the request verbatim, so this is only safe
+        for idempotent calls. Every adapter here uses GET, or POST against a
+        *read-only search* endpoint (Workable/Workday job listings). A future
+        adapter that issues a state-changing POST MUST pass ``retry=False`` to
+        opt out, otherwise a transient 5xx could double-fire the mutation.
+
+        On each retry attempt the ATS rate-limit bucket is re-acquired (when the
+        orchestrator wired one in) so a throttled server is not hammered.
         """
+        max_retries = self.MAX_RETRIES if retry else 0
         attempt = 0
         while True:
             try:
                 resp = await self.client.request(method, url, **kwargs)
             except (httpx.TimeoutException, httpx.TransportError) as exc:
-                if attempt >= self.MAX_RETRIES:
+                if attempt >= max_retries:
                     raise
                 delay = self._backoff_delay(attempt)
                 logger.debug(
                     "{} {} transport error ({}); retry {}/{} in {:.2f}s",
-                    method, url, type(exc).__name__, attempt + 1, self.MAX_RETRIES, delay,
+                    method, url, type(exc).__name__, attempt + 1, max_retries, delay,
                 )
                 await asyncio.sleep(delay)
+                await self._reacquire_rate_token()
                 attempt += 1
                 continue
 
-            if resp.status_code in self.RETRY_STATUSES and attempt < self.MAX_RETRIES:
+            if resp.status_code in self.RETRY_STATUSES and attempt < max_retries:
                 retry_after = self._parse_retry_after(resp)
                 delay = (
                     min(retry_after, self.RETRY_AFTER_CAP_S)
@@ -206,13 +231,19 @@ class BaseAdapter(ABC):
                 )
                 logger.debug(
                     "{} {} -> HTTP {}; retry {}/{} in {:.2f}s",
-                    method, url, resp.status_code, attempt + 1, self.MAX_RETRIES, delay,
+                    method, url, resp.status_code, attempt + 1, max_retries, delay,
                 )
                 await asyncio.sleep(delay)
+                await self._reacquire_rate_token()
                 attempt += 1
                 continue
 
             return resp
+
+    async def _reacquire_rate_token(self) -> None:
+        """Re-acquire the per-ATS rate-limit token before a retry, if wired."""
+        if self._rate_acquire is not None:
+            await self._rate_acquire()
 
     # -- Contract -----------------------------------------------------------
 

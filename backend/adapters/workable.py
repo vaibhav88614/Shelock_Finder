@@ -44,7 +44,7 @@ class WorkableAdapter(BaseAdapter):
         hit_cap = False
         for _ in range(self.MAX_PAGES):
             try:
-                resp = await self.request("POST", url, json=body)
+                resp = await self.request_with_retry("POST", url, json=body)
             except httpx.HTTPError as e:
                 raise AdapterError(f"Workable fetch failed for {sub!r}: {e}") from e
             if resp.status_code == 404:

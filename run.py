@@ -84,6 +84,25 @@ def check_seeds_cmd(
         raise typer.Exit(code=1)
 
 
+@app.command("heal-seeds")
+def heal_seeds_cmd(
+    dry_run: bool = typer.Option(False, "--dry-run", help="Report only; don't modify seeds."),
+    min_ok: int | None = typer.Option(None, "--min-ok", help="Exit non-zero if fewer than N companies end up OK."),
+) -> None:
+    """Live-probe seeds and re-point stale boards to their current ATS.
+
+    Writes verified fixes back to seeds/companies.json and an audit trail to
+    data/heal_report.csv. Candidates whose employer name can't be corroborated
+    are reported as 'needs-review' rather than auto-applied.
+    """
+    import asyncio
+
+    from scripts.heal_seeds import run_heal
+
+    code = asyncio.run(run_heal(dry_run=dry_run, min_ok=min_ok))
+    raise typer.Exit(code=code)
+
+
 @app.command()
 def reset(
     yes: bool = typer.Option(False, "--yes", help="Confirm destructive reset."),

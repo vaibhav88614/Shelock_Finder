@@ -65,7 +65,7 @@ class PersonioAdapter(BaseAdapter):
             )
         url = f"https://{sub}.jobs.personio.de/xml"
         try:
-            resp = await self.request("GET", url, headers={"Accept": "application/xml,text/xml"})
+            resp = await self.request_with_retry("GET", url, headers={"Accept": "application/xml,text/xml"})
         except httpx.HTTPError as e:
             raise AdapterError(f"Personio fetch failed for {sub!r}: {e}") from e
         if resp.status_code == 404:

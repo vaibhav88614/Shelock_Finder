@@ -100,7 +100,7 @@ class WorkdayAdapter(BaseAdapter):
                 "searchText": "",
             }
             try:
-                resp = await self.request("POST", url, json=payload, headers=req_headers)
+                resp = await self.request_with_retry("POST", url, json=payload, headers=req_headers)
             except httpx.HTTPError as e:
                 raise AdapterError(f"Workday fetch failed for {tenant}/{site}: {e}") from e
             if resp.status_code == 404:

@@ -34,7 +34,7 @@ class RecruiteeAdapter(BaseAdapter):
             )
         url = f"https://{sub}.recruitee.com/api/offers/"
         try:
-            resp = await self.request("GET", url)
+            resp = await self.request_with_retry("GET", url)
         except httpx.HTTPError as e:
             raise AdapterError(f"Recruitee fetch failed for {sub!r}: {e}") from e
         if resp.status_code == 404:

@@ -34,6 +34,7 @@ from __future__ import annotations
 
 import asyncio
 import csv
+import functools
 import json
 from dataclasses import dataclass
 from datetime import datetime, timedelta
@@ -176,11 +177,16 @@ async def _orchestrate(company_ids: list[int]) -> int:
         timeout=httpx.Timeout(30.0, connect=10.0),
         follow_redirects=True,
     ) as client:
-        # Cache one adapter per ATS family, sharing the pooled client.
+        # Cache one adapter per ATS family, sharing the pooled client. Each
+        # adapter is bound to a rate-token re-acquire callable so retries
+        # (inside request_with_retry) re-gate through the same per-ATS bucket
+        # instead of hammering an already-throttling server.
         adapter_cache: dict[str, BaseAdapter] = {}
         for ats_type in set(_company_ats_types(company_ids)):
             cls = get_adapter_cls(ats_type)
-            adapter_cache[ats_type] = cls(client=client)
+            adapter = cls(client=client)
+            adapter._rate_acquire = functools.partial(buckets.acquire, ats_type)
+            adapter_cache[ats_type] = adapter
 
         try:
             tasks = [
