@@ -24,7 +24,7 @@ data/
 *.db
 *.db-wal
 *.db-shm
-*.log
+
 
 # Editors / OS
 .vscode/

@@ -1,0 +1,46 @@
+2026-07-06T12:23:12.497Z ACTOR: Pulling container image of build diIK1buzp3UDWQOVk from registry.
+2026-07-06T12:23:43.952Z ACTOR: Creating container.
+2026-07-06T12:23:44.314Z ACTOR: Starting container.
+2026-07-06T12:23:44.316Z ACTOR: Running under "LIMITED_PERMISSIONS".
+2026-07-06T12:23:44.570Z Will run command: xvfb-run -a -s "-ac -screen 0 1920x1080x24+32 -nolisten tcp" /bin/sh -c npm start --silent
+2026-07-06T12:23:45.326Z [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+2026-07-06T12:23:45.898Z INFO  System info {"apifyVersion":"3.5.1","apifyClientVersion":"2.19.0","crawleeVersion":"3.15.2","osType":"Linux","nodeVersion":"v22.21.1"}
+2026-07-06T12:23:46.409Z INFO  PuppeteerCrawler: Starting the crawler.
+2026-07-06T12:23:48.134Z Processing https://www.goodfirms.co/directory/country/top-software-development-companies/python/india...
+2026-07-06T12:23:51.911Z Saved 48 items, total: 48
+2026-07-06T12:23:51.985Z data fetching...1
+2026-07-06T12:23:58.946Z Saved 48 items, total: 96
+2026-07-06T12:23:59.140Z data fetching...2
+2026-07-06T12:24:05.051Z Saved 48 items, total: 144
+2026-07-06T12:24:05.242Z data fetching...3
+2026-07-06T12:24:13.941Z Saved 48 items, total: 192
+2026-07-06T12:24:13.982Z data fetching...4
+2026-07-06T12:24:19.542Z Saved 48 items, total: 240
+2026-07-06T12:24:19.653Z data fetching...5
+2026-07-06T12:24:27.357Z Saved 48 items, total: 288
+2026-07-06T12:24:27.471Z data fetching...6
+2026-07-06T12:24:34.659Z Saved 48 items, total: 336
+2026-07-06T12:24:34.843Z data fetching...7
+2026-07-06T12:24:41.542Z Saved 48 items, total: 384
+2026-07-06T12:24:41.570Z data fetching...8
+2026-07-06T12:24:46.409Z INFO  PuppeteerCrawler:Statistics: PuppeteerCrawler request statistics: {"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":null,"requestsFinishedPerMinute":0,"requestsFailedPerMinute":0,"requestTotalDurationMillis":0,"requestsTotal":0,"crawlerRuntimeMillis":60406,"retryHistogram":[]}
+2026-07-06T12:24:47.446Z INFO  PuppeteerCrawler:AutoscaledPool: state {"currentConcurrency":1,"desiredConcurrency":1,"systemStatus":{"isSystemIdle":false,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":0},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.6,"actualRatio":0.273},"cpuInfo":{"isOverloaded":true,"limitRatio":0.4,"actualRatio":0.561},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":0}}}
+2026-07-06T12:24:49.154Z Saved 48 items, total: 432
+2026-07-06T12:24:49.187Z data fetching...9
+2026-07-06T12:24:58.053Z Saved 48 items, total: 480
+2026-07-06T12:24:58.158Z data fetching...10
+2026-07-06T12:25:05.678Z Saved 48 items, total: 528
+2026-07-06T12:25:05.844Z data fetching...11
+2026-07-06T12:25:11.054Z Saved 48 items, total: 576
+2026-07-06T12:25:11.240Z data fetching...12
+2026-07-06T12:25:24.141Z data not found...
+2026-07-06T12:25:24.148Z data fetching...13
+2026-07-06T12:25:38.714Z data not found...
+2026-07-06T12:25:38.716Z data fetching...14
+2026-07-06T12:25:46.408Z INFO  PuppeteerCrawler:Statistics: PuppeteerCrawler request statistics: {"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":null,"requestsFinishedPerMinute":0,"requestsFailedPerMinute":0,"requestTotalDurationMillis":0,"requestsTotal":0,"crawlerRuntimeMillis":120405,"retryHistogram":[]}
+2026-07-06T12:25:48.144Z INFO  PuppeteerCrawler:AutoscaledPool: state {"currentConcurrency":1,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":0},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.6,"actualRatio":0.02},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":0.242},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":0}}}
+2026-07-06T12:25:52.929Z data not found...
+2026-07-06T12:25:52.954Z Scraping completed. Total items: 576
+2026-07-06T12:25:53.166Z INFO  PuppeteerCrawler: All requests from the queue have been processed, the crawler will shut down.
+2026-07-06T12:25:54.026Z INFO  PuppeteerCrawler: Final request statistics: {"requestsFinished":1,"requestsFailed":0,"retryHistogram":[1],"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":126430,"requestsFinishedPerMinute":0,"requestsFailedPerMinute":0,"requestTotalDurationMillis":126430,"requestsTotal":1,"crawlerRuntimeMillis":128022}
+2026-07-06T12:25:54.028Z INFO  PuppeteerCrawler: Finished! Total 1 requests: 1 succeeded, 0 failed. {"terminal":true}
