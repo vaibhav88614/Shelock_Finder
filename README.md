@@ -128,6 +128,8 @@ Delete `data/jobpulse.db*` to start over; rerun `migrate` + `seed`.
 | `python run.py add-company URL [--name X]` | Auto-detect ATS and register a company. |
 | `python run.py detect-ats URL` | Print detected ATS family for a URL. |
 | `python run.py check-seeds` | Probe every seeded company and write `data/seed_check.csv`. |
+| `python run.py ingest-india [--from-goodfirms all] [--dry-run]` | Ingest India-based tech companies into the seed list (see below). |
+| `python run.py infer-selectors [--playwright] [--dry-run]` | Auto-infer `custom_selectors` for custom-adapter companies that lack them (see below). |
 | `python run.py serve [--host 127.0.0.1] [--port 8000]` | Run FastAPI + dashboard. |
 | `python run.py reset --yes` | Drop schema and recreate. **Destructive.** |
 
@@ -155,6 +157,73 @@ or from a `VITE_API_KEY` build-time env var.
 | `GET` | `/scrape-runs?limit=N` | Recent runs (newest first). |
 | `POST` | `/scrape-runs` | Trigger a full scrape across all active companies. Returns 202 + `{status:"queued"}`; 409 if another run is in-flight (`finished_at IS NULL`). Optional `?ats=greenhouse` and `?no_playwright=true`. Auth required. |
 | `GET` | `/health` | Liveness probe. |
+
+## India-based tech companies
+
+JobPulse ships with a tool to bulk-ingest India-based tech companies alongside
+the default US/global seeds, so the same dashboard covers both markets.
+
+```powershell
+python run.py ingest-india --dry-run          # report only, writes nothing to seeds
+python run.py ingest-india                     # Excel + curated list -> seeds
+python run.py ingest-india --from-goodfirms all  # also live-scrape GoodFirms (needs Playwright)
+python run.py seed                             # load the new companies into SQLite
+python run.py scrape                           # scrape jobs
+```
+
+Sources (merged and de-duplicated by host):
+
+1. The GoodFirms Excel export shipped in the repo
+   (`dataset_goodfirms-*.xlsx`, ~576 companies).
+2. A curated list of well-known Indian tech companies
+   (`scripts/india_curated.json`).
+3. Optional live GoodFirms directory scrape across several India categories
+   (`--from-goodfirms python,java,ai,...` or `all`). GoodFirms sits behind
+   Cloudflare and returns `403` to plain HTTP, so this path needs Playwright
+   (`playwright install chromium`); it is skipped with a warning if Playwright
+   is unavailable.
+
+For each candidate the tool: strips `utm_*`/`ref` tracking params, scans the
+homepage for a known ATS link (Greenhouse/Lever/Ashby/etc.), falls back to
+probing `/careers`-style paths (registered as a `custom` adapter), and runs a
+**5x HTTP sanity check** — any company that fails all five attempts is **dropped
+entirely** and never written to the seed file. Survivors are appended to
+`seeds/companies.json` tagged with `country: "India"`. Audit trails land in
+`data/india_ingest_report.csv` (kept) and `data/india_ingest_dropped.csv`
+(dropped, with reason).
+
+**Filtering by country in the dashboard.** There is no separate country control;
+the existing free-text **Location** filter is enough. Companies tagged with a
+`country` have their scraped job locations normalized at scrape time — a job
+listed as just `"Bangalore"` is stored as `"Bangalore, India"` (locations that
+already name a country/region are left untouched). So typing `India` in the
+Location box narrows the list to India-tagged companies. The `companies.country`
+column is an internal signal only; it is not exposed as an API query parameter.
+
+### Auto-inferring selectors for custom companies
+
+Most India-based services companies have in-house careers pages rather than a
+standard ATS, so `ingest-india` registers them as `ats_type="custom"` with **no**
+selectors — they show up in the DB but return zero jobs until selectors are set.
+`infer-selectors` bulk-configures them:
+
+```powershell
+python run.py infer-selectors --dry-run          # report only
+python run.py infer-selectors                     # httpx pass over India custom companies
+python run.py infer-selectors --playwright        # also try JS-rendered pages
+python run.py seed                                # apply the new selectors to the DB
+```
+
+For each custom company it fetches the careers page and brute-forces a ranked
+set of candidate CSS selectors, keeping the best `(list_item, title, apply_url)`
+spec that the real extraction engine turns into at least two plausible job rows
+(a `location` selector is added when it resolves for most rows). JS-heavy pages
+matched only after a Playwright render are stored as `ats_type="playwright"` with
+a `wait_for` hint. Results are written to `data/selectors_inferred.csv`;
+companies where nothing could be inferred keep their current config and are
+listed in `data/selectors_review.csv` for manual setup via the "Add company"
+UI. This is heuristic — it configures the fraction of pages with a
+machine-detectable structure, not all of them.
 
 ## Adding a custom adapter (per-company, no code)
 

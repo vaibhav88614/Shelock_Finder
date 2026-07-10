@@ -145,6 +145,54 @@ def test_fts5_delete_trigger_removes_row(fresh_db):
     assert len(after) == 0
 
 
+def test_country_column_present_after_upgrade(fresh_db):
+    """Migration 0004 adds `companies.country` (nullable) plus its index."""
+    from backend.db import engine
+    from backend.migrations import upgrade_to_head
+
+    upgrade_to_head()
+    with engine.connect() as conn:
+        cols = {r[1] for r in conn.execute(text("PRAGMA table_info(companies)")).all()}
+        idx = {r[1] for r in conn.execute(text("PRAGMA index_list(companies)")).all()}
+    assert "country" in cols
+    assert "ix_companies_country" in idx
+
+
+def test_country_column_absent_after_downgrade_one(fresh_db):
+    """Downgrading only 0004 removes the country column (and its index)."""
+    from alembic import command
+
+    from backend.db import engine
+    from backend.migrations import _alembic_cfg, upgrade_to_head
+
+    upgrade_to_head()
+    # Step 0004 -> 0003 specifically.
+    command.downgrade(_alembic_cfg(), "0003_cursor_and_finalize_indexes")
+    with engine.connect() as conn:
+        cols = {r[1] for r in conn.execute(text("PRAGMA table_info(companies)")).all()}
+        idx = {r[1] for r in conn.execute(text("PRAGMA index_list(companies)")).all()}
+    assert "country" not in cols
+    assert "ix_companies_country" not in idx
+
+
+def test_country_roundtrips_through_orm(fresh_db):
+    """A Company row can persist and read back a country value."""
+    from backend.db import session_scope
+    from backend.migrations import upgrade_to_head
+    from backend.models import Company
+
+    upgrade_to_head()
+    with session_scope() as s:
+        s.add(Company(name="IndiaCo", careers_url="https://x/careers",
+                      ats_type="custom", country="India", active=True))
+    with session_scope() as s:
+        from sqlalchemy import select
+
+        c = s.scalar(select(Company).where(Company.name == "IndiaCo"))
+        assert c is not None
+        assert c.country == "India"
+
+
 def test_downgrade_and_reupgrade(fresh_db):
     """downgrade_to_base drops the schema; re-upgrading must rebuild it."""
     from backend.db import engine

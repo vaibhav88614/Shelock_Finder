@@ -57,6 +57,11 @@ class Company(Base):
     ats_identifier: Mapped[str | None] = mapped_column(String(255), nullable=True)
     # JSON-encoded CSS selector spec for CustomAdapter / Playwright fallback.
     custom_selectors: Mapped[str | None] = mapped_column(Text, nullable=True)
+    # Country the company primarily employs in (e.g. "India"). Internal signal
+    # only — not exposed as an API/UI filter. Used by the scrape pipeline to
+    # normalize per-job location strings so the existing free-text Location
+    # filter reliably matches (see backend/scrape.py `_enrich_location`).
+    country: Mapped[str | None] = mapped_column(String(64), nullable=True)
     active: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
 
     last_scraped_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
@@ -71,6 +76,7 @@ class Company(Base):
     __table_args__ = (
         Index("ix_companies_ats_type", "ats_type"),
         Index("ix_companies_active", "active"),
+        Index("ix_companies_country", "country"),
     )
 
 

@@ -36,6 +36,7 @@ import asyncio
 import csv
 import functools
 import json
+import re
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -58,6 +59,46 @@ from .rate_limit import RateLimiterGroup
 GLOBAL_CONCURRENCY = 10
 PER_COMPANY_TIMEOUT_S = 60.0
 AUTO_DEACTIVATE_AFTER = 5
+
+
+# Country/region tokens that, when already present in a scraped location
+# string, mean we must NOT append the company's country (the location is
+# already geo-qualified). Lowercased substrings; deliberately conservative so
+# we over-preserve rather than double-append.
+_COUNTRY_TOKENS = (
+    "india", "usa", "united states", "united kingdom",
+    "canada", "germany", "france", "spain", "netherlands", "australia",
+    "singapore", "brazil", "ireland", "mexico", "poland", "portugal",
+    "japan", "china", "worldwide", "global", "emea", "apac", "anywhere",
+)
+
+# Standalone short country codes matched on word boundaries (so "us" doesn't
+# fire inside "business"/"houston"). Kept separate from the substring tokens
+# above because these are too short for a naive `in` check.
+_COUNTRY_CODE_RE = re.compile(r"\b(u\.?s\.?a?|u\.?k\.?|u\.?a\.?e\.?|eu)\b", re.IGNORECASE)
+
+
+def _enrich_location(loc: str | None, company_country: str | None) -> str | None:
+    """Ensure a job's location names the company's country when one is known.
+
+    Companies tagged with a `country` (e.g. India) should always have that
+    country present in their jobs' `location` so the free-text Location filter
+    matches reliably:
+      * empty/unknown location -> the country itself ("India");
+      * a location lacking any country/region -> "<loc>, India";
+      * a location already naming a country/region -> left unchanged.
+    No-op when the company has no country.
+    """
+    if not company_country:
+        return loc
+    if not loc or not loc.strip():
+        return company_country
+    lc = loc.lower()
+    if company_country.lower() in lc or any(tok in lc for tok in _COUNTRY_TOKENS):
+        return loc
+    if _COUNTRY_CODE_RE.search(loc):
+        return loc
+    return f"{loc}, {company_country}"
 
 
 # ---------------------------------------------------------------------------
@@ -325,7 +366,12 @@ async def _scrape_one(
 
     try:
         return await asyncio.to_thread(
-            _persist_company, run_id, company_id, started_at, normalized
+            _persist_company,
+            run_id,
+            company_id,
+            started_at,
+            normalized,
+            company_snapshot.country,
         )
     except Exception as e:  # noqa: BLE001 — isolate per spec §6
         logger.exception("company id={} persist failed", company_id)
@@ -349,6 +395,7 @@ class _CompanySnapshot:
     ats_identifier: str | None
     careers_url: str
     custom_selectors: dict | None
+    country: str | None = None
 
 
 def _load_company_snapshot(company_id: int) -> _CompanySnapshot | None:
@@ -369,6 +416,7 @@ def _load_company_snapshot(company_id: int) -> _CompanySnapshot | None:
             ats_identifier=c.ats_identifier,
             careers_url=c.careers_url,
             custom_selectors=sel,
+            country=c.country,
         )
 
 
@@ -404,6 +452,7 @@ def _persist_company(
     company_id: int,
     started_at: datetime,
     normalized: list[NormalizedJob],
+    company_country: str | None = None,
 ) -> _PerCompanyResult:
     """Upsert normalized jobs and write one ScrapeRunCompany row."""
     jobs_found = len(normalized)
@@ -421,6 +470,10 @@ def _persist_company(
                 nj.title,
             )
             continue
+        # Normalize location so a country-tagged company's jobs always carry
+        # that country, letting the free-text Location filter match. Done
+        # before fingerprinting so the fingerprint stays stable across runs.
+        nj.location = _enrich_location(nj.location, company_country)
         fp = fingerprint(company_id, nj.external_id, nj.title, nj.location, nj.apply_url)
         by_fp[fp] = nj
     items = list(by_fp.items())

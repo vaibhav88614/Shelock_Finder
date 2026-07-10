@@ -103,6 +103,89 @@ def heal_seeds_cmd(
     raise typer.Exit(code=code)
 
 
+@app.command("ingest-india")
+def ingest_india_cmd(
+    from_excel: str | None = typer.Option(
+        None, "--from-excel", help="Path to the GoodFirms .xlsx (default: dataset_goodfirms*.xlsx in repo root)."
+    ),
+    no_excel: bool = typer.Option(False, "--no-excel", help="Skip the Excel source."),
+    no_curated: bool = typer.Option(False, "--no-curated", help="Skip the curated JSON source."),
+    from_goodfirms: str | None = typer.Option(
+        None, "--from-goodfirms", help="Live-scrape GoodFirms directories: 'all' or a comma list (needs Playwright)."
+    ),
+    goodfirms_pages: int = typer.Option(15, "--goodfirms-pages", help="Max pages per GoodFirms category."),
+    max_workers: int = typer.Option(10, "--max-workers", help="Concurrent discovery/sanity workers."),
+    sanity_rounds: int = typer.Option(5, "--sanity-rounds", help="HTTP sanity-check attempts per company."),
+    sanity_spacing: float = typer.Option(2.0, "--sanity-spacing", help="Seconds between sanity attempts."),
+    dry_run: bool = typer.Option(False, "--dry-run", help="Report only; don't modify seeds."),
+) -> None:
+    """Ingest India-based tech companies (Excel + curated + optional GoodFirms) into seeds.
+
+    Discovers each company's careers URL / ATS, runs a 5x HTTP sanity check
+    (dropping any company that fails all attempts), and merges survivors into
+    seeds/companies.json tagged with country="India". Writes audit trails to
+    data/india_ingest_report.csv and data/india_ingest_dropped.csv.
+    """
+    import asyncio
+    from pathlib import Path
+
+    from scripts.ingest_india import _default_excel_path, _parse_goodfirms_arg, run_ingest
+
+    excel_path: Path | None = None
+    if not no_excel:
+        excel_path = Path(from_excel) if from_excel else _default_excel_path()
+
+    code = asyncio.run(
+        run_ingest(
+            from_excel=excel_path,
+            goodfirms_categories=_parse_goodfirms_arg(from_goodfirms),
+            from_curated=not no_curated,
+            dry_run=dry_run,
+            max_workers=max_workers,
+            sanity_rounds=sanity_rounds,
+            sanity_spacing_s=sanity_spacing,
+            goodfirms_pages=goodfirms_pages,
+        )
+    )
+    raise typer.Exit(code=code)
+
+
+@app.command("infer-selectors")
+def infer_selectors_cmd(
+    all_custom: bool = typer.Option(False, "--all-custom", help="Process every custom company, not just one country."),
+    country: str = typer.Option("India", "--country", help="Restrict to this country (ignored with --all-custom)."),
+    playwright: bool = typer.Option(False, "--playwright", help="Enable Playwright fallback for JS-rendered pages."),
+    max_playwright: int = typer.Option(80, "--max-playwright", help="Cap the number of Playwright renders."),
+    max_workers: int = typer.Option(16, "--max-workers", help="Concurrent httpx workers."),
+    refresh: bool = typer.Option(False, "--refresh", help="Re-infer companies that already have selectors."),
+    dry_run: bool = typer.Option(False, "--dry-run", help="Report only; don't modify seeds."),
+) -> None:
+    """Auto-infer custom_selectors for custom-adapter companies that lack them.
+
+    Fetches each careers page, infers a working (list_item, title, apply_url)
+    selector spec (validated against the real extraction engine), and applies it
+    to seeds/companies.json. JS-rendered pages matched via Playwright are stored
+    as ats_type="playwright". Companies that can't be inferred are written to
+    data/selectors_review.csv for manual configuration.
+    """
+    import asyncio
+
+    from scripts.infer_selectors import run_infer
+
+    code = asyncio.run(
+        run_infer(
+            all_custom=all_custom,
+            country=None if all_custom else country,
+            use_playwright=playwright,
+            max_playwright=max_playwright,
+            max_workers=max_workers,
+            dry_run=dry_run,
+            refresh=refresh,
+        )
+    )
+    raise typer.Exit(code=code)
+
+
 @app.command()
 def reset(
     yes: bool = typer.Option(False, "--yes", help="Confirm destructive reset."),

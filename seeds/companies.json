@@ -1312,5 +1312,3946 @@
     "careers_url": "https://hpe.wd5.myworkdayjobs.com/Jobsathpe",
     "ats_type": "workday",
     "ats_identifier": "hpe.wd5.myworkdayjobs.com|hpe|Jobsathpe"
+  },
+  {
+    "name": "01Synergy",
+    "careers_url": "http://01synergy.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "http://01synergy.com/careers",
+      "list_item": "div[class*=\"col\" i]",
+      "title": "h2",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "75WAY TECHNOLOGIES PRIVATE LIMITED",
+    "careers_url": "https://75way.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "9series Inc",
+    "careers_url": "https://www.9series.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": null
+  },
+  {
+    "name": "A3Logics",
+    "careers_url": "https://www.a3logics.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Aalpha Information Systems India Pvt. Ltd.",
+    "careers_url": "https://www.aalpha.net/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "AAPGS PRIVATE LIMITED",
+    "careers_url": "https://aapgs.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Aara Technologies",
+    "careers_url": "https://aaratechnologies.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Accubits",
+    "careers_url": "https://accubits.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Acquiscent Technologies Pvt Ltd",
+    "careers_url": "http://www.acquiscent.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "AdaptNXT Technology Solutions",
+    "careers_url": "https://adaptnxt.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Addon Solutions Pvt Ltd.",
+    "careers_url": "http://www.addonsolutions.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "ADSTRA DIGITAL",
+    "careers_url": "https://adstradigital.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Advantal Technologies Pvt Ltd",
+    "careers_url": "https://advantaltechnologies.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Agicent Technologies Pvt. ltd.",
+    "careers_url": "http://www.agicent.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Agile Infoways LLC",
+    "careers_url": "http://www.agileinfoways.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Aimdek Technologies",
+    "careers_url": "http://aimdek.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "http://aimdek.com/careers",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "h4",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "AIVEDA",
+    "careers_url": "https://aiveda.io/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Ajackus",
+    "careers_url": "https://www.ajackus.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.ajackus.com/careers",
+      "list_item": "div[class*=\"col\" i]",
+      "title": "[class*=\"title\" i]",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Akoode Technologies",
+    "careers_url": "https://www.akoode.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.akoode.com/career",
+      "list_item": "div[class*=\"col\" i]",
+      "title": "h2",
+      "apply_url": "a[href]@href",
+      "location": "[class*=\"city\" i]"
+    }
+  },
+  {
+    "name": "Aktiv Software",
+    "careers_url": "http://www.aktivsoftware.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "http://www.aktivsoftware.com/career",
+      "list_item": "div[class*=\"col\" i]",
+      "title": "h3",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Albiorix Technology Private Limited",
+    "careers_url": "https://www.albiorixtech.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.albiorixtech.com/careers",
+      "list_item": "div[class*=\"opening\" i]",
+      "title": "h5",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Alliance Web Solution Pvt Ltd",
+    "careers_url": "https://www.indiainternets.com/careers.html",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "AllianceTek",
+    "careers_url": "https://www.alliancetek.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Ancile Technologies Pvt Ltd",
+    "careers_url": "http://anciletech.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Aneka Labs Private Limited",
+    "careers_url": "https://anekalabs.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Anviam Solutions",
+    "careers_url": "https://anviam.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "AppDesk Services Pvt. Ltd.",
+    "careers_url": "https://www.appdeskservices.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Appeak Technologies LLP",
+    "careers_url": "https://appeaktech.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://appeaktech.com/careers",
+      "list_item": "li",
+      "title": "h5",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "AppSquadz Software Private Limited",
+    "careers_url": "https://www.appsquadz.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "AppTrait Solutions",
+    "careers_url": "http://apptraitsolutions.com/jobs",
+    "ats_type": "playwright",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "http://apptraitsolutions.com/jobs",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "h4",
+      "apply_url": "a[href]@href",
+      "location": "[class*=\"location\" i]",
+      "wait_for": "div[class*=\"job\" i]"
+    }
+  },
+  {
+    "name": "Appventurez",
+    "careers_url": "https://www.appventurez.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "ApuzzTech",
+    "careers_url": "https://apuzztech.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "AResourcePool",
+    "careers_url": "https://www.aresourcepool.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Arieotech",
+    "careers_url": "https://www.arieotech.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.arieotech.com/careers",
+      "list_item": "[class*=\"careers\" i] li",
+      "title": "[class*=\"position\" i]",
+      "apply_url": "a[href]@href",
+      "location": "[class*=\"location\" i]"
+    }
+  },
+  {
+    "name": "Ascent24 Technologies",
+    "careers_url": "https://www.ascent24.io/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.ascent24.io/careers",
+      "list_item": "div[class*=\"career\" i]",
+      "title": "h3",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Ashapura Softech",
+    "careers_url": "https://ashapurasoftech.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://ashapurasoftech.com/careers",
+      "list_item": "li",
+      "title": "[class*=\"title\" i]",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Askgalore Digital",
+    "careers_url": "https://askgalore.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://askgalore.com/career",
+      "list_item": "li",
+      "title": "h3",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Associative",
+    "careers_url": "https://associative.in/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": null
+  },
+  {
+    "name": "Augurs Technologies Private Limited",
+    "careers_url": "https://www.augurs.in/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.augurs.in/career",
+      "list_item": ".card",
+      "title": "h2",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Aum Solutions",
+    "careers_url": "https://aum-solutions.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Avlia IT Solution",
+    "careers_url": "https://avliaitsolution.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://avliaitsolution.com/career",
+      "list_item": "div[class*=\"position\" i]",
+      "title": "h3",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Banao Technologies",
+    "careers_url": "https://banao.tech/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Beyond Key",
+    "careers_url": "http://www.beyondkey.com/careers.html",
+    "ats_type": "playwright",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "http://www.beyondkey.com/careers.html",
+      "list_item": "article",
+      "title": "h3",
+      "apply_url": "a[href]@href",
+      "wait_for": "article"
+    }
+  },
+  {
+    "name": "BharatPe",
+    "careers_url": "https://www.bharatpe.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Binaryfolks Pvt. Ltd.",
+    "careers_url": "http://www.binaryfolks.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "BitCS",
+    "careers_url": "https://bitcs.in/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "BITLYZE TECHNOLOGIES PRIVATE LIMITED",
+    "careers_url": "https://www.bitlyze.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "BitsNPixs",
+    "careers_url": "https://www.bitsnpixs.com/jobs",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Biz4Solutions LLC",
+    "careers_url": "https://www.biz4solutions.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Bizople Solutions Pvt. Ltd.",
+    "careers_url": "https://www.bizople.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Biztacs Technology",
+    "careers_url": "http://biztacs.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Black Kite Technologies",
+    "careers_url": "https://blackkitetechnologies.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://blackkitetechnologies.com/career",
+      "list_item": "li[class*=\"position\" i]",
+      "title": "[class*=\"position\" i]",
+      "apply_url": "a[href]@href",
+      "location": "[class*=\"location\" i]"
+    }
+  },
+  {
+    "name": "Bloom Consulting Services",
+    "careers_url": "https://bloomcs.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://bloomcs.com/careers",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "h2",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Bluetech",
+    "careers_url": "http://www.bluetech.co.in/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Bonami Software",
+    "careers_url": "https://bonamisoftware.com/careers",
+    "ats_type": "playwright",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://bonamisoftware.com/careers",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "h3",
+      "apply_url": "a[href]@href",
+      "wait_for": "div[class*=\"job\" i]"
+    }
+  },
+  {
+    "name": "BoTree Technologies Pvt. Ltd.",
+    "careers_url": "https://www.botreetechnologies.com/careers",
+    "ats_type": "playwright",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.botreetechnologies.com/careers",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "a",
+      "apply_url": "a[href]@href",
+      "wait_for": "div[class*=\"job\" i]"
+    }
+  },
+  {
+    "name": "Brainerhub",
+    "careers_url": "https://www.brainerhub.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Brainstack Technologies",
+    "careers_url": "https://brainstacktechnologies.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Brand Metrics Fintech Pvt Ltd",
+    "careers_url": "https://www.brandmetrics.in/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Bridgecode Technologies LLP",
+    "careers_url": "http://www.thebridgecode.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Browseinfo",
+    "careers_url": "https://www.browseinfo.com/jobs",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.browseinfo.com/jobs",
+      "list_item": ".card",
+      "title": "h3",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "BrowserStack",
+    "careers_url": "https://www.browserstack.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "BSEtec",
+    "careers_url": "https://www.bsetec.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Budventure Technologies Pvt. Ltd.",
+    "careers_url": "http://www.budventure.technology/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "BuzzyBrains software (I) Pvt. Ltd",
+    "careers_url": "https://www.buzzybrains.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Calibraint",
+    "careers_url": "https://www.calibraint.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Canopus Infosystems",
+    "careers_url": "http://canopusinfosystems.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Capanicus",
+    "careers_url": "http://www.capanicus.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Cars24",
+    "careers_url": "https://www.cars24.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Chapter247 Infotech",
+    "careers_url": "http://www.chapter247.com/careers",
+    "ats_type": "playwright",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "http://www.chapter247.com/careers",
+      "list_item": "div[class*=\"col\" i]",
+      "title": "h4",
+      "apply_url": "a[href]@href",
+      "wait_for": "div[class*=\"col\" i]"
+    }
+  },
+  {
+    "name": "Chargebee",
+    "careers_url": "https://www.chargebee.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Citrusbug Technolabs",
+    "careers_url": "https://citrusbug.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://citrusbug.com/career",
+      "list_item": "div[class*=\"career\" i]",
+      "title": "h2",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Clarion Technologies",
+    "careers_url": "https://www.clariontech.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Clementius LLP",
+    "careers_url": "https://www.clementius.com/careers/",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Climbax Entertainment Private Limited",
+    "careers_url": "https://www.climbaxentertainment.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Closeloop Technologies",
+    "careers_url": "https://closeloop.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://closeloop.com/careers",
+      "list_item": "div[class*=\"col\" i]",
+      "title": "[class*=\"title\" i]",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Cloudesign Technology Solutions LLP",
+    "careers_url": "https://www.cloudesign.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Cloudnic Soft LLP",
+    "careers_url": "https://cloudnic.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Code Garage",
+    "careers_url": "https://codegaragetech.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Code-B Solutions",
+    "careers_url": "https://code-b.dev/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "CODEEDOC",
+    "careers_url": "https://codeedoc.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Codescastle Software Pvt. Ltd.",
+    "careers_url": "http://codescastle.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Codewinglet Private Limited",
+    "careers_url": "https://www.codewinglet.com/jobs",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Codexoro Technologies LLP",
+    "careers_url": "https://codexoro.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://codexoro.com/careers",
+      "list_item": "div[class*=\"col\" i]",
+      "title": "h2",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Codezilla Technology and Consultancy Pvt Ltd.",
+    "careers_url": "https://codezilla.io/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://codezilla.io/career",
+      "list_item": "div[class*=\"col\" i]",
+      "title": "[class*=\"title\" i]",
+      "apply_url": "a[href]@href",
+      "location": "[class*=\"city\" i]"
+    }
+  },
+  {
+    "name": "Coforge",
+    "careers_url": "https://www.coforge.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Coherent Lab LLP",
+    "careers_url": "https://www.coherentlab.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Colan Infotech Private Limited",
+    "careers_url": "https://colaninfotech.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Concetto Labs",
+    "careers_url": "https://www.concettolabs.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.concettolabs.com/careers",
+      "list_item": "div[class*=\"career\" i]",
+      "title": "h2",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Copperchips",
+    "careers_url": "https://copperchips.com/hiring",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Coretus Technologies",
+    "careers_url": "https://www.coretus.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Crescaler",
+    "careers_url": "https://crescaler.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://crescaler.com/career",
+      "list_item": "article[class*=\"job\" i]",
+      "title": "h3",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Crest Coder",
+    "careers_url": "https://www.crestcoder.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Creware Technologies Pvt",
+    "careers_url": "https://creware.asia/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "CSM Technologies",
+    "careers_url": "https://www.csm.tech/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.csm.tech/career",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "[class*=\"title\" i]",
+      "apply_url": "a[href]@href",
+      "location": "[class*=\"location\" i]"
+    }
+  },
+  {
+    "name": "Cubet Techno Labs",
+    "careers_url": "http://cubettech.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Cyber Infrastructure Inc.",
+    "careers_url": "https://www.cisin.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Cybernative Technologies Pvt. Ltd.",
+    "careers_url": "https://www.cybernativetech.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.cybernativetech.com/careers",
+      "list_item": "div[class*=\"position\" i]",
+      "title": "h3",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "cyberneusys",
+    "careers_url": "http://www.cyberneusys.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Cyberswind Technologies",
+    "careers_url": "https://www.cyberswindtech.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Damco Solutions",
+    "careers_url": "https://www.damcogroup.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": null
+  },
+  {
+    "name": "Dash Technologies",
+    "careers_url": "http://www.dashtechinc.com/jobs",
+    "ats_type": "playwright",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "http://www.dashtechinc.com/jobs",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "h4",
+      "apply_url": "a[href]@href",
+      "wait_for": "div[class*=\"job\" i]"
+    }
+  },
+  {
+    "name": "DataByteWorks",
+    "careers_url": "https://databyteworks.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Day One Technologies",
+    "careers_url": "https://www.day1tech.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Debut Infotech",
+    "careers_url": "https://www.debutinfotech.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Decipher Zone Technologies Pvt Ltd",
+    "careers_url": "http://decipherzone.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Deific India Group",
+    "careers_url": "https://deificdigital.com/careers",
+    "ats_type": "playwright",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://deificdigital.com/careers",
+      "list_item": "div[class*=\"col\" i]",
+      "title": "h4",
+      "apply_url": "a[href]@href",
+      "location": "[class*=\"city\" i]",
+      "wait_for": "div[class*=\"col\" i]"
+    }
+  },
+  {
+    "name": "Delhivery",
+    "careers_url": "https://www.delhivery.com/careers",
+    "ats_type": "playwright",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.delhivery.com/careers",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "a",
+      "apply_url": "a[href]@href",
+      "wait_for": "div[class*=\"job\" i]"
+    }
+  },
+  {
+    "name": "Deorwine Infotech",
+    "careers_url": "https://deorwine.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Deqode",
+    "careers_url": "http://deqode.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Designoweb Technologies Pvt. Ltd.",
+    "careers_url": "https://designoweb.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Destm Technologies",
+    "careers_url": "https://destm.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Deuex Solutions Pvt. Ltd.",
+    "careers_url": "https://deuexsolutions.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Devstree IT Solutions",
+    "careers_url": "https://devstree.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Dexoc",
+    "careers_url": "https://dexoc.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Dezdok",
+    "careers_url": "https://dezdok.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://dezdok.com/careers",
+      "list_item": "[class*=\"careers\" i] li",
+      "title": "a",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "DianApps Technologies Pvt. Ltd.",
+    "careers_url": "https://dianapps.com/jobs",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Digi Carotene",
+    "careers_url": "http://www.digicarotene.com/jobs",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "http://www.digicarotene.com/jobs",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "h2",
+      "apply_url": "a[href]@href",
+      "location": "[class*=\"location\" i]"
+    }
+  },
+  {
+    "name": "Digimonk Technologies",
+    "careers_url": "http://digimonk.in/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "http://digimonk.in/career",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "[class*=\"title\" i]",
+      "apply_url": "a[href]@href",
+      "location": "[class*=\"location\" i]"
+    }
+  },
+  {
+    "name": "Digital AIML Systems Pvt Ltd",
+    "careers_url": "https://digitalaiml.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": null
+  },
+  {
+    "name": "Digital Marketing Lab",
+    "careers_url": "https://www.digitalmarketinglab.co.in/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Digital Mesh",
+    "careers_url": "https://www.digitalmesh.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Digittrix",
+    "careers_url": "https://digittrix.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Diziwings Technologies Pvt Ltd",
+    "careers_url": "https://diziwings.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Dot Com Infoway",
+    "careers_url": "https://www.dotcominfoway.com/careers",
+    "ats_type": "playwright",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.dotcominfoway.com/careers",
+      "list_item": "[class*=\"careers\" i] li",
+      "title": "a",
+      "apply_url": "a[href]@href",
+      "wait_for": "[class*=\"careers\" i] li"
+    }
+  },
+  {
+    "name": "DRC Systems India Private Limited",
+    "careers_url": "https://www.drcsystems.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": null
+  },
+  {
+    "name": "Dream11",
+    "careers_url": "https://www.dream11.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "DreamzTech Solutions Inc.",
+    "careers_url": "https://www.dreamztech.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.dreamztech.com/careers",
+      "list_item": "div[class*=\"position\" i]",
+      "title": "[class*=\"title\" i]",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Drish Infotech Ltd",
+    "careers_url": "https://www.drishinfo.com/jobs",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.drishinfo.com/jobs",
+      "list_item": "article[class*=\"job\" i]",
+      "title": "h3",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Drisha Technologies",
+    "careers_url": "https://drishatechnologies.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://drishatechnologies.com/careers",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "[class*=\"title\" i]",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Druva",
+    "careers_url": "https://www.druva.com/careers",
+    "ats_type": "playwright",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.druva.com/careers",
+      "list_item": "div[class*=\"col\" i]",
+      "title": "h2",
+      "apply_url": "a[href]@href",
+      "wait_for": "div[class*=\"col\" i]"
+    }
+  },
+  {
+    "name": "DunRite Technologies",
+    "careers_url": "https://www.dunritetech.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "EBC TECH SERV PVT LTD",
+    "careers_url": "https://www.ebctspl.com/careers.html",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "EchoForge Cloud private limited",
+    "careers_url": "https://www.echoforgecloud.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "eClicknTech",
+    "careers_url": "https://www.eclickntech.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Emipro Technologies Pvt Ltd",
+    "careers_url": "https://www.emiprotechnologies.com/jobs",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.emiprotechnologies.com/jobs",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "a",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Emizen Tech Pvt Ltd",
+    "careers_url": "https://emizentech.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://emizentech.com/careers",
+      "list_item": "div[class*=\"career\" i]",
+      "title": "h3",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Encanto Technologies",
+    "careers_url": "https://encantotek.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Endurance Softwares",
+    "careers_url": "http://endurancesoftwares.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Enstacked Technologies",
+    "careers_url": "https://enstacked.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://enstacked.com/careers",
+      "list_item": "[class*=\"careers\" i] li",
+      "title": "a",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Eqaim Technology & Services Pvt. Ltd.",
+    "careers_url": "https://www.eqaim.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Esferasoft Solutions Pvt. Ltd.",
+    "careers_url": "http://www.esferasoft.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Etelligens Technologies Pvt Ltd",
+    "careers_url": "http://etelligens.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "http://etelligens.com/career",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "h2",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Euphoric Thought Technologies",
+    "careers_url": "http://www.euphoricthought.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": null
+  },
+  {
+    "name": "Everon Lab",
+    "careers_url": "https://everonlab.in/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Evozard Consulting Services Pvt Ltd",
+    "careers_url": "https://www.evozard.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Excellis IT Pvt.Ltd",
+    "careers_url": "https://www.excellisit.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Excent Solutions",
+    "careers_url": "https://www.excentsolutions.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Expert Code Lab",
+    "careers_url": "http://www.expertcodelab.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "http://www.expertcodelab.com/career",
+      "list_item": "li",
+      "title": "h4",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Extended Web AppTech LLP",
+    "careers_url": "http://www.extwebtech.com/career",
+    "ats_type": "playwright",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "http://www.extwebtech.com/career",
+      "list_item": "li[class*=\"position\" i]",
+      "title": "a",
+      "apply_url": "a[href]@href",
+      "wait_for": "li[class*=\"position\" i]"
+    }
+  },
+  {
+    "name": "Extern Labs",
+    "careers_url": "https://externlabs.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "FinByz Tech Pvt Ltd",
+    "careers_url": "https://finbyz.tech/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Finoit Technologies, Inc",
+    "careers_url": "https://www.finoit.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Flux8labs",
+    "careers_url": "https://flux8labs.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Freshworks",
+    "careers_url": "https://www.freshworks.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Fusion Informatics Limited",
+    "careers_url": "https://www.fusioninformatics.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Futuresoft India",
+    "careers_url": "https://futuresoftindia.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "fxis.ai",
+    "careers_url": "https://fxis.ai/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Galaxy Weblinks",
+    "careers_url": "https://www.galaxyweblinks.com/careers",
+    "ats_type": "playwright",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.galaxyweblinks.com/careers",
+      "list_item": "[class*=\"careers\" i] li",
+      "title": "[class*=\"title\" i]",
+      "apply_url": "a[href]@href",
+      "wait_for": "[class*=\"careers\" i] li"
+    }
+  },
+  {
+    "name": "GeekSpoc IT Services",
+    "careers_url": "https://geekspoc.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Girman Technologies Pvt. Ltd.",
+    "careers_url": "https://www.girmantech.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "GoDigitley",
+    "careers_url": "http://www.godigitley.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Golden Eagle IT Technologies",
+    "careers_url": "https://goldeneagle.ai/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://goldeneagle.ai/career",
+      "list_item": "div[class*=\"career\" i]",
+      "title": "h4",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "GOTESO",
+    "careers_url": "http://www.goteso.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "http://www.goteso.com/career",
+      "list_item": "div[class*=\"col\" i]",
+      "title": "a",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Graffersid",
+    "careers_url": "https://graffersid.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://graffersid.com/careers",
+      "list_item": "[class*=\"jobs\" i] li",
+      "title": "a",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Grandiose Digital Media",
+    "careers_url": "https://www.grandiosedigitalmedia.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Gravity Engineering Services",
+    "careers_url": "https://www.gravityer.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.gravityer.com/careers",
+      "list_item": "div[class*=\"col\" i]",
+      "title": "h3",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Grawlix Software Private Limited",
+    "careers_url": "https://grawlixsoft.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Great Future Technology Private Limited",
+    "careers_url": "https://gftpl.in/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Groww",
+    "careers_url": "https://groww.in/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "GTCSYS",
+    "careers_url": "https://gtcsys.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://gtcsys.com/careers",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "a",
+      "apply_url": "a[href]@href",
+      "location": "[class*=\"location\" i]"
+    }
+  },
+  {
+    "name": "Gupshup",
+    "careers_url": "https://www.gupshup.io/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "HASHCOVET",
+    "careers_url": "https://hashcovet.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "HashedIn",
+    "careers_url": "https://hashedin.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "HASHKRIO TECH LLP",
+    "careers_url": "https://www.hashkrio.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.hashkrio.com/career",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "h2",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Hashtrust Technologies",
+    "careers_url": "https://hashtrust.in/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Hasura",
+    "careers_url": "https://hasura.io/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "HCLTech",
+    "careers_url": "https://www.hcltech.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Heureux Software Solutions (P) Ltd.",
+    "careers_url": "http://www.heureuxsoftware.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Hiteshi",
+    "careers_url": "https://www.hiteshi.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "i-Verve Inc",
+    "careers_url": "https://i-verve.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Icertis",
+    "careers_url": "https://www.icertis.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "IJAGER TECHNOLOGIES PRIVATE LIMITED",
+    "careers_url": "https://www.ijager.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "IMG Global Infotech Pvt. Ltd",
+    "careers_url": "https://www.imgglobalinfotech.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Immence",
+    "careers_url": "https://immence.com/careers",
+    "ats_type": "playwright",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://immence.com/careers",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "h2",
+      "apply_url": "a[href]@href",
+      "wait_for": "div[class*=\"job\" i]"
+    }
+  },
+  {
+    "name": "Improwised Technologies Private Limited",
+    "careers_url": "https://www.improwised.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.improwised.com/careers",
+      "list_item": "div[class*=\"col\" i]",
+      "title": "h4",
+      "apply_url": "a[href]@href",
+      "location": "[class*=\"city\" i]"
+    }
+  },
+  {
+    "name": "IndaPoint Technologies Pvt. Ltd.",
+    "careers_url": "https://www.indapoint.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Indi IT Solutions",
+    "careers_url": "https://indiit.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "IndiaNIC",
+    "careers_url": "https://www.indianic.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Indium",
+    "careers_url": "https://www.indium.tech/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.indium.tech/careers",
+      "list_item": "li[class*=\"position\" i]",
+      "title": "[class*=\"title\" i]",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "INEXTURE Solutions",
+    "careers_url": "https://www.inexture.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "INFINTOR SOLUTIONS",
+    "careers_url": "https://www.infintor.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.infintor.com/careers",
+      "list_item": "div[class*=\"col\" i]",
+      "title": "h4",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Infograins",
+    "careers_url": "https://infograins.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Infoxen",
+    "careers_url": "https://www.infoxen.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Infylo Techsolutions Ltd",
+    "careers_url": "https://infylo.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "InnoApps Technologies Pvt. Ltd",
+    "careers_url": "https://www.innoappstech.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Innogent Technologies",
+    "careers_url": "https://innogent.in/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Innostax",
+    "careers_url": "https://innostax.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": null
+  },
+  {
+    "name": "Innovaccer",
+    "careers_url": "https://innovaccer.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Inshasis Technologies",
+    "careers_url": "https://inshasis.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Instinctools",
+    "careers_url": "https://www.instinctools.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Inventam Tech Solution (OPC) pvt. ltd.",
+    "careers_url": "https://inventam.com/jobs",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://inventam.com/jobs",
+      "list_item": "article[class*=\"job\" i]",
+      "title": "[class*=\"title\" i]",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Inventco Software",
+    "careers_url": "https://www.inventcolabssoftware.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Inventiple",
+    "careers_url": "https://www.inventiple.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "iSQUARE Business Solution Pvt. Ltd.",
+    "careers_url": "https://www.isquarebs.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.isquarebs.com/careers",
+      "list_item": "div[class*=\"col\" i]",
+      "title": "h4",
+      "apply_url": "a[href]@href",
+      "location": "[class*=\"location\" i]"
+    }
+  },
+  {
+    "name": "Isynbus Technologies",
+    "careers_url": "https://www.isynbus.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.isynbus.com/careers",
+      "list_item": "[class*=\"careers\" i] li",
+      "title": "a",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "ITC Infotech",
+    "careers_url": "https://www.itcinfotech.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Itmarkerz Technologies",
+    "careers_url": "http://www.itmarkerz.co.in/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "ITXITPRO PVT. LTD.",
+    "careers_url": "http://itxitpro.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "iWebServices",
+    "careers_url": "https://www.i-webservices.com/jobs",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.i-webservices.com/jobs",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "h4",
+      "apply_url": "a[href]@href",
+      "location": "[class*=\"location\" i]"
+    }
+  },
+  {
+    "name": "ixigo",
+    "careers_url": "https://www.ixigo.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Jawam Infotech",
+    "careers_url": "https://jawaminfotech.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "JKSOFTEC",
+    "careers_url": "https://jksoftec.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "JS Techno Solutions Pvt. Ltd.",
+    "careers_url": "https://jstechno.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Kadam Technologies Pvt. Ltd.",
+    "careers_url": "http://www.kadamtech.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "KEYSS Inc",
+    "careers_url": "https://keyssinc.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "KiwiTech",
+    "careers_url": "https://www.kiwitech.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": null
+  },
+  {
+    "name": "Konstant Infosolutions",
+    "careers_url": "https://www.konstantinfo.com/career",
+    "ats_type": "playwright",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.konstantinfo.com/career",
+      "list_item": "div[class*=\"career\" i]",
+      "title": "h3",
+      "apply_url": "a[href]@href",
+      "wait_for": "div[class*=\"career\" i]"
+    }
+  },
+  {
+    "name": "Krazimo Private Limited",
+    "careers_url": "https://krazimo.ai/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Kryptoninc",
+    "careers_url": "http://kryptoninc.co/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Linea Digitech",
+    "careers_url": "https://lineadigitech.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Linearloop Private Limited",
+    "careers_url": "https://www.linearloop.io/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Logix Shapers Offshore Services Pvt. Ltd.",
+    "careers_url": "https://logixshapers.com/jobs",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://logixshapers.com/jobs",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "h2",
+      "apply_url": "a[href]@href",
+      "location": "[class*=\"location\" i]"
+    }
+  },
+  {
+    "name": "LoopCon Technologies",
+    "careers_url": "https://loopcon.biz/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://loopcon.biz/careers",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "h4",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "LTIMindtree",
+    "careers_url": "https://www.ltimindtree.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Markovate",
+    "careers_url": "https://markovate.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Maticz Technologies",
+    "careers_url": "https://maticz.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": null
+  },
+  {
+    "name": "Matiyas Solutions",
+    "careers_url": "https://www.matiyas.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.matiyas.com/careers",
+      "list_item": "div[class*=\"col\" i]",
+      "title": "h3",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Matrix Infotech Solution",
+    "careers_url": "https://matrixinfotechsolution.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Mayura Consultancy Services (MCS)",
+    "careers_url": "https://www.mayuraconsultancy.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "MetaDesign Solutions",
+    "careers_url": "https://metadesignsolutions.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://metadesignsolutions.com/careers",
+      "list_item": "div[class*=\"career\" i]",
+      "title": "a",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Metric Tree Labs",
+    "careers_url": "https://metrictreelabs.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Micropyramid Informatics Pvt Ltd",
+    "careers_url": "https://micropyramid.com/jobs",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Mindfire Solutions",
+    "careers_url": "http://www.mindfiresolutions.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Mindrops",
+    "careers_url": "https://www.mindrops.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.mindrops.com/career",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "h2",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Mindtickle",
+    "careers_url": "https://jobs.lever.co/mindtickle",
+    "ats_type": "lever",
+    "ats_identifier": "mindtickle",
+    "country": "India"
+  },
+  {
+    "name": "Miracuves Solution",
+    "careers_url": "https://miracuves.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Mobiweb Technologies Pvt Ltd",
+    "careers_url": "https://www.mobiwebtech.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Mojo Web Technology",
+    "careers_url": "https://mojowebtech.com/jobs",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://mojowebtech.com/jobs",
+      "list_item": "div[class*=\"col\" i]",
+      "title": "h4",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Mxicoders",
+    "careers_url": "https://www.mxicoders.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "My Virtual Teams",
+    "careers_url": "http://myvirtualteams.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "MYCLOUDPULSE TECHNOLOGY PRIVATE LIMITED",
+    "careers_url": "https://mycloudpulse.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Nadcab Labs",
+    "careers_url": "https://www.nadcab.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": null
+  },
+  {
+    "name": "Nascenture",
+    "careers_url": "https://www.nascenture.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.nascenture.com/careers",
+      "list_item": "div[class*=\"col\" i]",
+      "title": "h3",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Naveck Technologies",
+    "careers_url": "https://www.naveck.com/hiring",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Navi",
+    "careers_url": "https://navi.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Net Solutions",
+    "careers_url": "https://www.netsolutions.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.netsolutions.com/careers",
+      "list_item": "article[class*=\"job\" i]",
+      "title": "h2",
+      "apply_url": "a[href]@href",
+      "location": "[class*=\"location\" i]"
+    }
+  },
+  {
+    "name": "Netedge Technology",
+    "careers_url": "https://www.netedgetechnology.com/jobs",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "NetSet Software Solutions",
+    "careers_url": "https://www.netsetsoftware.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.netsetsoftware.com/careers",
+      "list_item": "ul[class*=\"job\" i] li",
+      "title": "a",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Networsys Technologies LLP",
+    "careers_url": "https://www.networsys.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Neuronimbus",
+    "careers_url": "https://www.neuronimbus.com/careers",
+    "ats_type": "playwright",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.neuronimbus.com/careers",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "h3",
+      "apply_url": "a[href]@href",
+      "wait_for": "div[class*=\"job\" i]"
+    }
+  },
+  {
+    "name": "Next Big Technology(NBT)",
+    "careers_url": "http://nextbigtechnology.com/jobs",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "NextAstra Technologies",
+    "careers_url": "https://nextastra.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "NextDynamix Tech",
+    "careers_url": "http://www.nextdynamix.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "http://www.nextdynamix.com/careers",
+      "list_item": "article",
+      "title": "h2",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "NMT Technologies",
+    "careers_url": "https://www.nmttechnologies.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "NorthLogics",
+    "careers_url": "https://northlogics.tech/careers.html",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "NS Global Corporation",
+    "careers_url": "https://nsglobalcorporation.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://nsglobalcorporation.com/careers",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "h2",
+      "apply_url": "a[href]@href",
+      "location": "[class*=\"location\" i]"
+    }
+  },
+  {
+    "name": "ocius technologies",
+    "careers_url": "https://www.ociustechnologies.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Octos Global Solutions",
+    "careers_url": "http://octosglobal.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Offshore IT Staffing",
+    "careers_url": "http://www.offshoreitstaffing.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Ola Cabs",
+    "careers_url": "https://www.olacabs.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Ola Electric",
+    "careers_url": "https://www.olaelectric.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Omninos solutions",
+    "careers_url": "https://omninos.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Oneture Technologies Pvt. Ltd.",
+    "careers_url": "https://oneture.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://oneture.com/careers",
+      "list_item": "div[class*=\"opening\" i]",
+      "title": "[class*=\"title\" i]",
+      "apply_url": "a[href]@href",
+      "location": "[class*=\"location\" i]"
+    }
+  },
+  {
+    "name": "Ontoborn Technologies LLC",
+    "careers_url": "https://ontoborn.com/jobs",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "OptiSol Business Solutions",
+    "careers_url": "http://www.optisolbusiness.com/careers",
+    "ats_type": "playwright",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "http://www.optisolbusiness.com/careers",
+      "list_item": "li[class*=\"job\" i]",
+      "title": "a",
+      "apply_url": "a[href]@href",
+      "wait_for": "li[class*=\"job\" i]"
+    }
+  },
+  {
+    "name": "Orangedice Solutions FZC LLC",
+    "careers_url": "https://www.orangedice.ae/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Orion eSolutions Pvt. Ltd.",
+    "careers_url": "https://www.orionesolutions.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "OweBest Technologies",
+    "careers_url": "http://www.owebest.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "ownAI Solutions",
+    "careers_url": "http://www.ownai.net/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "OyeCommerz",
+    "careers_url": "https://oyecommerz.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://oyecommerz.com/careers",
+      "list_item": "div[class*=\"position\" i]",
+      "title": "h5",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Pace Wisdom Solutions",
+    "careers_url": "http://pacewisdom.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Parallel Team Technologies Private Limited",
+    "careers_url": "https://parallelteam.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Paytm",
+    "careers_url": "https://paytm.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "PEARL ORGANISATION",
+    "careers_url": "https://www.pearlorganisation.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Peerbits",
+    "careers_url": "http://www.peerbits.com/careers.html",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "PerfectionGeeks Technologies",
+    "careers_url": "https://www.perfectiongeeks.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Persistent Systems",
+    "careers_url": "https://www.persistent.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "PhonePe",
+    "careers_url": "https://www.phonepe.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Pine Labs",
+    "careers_url": "https://www.pinelabs.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Pixel Values Technolabs",
+    "careers_url": "https://www.pixelvalues.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Pixelstat",
+    "careers_url": "https://pixelstat.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://pixelstat.com/careers",
+      "list_item": "div[class*=\"col\" i]",
+      "title": "h3",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Pixeltoworld",
+    "careers_url": "https://pixeltoworld.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Plexoc Solutions Pvt. Ltd.",
+    "careers_url": "https://plexoc.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Plexusbit Software",
+    "careers_url": "http://plexusbit.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "PlusInfoLab",
+    "careers_url": "https://plusinfolab.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Polestar Tech Consultancy",
+    "careers_url": "https://polestartechno.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://polestartechno.com/careers",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "h4",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "PolicyBazaar",
+    "careers_url": "https://www.policybazaar.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Postman Labs",
+    "careers_url": "https://www.getpostman.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Pragmatyc",
+    "careers_url": "https://www.pragmatyc.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Pratiti Technologies Pvt Ltd.",
+    "careers_url": "https://www.pratititech.com/jobs",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.pratititech.com/jobs",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "h4",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Probey Services",
+    "careers_url": "https://probeyservices.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Probytes",
+    "careers_url": "http://www.probytes.net/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Prolitus Technologies",
+    "careers_url": "https://www.prolitus.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Protonshub Technologies",
+    "careers_url": "https://www.protonshub.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Protovo Solutions LLP",
+    "careers_url": "https://www.protovosolutions.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Purgesoft",
+    "careers_url": "http://www.purgesoft.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Pyther Innovations Private Limited",
+    "careers_url": "https://www.pyther.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Python India",
+    "careers_url": "https://www.pythonindia.in/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.pythonindia.in/career",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "h5",
+      "apply_url": "a[href]@href",
+      "location": "[class*=\"location\" i]"
+    }
+  },
+  {
+    "name": "Quacklabs Technologies",
+    "careers_url": "https://www.quacklabs.in/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Qualhon Informatics Pvt. Ltd.",
+    "careers_url": "https://qualhon.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Quantum IT Innovation",
+    "careers_url": "http://www.quantumitinnovation.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Queppelin",
+    "careers_url": "https://www.queppelin.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Radixweb",
+    "careers_url": "https://radixweb.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Rapido",
+    "careers_url": "https://www.rapido.bike/careers.html",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Razorpay",
+    "careers_url": "https://razorpay.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Reckonsys Tech labs Private Limited",
+    "careers_url": "https://www.reckonsys.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Redn Technologies",
+    "careers_url": "https://redn.in/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "reverseBits",
+    "careers_url": "https://www.reversebits.tech/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Rishabh Software",
+    "careers_url": "https://www.rishabhsoft.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "ROBOTRONIX ENGINEERING TECH PVT.LTD.",
+    "careers_url": "https://robotronix.co.in/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "RootedAI",
+    "careers_url": "https://www.rootedai.co.in/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Rudra Innovative Software",
+    "careers_url": "https://www.rudrainnovative.com/careers/",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.rudrainnovative.com/careers/",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "h4",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "RV Technologies Softwares Pvt. Ltd.",
+    "careers_url": "https://rvtechnologies.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://rvtechnologies.com/careers",
+      "list_item": "[class*=\"careers\" i] li",
+      "title": "a",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Saivion India: IT and ITeS Outsourcing Services",
+    "careers_url": "https://www.saivionindia.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Sankalpsutra Tech LLP",
+    "careers_url": "https://sankalpsutra.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Sankey Solutions",
+    "careers_url": "https://sankeysolutions.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://sankeysolutions.com/careers",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "h2",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Sarvadhi Solutions Pvt Ltd",
+    "careers_url": "https://sarvadhi.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://sarvadhi.com/careers",
+      "list_item": "li[class*=\"career\" i]",
+      "title": "h3",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Saubhagyam Web Pvt. Ltd.",
+    "careers_url": "http://saubhagyam.com/careers",
+    "ats_type": "playwright",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "http://saubhagyam.com/careers",
+      "list_item": "div[class*=\"col\" i]",
+      "title": "h4",
+      "apply_url": "a[href]@href",
+      "wait_for": "div[class*=\"col\" i]"
+    }
+  },
+  {
+    "name": "SayOne Technologies",
+    "careers_url": "https://www.sayonetech.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "ScalaCode",
+    "careers_url": "https://www.scalacode.com/join-us",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "SculptSoft Pvt. Ltd.",
+    "careers_url": "https://www.sculptsoft.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.sculptsoft.com/career",
+      "list_item": "div[class*=\"col\" i]",
+      "title": "a",
+      "apply_url": "a[href]@href",
+      "location": "[class*=\"place\" i]"
+    }
+  },
+  {
+    "name": "Seasia Infotech",
+    "careers_url": "https://www.seasiainfotech.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "ServerLT.com",
+    "careers_url": "https://www.serverlt.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": null
+  },
+  {
+    "name": "Settings Infotech",
+    "careers_url": "https://settingsinfotech.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "ShareChat",
+    "careers_url": "https://sharechat.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Siddhatech Software Services Pvt. Ltd.",
+    "careers_url": "https://www.siddhatech.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "SIFARS",
+    "careers_url": "https://sifars.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Sigzen Technologies",
+    "careers_url": "https://www.sigzen.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Silicon Signals Pvt. Ltd.",
+    "careers_url": "https://siliconsignals.io/jobs",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://siliconsignals.io/jobs",
+      "list_item": "[class*=\"jobs\" i] li",
+      "title": "a",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Simform",
+    "careers_url": "https://www.simform.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.simform.com/careers",
+      "list_item": "div[class*=\"career\" i]",
+      "title": "h3",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Sinergia Labs",
+    "careers_url": "http://simelabs.com/careers",
+    "ats_type": "playwright",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "http://simelabs.com/careers",
+      "list_item": "article[class*=\"job\" i]",
+      "title": "h2",
+      "apply_url": "a[href]@href",
+      "wait_for": "article[class*=\"job\" i]"
+    }
+  },
+  {
+    "name": "Slash Software",
+    "careers_url": "https://slash.software/hiring",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Smart Cherry AI",
+    "careers_url": "https://smartcherryai.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "SmartX Technologies",
+    "careers_url": "https://smartxtech.co/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Sociodigit",
+    "careers_url": "https://www.sociodigit.in/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Softkingo",
+    "careers_url": "https://www.softkingo.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Softlabs Group",
+    "careers_url": "https://www.softlabsgroup.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Softqube Technologies Pvt. Ltd.",
+    "careers_url": "https://www.softqubes.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Softsource Technolabs",
+    "careers_url": "https://softsourcetech.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Softura",
+    "careers_url": "https://www.softura.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Softwera Innovation",
+    "careers_url": "https://softwerainnovation.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Solufy Pvt. Ltd",
+    "careers_url": "https://www.solufyerp.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Space-O Technologies",
+    "careers_url": "https://www.spaceotechnologies.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "SPEC INDIA",
+    "careers_url": "https://www.spec-india.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.spec-india.com/careers",
+      "list_item": "li",
+      "title": "h5",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Spericorn Technology",
+    "careers_url": "https://www.spericorn.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Sphinx Solutions",
+    "careers_url": "https://www.sphinx-solution.com/career",
+    "ats_type": "playwright",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.sphinx-solution.com/career",
+      "list_item": ".card",
+      "title": "[class*=\"title\" i]",
+      "apply_url": "a[href]@href",
+      "wait_for": ".card"
+    }
+  },
+  {
+    "name": "Spiral Mantra Private Limited",
+    "careers_url": "https://spiralmantra.com/jobs",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://spiralmantra.com/jobs",
+      "list_item": "li",
+      "title": "a",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Spiral Technolabs Pvt Ltd",
+    "careers_url": "https://www.spiraltechnolabs.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "SpireHub Softwares Pvt Ltd.",
+    "careers_url": "https://spirehubs.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Sprinklr",
+    "careers_url": "https://www.sprinklr.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Sss Syber Tech Private Limited",
+    "careers_url": "https://www.ssssybertech.com/jobs",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.ssssybertech.com/jobs",
+      "list_item": "article[class*=\"job\" i]",
+      "title": "h3",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Star Knowledge",
+    "careers_url": "https://www.star-knowledge.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "startelelogic",
+    "careers_url": "http://www.startelelogic.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "http://www.startelelogic.com/careers",
+      "list_item": "div[class*=\"career\" i]",
+      "title": "[class*=\"position\" i]",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "StartxLabs Technologies Private Limited",
+    "careers_url": "https://startxlabs.com/careers",
+    "ats_type": "playwright",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://startxlabs.com/careers",
+      "list_item": "div[class*=\"career\" i]",
+      "title": "h2",
+      "apply_url": "a[href]@href",
+      "wait_for": "div[class*=\"career\" i]"
+    }
+  },
+  {
+    "name": "Steady Rabbit Technology Pvt Ltd",
+    "careers_url": "https://steadyrabbit.in/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "STERP Software Pvt. Ltd",
+    "careers_url": "https://www.shantitechnology.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "STW Services LLP",
+    "careers_url": "https://www.stw-services.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "SUPER WEB DEVELOPMENT LLP",
+    "careers_url": "https://superwebdevelopment.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Swiggy",
+    "careers_url": "https://www.swiggy.com/careers",
+    "ats_type": "playwright",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.swiggy.com/careers",
+      "list_item": "div[class*=\"col\" i]",
+      "title": "h4",
+      "apply_url": "a[href]@href",
+      "wait_for": "div[class*=\"col\" i]"
+    }
+  },
+  {
+    "name": "SynergyWorks Solutions LLP",
+    "careers_url": "https://www.thesynergyworks.com/hiring",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.thesynergyworks.com/hiring",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "a",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Synoris",
+    "careers_url": "https://synoris.co/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "SynthWeb",
+    "careers_url": "https://synthweb.in/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://synthweb.in/careers",
+      "list_item": "div[class*=\"vacanc\" i]",
+      "title": "h4",
+      "apply_url": "a[href]@href",
+      "location": "[class*=\"city\" i]"
+    }
+  },
+  {
+    "name": "Taazaa Inc",
+    "careers_url": "https://taazaa.com/careers",
+    "ats_type": "playwright",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://taazaa.com/careers",
+      "list_item": "div[class*=\"col\" i]",
+      "title": "h4",
+      "apply_url": "a[href]@href",
+      "wait_for": "div[class*=\"col\" i]"
+    }
+  },
+  {
+    "name": "Talentelgia Technologies Private Limited",
+    "careers_url": "https://www.talentelgia.com/career",
+    "ats_type": "playwright",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.talentelgia.com/career",
+      "list_item": "div[class*=\"opening\" i]",
+      "title": "h4",
+      "apply_url": "a[href]@href",
+      "wait_for": "div[class*=\"opening\" i]"
+    }
+  },
+  {
+    "name": "Talentica Software",
+    "careers_url": "https://www.talentica.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.talentica.com/careers",
+      "list_item": "div[class*=\"col\" i]",
+      "title": "[class*=\"title\" i]",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Tatvamasi Labs",
+    "careers_url": "https://tatvamasilabs.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "TCM STUNNER IT CONSULTANTS LLP",
+    "careers_url": "https://tcmstunner.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Team Unibrains",
+    "careers_url": "https://teamunibrains.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Tech Mahindra",
+    "careers_url": "https://www.techmahindra.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Tech2Globe Web Solutions LLP",
+    "careers_url": "https://www.tech2globe.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": null
+  },
+  {
+    "name": "Tech4biz Solutions Private Limited",
+    "careers_url": "http://tech4bizsolutions.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "TechAhead",
+    "careers_url": "http://www.techaheadcorp.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Techcronus Business Solutions",
+    "careers_url": "https://www.techcronus.com/careers",
+    "ats_type": "playwright",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.techcronus.com/careers",
+      "list_item": "div[class*=\"position\" i]",
+      "title": "a",
+      "apply_url": "a[href]@href",
+      "wait_for": "div[class*=\"position\" i]"
+    }
+  },
+  {
+    "name": "Techlusion",
+    "careers_url": "https://techlusion.io/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://techlusion.io/careers",
+      "list_item": "div[class*=\"position\" i]",
+      "title": "h4",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Technanosoft Technologies",
+    "careers_url": "https://technanosoft.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Technaureus Info Solutions Pvt. Ltd.",
+    "careers_url": "http://www.technaureus.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Technogiq IT Solutions Private Limited",
+    "careers_url": "http://www.technogiq.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "http://www.technogiq.com/careers",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "a",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Technostacks",
+    "careers_url": "https://technostacks.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Technource",
+    "careers_url": "https://www.technource.com/jobs",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "TechQware Technologies",
+    "careers_url": "https://www.techqware.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Techversantinfotech",
+    "careers_url": "https://www.techversantinfotech.com/jobs",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": null
+  },
+  {
+    "name": "Techwink Services",
+    "careers_url": "https://techwink.net/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://techwink.net/careers",
+      "list_item": "li",
+      "title": "[class*=\"title\" i]",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "TechWize",
+    "careers_url": "https://techwize.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Tecocraft PVT. LTD",
+    "careers_url": "https://www.tecocraft.co.uk/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Tekniko Global",
+    "careers_url": "https://www.teknikoglobal.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "TensorSoft Ai",
+    "careers_url": "http://tensorsoft.ai/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Teqlawn",
+    "careers_url": "https://teqlawn.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://teqlawn.com/career",
+      "list_item": "div[class*=\"career\" i]",
+      "title": "h2",
+      "apply_url": "a[href]@href",
+      "location": "[class*=\"city\" i]"
+    }
+  },
+  {
+    "name": "The Intellify",
+    "careers_url": "http://theintellify.com/careers/",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "http://theintellify.com/careers/",
+      "list_item": "div[class*=\"opening\" i]",
+      "title": "a",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "The Tech Clouds",
+    "careers_url": "https://thetechclouds.com/jobs",
+    "ats_type": "playwright",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://thetechclouds.com/jobs",
+      "list_item": "[class*=\"jobs\" i] li",
+      "title": "a",
+      "apply_url": "a[href]@href",
+      "wait_for": "[class*=\"jobs\" i] li"
+    }
+  },
+  {
+    "name": "ThinkPalm Technologies",
+    "careers_url": "http://thinkpalm.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "http://thinkpalm.com/careers",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "a",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Thoughtwin IT Solution",
+    "careers_url": "https://www.thoughtwin.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Trakshym",
+    "careers_url": "https://trakshym.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Trident Analytical Solutions",
+    "careers_url": "https://tas.co.in/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Trigvent Solutions",
+    "careers_url": "https://www.trigvent.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Turain Software Pvt. Ltd.",
+    "careers_url": "https://www.turaingrp.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Turf Dev Private Limited",
+    "careers_url": "https://www.turfdev.in/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "UcodeSoft Solutions Pvt Ltd",
+    "careers_url": "https://ucodesoft.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Ultrashield Technology (AI Development)",
+    "careers_url": "https://www.ultrashieldtechnology.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Unacademy",
+    "careers_url": "https://unacademy.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Unico Connect",
+    "careers_url": "https://unicoconnect.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://unicoconnect.com/careers",
+      "list_item": "div[class*=\"career\" i]",
+      "title": "h3",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Unified Infotech",
+    "careers_url": "https://www.unifiedinfotech.net/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.unifiedinfotech.net/careers",
+      "list_item": "div[class*=\"career\" i]",
+      "title": "h5",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Unthinkable Pvt. Ltd.",
+    "careers_url": "https://www.unthinkable.co/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.unthinkable.co/career",
+      "list_item": "li",
+      "title": "[class*=\"title\" i]",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "UpCodo Digital",
+    "careers_url": "https://upcodo.com/jobs",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "UpforceTech",
+    "careers_url": "https://upforcetech.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "upGrad",
+    "careers_url": "https://www.upgrad.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "V2Soft Pvt Ltd",
+    "careers_url": "https://www.v2soft.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.v2soft.com/careers",
+      "list_item": "[class*=\"careers\" i] li",
+      "title": "a",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "V2STech Solutions Private Limited",
+    "careers_url": "https://v2stech.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "ValueCoders",
+    "careers_url": "https://www.valuecoders.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.valuecoders.com/careers",
+      "list_item": "[class*=\"careers\" i] li",
+      "title": "a",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Vegavid Technology",
+    "careers_url": "https://vegavid.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "VIBIDSOFT",
+    "careers_url": "http://www.vibidsoft.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "http://www.vibidsoft.com/career",
+      "list_item": "div[class*=\"col\" i]",
+      "title": "h5",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Vinfotech",
+    "careers_url": "http://www.vinfotech.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Vipra Business",
+    "careers_url": "http://www.viprabusiness.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Vnnovate Solutions Pvt Ltd",
+    "careers_url": "http://vnnovate.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Votiko Solutions",
+    "careers_url": "https://votiko.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Wappnet Systems",
+    "careers_url": "https://wappnet.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Warlock Technologies Pvt Ltd",
+    "careers_url": "https://www.warlocktechnologies.com/jobs",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Web Key Digital",
+    "careers_url": "http://www.webkeydigital.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "http://www.webkeydigital.com/careers",
+      "list_item": "li[class*=\"position\" i]",
+      "title": "h2",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "WebGuruz Technologies Pvt Ltd",
+    "careers_url": "https://www.webguruz.in/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "WeblineIndia",
+    "careers_url": "https://www.weblineindia.com/careers.html",
+    "ats_type": "playwright",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.weblineindia.com/careers.html",
+      "list_item": "li[class*=\"job\" i]",
+      "title": "a",
+      "apply_url": "a[href]@href",
+      "wait_for": "li[class*=\"job\" i]"
+    }
+  },
+  {
+    "name": "Webo App Discovery Limited",
+    "careers_url": "https://weboappdiscovery.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Weboconnect",
+    "careers_url": "https://weboconnect.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "WebservX",
+    "careers_url": "https://www.webservx.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.webservx.com/career",
+      "list_item": "div[class*=\"col\" i]",
+      "title": "h3",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Webtrack Technologies",
+    "careers_url": "http://www.webtracktechnologies.com/hiring",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Whatfix",
+    "careers_url": "https://whatfix.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://whatfix.com/careers",
+      "list_item": "div[class*=\"position\" i]",
+      "title": "h3",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Wipro",
+    "careers_url": "https://www.wipro.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "WireFuture",
+    "careers_url": "https://wirefuture.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Wrexim Infotech",
+    "careers_url": "http://wreximinfotech.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Xenovex Technologies Pvt Ltd",
+    "careers_url": "http://www.xenovex.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Xicom",
+    "careers_url": "http://www.xicom.biz/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "http://www.xicom.biz/careers",
+      "list_item": "[class*=\"careers\" i] li",
+      "title": "a",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "YellowFish Digital Innovations",
+    "careers_url": "https://yellowfish.in/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "YES IT Labs LLC",
+    "careers_url": "http://yesitlabs.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "http://yesitlabs.com/careers",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "a",
+      "apply_url": "a[href]@href",
+      "location": "[class*=\"location\" i]"
+    }
+  },
+  {
+    "name": "Youthtech Solutions LLP",
+    "careers_url": "https://www.youthtechsolutions.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.youthtechsolutions.com/career",
+      "list_item": "li",
+      "title": "[class*=\"title\" i]",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Zaigo Infotech Software Solutions",
+    "careers_url": "https://www.zaigoinfotech.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "zalgo Infotech PVT. LTD.",
+    "careers_url": "https://zalgoinfotech.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://zalgoinfotech.com/career",
+      "list_item": "li[class*=\"position\" i]",
+      "title": "a",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
+    "name": "Zazz",
+    "careers_url": "https://www.zazz.io/careers",
+    "ats_type": "playwright",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.zazz.io/careers",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "h3",
+      "apply_url": "a[href]@href",
+      "wait_for": "div[class*=\"job\" i]"
+    }
+  },
+  {
+    "name": "Zerodha",
+    "careers_url": "https://zerodha.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Zerone Consulting",
+    "careers_url": "http://www.zerone-consulting.com/career",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Zerozilla",
+    "careers_url": "http://www.zerozilla.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "http://www.zerozilla.com/careers",
+      "list_item": "div[class*=\"job\" i]",
+      "title": "a",
+      "apply_url": "a[href]@href",
+      "location": "[class*=\"location\" i]"
+    }
+  },
+  {
+    "name": "Zeta",
+    "careers_url": "https://www.zeta.tech/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Zignuts Technolab Pvt. Ltd.",
+    "careers_url": "https://www.zignuts.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "ZipNom Technologies Private Limited",
+    "careers_url": "https://zipnom.com/about/careers",
+    "ats_type": "playwright",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://zipnom.com/about/careers",
+      "list_item": "li[class*=\"job\" i]",
+      "title": "a",
+      "apply_url": "a[href]@href",
+      "wait_for": "li[class*=\"job\" i]"
+    }
+  },
+  {
+    "name": "Zoho",
+    "careers_url": "https://www.zoho.com/careers",
+    "ats_type": "playwright",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "https://www.zoho.com/careers",
+      "list_item": "li[class*=\"job\" i]",
+      "title": "a",
+      "apply_url": "a[href]@href",
+      "wait_for": "li[class*=\"job\" i]"
+    }
+  },
+  {
+    "name": "Zomato",
+    "careers_url": "https://www.zomato.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
   }
 ]

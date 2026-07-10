@@ -47,6 +47,8 @@ def run_seed() -> int:
                 existing.custom_selectors = (
                     json.dumps(row["custom_selectors"]) if row.get("custom_selectors") else None
                 )
+                if "country" in row:
+                    existing.country = row.get("country") or None
                 if "active" in row:
                     existing.active = bool(row["active"])
                 continue
@@ -61,6 +63,7 @@ def run_seed() -> int:
                         if row.get("custom_selectors")
                         else None
                     ),
+                    country=row.get("country") or None,
                     active=bool(row.get("active", True)),
                 )
             )
