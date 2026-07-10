@@ -134,6 +134,10 @@ class CompanyHealth(BaseModel):
     name: str
     ats_type: str
     active: bool
+    # True when the company is driven by CSS selectors (ats_type custom /
+    # playwright) and those selectors are configured — i.e. a "custom-selector
+    # company" whose scraping the admin UI can toggle on/off.
+    has_selectors: bool = False
     last_scraped_at: datetime | None
     last_success_at: datetime | None
     consecutive_failures: int

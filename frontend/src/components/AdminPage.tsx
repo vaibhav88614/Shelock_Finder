@@ -8,6 +8,7 @@ import {
   setApiKey,
   triggerScrape,
   triggerScrapeAll,
+  updateCompany,
 } from "../api";
 import type { CompanyHealth, ScrapeRun } from "../types";
 
@@ -102,6 +103,15 @@ export function AdminPage() {
     },
   });
 
+  const toggleScrape = useMutation({
+    mutationFn: ({ id, active }: { id: number; active: boolean }) =>
+      updateCompany(id, { active }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["company-health"] });
+      qc.invalidateQueries({ queryKey: ["stats"] });
+    },
+  });
+
   const onScrapeAll = (noPlaywright: boolean) => {
     const label = noPlaywright ? "all companies (skipping Playwright sites)" : "all 219 companies";
     if (!window.confirm(`Start a full scrape of ${label}? This takes 1–5 minutes.`)) return;
@@ -135,6 +145,8 @@ export function AdminPage() {
 
   const failing = (health.data ?? []).filter((r) => r.consecutive_failures > 0).length;
   const inactive = (health.data ?? []).filter((r) => !r.active).length;
+  const customRows = (health.data ?? []).filter((r) => r.has_selectors);
+  const customScrapeOn = customRows.filter((r) => r.active).length;
 
   return (
     <div className="space-y-5">
@@ -251,7 +263,8 @@ export function AdminPage() {
           </label>
           <div className="text-xs text-slate-500 ml-auto">
             <strong>{rows.length}</strong> shown · <strong>{failing}</strong> failing ·{" "}
-            <strong>{inactive}</strong> inactive
+            <strong>{inactive}</strong> inactive ·{" "}
+            <strong>{customScrapeOn}</strong>/{customRows.length} custom scrape on
           </div>
         </div>
         <div className="overflow-x-auto">
@@ -264,20 +277,23 @@ export function AdminPage() {
                 <th className="text-right px-3 py-2 font-medium">Fails</th>
                 <th className="text-left px-3 py-2 font-medium">Last success</th>
                 <th className="text-left px-3 py-2 font-medium">Last scraped</th>
+                <th className="text-center px-3 py-2 font-medium" title="Custom/playwright companies with selectors">
+                  Scrape
+                </th>
                 <th className="text-right px-3 py-2 font-medium">Action</th>
               </tr>
             </thead>
             <tbody>
               {health.isLoading && (
                 <tr>
-                  <td colSpan={7} className="text-center text-slate-400 py-6">
+                  <td colSpan={8} className="text-center text-slate-400 py-6">
                     Loading…
                   </td>
                 </tr>
               )}
               {rows.length === 0 && !health.isLoading && (
                 <tr>
-                  <td colSpan={7} className="text-center text-slate-400 py-6">
+                  <td colSpan={8} className="text-center text-slate-400 py-6">
                     No companies match.
                   </td>
                 </tr>
@@ -302,12 +318,53 @@ export function AdminPage() {
                   </td>
                   <td className="px-3 py-2 text-slate-500">{fmtAgo(r.last_success_at)}</td>
                   <td className="px-3 py-2 text-slate-500">{fmtAgo(r.last_scraped_at)}</td>
+                  <td className="px-3 py-2 text-center">
+                    {r.has_selectors ? (
+                      <label
+                        className="inline-flex items-center gap-1.5 cursor-pointer"
+                        title={
+                          r.active
+                            ? "Included in scrape runs — click to skip"
+                            : "Skipped in scrape runs — click to include"
+                        }
+                      >
+                        <input
+                          type="checkbox"
+                          className="h-4 w-4 rounded border-slate-300 text-slate-900 focus:ring-slate-400"
+                          checked={r.active}
+                          disabled={
+                            toggleScrape.isPending &&
+                            toggleScrape.variables?.id === r.id
+                          }
+                          onChange={() =>
+                            toggleScrape.mutate({ id: r.id, active: !r.active })
+                          }
+                          aria-label={`${r.active ? "Disable" : "Enable"} scraping for ${r.name}`}
+                        />
+                        <span className="text-xs text-slate-500">
+                          {toggleScrape.isPending && toggleScrape.variables?.id === r.id
+                            ? "…"
+                            : r.active
+                            ? "On"
+                            : "Off"}
+                        </span>
+                      </label>
+                    ) : (
+                      <span className="text-slate-300" title="Not a custom-selector company">
+                        —
+                      </span>
+                    )}
+                  </td>
                   <td className="px-3 py-2 text-right">
                     <button
                       type="button"
-                      disabled={scrape.isPending && scrape.variables === r.id}
+                      disabled={
+                        !r.active ||
+                        (scrape.isPending && scrape.variables === r.id)
+                      }
                       onClick={() => scrape.mutate(r.id)}
                       className="text-xs border border-slate-300 rounded px-2 py-1 hover:bg-slate-100 disabled:opacity-50"
+                      title={!r.active ? "Enable scraping first" : undefined}
                     >
                       {scrape.isPending && scrape.variables === r.id ? "Queued…" : "Scrape now"}
                     </button>
@@ -317,9 +374,12 @@ export function AdminPage() {
             </tbody>
           </table>
         </div>
-        {scrape.isError && (
+        {(scrape.isError || toggleScrape.isError) && (
           <div className="mt-2 text-xs text-red-700">
-            Trigger failed: {(scrape.error as Error).message}
+            {scrape.isError && <>Trigger failed: {(scrape.error as Error).message}</>}
+            {toggleScrape.isError && (
+              <>Toggle failed: {(toggleScrape.error as Error).message}</>
+            )}
           </div>
         )}
       </section>

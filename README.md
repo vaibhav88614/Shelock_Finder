@@ -118,6 +118,35 @@ server that also serves the static dashboard bundle.
 
 Delete `data/jobpulse.db*` to start over; rerun `migrate` + `seed`.
 
+## Database bootstrap (git split/assemble)
+
+`data/jobpulse.db` is well over GitHub's 100 MB per-file limit, so it is **not**
+tracked directly. Instead the repo ships gzip-compressed chunks in
+`data/db_parts/` plus a `manifest.json` with sha256 checksums; a fresh clone
+reassembles the DB in one command:
+
+```powershell
+python scripts/db_assemble.py            # data/db_parts/* -> data/jobpulse.db
+```
+
+`db_assemble.py` is idempotent: if `data/jobpulse.db` already exists and its
+sha256 matches the manifest, it is a no-op. Pass `--force` to overwrite a
+mismatched local DB.
+
+After you run a scrape and want to publish the updated DB, refresh the chunks
+before committing:
+
+```powershell
+python scripts/db_split.py               # data/jobpulse.db -> data/db_parts/*
+git add data/db_parts/
+git commit -m "refresh DB snapshot"
+```
+
+Both scripts stream through a 1 MB buffer and verify sha256 end-to-end, so the
+round trip is bit-exact. Default chunk size is 45 MB (safely below GitHub's
+100 MB limit); override with `--chunk-size 30MB` if you ever need smaller
+pieces.
+
 ## CLI reference
 
 | Command | What it does |

@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "target": "data/jobpulse.db",
+  "original_size": 314703872,
+  "original_sha256": "0c47007cc5bf99b03568590ffdae078648ca51a74dd5de0139f7fe84b2ae51a1",
+  "compression": "gzip",
+  "compressed_size": 88208110,
+  "chunk_size": 47185920,
+  "chunks": [
+    {
+      "name": "jobpulse.db.gz.part-000",
+      "size": 47185920,
+      "sha256": "06bebbba5628de125654a6e322940a6a311fc2292d3cfab15fa4111f2ea9ace8"
+    },
+    {
+      "name": "jobpulse.db.gz.part-001",
+      "size": 41022190,
+      "sha256": "656080369350da70f4830cdf8a26dfcb28dc552944482e8cded4c8c28449ac6a"
+    }
+  ]
+}

@@ -157,6 +157,26 @@ export interface CreateCompanyPayload {
   custom_selectors?: Record<string, unknown> | null;
 }
 
+export interface UpdateCompanyPayload {
+  active?: boolean;
+}
+
+export async function updateCompany(
+  companyId: number,
+  payload: UpdateCompanyPayload
+): Promise<Company> {
+  const r = await fetch(`${API}/companies/${companyId}`, {
+    method: "PATCH",
+    headers: mutateHeaders({
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    }),
+    body: JSON.stringify(payload),
+  });
+  if (!r.ok) throw new Error(await readErrorMessage(r));
+  return (await r.json()) as Company;
+}
+
 export async function createCompany(payload: CreateCompanyPayload): Promise<Company> {
   const r = await fetch(`${API}/companies`, {
     method: "POST",

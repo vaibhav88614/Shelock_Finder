@@ -59,6 +59,7 @@ export interface CompanyHealth {
   name: string;
   ats_type: string;
   active: boolean;
+  has_selectors: boolean;
   last_scraped_at: string | null;
   last_success_at: string | null;
   consecutive_failures: number;

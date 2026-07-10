@@ -20,18 +20,19 @@ frontend/dist/
 frontend/.vite/
 
 # Local data (runtime artifacts)
-data/
-*.db
-*.db-wal
-*.db-shm
-
+# The SQLite DB itself is not tracked — it is reassembled from chunks in
+# data/db_parts/ via `python scripts/db_assemble.py`. See README > Database bootstrap.
+data/jobpulse.db
+data/jobpulse.db-journal
+data/jobpulse.db-wal
+data/jobpulse.db-shm
+# Temp artifact produced by scripts/db_split.py
+data/db_parts/*.tmp
 
 # Editors / OS
 .vscode/
 .idea/
-.DS_Store
-Thumbs.db
+
 
 # Playwright
-playwright-report/
-test-results/
+

@@ -67,6 +67,8 @@ def companies_health(s: Session = Depends(get_session)) -> list[CompanyHealth]:
                 name=c.name,
                 ats_type=c.ats_type,
                 active=c.active,
+                has_selectors=c.ats_type in ("custom", "playwright")
+                and bool(c.custom_selectors),
                 last_scraped_at=c.last_scraped_at,
                 last_success_at=c.last_success_at,
                 consecutive_failures=c.consecutive_failures,
