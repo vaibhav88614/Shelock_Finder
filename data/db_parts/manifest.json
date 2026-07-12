@@ -2,20 +2,25 @@
   "version": 1,
   "target": "data/jobpulse.db",
   "original_size": 314703872,
-  "original_sha256": "0c47007cc5bf99b03568590ffdae078648ca51a74dd5de0139f7fe84b2ae51a1",
+  "original_sha256": "511e94b5b6862895b14485514766aaf150b863bb7c18478fe2dbdef495a1d320",
   "compression": "gzip",
-  "compressed_size": 88208110,
+  "compressed_size": 98522033,
   "chunk_size": 47185920,
   "chunks": [
     {
       "name": "jobpulse.db.gz.part-000",
       "size": 47185920,
-      "sha256": "06bebbba5628de125654a6e322940a6a311fc2292d3cfab15fa4111f2ea9ace8"
+      "sha256": "216bebda07927fa446589998c4710a5929253fad469fe8f4665f7d497558f7cf"
     },
     {
       "name": "jobpulse.db.gz.part-001",
-      "size": 41022190,
-      "sha256": "656080369350da70f4830cdf8a26dfcb28dc552944482e8cded4c8c28449ac6a"
+      "size": 47185920,
+      "sha256": "b54f98426b6a698c021aec92d6e31fbda7260bd54d0506399ef54b908a59d92b"
+    },
+    {
+      "name": "jobpulse.db.gz.part-002",
+      "size": 4150193,
+      "sha256": "989341b2faddf5b42c2c6cd341b3461e3374b24fd0ad68a3f5b97fe04dcc2838"
     }
   ]
 }
