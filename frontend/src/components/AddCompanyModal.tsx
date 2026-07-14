@@ -125,25 +125,27 @@ export function AddCompanyModal({ onClose }: Props) {
     <FocusLock returnFocus>
       <div className="fixed inset-0 z-50 flex items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="add-company-title">
         <div className="absolute inset-0 bg-slate-900/40" onClick={onClose} aria-hidden="true" />
-        <div className="relative bg-white rounded-lg shadow-xl w-full max-w-xl mx-4 overflow-hidden">
-          <div className="flex items-center justify-between border-b border-slate-200 px-5 py-3">
+        <div className="relative bg-white dark:bg-slate-900 dark:text-slate-100 rounded-lg shadow-xl w-full max-w-xl mx-4 overflow-hidden">
+          <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 px-5 py-3">
             <h2 id="add-company-title" className="text-lg font-semibold">Add company</h2>
           <button
             onClick={onClose}
-            className="text-slate-500 hover:text-slate-900 text-2xl leading-none px-2"
+            className="text-slate-500 hover:text-slate-900 dark:hover:text-white text-2xl leading-none px-2"
             aria-label="Close"
           >
             ×
           </button>
         </div>
 
-        <div className="border-b border-slate-200 px-5 flex gap-4 text-sm">
+        <div className="border-b border-slate-200 dark:border-slate-800 px-5 flex gap-4 text-sm">
           {(["single", "bulk"] as Tab[]).map((t) => (
             <button
               key={t}
               onClick={() => setTab(t)}
               className={`py-2 -mb-px border-b-2 ${
-                tab === t ? "border-slate-900 text-slate-900" : "border-transparent text-slate-500"
+                tab === t
+                  ? "border-slate-900 dark:border-slate-100 text-slate-900 dark:text-slate-100"
+                  : "border-transparent text-slate-500 dark:text-slate-400"
               }`}
             >
               {t === "single" ? "Single URL" : "Bulk CSV"}

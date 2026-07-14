@@ -186,6 +186,65 @@ def infer_selectors_cmd(
     raise typer.Exit(code=code)
 
 
+@app.command("cleanup-jobs")
+def cleanup_jobs_cmd(
+    days: int = typer.Option(30, "--days", help="Delete jobs whose last_seen_at is older than this many days."),
+    dry_run: bool = typer.Option(False, "--dry-run", help="Report what would be deleted without touching the DB."),
+    yes: bool = typer.Option(False, "--yes", help="Skip the interactive confirmation prompt."),
+) -> None:
+    """Delete jobs that haven't been seen for `days` (default 30) days.
+
+    Uses `last_seen_at` (bumped on every successful scrape) so a job that
+    keeps reappearing in the source's careers page is refreshed and never
+    removed.
+    """
+    from scripts.cleanup_jobs import run_cleanup
+
+    if not dry_run and not yes:
+        typer.confirm(
+            f"Delete jobs older than {days} days? This can't be undone.",
+            abort=True,
+        )
+
+    summary = run_cleanup(days=days, dry_run=dry_run)
+    if summary.dry_run:
+        typer.echo(f"Preview: {summary.matched} jobs are older than the {days}-day cutoff.")
+    else:
+        typer.echo(f"Deleted {summary.deleted} of {summary.matched} matching jobs.")
+
+
+@app.command("prune-failing")
+def prune_failing_cmd(
+    threshold: int = typer.Option(5, "--threshold", help="Minimum consecutive_failures to prune."),
+    dry_run: bool = typer.Option(False, "--dry-run", help="Report what would be pruned; don't modify anything."),
+    no_seed_sync: bool = typer.Option(
+        False,
+        "--no-seed-sync",
+        help="Keep the removed companies inside seeds/companies.json (default: strip them).",
+    ),
+    yes: bool = typer.Option(False, "--yes", help="Skip the interactive confirmation prompt."),
+) -> None:
+    """Delete companies whose consecutive_failures >= threshold.
+
+    Jobs and per-run scrape_run_companies rows are removed via FK cascade.
+    By default the seed file is rewritten so `python run.py seed` won't
+    resurrect the pruned entries; pass --no-seed-sync to keep them.
+    """
+    from scripts.prune_failing import format_report, run_prune
+
+    if not dry_run and not yes:
+        typer.confirm(
+            f"Delete every company with consecutive_failures >= {threshold}? "
+            "This cascades to their jobs and run history.",
+            abort=True,
+        )
+
+    summary = run_prune(
+        threshold=threshold, dry_run=dry_run, seed_sync=not no_seed_sync
+    )
+    typer.echo(format_report(summary))
+
+
 @app.command()
 def reset(
     yes: bool = typer.Option(False, "--yes", help="Confirm destructive reset."),

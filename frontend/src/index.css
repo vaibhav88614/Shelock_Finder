@@ -7,3 +7,19 @@ body,
 #root {
   height: 100%;
 }
+
+/* Default body colors switch with the .dark class on <html>. Individual
+ * components layer additional dark: variants on top of this for surfaces
+ * that don't inherit body colors (cards, tables, inputs).
+ */
+body {
+  @apply bg-slate-50 text-slate-900;
+}
+
+html.dark body {
+  @apply bg-slate-950 text-slate-100;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background-color: rgb(51 65 85);
+}

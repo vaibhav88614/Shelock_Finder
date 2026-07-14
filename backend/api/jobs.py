@@ -2,17 +2,18 @@
 from __future__ import annotations
 
 import csv
-from datetime import datetime
+from datetime import datetime, timedelta
 from io import StringIO
 from typing import Iterator
 
-from fastapi import APIRouter, Depends, HTTPException, Query, Response
+from fastapi import APIRouter, Depends, HTTPException, Query
 from fastapi.responses import StreamingResponse
-from sqlalchemy import func, select
+from sqlalchemy import delete, func, select
 from sqlalchemy.orm import Session
 
 from ..db import get_session
 from ..models import Company, Job, utcnow_naive
+from .deps import require_api_key
 from .filters import (
     JobFilters,
     POSTED_WITHIN_DAYS_MAX,
@@ -21,7 +22,7 @@ from .filters import (
     encode_cursor,
     matched_keywords,
 )
-from .schemas import JobOut, JobsListOut
+from .schemas import CleanupJobsResult, JobOut, JobsListOut
 
 
 router = APIRouter(prefix="/jobs", tags=["jobs"])
@@ -89,6 +90,7 @@ def list_jobs(
     remote_only: bool | None = Query(default=None),
     sort: str = Query(default="posted_date", pattern="^(posted_date|company|title|first_seen)$"),
     cursor: str | None = Query(default=None, max_length=500),
+    offset: int | None = Query(default=None, ge=0, le=1_000_000),
     limit: int = Query(default=50, ge=1, le=200),
     new_since: datetime | None = Query(default=None),
     new_in_last_run: bool = Query(default=False),
@@ -108,18 +110,27 @@ def list_jobs(
         new_since=new_since,
         new_in_last_run=new_in_last_run,
     )
+    # Numbered pagination (offset) and keyset pagination (cursor) are mutually
+    # exclusive. Offset lets the UI jump to any page directly; cursor is kept
+    # for callers (CSV pre-fetch, tests) that stream sequentially.
+    if offset is not None and cursor is not None:
+        raise HTTPException(status_code=400, detail="pass either cursor or offset, not both")
+
     try:
         stmt = build_jobs_query(filters, cursor=cursor)
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
 
-    # Pull limit+1 to know if there's another page.
-    rows = s.execute(stmt.limit(limit + 1)).all()
+    if offset is not None:
+        rows = s.execute(stmt.offset(offset).limit(limit + 1)).all()
+    else:
+        # Pull limit+1 to know if there's another page.
+        rows = s.execute(stmt.limit(limit + 1)).all()
     page = rows[:limit]
     items = [_to_job_out(job, company_name, keywords) for (job, company_name) in page]
 
     next_cursor = None
-    if len(rows) > limit:
+    if offset is None and len(rows) > limit:
         last_job, last_company = page[-1]
         peek_job, _ = rows[limit]
 
@@ -232,6 +243,33 @@ def export_jobs_csv(
     filename = f"jobpulse_export_{utcnow_naive():%Y%m%d_%H%M}.csv"
     headers = {"Content-Disposition": f'attachment; filename="{filename}"'}
     return StreamingResponse(_row_iter(), media_type="text/csv", headers=headers)
+
+
+@router.delete("/cleanup", response_model=CleanupJobsResult,
+               dependencies=[Depends(require_api_key)])
+def cleanup_old_jobs(
+    days: int = Query(default=30, ge=1, le=365,
+                      description="Delete jobs whose last_seen_at is older than this many days."),
+    dry_run: bool = Query(default=False),
+    s: Session = Depends(get_session),
+) -> CleanupJobsResult:
+    """Delete jobs not seen for at least `days` days.
+
+    Uses `last_seen_at` (the timestamp bumped every successful scrape) so a
+    job that keeps reappearing on the careers page is never removed. Set
+    `dry_run=true` to preview the count without deleting.
+    """
+    cutoff = utcnow_naive() - timedelta(days=days)
+    count_stmt = select(func.count()).select_from(Job).where(Job.last_seen_at < cutoff)
+    matched = int(s.scalar(count_stmt) or 0)
+    deleted = 0
+    if not dry_run and matched > 0:
+        result = s.execute(delete(Job).where(Job.last_seen_at < cutoff))
+        deleted = int(result.rowcount or 0)
+        s.commit()
+    return CleanupJobsResult(
+        cutoff=cutoff, matched=matched, deleted=deleted, dry_run=dry_run
+    )
 
 
 @router.get("/{job_id}", response_model=JobOut)

@@ -1,5 +1,5 @@
-import { memo, useEffect, useRef, useState } from "react";
-import type { JobFilters, SortOption } from "../types";
+import { memo, useEffect, useState } from "react";
+import { defaultFilters, type JobFilters, type SortOption } from "../types";
 
 interface Props {
   value: JobFilters;
@@ -14,77 +14,116 @@ const SORTS: { label: string; value: SortOption }[] = [
   { label: "First seen", value: "first_seen" },
 ];
 
-// Local debounced state so typing in keyword/location doesn't refetch on
-// every keystroke. We propagate up after 300ms of inactivity.
+// Deep-equal check for JobFilters — fine at this size (< 15 fields).
+function filtersEqual(a: JobFilters, b: JobFilters): boolean {
+  return (
+    a.keywords.join("|") === b.keywords.join("|") &&
+    a.keyword_logic === b.keyword_logic &&
+    a.location === b.location &&
+    a.remote_only === b.remote_only &&
+    a.experience_min === b.experience_min &&
+    a.experience_max === b.experience_max &&
+    a.posted_within_days === b.posted_within_days &&
+    a.company_ids.join(",") === b.company_ids.join(",") &&
+    a.sort === b.sort &&
+    a.new_in_last_run === b.new_in_last_run
+  );
+}
+
+/**
+ * Filters panel — edits are held locally as a draft and only pushed up when
+ * the user clicks "Apply filters" (or presses Enter in a text field). This
+ * prevents the jobs list from thrashing on every keystroke and lets the user
+ * see the pending state before committing.
+ */
 export const Filters = memo(function Filters({ value, onChange, onExport }: Props) {
+  const [draft, setDraft] = useState<JobFilters>(value);
   const [keywordText, setKeywordText] = useState(value.keywords.join(", "));
-  const [location, setLocation] = useState(value.location);
 
-  // Refs let the debounced timeout read the *current* filter snapshot without
-  // listing `value` / `onChange` as deps (which would reset the timer on
-  // every parent re-render). Closure-stale bugs are why this exists.
-  const valueRef = useRef(value);
-  const onChangeRef = useRef(onChange);
-  valueRef.current = value;
-  onChangeRef.current = onChange;
-
+  // When the parent state changes (e.g. reset from elsewhere) sync the draft.
   useEffect(() => {
-    const t = setTimeout(() => {
-      const v = valueRef.current;
-      const kws = keywordText
-        .split(",")
-        .map((s) => s.trim())
-        .filter(Boolean);
-      if (
-        kws.join("|") !== v.keywords.join("|") ||
-        location !== v.location
-      ) {
-        onChangeRef.current({ ...v, keywords: kws, location });
-      }
-    }, 300);
-    return () => clearTimeout(t);
-  }, [keywordText, location]);
+    setDraft(value);
+    setKeywordText(value.keywords.join(", "));
+  }, [value]);
+
+  const parseKeywords = (text: string): string[] =>
+    text
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean);
+
+  const currentDraft = (): JobFilters => ({
+    ...draft,
+    keywords: parseKeywords(keywordText),
+  });
 
   const set = <K extends keyof JobFilters>(k: K, v: JobFilters[K]) =>
-    onChange({ ...value, [k]: v });
+    setDraft((prev) => ({ ...prev, [k]: v }));
+
+  const apply = () => {
+    const next = currentDraft();
+    if (!filtersEqual(next, value)) onChange(next);
+  };
+
+  const reset = () => {
+    const d = defaultFilters();
+    setDraft(d);
+    setKeywordText("");
+    if (!filtersEqual(d, value)) onChange(d);
+  };
+
+  const submitOnEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      apply();
+    }
+  };
+
+  const isDirty = !filtersEqual(currentDraft(), value);
+
+  const inputCls =
+    "border border-slate-300 dark:border-slate-700 dark:bg-slate-900 rounded px-2 py-1.5 text-sm mt-1";
+  const labelCls = "text-xs text-slate-600 dark:text-slate-300 flex flex-col";
 
   return (
-    <div className="bg-white border border-slate-200 rounded-lg p-4 space-y-3 shadow-sm">
+    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg p-4 space-y-3 shadow-sm">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
-        <label className="text-xs text-slate-600 flex flex-col">
+        <label className={labelCls}>
           Keywords <span className="text-[10px] text-slate-400">comma-separated</span>
           <input
-            className="border border-slate-300 rounded px-2 py-1.5 text-sm mt-1"
+            className={inputCls}
             placeholder="python, kubernetes"
             value={keywordText}
             onChange={(e) => setKeywordText(e.target.value)}
+            onKeyDown={submitOnEnter}
           />
         </label>
-        <label className="text-xs text-slate-600 flex flex-col">
+        <label className={labelCls}>
           Location
           <input
-            className="border border-slate-300 rounded px-2 py-1.5 text-sm mt-1"
+            className={inputCls}
             placeholder="Berlin, Remote, US…"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
+            value={draft.location}
+            onChange={(e) => set("location", e.target.value)}
+            onKeyDown={submitOnEnter}
           />
         </label>
-        <label className="text-xs text-slate-600 flex flex-col">
+        <label className={labelCls}>
           Keyword logic
           <select
-            className="border border-slate-300 rounded px-2 py-1.5 text-sm mt-1"
-            value={value.keyword_logic}
+            className={inputCls}
+            value={draft.keyword_logic}
             onChange={(e) => set("keyword_logic", e.target.value as "and" | "or")}
           >
             <option value="or">OR (any keyword)</option>
             <option value="and">AND (all keywords)</option>
           </select>
         </label>
-        <label className="text-xs text-slate-600 flex flex-col">
+        <label className={labelCls}>
           Sort
           <select
-            className="border border-slate-300 rounded px-2 py-1.5 text-sm mt-1"
-            value={value.sort}
+            className={inputCls}
+            value={draft.sort}
             onChange={(e) => set("sort", e.target.value as SortOption)}
           >
             {SORTS.map((s) => (
@@ -97,50 +136,62 @@ export const Filters = memo(function Filters({ value, onChange, onExport }: Prop
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 items-end">
-        <label className="text-xs text-slate-600 flex flex-col">
+        <label className={labelCls}>
           Posted within (days)
           <input
             type="number"
             min={1}
             max={15}
-            className="border border-slate-300 rounded px-2 py-1.5 text-sm mt-1"
-            value={value.posted_within_days}
+            className={inputCls}
+            value={draft.posted_within_days}
             onChange={(e) =>
-              set("posted_within_days", Math.max(1, Math.min(15, Number(e.target.value) || 15)))
+              set(
+                "posted_within_days",
+                Math.max(1, Math.min(15, Number(e.target.value) || 15))
+              )
             }
+            onKeyDown={submitOnEnter}
           />
         </label>
-        <label className="text-xs text-slate-600 flex flex-col">
+        <label className={labelCls}>
           Exp. min (yrs)
           <input
             type="number"
             min={0}
             max={30}
-            className="border border-slate-300 rounded px-2 py-1.5 text-sm mt-1"
-            value={value.experience_min ?? ""}
+            className={inputCls}
+            value={draft.experience_min ?? ""}
             onChange={(e) =>
-              set("experience_min", e.target.value === "" ? null : Number(e.target.value))
+              set(
+                "experience_min",
+                e.target.value === "" ? null : Number(e.target.value)
+              )
             }
+            onKeyDown={submitOnEnter}
           />
         </label>
-        <label className="text-xs text-slate-600 flex flex-col">
+        <label className={labelCls}>
           Exp. max (yrs)
           <input
             type="number"
             min={0}
             max={30}
-            className="border border-slate-300 rounded px-2 py-1.5 text-sm mt-1"
-            value={value.experience_max ?? ""}
+            className={inputCls}
+            value={draft.experience_max ?? ""}
             onChange={(e) =>
-              set("experience_max", e.target.value === "" ? null : Number(e.target.value))
+              set(
+                "experience_max",
+                e.target.value === "" ? null : Number(e.target.value)
+              )
             }
+            onKeyDown={submitOnEnter}
           />
         </label>
-        <label className="text-xs text-slate-600 flex flex-col">
+        <label className={labelCls}>
           Remote
           <select
-            className="border border-slate-300 rounded px-2 py-1.5 text-sm mt-1"
-            value={value.remote_only === null ? "" : value.remote_only ? "yes" : "no"}
+            className={inputCls}
+            value={draft.remote_only === null ? "" : draft.remote_only ? "yes" : "no"}
             onChange={(e) => {
               const v = e.target.value;
               set("remote_only", v === "" ? null : v === "yes");
@@ -151,22 +202,47 @@ export const Filters = memo(function Filters({ value, onChange, onExport }: Prop
             <option value="no">On-site / hybrid</option>
           </select>
         </label>
-        <label className="text-xs text-slate-600 flex items-center gap-2 mt-4">
+        <label className="text-xs text-slate-600 dark:text-slate-300 flex items-center gap-2 mt-4">
           <input
             type="checkbox"
-            checked={value.new_in_last_run}
+            checked={draft.new_in_last_run}
             onChange={(e) => set("new_in_last_run", e.target.checked)}
           />
           New in last run
         </label>
-        <button
-          type="button"
-          onClick={onExport}
-          className="bg-slate-900 text-white text-sm rounded px-3 py-1.5 hover:bg-slate-700"
-        >
-          Export CSV
-        </button>
+        <div className="flex items-center gap-2 justify-end">
+          <button
+            type="button"
+            onClick={reset}
+            className="text-xs border border-slate-300 dark:border-slate-700 rounded px-3 py-1.5 hover:bg-slate-100 dark:hover:bg-slate-800"
+            title="Reset all filters to defaults"
+          >
+            Reset
+          </button>
+          <button
+            type="button"
+            onClick={apply}
+            disabled={!isDirty}
+            className="text-sm bg-slate-900 text-white rounded px-3 py-1.5 hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white"
+            title="Apply pending filter changes"
+          >
+            {isDirty ? "Apply filters" : "Filters applied"}
+          </button>
+          <button
+            type="button"
+            onClick={onExport}
+            className="text-sm border border-slate-300 dark:border-slate-700 rounded px-3 py-1.5 hover:bg-slate-100 dark:hover:bg-slate-800"
+            title="Download the current results as CSV"
+          >
+            Export CSV
+          </button>
+        </div>
       </div>
+      {isDirty && (
+        <p className="text-[11px] text-amber-700 dark:text-amber-400">
+          Pending changes — click <strong>Apply filters</strong> (or press Enter) to update the results.
+        </p>
+      )}
     </div>
   );
 });

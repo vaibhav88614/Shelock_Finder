@@ -1,5 +1,7 @@
 import type {
+  BulkActiveResult,
   BulkImportResult,
+  CleanupJobsResult,
   Company,
   CompanyHealth,
   DetectAtsResult,
@@ -105,6 +107,17 @@ export async function fetchJobs(
   return getJson<JobsListOut>(`${API}/jobs?${p.toString()}`);
 }
 
+export async function fetchJobsPage(
+  filters: JobFilters,
+  offset: number,
+  limit: number,
+  includeTotal = true
+): Promise<JobsListOut> {
+  const p = buildJobParams(filters, { limit: String(limit), offset: String(offset) });
+  if (includeTotal) p.set("include_total", "true");
+  return getJson<JobsListOut>(`${API}/jobs?${p.toString()}`);
+}
+
 export function exportCsvUrl(filters: JobFilters): string {
   return `${API}/jobs/export.csv?${buildJobParams(filters).toString()}`;
 }
@@ -188,6 +201,37 @@ export async function createCompany(payload: CreateCompanyPayload): Promise<Comp
   });
   if (!r.ok) throw new Error(await readErrorMessage(r));
   return (await r.json()) as Company;
+}
+
+export async function bulkSetCompaniesActive(payload: {
+  active: boolean;
+  ids?: number[];
+  ats_types?: string[];
+  max_consecutive_failures?: number;
+}): Promise<BulkActiveResult> {
+  const r = await fetch(`${API}/companies/bulk-active`, {
+    method: "POST",
+    headers: mutateHeaders({
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    }),
+    body: JSON.stringify(payload),
+  });
+  if (!r.ok) throw new Error(await readErrorMessage(r));
+  return (await r.json()) as BulkActiveResult;
+}
+
+export async function cleanupOldJobs(
+  days = 30,
+  dryRun = false
+): Promise<CleanupJobsResult> {
+  const p = new URLSearchParams({ days: String(days), dry_run: String(dryRun) });
+  const r = await fetch(`${API}/jobs/cleanup?${p.toString()}`, {
+    method: "DELETE",
+    headers: mutateHeaders({ Accept: "application/json" }),
+  });
+  if (!r.ok) throw new Error(await readErrorMessage(r));
+  return (await r.json()) as CleanupJobsResult;
 }
 
 export async function bulkImportCompanies(file: File): Promise<BulkImportResult> {

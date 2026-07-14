@@ -88,6 +88,18 @@ export interface BulkImportResult {
   errors: string[];
 }
 
+export interface BulkActiveResult {
+  updated: number;
+  matched: number;
+}
+
+export interface CleanupJobsResult {
+  cutoff: string;
+  matched: number;
+  deleted: number;
+  dry_run: boolean;
+}
+
 export type SortOption = "posted_date" | "company" | "title" | "first_seen";
 export type KeywordLogic = "and" | "or";
 

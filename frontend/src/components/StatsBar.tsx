@@ -19,10 +19,10 @@ function fmtAgo(iso: string | null | undefined): string {
 
 function Tile({ label, value, sub }: { label: string; value: string | number; sub?: string }) {
   return (
-    <div className="bg-white border border-slate-200 rounded-lg p-3 shadow-sm">
-      <div className="text-[10px] uppercase tracking-wide text-slate-500">{label}</div>
-      <div className="text-2xl font-semibold text-slate-900 leading-tight">{value}</div>
-      {sub && <div className="text-xs text-slate-500">{sub}</div>}
+    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg p-3 shadow-sm">
+      <div className="text-[10px] uppercase tracking-wide text-slate-500 dark:text-slate-400">{label}</div>
+      <div className="text-2xl font-semibold text-slate-900 dark:text-slate-100 leading-tight">{value}</div>
+      {sub && <div className="text-xs text-slate-500 dark:text-slate-400">{sub}</div>}
     </div>
   );
 }

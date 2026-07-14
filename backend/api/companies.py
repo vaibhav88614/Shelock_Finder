@@ -14,6 +14,8 @@ from ..detect import detect_ats
 from ..models import Company
 from .deps import require_api_key
 from .schemas import (
+    CompanyBulkActiveIn,
+    CompanyBulkActiveResult,
     CompanyBulkImportResult,
     CompanyCreate,
     CompanyOut,
@@ -105,6 +107,41 @@ def update_company(
     s.commit()
     s.refresh(c)
     return _to_out(c)
+
+
+@router.post("/bulk-active", response_model=CompanyBulkActiveResult,
+             dependencies=[Depends(require_api_key)])
+def bulk_set_active(
+    payload: CompanyBulkActiveIn,
+    s: Session = Depends(get_session),
+) -> CompanyBulkActiveResult:
+    """Flip `active` on many companies at once.
+
+    Selects rows by explicit `ids` OR by (`ats_types` filter combined with an
+    upper-bound `max_consecutive_failures`). Companies already at the target
+    state are counted under `matched` but not in `updated`.
+    """
+    stmt = select(Company)
+    if payload.ids is not None:
+        if not payload.ids:
+            return CompanyBulkActiveResult(updated=0, matched=0)
+        stmt = stmt.where(Company.id.in_(payload.ids))
+    if payload.ats_types is not None:
+        if not payload.ats_types:
+            return CompanyBulkActiveResult(updated=0, matched=0)
+        stmt = stmt.where(Company.ats_type.in_(payload.ats_types))
+    if payload.max_consecutive_failures is not None:
+        stmt = stmt.where(Company.consecutive_failures <= payload.max_consecutive_failures)
+
+    updated = 0
+    matched = 0
+    for c in s.scalars(stmt):
+        matched += 1
+        if c.active is not payload.active:
+            c.active = payload.active
+            updated += 1
+    s.commit()
+    return CompanyBulkActiveResult(updated=updated, matched=matched)
 
 
 @router.delete("/{company_id}", status_code=status.HTTP_204_NO_CONTENT,

@@ -71,6 +71,31 @@ class CompanyBulkImportResult(BaseModel):
     errors: list[str] = Field(default_factory=list)
 
 
+class CompanyBulkActiveIn(BaseModel):
+    """Body for `POST /companies/bulk-active` — flip .active on many rows.
+
+    Either supply an explicit `ids` list or (when the caller wants "everything
+    matching a health predicate") an `ats_types` allowlist plus
+    `max_consecutive_failures`.
+    """
+    active: bool
+    ids: list[int] | None = None
+    ats_types: list[str] | None = None
+    max_consecutive_failures: int | None = None
+
+
+class CompanyBulkActiveResult(BaseModel):
+    updated: int
+    matched: int
+
+
+class CleanupJobsResult(BaseModel):
+    cutoff: datetime
+    matched: int
+    deleted: int
+    dry_run: bool
+
+
 class DetectAtsOut(BaseModel):
     """Lightweight URL → ATS classification result for the Add-Company UI."""
     ats_type: str | None = None
