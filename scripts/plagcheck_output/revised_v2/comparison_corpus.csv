@@ -1,0 +1,184 @@
+index,style,score_pct,score5_pct,score8_pct,preview
+0,Normal,0.0,0.0,0.0,IV. EXPERIMENTAL RESULTS
+1,Normal,0.03,0.03,0.01,"During Kharif-2025, morphological characterization was undertaken on 102 cowpea germplasm accessions together with five standard checks—C-152, KBC-2, KBC-9, IT-38956-11, and a loca"
+2,Normal,0.0,0.0,0.0,"Results obtained in the present study are presented below under three thematic headings that correspond to the stated research objectives, covering genetic variability, genetic div"
+3,List Paragraph,0.03,0.03,0.01,To study the genetic variability for grain yield and its attributing quantitative traits.
+4,List Paragraph,0.04,0.04,0.02,To study the genetic divergence and associationship between grain yield and its attributing quantitative traits.
+5,List Paragraph,0.02,0.02,0.0,To study the seed morphometric and quality traits of cowpea genotypes.
+6,Normal,0.04,0.04,0.02,4.1 To study the genetic variability for grain yield and its attributing quantitative traits.
+7,List Paragraph,0.0,0.0,0.0,"A total of 102 cowpea germplasm lines plus five check cultivars were field-evaluated in Kharif-2025 under an Augmented Randomized Block Design (ARBD) comprising six blocks, with th"
+8,Normal,0.01,0.01,0.0,4.1.1. Analysis of variance.
+9,Normal,0.04,0.04,0.02,4.1.2. Genetic variability analysis for seed yield and its attributing traits.
+10,Normal,0.04,0.04,0.02,4.1.3. Principal component analysis for seed yield and its attributing traits.
+13,Normal,0.01,0.01,0.0,4.1.1 Analysis of variance (ANOVA)
+14,Normal,0.0,0.0,0.0,Analysis of variance (ANOVA) constitutes a robust statistical procedure for testing whether mean values differ significantly across experimental groups. For twelve quantitative cha
+15,Normal,0.05,0.05,0.03,"The ANOVA further revealed significant genotypic effects for all traits under study, while treatment, check, and check-versus-test-entry contrasts were also significant for the maj"
+16,Normal,0.04,0.04,0.02,4.1.2. Genetic variability analysis for seed yield and its attributing traits.
+17,Normal,0.06,0.06,0.01,Genetic variability underpins every crop improvement initiative because it supplies the raw material from which superior genotypes with desirable agronomic attributes can be identi
+18,Normal,0.0,0.0,0.0,"When broad-sense heritability is high and accompanied by substantial genetic advance, additive gene action is generally inferred to predominate; under such circumstances, direct ph"
+19,Default,0.03,0.03,0.01,"Accordingly, the present investigation estimated variability parameters—including mean, range, GCV, PCV, heritability (h²), and GAM—for all yield-contributing characters across 107"
+20,Normal,0.03,0.03,0.01,4.1.2.1. Days to 50 per cent flowering
+21,Normal,0.02,0.02,0.0,"Across the 107 cowpea genotypes, days to 50 per cent flowering (DFF) spanned 38 to 62 days and averaged 44 days, demonstrating meaningful genetic spread in the timing of reproducti"
+22,Normal,0.03,0.03,0.01,Consistent patterns of moderate variability coupled with high heritability and genetic advance for DFF have been reported by Panchta et al. (2020) in their cowpea diversity panels.
+23,Normal,0.02,0.02,0.0,4.1.2.2. Days to physiological maturity
+24,Normal,0.01,0.01,0.0,"Days to physiological maturity (DM) varied from 80 to 108 days with a population mean of 90 days. Both PCV (5.21%) and GCV (5.16%) were comparatively low, and the negligible differ"
+25,Normal,0.0,0.0,0.0,"Selection for shorter or longer crop duration remains feasible, though substantial genetic gains will require crossing parents that differ markedly in maturity. Owusu et al. (2022)"
+29,Normal,0.02,0.02,0.0,4.1.2.3. Plant height (cm)
+30,Normal,0.09,0.09,0.04,"Plant height ranged from 31.46 cm to 94.31 cm with a mean of 64.5 cm among the evaluated genotypes. The trait registered high GCV (21.08%) and PCV (21.12%), broad-sense heritabilit"
+31,Normal,0.03,0.03,0.01,The narrow PCV–GCV interval further corroborates limited environmental influence on plant height in this study. Poornima et al. (2023) documented comparable high heritability and g
+32,Normal,0.02,0.02,0.0,4.1.2.4. Number of branches per plant
+33,Normal,0.05,0.05,0.01,"Number of branches per plant among the 107 genotypes extended from 3 to 14, averaging 8 branches. High GCV (27.19%) and PCV (27.33%) were accompanied by broad-sense heritability of"
+34,Normal,0.0,0.0,0.0,"Environmental effects on branch number were evidently small given the tight correspondence between GCV and PCV, and a large fraction of the phenotypic variance was genetically heri"
+35,Normal,0.02,0.02,0.0,4.1.2.5. Seed length (mm)
+36,Normal,0.15,0.15,0.08,Seed length in the present material ranged from 4.84 mm to 9.74 mm with a mean of 6.80 mm. Moderate GCV (10.03%) and PCV (10.97%) indicated substantial genetic contribution to leng
+37,Normal,0.0,0.0,0.0,"Seed length therefore retains sufficient heritable variation for targeted improvement, although breeders should anticipate gradual rather than step-change progress. Porbeni et al. "
+38,Normal,0.02,0.02,0.0,4.1.2.6. Seed breadth (mm)
+39,Normal,0.08,0.08,0.03,"Seed breadth among the 107 genotypes ranged from 3.86 mm to 7.25 mm, averaging 5.04 mm. Low GCV (9.22%) and moderate PCV (10.78%)—with PCV exceeding GCV more noticeably than for mo"
+40,Normal,0.03,0.03,0.01,Porbeni et al. (2017) documented similar environmental sensitivity for seed breadth in cowpea. Yasin et al. (2021) reported moderate heritability with limited genetic advance for t
+41,Normal,0.02,0.02,0.0,4.1.2.7. Seed thickness (mm)
+42,Normal,0.12,0.12,0.09,Seed thickness ranged from 3.51 mm to 8.10 mm with a mean of 4.06 mm. Moderate GCV (10.94%) and PCV (12.16%) with a narrow gap between them reflected moderate environmental influen
+43,Normal,0.01,0.01,0.0,Porbeni et al. (2017) reported parallel genetic parameters for seed thickness in cowpea diversity studies. Thapa et al. (2021) confirmed moderate GCV and high heritability for this
+45,Normal,0.02,0.02,0.0,4.1.2.8. Seed weight (g)
+46,Normal,0.05,0.05,0.01,Seed weight spanned 7.42 g to 22.17 g with a mean of 9.75 g in the present investigation. Moderate GCV (17.88%) and PCV (18.94%) with a small PCV–GCV difference indicated relativel
+47,Normal,0.0,0.0,0.0,"Because seed weight contributes directly to harvest index and market grade, genotypes with superior hundred-seed weight can be identified reliably through phenotypic screening. Dif"
+48,Normal,0.02,0.02,0.0,4.1.2.9. Pod length (cm)
+49,Normal,0.07,0.07,0.01,"Pod length among the 107 genotypes ranged from 10.36 cm to 19.68 cm, averaging 14.44 cm. Moderate GCV (10.32%) and PCV (10.77%) together with high heritability (91.84%) and GAM (20"
+50,Normal,0.01,0.01,0.0,"Because pod length determines the physical space available for seed set, genotypes with longer pods are attractive as parents for improving yield-related traits. Extended pod cavit"
+51,Normal,0.02,0.02,0.0,4.1.2.10. Number of pods per plant
+52,Normal,0.07,0.07,0.03,"Number of pods per plant (NPPP) varied from 11 to 18 with a mean of 13 pods. The trait showed moderate GCV (10.78%) and PCV (11.40%), high heritability (89.37%), and GAM (21.02%), "
+53,Normal,0.0,0.0,0.0,"The small GCV–PCV difference confirms limited environmental influence on pod number per plant. Because NPPP is a direct component of seed yield, the combination of high heritabilit"
+54,Normal,0.02,0.02,0.0,4.1.2.11. Number of seeds per pod
+55,Normal,0.06,0.06,0.01,Number of seeds per pod (NSPP) ranged from 12 to 25 with an average of 15 seeds per pod across the evaluated genotypes. Moderate GCV (11.41%) and PCV (11.86%) suggested very limite
+56,Normal,0.0,0.0,0.0,High heritability coupled with high genetic advance implies that phenotypic selection for increased NSPP will be effective in the present germplasm. As a key determinant of per-pod
+57,Normal,0.03,0.03,0.01,4.1.2.12. Grain yield per ha (kg/ha)
+58,Normal,0.06,0.06,0.01,"Grain yield per hectare (GY) ranged from 397.04 to 1891.2 kg/ha with a mean of 841.41 kg/ha. High GCV (33.09%) and PCV (40.04%) reflected substantial genotypic variability, and the"
+59,Normal,0.01,0.01,0.0,"The joint occurrence of high heritability and high GAM suggests that meaningful yield improvement is achievable through selection, provided that environmental interactions are acco"
+60,Normal,0.04,0.04,0.02,4.1.3. Principal component analysis for seed yield and its attributing traits.
+61,Normal,0.09,0.09,0.04,"To summarize multivariate patterns of genetic diversity among the 107 cowpea genotypes, principal component analysis (PCA) was performed using twelve morphological, phenological, s"
+62,Normal (Web),0.12,0.12,0.07,"Trait loadings on individual principal components (Table 7; Fig. 5 and Fig. 6) showed that PC1 was dominated by number of pods per plant (NPPP), number of branches (NB), grain yiel"
+63,isselectedend,0.09,0.09,0.04,"PC3 combined days to 50 per cent flowering (DFF) with NSPP, highlighting a phenological–reproductive dimension of variation. PC4 was influenced chiefly by days to maturity (DM), se"
+64,isselectedend,0.0,0.0,0.0,That yield-related and seed morphological traits dominate multivariate axes of cowpea variation has been established in earlier PCA-based diversity studies. Gerrano et al. (2011) d
+65,Normal (Web),0.0,0.0,0.0,"The PCA scatter plot revealed wide spread of genotypes across quadrants, reinforcing the presence of substantial multivariate diversity. Accessions plotted in proximity are expecte"
+66,Normal (Web),0.0,0.0,0.0,Multivariate PCA coordinates should nevertheless be interpreted alongside actual field performance of individual traits rather than used in isolation for parent selection. Genotype
+67,Normal,0.05,0.05,0.03,4.2 To study the genetic divergence and associationship between grain yield and its attributing quantitative traits.
+68,Normal,0.0,0.0,0.0,"Genetic divergence among the 107 cowpea genotypes was quantified through Mahalanobis D² statistics. Genotypes were allocated to discrete clusters, and mean intra-cluster as well as"
+69,Normal,0.02,0.02,0.0,4.2.1. Clustering pattern of cowpea genotypes
+70,Normal,0.02,0.02,0.0,4.2.2. Intra and inter-cluster distances
+71,Normal,0.04,0.04,0.02,4.2.3. Phenotypic correlation coefficient for seed yield and its attributing traits
+72,Normal,0.05,0.05,0.03,4.2.4. Path coefficient analysis for seed yield and yield attributing traits
+73,Normal,0.03,0.03,0.01,4.2.1. Genetic diversity for seed yield and its attributing traits
+74,Normal,0.08,0.08,0.06,Mahalanobis D² analysis partitioned the 107 cowpea genotypes into five distinct clusters based on generalized squared distances; cluster membership is detailed in Table 8 (Fig. 7).
+75,Normal,0.0,0.0,0.0,"The concentration of nearly 86 genotypes in Clusters II and III suggests that many accessions share similar multivariate trait profiles, whereas the smaller clusters harbour geneti"
+76,Normal,0.02,0.02,0.0,4.2.2. Intra and inter-cluster distances.
+77,isselectedend,0.17,0.17,0.11,"Mean intra- and inter-cluster Mahalanobis D² distances are tabulated in Table 9 (Fig. 8). Intra-cluster values were uniformly lower than inter-cluster values, confirming greater ho"
+78,Normal (Web),0.03,0.03,0.01,"The largest inter-cluster distance occurred between Cluster I and Cluster IV (9.354 units), indicating maximum multivariate divergence between these groups, whereas the smallest di"
+79,Normal,0.09,0.09,0.07,"Substantial inter-cluster divergence observed here aligns with reports by Praveena et al. (2019), Walle et al. (2019), Purohit et al. (2020), and Oo et al. (2020), who also documen"
+80,Default,0.02,0.02,0.0,4.2.3. Cluster means for different characters
+81,Normal (Web),0.09,0.09,0.03,Cluster mean profiles for twelve quantitative characters (Table 10) demonstrated marked inter-cluster differences. Days to 50 per cent flowering ranged from 43 days in Cluster III 
+82,Normal (Web),0.11,0.11,0.03,"Plant height differed substantially among clusters, from 57.86 cm in Cluster IV to 77.06 cm in Cluster V. Branch number varied from 7 in Cluster IV to 11 in Cluster V; the superior"
+83,Normal (Web),0.07,0.07,0.02,"Seed weight ranged from 8.67 g in Cluster II to 12.82 g in Cluster V, while pod length was maximum in Cluster II (16.17 cm) and minimum in Cluster IV (13.90 cm). The favourable com"
+84,Normal (Web),0.23,0.23,0.18,"Grain yield per hectare also differed markedly among clusters: Cluster V recorded the highest mean (1645.79 kg/ha), followed by Cluster III (964.25 kg/ha), Cluster II (795.01 kg/ha"
+85,Normal (Web),0.03,0.03,0.01,4.2.4. Relative contribution of characters towards genetic divergence
+86,Normal (Web),0.12,0.12,0.09,Relative contributions of quantitative characters to total genetic divergence (Table 11; Fig. 9) indicated unequal importance of traits in separating genotypes. Seed thickness acco
+87,Normal (Web),0.18,0.18,0.11,"Plant height contributed 7.32 per cent to divergence, seed breadth 6.83 per cent, and seed length 6.36 per cent. Moderate contributions were observed for number of pods per plant ("
+88,Normal (Web),0.04,0.04,0.0,"The five leading traits—seed thickness, number of seeds per pod, grain yield per hectare, days to maturity, and number of branches—together explained more than half of the total ob"
+89,Normal (Web),0.01,0.01,0.0,"Cluster V outperformed other groups for grain yield, seed weight, and seeds per pod, whereas Cluster I was superior for seed dimensions. Genotypes with desirable performance for th"
+90,Normal,0.04,0.04,0.02,4.2.5. Phenotypic correlation coefficient for seed yield and its attributing traits
+91,Normal,0.0,0.0,0.0,"Phenotypic correlation coefficients quantify both the strength and direction of linear associations between component traits and grain yield, thereby highlighting characters that m"
+92,Normal,0.0,0.0,0.0,Table 12 (Fig. 10) presents phenotypic correlation coefficients between grain yield per hectare and eleven yield-attributing characters evaluated across 107 cowpea genotypes.
+93,Normal,0.03,0.03,0.01,4.2.5.1. Days to 50 per cent flowering
+94,Normal,0.3,0.3,0.25,"Days to 50 per cent flowering exhibited positive but non-significant phenotypic associations with plant height (0.116), seed breadth (0.082), seed thickness (0.058), seed weight (0"
+95,Normal,0.02,0.02,0.0,"The negative association with number of pods per plant suggests that genotypes flowering relatively early tended—though not significantly—to produce more pods, possibly because ext"
+96,Normal,0.05,0.05,0.01,"These results contrast with Nagalakshmi et al. (2020), who reported a significant positive correlation between days to 50 per cent flowering and seed yield (0.19) together with a p"
+97,Normal,0.02,0.02,0.0,4.2.5.2. Days to physiological maturity
+98,Normal,0.3,0.3,0.25,"Days to physiological maturity showed positive but non-significant correlations with pod length (0.154), seed thickness (0.110), seed breadth (0.099), and number of pods per plant "
+99,Normal,0.03,0.03,0.01,The negative association with grain yield implies that extended maturity duration conferred no yield advantage in the present germplasm. Waghmare et al. (2019) similarly reported n
+100,Normal,0.02,0.02,0.0,4.2.5.3. Plant height (cm)
+101,Normal,0.2,0.2,0.14,"Plant height correlated significantly and positively with number of branches per plant (0.518). Non-significant positive associations were recorded with pod length (0.088), seed th"
+102,Normal,0.06,0.06,0.01,"The present results align with Chaudhary et al. (2020) and Nagalakshmi et al. (2020), who reported positive height–branching relationships in cowpea. Waghmare et al. (2019), by con"
+103,Normal,0.02,0.02,0.0,4.2.5.4. Number of branches per plant
+104,Normal,0.23,0.23,0.17,"Number of branches per plant showed significant positive correlations with number of pods per plant (0.517), grain yield per hectare (0.417), number of seeds per pod (0.249), and p"
+105,Normal,0.0,0.0,0.0,"The significant positive branch–yield association indicates that well-branched genotypes achieved higher grain yields, probably because additional branches provide more inflorescen"
+106,Normal,0.02,0.02,0.0,4.2.5.5. Seed length (mm)
+107,Normal,0.2,0.2,0.14,Seed length correlated strongly and positively with seed breadth (0.764). Significant positive associations were also recorded with seed thickness (0.305) and number of pods per pl
+108,Normal,0.05,0.05,0.03,"The tight positive association among seed length, breadth, and thickness confirms that seed dimensional characters co-vary as an integrated morphological module. The weak negative "
+109,Normal,0.02,0.02,0.0,4.2.5.6. Seed breadth (mm)
+110,Normal,0.24,0.24,0.18,"Seed breadth showed a significant positive association with seed thickness (0.350). Non-significant positive coefficients were obtained for number of pods per plant (0.082), grain "
+111,Normal,0.0,0.0,0.0,The positive breadth–thickness correlation reflects coordinated development of seed lateral and dorso-ventral dimensions. Although seed breadth was positively associated with grain
+114,Normal,0.02,0.02,0.0,4.2.5.7. Seed thickness (mm)
+115,Normal,0.24,0.24,0.2,"Pod length (0.069) and seed weight (0.010) were positively associated with seed thickness, whereas grain yield per hectare (-0.119), number of seeds per pod (-0.094), and number of"
+116,Normal,0.02,0.02,0.0,4.2.5.8. Seed weight (g)
+117,Normal,0.12,0.12,0.05,"All subsequent associations with seed weight were positive and non-significant: number of pods per plant (0.137), number of seeds per pod (0.137), grain yield per hectare (0.070), "
+118,Normal,0.02,0.02,0.0,4.2.5.9. Pod length (cm)
+119,Normal,0.12,0.12,0.07,Pod length correlated significantly and positively with number of pods per plant (0.243). Associations with grain yield per hectare (0.173) and number of seeds per pod (0.075) were
+120,Normal,0.02,0.02,0.0,4.2.5.10. Number of pods per plant
+121,Normal,0.05,0.05,0.03,"Among all characters examined, grain yield per hectare showed a highly significant positive correlation with number of pods per plant (0.299). Number of seeds per pod was also posi"
+122,Normal,0.08,0.08,0.06,"Increased pod number expands the total number of reproductive units per plant and thereby raises the ceiling for grain production. Manggoel et al. (2012), Aliyu et al. (2016), Chau"
+123,Normal,0.02,0.02,0.0,4.2.5.11. Number of seeds per pod
+124,Normal,0.03,0.03,0.01,The strongest and most significant positive correlation with grain yield per hectare was observed for number of seeds per pod (0.659). Panchta et al. (2020) reported similar NSPP–y
+125,Normal,0.05,0.05,0.03,4.2.6. Path coefficient analysis for seed yield and yield attributing traits
+126,Normal,0.04,0.04,0.01,Path coefficient analysis disaggregates the observed phenotypic associations between grain yield and its component characters into direct effects on yield and indirect effects tran
+129,Normal,0.03,0.03,0.01,4.2.6.1. Days to 50 per cent flowering
+130,Normal,0.25,0.25,0.19,Days to 50 per cent flowering exerted a negative direct effect (-0.03196) on grain yield at the phenotypic level. Favourable indirect contributions were mediated through number of 
+131,Normal,0.03,0.03,0.01,"The negative direct path indicates that delayed flowering per se depressed grain yield when other traits were held constant. However, the positive indirect effect via NSPP shows th"
+132,Normal,0.02,0.02,0.0,4.2.6.2. Days to physiological maturity
+133,Normal,0.24,0.24,0.18,"Days to physiological maturity registered a positive but small direct effect on grain yield (0.01360). The largest indirect contribution flowed through seed breadth (0.02444), foll"
+134,Normal,0.03,0.03,0.01,The low direct effect magnitude confirms that maturity duration contributed minimally to yield when isolated from correlated traits. The comparatively large negative indirect effec
+136,Normal,0.02,0.02,0.0,4.2.6.3. Plant height (cm)
+137,Normal,0.11,0.11,0.07,"Plant height displayed a negative direct effect (-0.06319) on grain yield, yet its overall association with yield was positively influenced primarily through number of branches (0."
+138,Normal,0.15,0.15,0.1,"Negative indirect effects were observed through seed breadth (-0.02176), seed thickness (-0.00609), days to 50 per cent flowering (-0.00371), seed weight (-0.00292), and days to ma"
+139,Normal,0.02,0.02,0.0,4.2.6.4. Number of branches per plant
+140,Normal,0.36,0.36,0.29,Number of branches per plant recorded a relatively high positive direct effect (0.24225) on grain yield. Favourable indirect contributions were transmitted through number of seeds 
+141,Normal,0.0,0.0,0.0,"The substantial positive direct path confirms that branching ability itself directly elevates grain yield, presumably by increasing the number of reproductive sites available for p"
+142,Normal,0.02,0.02,0.0,4.2.6.5. Seed length (mm)
+143,Normal (Web),0.33,0.33,0.22,"Seed length carried a comparatively large negative direct effect (-0.24285) on grain yield. Despite this unfavourable direct contribution, a positive indirect effect was expressed "
+144,Normal,0.03,0.03,0.01,"The negative direct path demonstrates that increased seed length, when decoupled from other traits, was detrimental to aggregate grain yield in this germplasm. The strong positive "
+145,Normal,0.02,0.02,0.0,4.2.6.6. Seed breadth (mm)
+146,Normal (Web),0.32,0.32,0.22,"Among seed dimensional characters, seed breadth produced the highest positive direct effect (0.24598) on grain yield. Favourable indirect influences were also expressed through num"
+147,Normal,0.0,0.0,0.0,"The positive direct path indicates that wider seeds contributed favourably to grain yield in the present material, possibly by supporting greater seed biomass per unit. Seed breadt"
+148,Normal,0.02,0.02,0.0,4.2.6.7. Seed thickness (mm)
+149,Normal (Web),0.29,0.29,0.24,"Seed thickness exerted a negative direct influence (-0.08011) on grain yield, partially compensated by positive indirect effects through seed breadth (0.08618), number of branches "
+150,Normal (Web),0.08,0.08,0.06,The negative direct effect confirms that thicker seeds did not independently enhance grain yield once other traits were held constant. The positive indirect effect via seed breadth
+151,Normal,0.02,0.02,0.0,4.2.6.8. Seed weight (g)
+152,Normal,0.32,0.32,0.29,"Seed weight displayed a negative direct path (-0.04778) towards grain yield. The strongest favourable indirect contribution was mediated through number of seeds per pod (0.07964), "
+153,Normal,0.06,0.06,0.04,The negative direct effect indicates that heavier individual seeds did not directly increase total grain yield when yield component traits were accounted for. Carvalho et al. (2017
+154,Normal,0.02,0.02,0.0,4.2.6.9. Pod length (cm)
+155,Normal,0.31,0.31,0.26,Pod length registered a positive direct effect of 0.05192 on grain yield. Its contribution was further reinforced by favourable indirect effects through number of branches (0.06009
+156,Normal,0.08,0.08,0.06,"Manggoel et al. (2012), Aliyu et al. (2016), Chaudhary et al. (2020), and Kavyashree et al. (2023) each documented positive direct pod length effects on cowpea seed yield. The posi"
+157,Normal,0.02,0.02,0.0,4.2.6.10. Number of pods per plant
+158,Normal,0.3,0.3,0.26,Number of pods per plant contributed positively to grain yield through a direct effect of 0.13620. A nearly comparable indirect effect was mediated through number of branches (0.12
+159,Normal,0.19,0.19,0.14,"Negative indirect effects were confined to seed length (-0.05041), seed weight (-0.00652), and plant height (-0.00312). The positive direct path confirms that pod number itself dir"
+160,Normal,0.02,0.02,0.0,4.2.6.11. Number of seeds per pod
+161,Normal,0.26,0.26,0.22,"Of all component characters examined, number of seeds per pod exhibited the highest positive direct effect (0.57965) on grain yield. Its favourable influence was supplemented by po"
+162,Normal,0.16,0.16,0.11,"Negative indirect contributions through seed weight (-0.00657), days to 50 per cent flowering (-0.00290), days to maturity (-0.00164), and plant height (-0.00112) were comparativel"
+163,Normal,0.11,0.11,0.04,"The residual effect of 0.66 indicated that the characters included in the path model collectively explained approximately 56.44 per cent of grain yield variation, while the remaini"
+164,Normal,0.03,0.03,0.01,4.3. To study the seed morphometric and quality traits of cowpea genotypes.
+165,List Paragraph,0.11,0.11,0.08,"Seed morphological and quality attributes of all 107 cowpea genotypes were documented with respect to seed size, shape, and colour (Table 14). From this broader panel, the ten high"
+166,pdq2pg_selectionanchorcontainer,0.03,0.03,0.01,"4.3.1. Seed shape, size and color of cowpea genotypes"
+167,Normal (Web),0.05,0.05,0.03,4.3.2. Germination percentage and seedling vigour of ten selected cowpea genotypes
+170,Normal (Web),0.05,0.05,0.03,4.3.2. Germination percentage and seedling vigour of ten selected cowpea genotypes
+171,pdq2pg_selectionanchorcontainer,0.0,0.0,0.0,"Because seed quality and rapid, uniform seedling establishment strongly influence field stand and subsequent crop productivity, ten elite cowpea genotypes along with check cultivar"
+172,pdq2pg_selectionanchorcontainer,0.07,0.07,0.01,"Marked genotypic differences were observed for germination percentage, seedling vigour, and grain yield among the evaluated entries (Table 15). Germination ranged from 87.50 to 97."
+173,Normal (Web),0.08,0.08,0.03,V-16 achieved the highest grain yield (1891.22 kg/ha) together with 97.30 per cent germination and seedling vigour index 2732.24. EC-458480 ranked next for yield (1876.32 kg/ha) an
+174,Normal (Web),0.09,0.09,0.03,"IC-2591054 and EC-458418 also performed well, yielding 1640.44 kg/ha and 1633.63 kg/ha with germination values of 89.50 per cent and 91.80 per cent, respectively. C4-IT-38956-1 pro"
+175,List Paragraph,0.11,0.11,0.03,"Among check cultivars, KBC-2 achieved the highest seedling vigour index (3054.03), while KBC-9 recorded a comparatively high germination percentage (94.30%). Their grain yields wer"
+194,Normal,0.0,0.0,0.0,V. SUMMARY AND CONCLUSION
+195,Normal,0.24,0.24,0.12,"This investigation was designed to quantify genetic variability and diversity within cowpea (Vigna unguiculata L. Walp.) germplasm, elucidate associations among component traits an"
+196,Normal,0.03,0.03,0.0,"Analysis of variance revealed significant genotypic differences for all characters studied, confirming adequate variability in the experimental material. The magnitude of variation"
+197,Normal,0.18,0.18,0.11,"Plant height registered high GCV and PCV (21.08% and 21.12%) together with high heritability (99.64%) and GAM (43.41%), indicating strong selection potential. Number of branches pe"
+198,Normal,0.29,0.29,0.22,"Days to 50 per cent flowering, seed thickness, seed weight, pod length, number of pods per plant, and number of seeds per pod displayed moderate GCV alongside high heritability and"
+199,Normal,0.14,0.14,0.07,"Principal component analysis identified five components with eigenvalues exceeding unity, jointly accounting for 69.05 per cent of total variation. PC1 explained 20.26 per cent and"
+200,Normal,0.1,0.1,0.06,"Mahalanobis D² analysis grouped the 107 genotypes into five clusters: Cluster II (48 genotypes), Cluster III (44), Cluster V (10), Cluster I (3), and Cluster IV (2). Inter-cluster "
+201,pdq2pg_selectionanchorcontainer,0.28,0.28,0.16,"Cluster means revealed substantial inter-group differences. Cluster V recorded the highest means for plant height (77.06 cm), number of branches (11.32), seed weight (12.82 g), num"
+202,Normal (Web),0.29,0.29,0.23,"Relative contributions to genetic divergence were led by seed thickness (15.28%), followed by number of seeds per pod (11.85%), grain yield per hectare (11.52%), days to physiologi"
+203,Normal,0.28,0.28,0.22,"Correlation analysis revealed that grain yield per hectare was positively and significantly associated with number of seeds per pod (0.659*), number of pods per plant (0.299), and "
+204,Normal,0.16,0.16,0.09,Path coefficient analysis clarified individual trait contributions to grain yield. NSPP recorded the highest positive direct effect (0.57965). Positive direct effects were also obs
+205,Normal,0.09,0.09,0.03,"Considerable variation was also observed for seed morphological characters. Genotypes differed widely in seed colour, including cream, brown, black, reddish brown, purplish brown, "
+206,Normal,0.16,0.16,0.1,Seed quality evaluation among selected genotypes and checks revealed notable differences. V-16 recorded the highest germination percentage (97.3%). EC-458480 achieved the highest s
+207,Normal,0.05,0.05,0.03,"Overall, the present investigation demonstrates substantial useful variability and diversity within the evaluated cowpea germplasm. Number of seeds per pod emerged as the most crit"
+208,Normal,0.07,0.07,0.01,Number of branches per plant and number of pods per plant were also positively associated with yield and merit consideration during genotype selection. Diversity revealed through M
+209,Normal,0.0,0.0,0.0,Future line of work
+210,Normal,0.03,0.03,0.01,"Based on the findings of the present investigation, the following future line of work is suggested:"
+211,Normal,0.09,0.09,0.07,Promising genotypes identified in the present study may be evaluated over different seasons and locations to confirm their performance and adaptability under varying environmental 
+212,Normal,0.11,0.11,0.09,"Genotypes belonging to highly divergent clusters, particularly those showing desirable agronomic performance, may be utilized as parents in hybridization programmes for generating "
+213,Normal,0.1,0.1,0.07,"Promising genotypes combining high yield with desirable seed morphology, germination and seedling vigour may be further evaluated for their potential use in cowpea improvement prog"
