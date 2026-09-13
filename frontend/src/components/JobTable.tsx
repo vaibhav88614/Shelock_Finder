@@ -1,5 +1,6 @@
 import { memo, useMemo } from "react";
 import type { Job } from "../types";
+import type { Density } from "../urlState";
 
 interface Props {
   jobs: Job[];
@@ -10,6 +11,9 @@ interface Props {
   pageSize: number;
   onPageChange: (page: number) => void;
   onPageSizeChange: (size: number) => void;
+  density: Density;
+  onDensityChange: (density: Density) => void;
+  showMatchColumn: boolean;
 }
 
 function fmtDate(iso: string | null): string {
@@ -19,7 +23,11 @@ function fmtDate(iso: string | null): string {
   return d.toISOString().slice(0, 10);
 }
 
-/** Build a page-number list with `…` gaps, keeping first/last/current window. */
+function fmtScore(n: number | null): string {
+  if (n === null || n === undefined) return "—";
+  return n.toFixed(1);
+}
+
 function buildPageList(current: number, totalPages: number): (number | "…")[] {
   if (totalPages <= 7) {
     return Array.from({ length: totalPages }, (_, i) => i + 1);
@@ -36,6 +44,18 @@ function buildPageList(current: number, totalPages: number): (number | "…")[] 
 
 const PAGE_SIZES = [25, 50, 100, 200];
 
+const DENSITY_ROW: Record<Density, string> = {
+  comfortable: "px-4 py-2",
+  compact: "px-3 py-1.5",
+  dense: "px-2 py-1",
+};
+
+const DENSITY_TEXT: Record<Density, string> = {
+  comfortable: "text-sm",
+  compact: "text-sm",
+  dense: "text-xs",
+};
+
 export const JobTable = memo(function JobTable({
   jobs,
   onSelect,
@@ -45,6 +65,9 @@ export const JobTable = memo(function JobTable({
   pageSize,
   onPageChange,
   onPageSizeChange,
+  density,
+  onDensityChange,
+  showMatchColumn,
 }: Props) {
   const totalPages = useMemo(() => {
     if (total === null || total <= 0) return 1;
@@ -58,6 +81,9 @@ export const JobTable = memo(function JobTable({
 
   const btn =
     "text-xs border border-slate-300 dark:border-slate-700 rounded px-2 py-1 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed";
+  const cell = DENSITY_ROW[density];
+  const textCls = DENSITY_TEXT[density];
+  const colCount = showMatchColumn ? 7 : 6;
 
   return (
     <div
@@ -76,7 +102,20 @@ export const JobTable = memo(function JobTable({
             ? "0 results"
             : `${jobs.length} loaded`}
         </span>
-        <span className="flex items-center gap-2">
+        <span className="flex items-center gap-3">
+          <label className="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1">
+            Density
+            <select
+              value={density}
+              onChange={(e) => onDensityChange(e.target.value as Density)}
+              className="border border-slate-300 dark:border-slate-700 dark:bg-slate-900 rounded px-1.5 py-0.5 text-xs"
+              title="Row height"
+            >
+              <option value="comfortable">Comfortable</option>
+              <option value="compact">Compact</option>
+              <option value="dense">Dense</option>
+            </select>
+          </label>
           <label className="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1">
             Per page
             <select
@@ -95,21 +134,24 @@ export const JobTable = memo(function JobTable({
         </span>
       </div>
       <div className="overflow-x-auto">
-        <table className="min-w-full text-sm">
+        <table className={`min-w-full ${textCls}`}>
           <thead className="bg-slate-50 dark:bg-slate-800/60 text-slate-600 dark:text-slate-300 text-xs uppercase">
             <tr>
-              <th className="text-left px-4 py-2 font-medium">Company</th>
-              <th className="text-left px-4 py-2 font-medium">Title</th>
-              <th className="text-left px-4 py-2 font-medium">Location</th>
-              <th className="text-left px-4 py-2 font-medium">Remote</th>
-              <th className="text-left px-4 py-2 font-medium">Posted</th>
-              <th className="text-left px-4 py-2 font-medium">Keywords</th>
+              {showMatchColumn && (
+                <th className={`text-right ${cell} font-medium`}>Match</th>
+              )}
+              <th className={`text-left ${cell} font-medium`}>Company</th>
+              <th className={`text-left ${cell} font-medium`}>Title</th>
+              <th className={`text-left ${cell} font-medium`}>Location</th>
+              <th className={`text-left ${cell} font-medium`}>Remote</th>
+              <th className={`text-left ${cell} font-medium`}>Posted</th>
+              <th className={`text-left ${cell} font-medium`}>Keywords</th>
             </tr>
           </thead>
           <tbody>
             {jobs.length === 0 && !loading && (
               <tr>
-                <td colSpan={6} className="px-4 py-8 text-center text-slate-400">
+                <td colSpan={colCount} className="px-4 py-8 text-center text-slate-400">
                   No jobs match the current filters.
                 </td>
               </tr>
@@ -120,14 +162,40 @@ export const JobTable = memo(function JobTable({
                 className="border-t border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer"
                 onClick={() => onSelect(j)}
               >
-                <td className="px-4 py-2 whitespace-nowrap text-slate-700 dark:text-slate-200">
+                {showMatchColumn && (
+                  <td className={`${cell} text-right`}>
+                    {j.match_score !== null && j.match_score > 0 ? (
+                      <span
+                        className="inline-block bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800 dark:text-emerald-300 rounded px-1.5 py-0.5 text-xs font-semibold"
+                        title={
+                          j.matched_terms.length
+                            ? `Top terms: ${j.matched_terms.join(", ")}`
+                            : "BM25 score against your resume"
+                        }
+                      >
+                        {fmtScore(j.match_score)}
+                      </span>
+                    ) : (
+                      <span className="text-slate-300 dark:text-slate-600">
+                        {fmtScore(j.match_score)}
+                      </span>
+                    )}
+                  </td>
+                )}
+                <td className={`${cell} whitespace-nowrap text-slate-700 dark:text-slate-200`}>
                   {j.company_name ?? `#${j.company_id}`}
                 </td>
-                <td className="px-4 py-2 dark:text-slate-100">{j.title}</td>
-                <td className="px-4 py-2 text-slate-600 dark:text-slate-300">{j.location ?? "—"}</td>
-                <td className="px-4 py-2 text-slate-500 dark:text-slate-400">{j.remote_type ?? "—"}</td>
-                <td className="px-4 py-2 text-slate-500 dark:text-slate-400">{fmtDate(j.posted_date)}</td>
-                <td className="px-4 py-2">
+                <td className={`${cell} dark:text-slate-100`}>{j.title}</td>
+                <td className={`${cell} text-slate-600 dark:text-slate-300`}>
+                  {j.location ?? "—"}
+                </td>
+                <td className={`${cell} text-slate-500 dark:text-slate-400`}>
+                  {j.is_remote ? "Remote" : j.remote_type ?? "—"}
+                </td>
+                <td className={`${cell} text-slate-500 dark:text-slate-400`}>
+                  {fmtDate(j.posted_date)}
+                </td>
+                <td className={cell}>
                   <div className="flex flex-wrap gap-1">
                     {j.keywords_matched.map((k) => (
                       <span
@@ -137,6 +205,16 @@ export const JobTable = memo(function JobTable({
                         {k}
                       </span>
                     ))}
+                    {showMatchColumn &&
+                      j.matched_terms.slice(0, 3).map((t) => (
+                        <span
+                          key={`m-${t}`}
+                          className="inline-block bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800 dark:text-emerald-300 text-xs rounded px-1.5 py-0.5"
+                          title="matched resume term"
+                        >
+                          {t}
+                        </span>
+                      ))}
                   </div>
                 </td>
               </tr>

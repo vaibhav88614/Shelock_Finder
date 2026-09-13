@@ -186,6 +186,44 @@ def infer_selectors_cmd(
     raise typer.Exit(code=code)
 
 
+@app.command("backfill-locations")
+def backfill_locations_cmd(
+    limit: int | None = typer.Option(
+        None, "--limit", help="Backfill only the first N rows (mostly useful for tests)."
+    ),
+    dry_run: bool = typer.Option(False, "--dry-run", help="Report intended changes without writing."),
+) -> None:
+    """Re-parse every job's ``location`` into the structured columns.
+
+    Idempotent — run any time after upgrading past migration 0005.
+    """
+    from scripts.backfill_locations import run_backfill
+
+    summary = run_backfill(limit=limit, dry_run=dry_run)
+    verb = "Would update" if summary.dry_run else "Updated"
+    typer.echo(
+        f"{verb} {summary.updated} / {summary.processed} rows · "
+        f"city={summary.with_city} country={summary.with_country} remote={summary.remote}"
+    )
+
+
+@app.command("rescore-resume")
+def rescore_resume_cmd() -> None:
+    """Recompute BM25 match scores against every active job for the active resume."""
+    from backend.resume import get_active_resume_id, rescore_resume
+
+    rid = get_active_resume_id()
+    if rid is None:
+        typer.echo("No active resume — upload one via the dashboard first.", err=True)
+        raise typer.Exit(code=1)
+    summary = rescore_resume(rid)
+    typer.echo(
+        f"Rescored resume {summary.resume_id}: "
+        f"scored={summary.scored} nonzero={summary.nonzero} "
+        f"top={summary.top_score:.2f} in {summary.duration_s:.2f}s"
+    )
+
+
 @app.command("cleanup-jobs")
 def cleanup_jobs_cmd(
     days: int = typer.Option(30, "--days", help="Delete jobs whose last_seen_at is older than this many days."),

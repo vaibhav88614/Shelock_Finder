@@ -7,7 +7,11 @@ import type {
   DetectAtsResult,
   JobFilters,
   JobsListOut,
+  LocationFacetsOut,
+  RescoreResult,
+  ResumeInfo,
   ScrapeRun,
+  SparklinesOut,
   Stats,
 } from "./types";
 
@@ -78,6 +82,9 @@ function buildJobParams(filters: JobFilters, extra: Record<string, string> = {})
   for (const k of filters.keywords) if (k.trim()) p.append("keywords", k.trim());
   p.set("keyword_logic", filters.keyword_logic);
   if (filters.location.trim()) p.set("location", filters.location.trim());
+  for (const c of filters.cities) if (c) p.append("cities", c);
+  for (const c of filters.countries) if (c) p.append("countries", c);
+  for (const r of filters.regions) if (r) p.append("regions", r);
   if (filters.remote_only !== null) p.set("remote_only", String(filters.remote_only));
   if (filters.experience_min !== null) p.set("experience_min", String(filters.experience_min));
   if (filters.experience_max !== null) p.set("experience_max", String(filters.experience_max));
@@ -85,6 +92,7 @@ function buildJobParams(filters: JobFilters, extra: Record<string, string> = {})
   for (const id of filters.company_ids) p.append("company_ids", String(id));
   p.set("sort", filters.sort);
   if (filters.new_in_last_run) p.set("new_in_last_run", "true");
+  if (filters.min_match_score !== null) p.set("min_match_score", String(filters.min_match_score));
   for (const [k, v] of Object.entries(extra)) p.set(k, v);
   return p;
 }
@@ -141,6 +149,58 @@ export const fetchStats = () => getJson<Stats>(`${API}/stats`);
 export const fetchCompanies = () => getJson<Company[]>(`${API}/companies`);
 export const fetchRuns = (limit = 5) => getJson<ScrapeRun[]>(`${API}/scrape-runs?limit=${limit}`);
 export const fetchCompanyHealth = () => getJson<CompanyHealth[]>(`${API}/stats/companies`);
+export const fetchSparklines = (days = 30, runWindow = 25) =>
+  getJson<SparklinesOut>(`${API}/stats/sparklines?days=${days}&run_window=${runWindow}`);
+export const fetchLocationFacets = (limit = 15, postedWithinDays = 15) =>
+  getJson<LocationFacetsOut>(
+    `${API}/stats/facets/locations?limit=${limit}&posted_within_days=${postedWithinDays}`
+  );
+
+export async function fetchResume(): Promise<ResumeInfo | null> {
+  const r = await fetch(`${API}/resume`, { headers: { Accept: "application/json" } });
+  if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+  const body = await r.json();
+  return body ?? null;
+}
+
+export async function uploadResumeText(text: string, name = "primary"): Promise<ResumeInfo> {
+  const r = await fetch(`${API}/resume`, {
+    method: "POST",
+    headers: mutateHeaders({ "Content-Type": "application/json", Accept: "application/json" }),
+    body: JSON.stringify({ text, name }),
+  });
+  if (!r.ok) throw new Error(await readErrorMessage(r));
+  return (await r.json()) as ResumeInfo;
+}
+
+export async function uploadResumeFile(file: File): Promise<ResumeInfo> {
+  const form = new FormData();
+  form.append("file", file);
+  const r = await fetch(`${API}/resume/upload`, {
+    method: "POST",
+    headers: mutateHeaders(),
+    body: form,
+  });
+  if (!r.ok) throw new Error(await readErrorMessage(r));
+  return (await r.json()) as ResumeInfo;
+}
+
+export async function deleteResume(): Promise<void> {
+  const r = await fetch(`${API}/resume`, {
+    method: "DELETE",
+    headers: mutateHeaders(),
+  });
+  if (!r.ok) throw new Error(await readErrorMessage(r));
+}
+
+export async function rescoreResume(): Promise<RescoreResult> {
+  const r = await fetch(`${API}/resume/rescore`, {
+    method: "POST",
+    headers: mutateHeaders(),
+  });
+  if (!r.ok) throw new Error(await readErrorMessage(r));
+  return (await r.json()) as RescoreResult;
+}
 
 export async function triggerScrape(companyId: number): Promise<void> {
   const r = await fetch(`${API}/companies/${companyId}/scrape`, {

@@ -116,6 +116,10 @@ class JobOut(BaseModel):
     company_name: str | None = None
     title: str
     location: str | None = None
+    city: str | None = None
+    region: str | None = None
+    country: str | None = None
+    is_remote: bool = False
     remote_type: str | None = None
     department: str | None = None
     employment_type: str | None = None
@@ -128,6 +132,9 @@ class JobOut(BaseModel):
     last_seen_at: datetime
     is_active: bool
     keywords_matched: list[str] = Field(default_factory=list)
+    # Resume match — populated when an active resume exists.
+    match_score: float | None = None
+    matched_terms: list[str] = Field(default_factory=list)
 
 
 class JobsListOut(BaseModel):
@@ -176,6 +183,44 @@ class StatsOut(BaseModel):
     companies_total: int
     companies_active: int
     last_run: ScrapeRunOut | None = None
+
+
+class LocationFacet(BaseModel):
+    """One row in a location-facets response.
+
+    ``value`` is the canonical facet key (city name, country name, or the
+    literal string ``"__remote__"``); ``count`` is the number of ACTIVE jobs
+    that carry that facet after the *other* filters are applied. The caller
+    reuses this to build clickable filter chips.
+    """
+    value: str
+    count: int
+    label: str | None = None
+
+
+class LocationFacetsOut(BaseModel):
+    cities: list[LocationFacet] = Field(default_factory=list)
+    countries: list[LocationFacet] = Field(default_factory=list)
+    regions: list[LocationFacet] = Field(default_factory=list)
+    remote: int = 0
+    onsite: int = 0
+
+
+class SparklinePoint(BaseModel):
+    label: str  # ISO date for daily series; "#<id>" for run-based series.
+    value: int
+
+
+class SparklinesOut(BaseModel):
+    """Compact time-series arrays for the dashboard tile sparklines.
+
+    Each series is short (<=60 points) and is safe to fetch every minute —
+    it uses indexed columns and touches only a small window of rows.
+    """
+    new_jobs_per_day: list[SparklinePoint] = Field(default_factory=list)
+    active_per_day: list[SparklinePoint] = Field(default_factory=list)
+    runs_jobs_new: list[SparklinePoint] = Field(default_factory=list)
+    runs_jobs_found: list[SparklinePoint] = Field(default_factory=list)
 
 
 # ---------------------------------------------------------------------------

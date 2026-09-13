@@ -19,6 +19,7 @@ from datetime import datetime, timezone
 from sqlalchemy import (
     Boolean,
     DateTime,
+    Float,
     ForeignKey,
     Index,
     Integer,
@@ -93,6 +94,14 @@ class Job(Base):
     title: Mapped[str] = mapped_column(String(512), nullable=False)
     description: Mapped[str | None] = mapped_column(Text, nullable=True)
     location: Mapped[str | None] = mapped_column(String(512), nullable=True)
+    # Structured location — populated at scrape time by
+    # `backend.location.parse_location()`. The raw `location` string stays as
+    # the canonical human-readable value (CSV export, drawer); these columns
+    # let the API build facet counts and structured filters.
+    city: Mapped[str | None] = mapped_column(String(128), nullable=True)
+    region: Mapped[str | None] = mapped_column(String(128), nullable=True)
+    country: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    is_remote: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     remote_type: Mapped[str | None] = mapped_column(String(64), nullable=True)
     department: Mapped[str | None] = mapped_column(String(255), nullable=True)
     employment_type: Mapped[str | None] = mapped_column(String(64), nullable=True)
@@ -115,6 +124,9 @@ class Job(Base):
         Index("ix_jobs_company_posted", "company_id", "posted_date"),
         Index("ix_jobs_first_seen_at", "first_seen_at"),
         Index("ix_jobs_is_active", "is_active"),
+        Index("ix_jobs_city", "city"),
+        Index("ix_jobs_country", "country"),
+        Index("ix_jobs_is_remote", "is_remote"),
     )
 
 
@@ -156,4 +168,61 @@ class ScrapeRunCompany(Base):
 
     __table_args__ = (
         Index("ix_src_run_company", "scrape_run_id", "company_id"),
+    )
+
+
+class Resume(Base):
+    """Uploaded resume. Modeled as a table for future multi-profile support;
+    the current UI only surfaces the row where ``is_active`` is True.
+    """
+
+    __tablename__ = "resumes"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    name: Mapped[str] = mapped_column(String(255), nullable=False)
+    filename: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    # Plain-text extract (PDFs get run through the built-in extractor). Kept
+    # verbatim so operators can spot-check what actually got tokenised.
+    text: Mapped[str] = mapped_column(Text, nullable=False)
+    # JSON-encoded bag-of-words: ``{"term": tf, ...}``. Serialised so the
+    # scorer never re-tokenises the resume on the hot path.
+    tokens: Mapped[str] = mapped_column(Text, nullable=False, default="[]")
+    is_active: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
+    uploaded_at: Mapped[datetime] = mapped_column(DateTime, nullable=False, default=_utcnow)
+    scored_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+
+    matches: Mapped[list["JobMatch"]] = relationship(
+        back_populates="resume", cascade="all, delete-orphan", passive_deletes=True
+    )
+
+    __table_args__ = (Index("ix_resumes_is_active", "is_active"),)
+
+
+class JobMatch(Base):
+    """Cached BM25 score of one (job, resume) pair.
+
+    Populated on resume upload (full rescore) and after each scrape run
+    (delta rescore of just the newly added jobs). ``sort=match`` on the
+    /jobs endpoint outer-joins this table and orders by ``score DESC``.
+    """
+
+    __tablename__ = "job_matches"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    resume_id: Mapped[int] = mapped_column(
+        ForeignKey("resumes.id", ondelete="CASCADE"), nullable=False
+    )
+    job_id: Mapped[int] = mapped_column(
+        ForeignKey("jobs.id", ondelete="CASCADE"), nullable=False
+    )
+    score: Mapped[float] = mapped_column(Float, nullable=False, default=0.0)
+    matched_terms: Mapped[str | None] = mapped_column(String(512), nullable=True)
+    computed_at: Mapped[datetime] = mapped_column(DateTime, nullable=False, default=_utcnow)
+
+    resume: Mapped[Resume] = relationship(back_populates="matches")
+
+    __table_args__ = (
+        UniqueConstraint("resume_id", "job_id", name="uq_job_matches_resume_job"),
+        Index("ix_job_matches_resume_score", "resume_id", "score"),
+        Index("ix_job_matches_job", "job_id"),
     )

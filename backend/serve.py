@@ -14,7 +14,13 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-from .api import companies_router, jobs_router, scrape_runs_router, stats_router
+from .api import (
+    companies_router,
+    jobs_router,
+    resume_router,
+    scrape_runs_router,
+    stats_router,
+)
 from .config import settings
 from .migrations import upgrade_to_head
 
@@ -50,6 +56,7 @@ def create_app() -> FastAPI:
     app.include_router(companies_router, prefix=api_prefix)
     app.include_router(scrape_runs_router, prefix=api_prefix)
     app.include_router(stats_router, prefix=api_prefix)
+    app.include_router(resume_router, prefix=api_prefix)
 
     if settings.frontend_dist.exists():
         app.mount("/", StaticFiles(directory=str(settings.frontend_dist), html=True), name="frontend")

@@ -12,7 +12,8 @@ from sqlalchemy import delete, func, select
 from sqlalchemy.orm import Session
 
 from ..db import get_session
-from ..models import Company, Job, utcnow_naive
+from ..models import Company, Job, JobMatch, utcnow_naive
+from ..resume import get_active_resume_id
 from .deps import require_api_key
 from .filters import (
     JobFilters,
@@ -36,10 +37,15 @@ def _filters_from_query(
     experience_max: int | None,
     posted_within_days: int,
     location: str | None,
+    cities: list[str] | None,
+    countries: list[str] | None,
+    regions: list[str] | None,
     remote_only: bool | None,
     sort: str,
     new_since: datetime | None,
     new_in_last_run: bool,
+    resume_id: int | None = None,
+    min_match_score: float | None = None,
 ) -> JobFilters:
     return JobFilters(
         company_ids=company_ids or None,
@@ -49,20 +55,34 @@ def _filters_from_query(
         experience_max=experience_max,
         posted_within_days=posted_within_days,
         location=location,
+        cities=cities or None,
+        countries=countries or None,
+        regions=regions or None,
         remote_only=remote_only,
         sort=sort,
         new_since=new_since,
         new_in_last_run=new_in_last_run,
+        resume_id=resume_id,
+        min_match_score=min_match_score,
     )
 
 
-def _to_job_out(job: Job, company_name: str, keywords: list[str] | None) -> JobOut:
+def _to_job_out(
+    job: Job,
+    company_name: str,
+    keywords: list[str] | None,
+    match: JobMatch | None = None,
+) -> JobOut:
     return JobOut(
         id=job.id,
         company_id=job.company_id,
         company_name=company_name,
         title=job.title,
         location=job.location,
+        city=job.city,
+        region=job.region,
+        country=job.country,
+        is_remote=job.is_remote,
         remote_type=job.remote_type,
         department=job.department,
         employment_type=job.employment_type,
@@ -75,6 +95,12 @@ def _to_job_out(job: Job, company_name: str, keywords: list[str] | None) -> JobO
         last_seen_at=job.last_seen_at,
         is_active=job.is_active,
         keywords_matched=matched_keywords(job, keywords),
+        match_score=(match.score if match is not None else None),
+        matched_terms=(
+            [t for t in (match.matched_terms or "").split(",") if t]
+            if match is not None
+            else []
+        ),
     )
 
 
@@ -87,16 +113,29 @@ def list_jobs(
     experience_max: int | None = Query(default=None, ge=0, le=30),
     posted_within_days: int = Query(default=15, ge=1, le=POSTED_WITHIN_DAYS_MAX),
     location: str | None = Query(default=None, max_length=200),
+    cities: list[str] | None = Query(default=None),
+    countries: list[str] | None = Query(default=None),
+    regions: list[str] | None = Query(default=None),
     remote_only: bool | None = Query(default=None),
-    sort: str = Query(default="posted_date", pattern="^(posted_date|company|title|first_seen)$"),
+    sort: str = Query(
+        default="posted_date",
+        pattern="^(posted_date|company|title|first_seen|match)$",
+    ),
     cursor: str | None = Query(default=None, max_length=500),
     offset: int | None = Query(default=None, ge=0, le=1_000_000),
     limit: int = Query(default=50, ge=1, le=200),
     new_since: datetime | None = Query(default=None),
     new_in_last_run: bool = Query(default=False),
     include_total: bool = Query(default=False),
+    min_match_score: float | None = Query(default=None, ge=0),
     s: Session = Depends(get_session),
 ) -> JobsListOut:
+    # sort=match needs the active resume so build_jobs_query can outer-join
+    # job_matches. Resolved once here so downstream doesn't hit the DB again.
+    resume_id: int | None = None
+    if sort == "match":
+        resume_id = get_active_resume_id()
+
     filters = _filters_from_query(
         company_ids=company_ids,
         keywords=keywords,
@@ -105,10 +144,15 @@ def list_jobs(
         experience_max=experience_max,
         posted_within_days=posted_within_days,
         location=location,
+        cities=cities,
+        countries=countries,
+        regions=regions,
         remote_only=remote_only,
         sort=sort,
         new_since=new_since,
         new_in_last_run=new_in_last_run,
+        resume_id=resume_id,
+        min_match_score=min_match_score,
     )
     # Numbered pagination (offset) and keyset pagination (cursor) are mutually
     # exclusive. Offset lets the UI jump to any page directly; cursor is kept
@@ -127,7 +171,28 @@ def list_jobs(
         # Pull limit+1 to know if there's another page.
         rows = s.execute(stmt.limit(limit + 1)).all()
     page = rows[:limit]
-    items = [_to_job_out(job, company_name, keywords) for (job, company_name) in page]
+
+    # Look up match rows in one shot so every job on the page carries its
+    # score without a per-row query. Only needed when a resume exists.
+    match_by_job: dict[int, JobMatch] = {}
+    if resume_id is None:
+        resume_id = get_active_resume_id()
+    if resume_id is not None and page:
+        page_ids = [job.id for (job, _) in page]
+        match_by_job = {
+            m.job_id: m
+            for m in s.scalars(
+                select(JobMatch).where(
+                    JobMatch.resume_id == resume_id,
+                    JobMatch.job_id.in_(page_ids),
+                )
+            )
+        }
+
+    items = [
+        _to_job_out(job, company_name, keywords, match_by_job.get(job.id))
+        for (job, company_name) in page
+    ]
 
     next_cursor = None
     if offset is None and len(rows) > limit:
@@ -163,10 +228,15 @@ def list_jobs(
             experience_max=experience_max,
             posted_within_days=posted_within_days,
             location=location,
+            cities=cities,
+            countries=countries,
+            regions=regions,
             remote_only=remote_only,
             sort=sort,
             new_since=new_since,
             new_in_last_run=new_in_last_run,
+            resume_id=resume_id,
+            min_match_score=min_match_score,
         )
         base = build_jobs_query(count_filters, cursor=None).order_by(None)
         total = s.scalar(select(func.count()).select_from(base.subquery())) or 0
@@ -183,6 +253,9 @@ def export_jobs_csv(
     experience_max: int | None = Query(default=None, ge=0, le=30),
     posted_within_days: int = Query(default=15, ge=1, le=POSTED_WITHIN_DAYS_MAX),
     location: str | None = Query(default=None, max_length=200),
+    cities: list[str] | None = Query(default=None),
+    countries: list[str] | None = Query(default=None),
+    regions: list[str] | None = Query(default=None),
     remote_only: bool | None = Query(default=None),
     sort: str = Query(default="posted_date", pattern="^(posted_date|company|title|first_seen)$"),
     new_since: datetime | None = Query(default=None),
@@ -197,6 +270,9 @@ def export_jobs_csv(
         experience_max=experience_max,
         posted_within_days=posted_within_days,
         location=location,
+        cities=cities,
+        countries=countries,
+        regions=regions,
         remote_only=remote_only,
         sort=sort,
         new_since=new_since,

@@ -20,6 +20,9 @@ loguru==0.7.2
 python-dateutil==2.9.0.post0
 typer==0.13.1
 rich==13.9.4
+# PDF text extraction for resume uploads. Pure-python (no native deps) so it
+# works on the same runtime as the rest of the backend without a compile step.
+pypdf==5.1.0
 
 # Tests
 pytest==8.3.3

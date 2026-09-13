@@ -7,6 +7,10 @@ export interface Job {
   company_name: string | null;
   title: string;
   location: string | null;
+  city: string | null;
+  region: string | null;
+  country: string | null;
+  is_remote: boolean;
   remote_type: string | null;
   department: string | null;
   employment_type: string | null;
@@ -19,6 +23,8 @@ export interface Job {
   last_seen_at: string;
   is_active: boolean;
   keywords_matched: string[];
+  match_score: number | null;
+  matched_terms: string[];
 }
 
 export interface JobsListOut {
@@ -100,13 +106,21 @@ export interface CleanupJobsResult {
   dry_run: boolean;
 }
 
-export type SortOption = "posted_date" | "company" | "title" | "first_seen";
+export type SortOption =
+  | "posted_date"
+  | "company"
+  | "title"
+  | "first_seen"
+  | "match";
 export type KeywordLogic = "and" | "or";
 
 export interface JobFilters {
   keywords: string[];
   keyword_logic: KeywordLogic;
   location: string;
+  cities: string[];
+  countries: string[];
+  regions: string[];
   remote_only: boolean | null;
   experience_min: number | null;
   experience_max: number | null;
@@ -114,12 +128,16 @@ export interface JobFilters {
   company_ids: number[];
   sort: SortOption;
   new_in_last_run: boolean;
+  min_match_score: number | null;
 }
 
 export const defaultFilters = (): JobFilters => ({
   keywords: [],
   keyword_logic: "or",
   location: "",
+  cities: [],
+  countries: [],
+  regions: [],
   remote_only: null,
   experience_min: null,
   experience_max: null,
@@ -127,4 +145,51 @@ export const defaultFilters = (): JobFilters => ({
   company_ids: [],
   sort: "posted_date",
   new_in_last_run: false,
+  min_match_score: null,
 });
+
+export interface LocationFacet {
+  value: string;
+  count: number;
+  label: string | null;
+}
+
+export interface LocationFacetsOut {
+  cities: LocationFacet[];
+  countries: LocationFacet[];
+  regions: LocationFacet[];
+  remote: number;
+  onsite: number;
+}
+
+export interface SparklinePoint {
+  label: string;
+  value: number;
+}
+
+export interface SparklinesOut {
+  new_jobs_per_day: SparklinePoint[];
+  active_per_day: SparklinePoint[];
+  runs_jobs_new: SparklinePoint[];
+  runs_jobs_found: SparklinePoint[];
+}
+
+export interface ResumeInfo {
+  id: number;
+  name: string;
+  filename: string | null;
+  uploaded_at: string;
+  scored_at: string | null;
+  text_length: number;
+  bag_size: number;
+  matches_total: number;
+  matches_nonzero: number;
+}
+
+export interface RescoreResult {
+  resume_id: number;
+  scored: number;
+  nonzero: number;
+  top_score: number;
+  duration_s: number;
+}

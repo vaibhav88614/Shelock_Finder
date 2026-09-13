@@ -47,11 +47,21 @@ class JobFilters:
     experience_max: int | None = None
     posted_within_days: int = 15  # clamped to POSTED_WITHIN_DAYS_MAX in build_jobs_query
     location: str | None = None
+    # Structured location facets (Phase 8). Optional — free-text `location`
+    # keeps working. Each is an OR-list; combining across facets is AND.
+    cities: list[str] | None = None
+    countries: list[str] | None = None
+    regions: list[str] | None = None
     remote_only: bool | None = None
-    sort: str = "posted_date"  # "posted_date" | "company" | "title" | "first_seen"
+    sort: str = "posted_date"  # "posted_date" | "company" | "title" | "first_seen" | "match"
     new_since: datetime | None = None
     new_in_last_run: bool = False
     active_only: bool = True
+    # Resume-match scoring (Phase 9). Set by /jobs endpoints when a resume
+    # is uploaded so `sort=match` joins/orders correctly and rows carry a
+    # `match_score`. `min_match_score` gates rows to the top of the funnel.
+    resume_id: int | None = None
+    min_match_score: float | None = None
 
 
 # ---------------------------------------------------------------------------
@@ -161,8 +171,30 @@ def build_jobs_query(filters: JobFilters, cursor: str | None = None) -> Select:
         loc_pat = f"%{filters.location.strip().lower()}%"
         stmt = stmt.where(func.lower(Job.location).like(loc_pat))
 
+    if filters.cities:
+        # Case-insensitive IN — sqlite's default is case-sensitive on TEXT
+        # comparisons, and city names arrive with mixed capitalisation.
+        lowered = [c.lower() for c in filters.cities if c]
+        if lowered:
+            stmt = stmt.where(func.lower(Job.city).in_(lowered))
+
+    if filters.countries:
+        lowered = [c.lower() for c in filters.countries if c]
+        if lowered:
+            stmt = stmt.where(func.lower(Job.country).in_(lowered))
+
+    if filters.regions:
+        lowered = [r.lower() for r in filters.regions if r]
+        if lowered:
+            stmt = stmt.where(func.lower(Job.region).in_(lowered))
+
     if filters.remote_only:
-        stmt = stmt.where(Job.remote_type == "remote")
+        # Two signals here — the boolean flag populated by the location
+        # parser (post-0005) and the legacy string ``remote_type`` field
+        # some adapters set directly. Accept either so pre-backfill rows
+        # (and adapter output where the parser hasn't seen the location
+        # string yet) still respect the filter.
+        stmt = stmt.where(or_(Job.is_remote.is_(True), Job.remote_type == "remote"))
 
     # ---- Keyword matching (FTS5 + LIKE hybrid) ----------------------------
     if filters.keywords:
@@ -209,9 +241,34 @@ def build_jobs_query(filters: JobFilters, cursor: str | None = None) -> Select:
         stmt = stmt.where(Job.first_seen_at >= last_started)
 
     # ---- Sort + cursor ----------------------------------------------------
-    sort = filters.sort if filters.sort in {"posted_date", "company", "title", "first_seen"} else "posted_date"
+    sort = filters.sort if filters.sort in {"posted_date", "company", "title", "first_seen", "match"} else "posted_date"
 
-    if sort == "posted_date":
+    # Resume-match sort — outer-join `job_matches` so unscored jobs appear
+    # with a NULL score at the bottom. Requires an active `resume_id` to be
+    # semantically meaningful; unset falls through to posted_date.
+    if sort == "match":
+        # Local import: keep the ORM cycle out of the module import order
+        # (models imports filters via schemas would be a cycle otherwise).
+        from ..models import JobMatch
+
+        if filters.resume_id is not None:
+            stmt = stmt.outerjoin(
+                JobMatch,
+                and_(
+                    JobMatch.job_id == Job.id,
+                    JobMatch.resume_id == filters.resume_id,
+                ),
+            )
+            if filters.min_match_score is not None:
+                stmt = stmt.where(JobMatch.score >= filters.min_match_score)
+            sort_col = JobMatch.score
+            order = [JobMatch.score.desc().nullslast(), Job.id.desc()]
+        else:
+            # Silently degrade — no resume, no scores. Falls back to newest.
+            sort = "posted_date"
+            sort_col = Job.posted_date
+            order = [Job.posted_date.desc().nullslast(), Job.id.desc()]
+    elif sort == "posted_date":
         sort_col = Job.posted_date
         order = [Job.posted_date.desc().nullslast(), Job.id.desc()]
     elif sort == "first_seen":

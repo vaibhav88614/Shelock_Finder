@@ -5,27 +5,44 @@ import { AdminPage } from "./components/AdminPage";
 import { Filters } from "./components/Filters";
 import { JobDrawer } from "./components/JobDrawer";
 import { JobTable } from "./components/JobTable";
+import { ResumePanel } from "./components/ResumePanel";
 import { StatsBar } from "./components/StatsBar";
 import {
   downloadJobsCsv,
   fetchJobsPage,
+  fetchResume,
   fetchRuns,
+  fetchSparklines,
   fetchStats,
 } from "./api";
 import { applyTheme, getEffectiveTheme, saveTheme, type Theme } from "./theme";
-import { defaultFilters, type Job, type JobFilters } from "./types";
+import { type Job, type JobFilters } from "./types";
+import {
+  readUrlState,
+  writeUrlState,
+  type Density,
+  type View,
+} from "./urlState";
 
-type View = "jobs" | "admin";
-
-const DEFAULT_PAGE_SIZE = 50;
+// Auto-refresh cadence for the stats + runs queries. Only fires while the
+// tab is visible (document.hidden === false); TanStack Query already
+// respects `refetchInterval` + `refetchIntervalInBackground: false` (default),
+// so the browser leaves the API alone in a background tab.
+const REFRESH_INTERVAL_MS = 60_000;
 
 export default function App() {
-  const [view, setView] = useState<View>("jobs");
-  const [filters, setFilters] = useState<JobFilters>(defaultFilters());
+  // Hydrate every piece of state from the URL query string on first mount so
+  // deep-linked / bookmarked views land exactly where the user left off.
+  const bootstrapped = useMemo(() => readUrlState(), []);
+
+  const [view, setView] = useState<View>(bootstrapped.view);
+  const [filters, setFilters] = useState<JobFilters>(bootstrapped.filters);
   const [selected, setSelected] = useState<Job | null>(null);
   const [addOpen, setAddOpen] = useState(false);
-  const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
+  const [resumeOpen, setResumeOpen] = useState(false);
+  const [page, setPage] = useState(bootstrapped.page);
+  const [pageSize, setPageSize] = useState(bootstrapped.pageSize);
+  const [density, setDensity] = useState<Density>(bootstrapped.density);
 
   const [theme, setTheme] = useState<Theme>(() => getEffectiveTheme());
   useEffect(() => {
@@ -33,12 +50,43 @@ export default function App() {
     saveTheme(theme);
   }, [theme]);
 
-  const stats = useQuery({ queryKey: ["stats"], queryFn: fetchStats });
-  const runs = useQuery({ queryKey: ["runs"], queryFn: () => fetchRuns(5) });
+  // Persist every piece of state we serialise back into the URL, so
+  // navigating within the app never desyncs the address bar.
+  useEffect(() => {
+    writeUrlState({ view, filters, page, pageSize, density });
+  }, [view, filters, page, pageSize, density]);
 
-  // Reset to page 1 whenever the filter set changes so users don't land on a
-  // page number that no longer exists after tightening filters (e.g. jumping
-  // from p10 → 5 total pages).
+  const stats = useQuery({
+    queryKey: ["stats"],
+    queryFn: fetchStats,
+    refetchInterval: REFRESH_INTERVAL_MS,
+  });
+  const runs = useQuery({
+    queryKey: ["runs"],
+    queryFn: () => fetchRuns(5),
+    refetchInterval: REFRESH_INTERVAL_MS,
+  });
+  const sparklines = useQuery({
+    queryKey: ["sparklines"],
+    queryFn: () => fetchSparklines(30, 25),
+    refetchInterval: REFRESH_INTERVAL_MS,
+    staleTime: 30_000,
+  });
+  const resume = useQuery({
+    queryKey: ["resume"],
+    queryFn: fetchResume,
+    staleTime: 30_000,
+  });
+
+  // If a resume is present, offer "match" sorting; if it's later removed,
+  // fall the current sort back to posted_date so the query doesn't ask the
+  // backend for match rows that don't exist.
+  useEffect(() => {
+    if (!resume.data && filters.sort === "match") {
+      setFilters((f) => ({ ...f, sort: "posted_date" }));
+    }
+  }, [resume.data, filters.sort]);
+
   useEffect(() => {
     setPage(1);
   }, [filters]);
@@ -51,6 +99,9 @@ export default function App() {
       filters.keywords.join(","),
       filters.keyword_logic,
       filters.location,
+      filters.cities.join(","),
+      filters.countries.join(","),
+      filters.regions.join(","),
       filters.remote_only,
       filters.experience_min,
       filters.experience_max,
@@ -58,26 +109,22 @@ export default function App() {
       filters.sort,
       filters.new_in_last_run,
       filters.company_ids.join(","),
+      filters.min_match_score,
     ],
     queryFn: () =>
       fetchJobsPage(filters, (page - 1) * pageSize, pageSize, true),
     enabled: view === "jobs",
-    // Keep previous page visible while the next one loads so the layout
-    // doesn't jump around.
     placeholderData: (prev) => prev,
   });
 
   const flatJobs: Job[] = jobs.data?.items ?? [];
   const total = jobs.data?.total ?? null;
 
-  const csvExport = useMutation({
-    mutationFn: () => downloadJobsCsv(filters),
-  });
-  const handleExport = useCallback(() => {
-    csvExport.mutate();
-  }, [csvExport]);
+  const csvExport = useMutation({ mutationFn: () => downloadJobsCsv(filters) });
+  const handleExport = useCallback(() => csvExport.mutate(), [csvExport]);
   const handleAddClose = useCallback(() => setAddOpen(false), []);
   const handleDrawerClose = useCallback(() => setSelected(null), []);
+  const handleResumeClose = useCallback(() => setResumeOpen(false), []);
 
   const handlePageChange = useCallback(
     (p: number) => {
@@ -91,18 +138,30 @@ export default function App() {
     setPage(1);
   }, []);
 
+  const handleFiltersChange = useCallback((next: JobFilters) => {
+    setFilters(next);
+  }, []);
+
   const toggleTheme = useCallback(() => {
     setTheme((t) => (t === "dark" ? "light" : "dark"));
   }, []);
 
   const themeIcon = useMemo(() => (theme === "dark" ? "☀︎" : "☾"), [theme]);
+  const hasResume = Boolean(resume.data);
+  const resumeButtonLabel = hasResume
+    ? resume.data?.scored_at
+      ? `Resume · ${resume.data.matches_nonzero.toLocaleString()} matches`
+      : "Resume · scoring…"
+    : "Add resume";
 
   return (
     <div className="min-h-full">
       <header className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100">JobPulse</h1>
+            <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100">
+              JobPulse
+            </h1>
             <p className="text-xs text-slate-500 dark:text-slate-400">
               Local job aggregator · 100% offline · no Docker
             </p>
@@ -132,6 +191,22 @@ export default function App() {
                 Admin
               </button>
             </nav>
+            <button
+              type="button"
+              onClick={() => setResumeOpen(true)}
+              className={`text-xs rounded px-3 py-1.5 border transition-colors ${
+                hasResume
+                  ? "border-emerald-300 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/40 hover:bg-emerald-100 dark:hover:bg-emerald-900/40"
+                  : "border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800"
+              }`}
+              title={
+                hasResume
+                  ? "Manage your resume + match scores"
+                  : "Upload a resume to score jobs by match"
+              }
+            >
+              {resumeButtonLabel}
+            </button>
             <button
               type="button"
               onClick={toggleTheme}
@@ -166,9 +241,18 @@ export default function App() {
       <main className="max-w-7xl mx-auto px-4 py-5 space-y-5">
         {view === "jobs" ? (
           <>
-            <StatsBar stats={stats.data} runs={runs.data} />
+            <StatsBar
+              stats={stats.data}
+              runs={runs.data}
+              sparklines={sparklines.data}
+            />
 
-            <Filters value={filters} onChange={setFilters} onExport={handleExport} />
+            <Filters
+              value={filters}
+              onChange={handleFiltersChange}
+              onExport={handleExport}
+              hasResume={hasResume}
+            />
 
             {jobs.isError && (
               <div className="bg-red-50 border border-red-200 text-red-800 rounded p-3 text-sm dark:bg-red-950/40 dark:border-red-900 dark:text-red-300">
@@ -193,6 +277,9 @@ export default function App() {
               pageSize={pageSize}
               onPageChange={handlePageChange}
               onPageSizeChange={handlePageSizeChange}
+              density={density}
+              onDensityChange={setDensity}
+              showMatchColumn={hasResume}
             />
           </>
         ) : (
@@ -202,6 +289,7 @@ export default function App() {
 
       <JobDrawer job={selected} onClose={handleDrawerClose} />
       {addOpen && <AddCompanyModal onClose={handleAddClose} />}
+      {resumeOpen && <ResumePanel onClose={handleResumeClose} />}
     </div>
   );
 }

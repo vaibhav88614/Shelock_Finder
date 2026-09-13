@@ -70,17 +70,45 @@ export function JobDrawer({ job, onClose }: Props) {
 
           {job.keywords_matched.length > 0 && (
             <div>
-              <div className="text-slate-500 text-xs uppercase mb-1">Matched</div>
+              <div className="text-slate-500 dark:text-slate-400 text-xs uppercase mb-1">Matched keywords</div>
               <div className="flex flex-wrap gap-1">
                 {job.keywords_matched.map((k) => (
                   <span
                     key={k}
-                    className="inline-block bg-amber-100 text-amber-800 text-xs rounded px-1.5 py-0.5"
+                    className="inline-block bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-300 text-xs rounded px-1.5 py-0.5"
                   >
                     {k}
                   </span>
                 ))}
               </div>
+            </div>
+          )}
+
+          {job.match_score !== null && (
+            <div className="rounded border border-emerald-200 dark:border-emerald-900/50 bg-emerald-50 dark:bg-emerald-950/40 px-3 py-2">
+              <div className="text-emerald-800 dark:text-emerald-200 text-xs uppercase mb-1 flex items-center justify-between">
+                <span>Resume match</span>
+                <span className="font-semibold">
+                  Score {job.match_score.toFixed(1)}
+                </span>
+              </div>
+              {job.matched_terms.length > 0 ? (
+                <div className="flex flex-wrap gap-1">
+                  {job.matched_terms.map((t) => (
+                    <span
+                      key={t}
+                      className="inline-block bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-200 text-xs rounded px-1.5 py-0.5"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-xs text-emerald-800 dark:text-emerald-300">
+                  Low overlap with your resume — the score reflects generic
+                  vocabulary rather than distinct skills.
+                </div>
+              )}
             </div>
           )}
 

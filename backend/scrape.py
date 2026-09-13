@@ -50,6 +50,7 @@ from .adapters import ADAPTERS, AdapterError, NormalizedJob, get_adapter_cls
 from .adapters.base import BaseAdapter, fingerprint
 from .config import settings
 from .db import SessionLocal, engine, session_scope
+from .location import parse_location
 from .migrations import upgrade_to_head
 from .models import Company, Job, ScrapeRun, ScrapeRunCompany, utcnow_naive
 from .rate_limit import RateLimiterGroup
@@ -495,6 +496,17 @@ def _persist_company(
             existing = {j.fingerprint: j for j in existing_rows}
 
             for fp, nj in chunk:
+                # Structured location — feeds facet endpoint / structured
+                # filters. Uses the (now country-appended) `nj.location` and
+                # the company's country hint as a fallback signal.
+                parsed = parse_location(nj.location, company_country)
+                # Adapter-declared remote_type overrides the parser's boolean
+                # detection when it explicitly says "remote"; parser's flag
+                # covers ATSes that only encode remote in the location text.
+                is_remote = (
+                    (nj.remote_type or "").lower() == "remote"
+                    or parsed.is_remote
+                )
                 row = existing.get(fp)
                 if row is None:
                     s.add(
@@ -505,6 +517,10 @@ def _persist_company(
                             title=nj.title,
                             description=nj.description,
                             location=nj.location,
+                            city=parsed.city,
+                            region=parsed.region,
+                            country=parsed.country,
+                            is_remote=is_remote,
                             remote_type=nj.remote_type,
                             department=nj.department,
                             employment_type=nj.employment_type,
@@ -528,6 +544,10 @@ def _persist_company(
                     row.title = nj.title
                     row.description = nj.description
                     row.location = nj.location
+                    row.city = parsed.city
+                    row.region = parsed.region
+                    row.country = parsed.country
+                    row.is_remote = is_remote
                     row.remote_type = nj.remote_type
                     row.department = nj.department
                     row.employment_type = nj.employment_type
@@ -631,6 +651,36 @@ def _finalize_run(
             conn.exec_driver_sql("PRAGMA optimize")
     except Exception:  # noqa: BLE001 — ops housekeeping, never abort a run
         logger.exception("WAL checkpoint/optimize after _finalize_run failed (non-fatal)")
+
+    # Delta rescore — if a resume is active, keep its cached match scores in
+    # sync with the jobs added by this run. Only the delta gets scored, so
+    # this stays cheap even on 500-new-job runs.
+    try:
+        _delta_rescore_after_run(run_id, started_at)
+    except Exception:  # noqa: BLE001 — never let match scoring abort a run
+        logger.exception("delta rescore after run_id={} failed (non-fatal)", run_id)
+
+
+def _delta_rescore_after_run(run_id: int, started_at: datetime) -> None:
+    """Rescore just the jobs first-seen inside this run against the active resume."""
+    from .resume import get_active_resume_id, rescore_resume
+
+    resume_id = get_active_resume_id()
+    if resume_id is None:
+        return
+    with session_scope() as s:
+        new_ids = [
+            row[0]
+            for row in s.execute(
+                select(Job.id).where(Job.first_seen_at == started_at)
+            ).all()
+        ]
+    if not new_ids:
+        return
+    logger.info(
+        "post-scrape rescore: resume={} new_jobs={}", resume_id, len(new_ids)
+    )
+    rescore_resume(resume_id, only_job_ids=new_ids)
 
 
 CSV_COLUMNS = [
