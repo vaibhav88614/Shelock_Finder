@@ -22,7 +22,7 @@ from dateutil import parser as dateparser
 from loguru import logger
 
 from ._experience import parse_experience
-from ._text import detect_remote_type, strip_html
+from ._text import as_text, detect_remote_type, strip_html
 from .base import AdapterError, BaseAdapter, NormalizedJob, RawJob
 
 
@@ -88,16 +88,16 @@ class PersonioAdapter(BaseAdapter):
     def normalize(self, raw: RawJob, company) -> NormalizedJob:  # noqa: ANN001
         external_id = raw.get("id") or None
         external_id = str(external_id) if external_id else None
-        title = (raw.get("name") or "").strip()
+        title = as_text(raw.get("name"))
         sub = (company.ats_identifier or "").strip()
-        apply_url = (
+        apply_url = as_text(
             raw.get("url")
             or (f"https://{sub}.jobs.personio.de/job/{external_id}" if external_id else "")
-        ).strip()
+        )
 
-        location = (raw.get("office") or "").strip() or None
-        department = (raw.get("department") or raw.get("recruitingCategory") or "").strip() or None
-        employment_type = (raw.get("employmentType") or raw.get("schedule") or "").strip() or None
+        location = as_text(raw.get("office")) or None
+        department = as_text(raw.get("department") or raw.get("recruitingCategory")) or None
+        employment_type = as_text(raw.get("employmentType") or raw.get("schedule")) or None
 
         description = strip_html(raw.get("jobDescriptions"))
         keywords = raw.get("keywords")

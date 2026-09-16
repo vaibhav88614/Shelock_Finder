@@ -19,7 +19,7 @@ from dateutil import parser as dateparser
 from loguru import logger
 
 from ._experience import parse_experience
-from ._text import detect_remote_type, strip_html
+from ._text import as_text, detect_remote_type, strip_html
 from .base import AdapterError, BaseAdapter, NormalizedJob, RawJob
 
 
@@ -54,7 +54,7 @@ class RecruiteeAdapter(BaseAdapter):
     def normalize(self, raw: RawJob, company) -> NormalizedJob:  # noqa: ANN001
         external_id = raw.get("id")
         external_id = str(external_id) if external_id is not None else None
-        title = (raw.get("title") or "").strip()
+        title = as_text(raw.get("title"))
         apply_url = (
             raw.get("careers_apply_url")
             or raw.get("careers_url")
@@ -65,10 +65,10 @@ class RecruiteeAdapter(BaseAdapter):
         loc_parts = [raw.get("city"), raw.get("country")]
         location = ", ".join(p for p in loc_parts if isinstance(p, str) and p) or None
         if not location:
-            location = (raw.get("location") or "").strip() or None
+            location = as_text(raw.get("location")) or None
 
-        department = (raw.get("department") or "").strip() or None
-        employment_type = (raw.get("employment_type_code") or raw.get("category_code") or "").strip() or None
+        department = as_text(raw.get("department")) or None
+        employment_type = as_text(raw.get("employment_type_code") or raw.get("category_code")) or None
 
         desc_html = "\n\n".join(
             v for v in (raw.get("description"), raw.get("requirements")) if isinstance(v, str)

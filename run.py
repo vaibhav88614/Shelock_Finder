@@ -283,6 +283,30 @@ def prune_failing_cmd(
     typer.echo(format_report(summary))
 
 
+@app.command("remove-companies")
+def remove_companies_cmd(
+    names: list[str] = typer.Argument(
+        None, help="Company names to remove (default: the req.txt removal list)."
+    ),
+    dry_run: bool = typer.Option(False, "--dry-run", help="Report what would be removed; don't modify anything."),
+    no_seed_sync: bool = typer.Option(
+        False, "--no-seed-sync", help="Keep matching entries inside seeds/companies.json."
+    ),
+    yes: bool = typer.Option(False, "--yes", help="Skip the interactive confirmation prompt."),
+) -> None:
+    """Hard-delete companies by name. Cascades to their jobs and run history."""
+    from scripts.remove_companies import format_report, run_remove
+
+    if not dry_run and not yes:
+        typer.confirm(
+            "Hard-delete the named companies? This cascades to their jobs and run history.",
+            abort=True,
+        )
+
+    summary = run_remove(names or None, dry_run=dry_run, seed_sync=not no_seed_sync)
+    typer.echo(format_report(summary))
+
+
 @app.command()
 def reset(
     yes: bool = typer.Option(False, "--yes", help="Confirm destructive reset."),

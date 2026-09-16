@@ -19,7 +19,7 @@ from dateutil import parser as dateparser
 from loguru import logger
 
 from ._experience import parse_experience
-from ._text import detect_remote_type, strip_html
+from ._text import as_text, detect_remote_type, strip_html
 from .base import AdapterError, BaseAdapter, NormalizedJob, RawJob
 
 
@@ -57,10 +57,10 @@ class AshbyAdapter(BaseAdapter):
     def normalize(self, raw: RawJob, company) -> NormalizedJob:  # noqa: ANN001
         external_id = raw.get("id")
         external_id = str(external_id) if external_id is not None else None
-        title = (raw.get("title") or "").strip()
-        apply_url = (raw.get("jobUrl") or raw.get("applyUrl") or "").strip()
+        title = as_text(raw.get("title"))
+        apply_url = as_text(raw.get("jobUrl") or raw.get("applyUrl"))
 
-        location = (raw.get("location") or "").strip() or None
+        location = as_text(raw.get("location")) or None
         # `address` is sometimes a richer dict
         if not location:
             addr = raw.get("address") or {}
@@ -72,12 +72,12 @@ class AshbyAdapter(BaseAdapter):
         if not description:
             description = strip_html(raw.get("descriptionHtml"))
 
-        department = (raw.get("department") or "").strip() or None
-        team = (raw.get("team") or "").strip() or None
+        department = as_text(raw.get("department")) or None
+        team = as_text(raw.get("team")) or None
         if team and not department:
             department = team
 
-        employment_type = (raw.get("employmentType") or "").strip() or None
+        employment_type = as_text(raw.get("employmentType")) or None
         if employment_type:
             employment_type = employment_type.replace("FullTime", "Full-time").replace(
                 "PartTime", "Part-time"

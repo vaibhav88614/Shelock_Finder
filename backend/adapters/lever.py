@@ -37,6 +37,7 @@ import httpx
 from loguru import logger
 
 from ._experience import parse_experience
+from ._text import as_text
 from .base import AdapterError, BaseAdapter, NormalizedJob, RawJob
 
 
@@ -94,16 +95,16 @@ class LeverAdapter(BaseAdapter):
     def normalize(self, raw: RawJob, company) -> NormalizedJob:  # noqa: ANN001
         external_id = raw.get("id")
         external_id = str(external_id) if external_id is not None else None
-        title = (raw.get("text") or "").strip()
-        apply_url = (raw.get("hostedUrl") or raw.get("applyUrl") or "").strip()
+        title = as_text(raw.get("text"))
+        apply_url = as_text(raw.get("hostedUrl") or raw.get("applyUrl"))
 
         cats = raw.get("categories") or {}
         if not isinstance(cats, dict):
             cats = {}
 
-        location = (cats.get("location") or "").strip() or None
-        department = (cats.get("team") or cats.get("department") or "").strip() or None
-        employment_type = (cats.get("commitment") or "").strip() or None
+        location = as_text(cats.get("location")) or None
+        department = as_text(cats.get("team") or cats.get("department")) or None
+        employment_type = as_text(cats.get("commitment")) or None
 
         # Prefer plain description text; fall back to stripping HTML.
         description = raw.get("descriptionPlain")

@@ -1068,12 +1068,6 @@
     "ats_identifier": "tide"
   },
   {
-    "name": "Polestar",
-    "careers_url": "https://polestar.recruitee.com/",
-    "ats_type": "recruitee",
-    "ats_identifier": "polestar"
-  },
-  {
     "name": "Personio",
     "careers_url": "https://personio.jobs.personio.de/",
     "ats_type": "personio",
@@ -1285,9 +1279,10 @@
   },
   {
     "name": "Comcast",
-    "careers_url": "https://comcast.wd5.myworkdayjobs.com/Comcast_Careers",
+    "careers_url": "https://comcast.wd115.myworkdayjobs.com/Comcast_Careers",
     "ats_type": "workday",
-    "ats_identifier": "comcast.wd5.myworkdayjobs.com|comcast|Comcast_Careers"
+    "ats_identifier": "comcast.wd115.myworkdayjobs.com|comcast|Comcast_Careers",
+    "active": true
   },
   {
     "name": "AT&T",
@@ -3827,19 +3822,6 @@
     "country": "India"
   },
   {
-    "name": "Polestar Tech Consultancy",
-    "careers_url": "https://polestartechno.com/careers",
-    "ats_type": "custom",
-    "ats_identifier": null,
-    "country": "India",
-    "custom_selectors": {
-      "list_url": "https://polestartechno.com/careers",
-      "list_item": "div[class*=\"job\" i]",
-      "title": "h4",
-      "apply_url": "a[href]@href"
-    }
-  },
-  {
     "name": "PolicyBazaar",
     "careers_url": "https://www.policybazaar.com/careers",
     "ats_type": "custom",
@@ -4187,15 +4169,15 @@
   },
   {
     "name": "Silicon Signals Pvt. Ltd.",
-    "careers_url": "https://siliconsignals.io/jobs",
+    "careers_url": "https://siliconsignals.io/jobs/",
     "ats_type": "custom",
     "ats_identifier": null,
     "country": "India",
     "custom_selectors": {
-      "list_url": "https://siliconsignals.io/jobs",
-      "list_item": "[class*=\"jobs\" i] li",
-      "title": "a",
-      "apply_url": "a[href]@href"
+      "list_url": "https://siliconsignals.io/jobs/",
+      "list_item": ".elementor-posts-container article",
+      "title": ".elementor-post__title",
+      "apply_url": ".elementor-post__title a@href"
     }
   },
   {
@@ -4341,19 +4323,6 @@
       "title": "[class*=\"title\" i]",
       "apply_url": "a[href]@href",
       "wait_for": ".card"
-    }
-  },
-  {
-    "name": "Spiral Mantra Private Limited",
-    "careers_url": "https://spiralmantra.com/jobs",
-    "ats_type": "custom",
-    "ats_identifier": null,
-    "country": "India",
-    "custom_selectors": {
-      "list_url": "https://spiralmantra.com/jobs",
-      "list_item": "li",
-      "title": "a",
-      "apply_url": "a[href]@href"
     }
   },
   {
@@ -4846,19 +4815,6 @@
     }
   },
   {
-    "name": "Unified Infotech",
-    "careers_url": "https://www.unifiedinfotech.net/careers",
-    "ats_type": "custom",
-    "ats_identifier": null,
-    "country": "India",
-    "custom_selectors": {
-      "list_url": "https://www.unifiedinfotech.net/careers",
-      "list_item": "div[class*=\"career\" i]",
-      "title": "h5",
-      "apply_url": "a[href]@href"
-    }
-  },
-  {
     "name": "Unthinkable Pvt. Ltd.",
     "careers_url": "https://www.unthinkable.co/career",
     "ats_type": "custom",
@@ -4911,19 +4867,6 @@
     "ats_type": "custom",
     "ats_identifier": null,
     "country": "India"
-  },
-  {
-    "name": "ValueCoders",
-    "careers_url": "https://www.valuecoders.com/careers",
-    "ats_type": "custom",
-    "ats_identifier": null,
-    "country": "India",
-    "custom_selectors": {
-      "list_url": "https://www.valuecoders.com/careers",
-      "list_item": "[class*=\"careers\" i] li",
-      "title": "a",
-      "apply_url": "a[href]@href"
-    }
   },
   {
     "name": "Vegavid Technology",
@@ -5253,5 +5196,188 @@
     "ats_type": "custom",
     "ats_identifier": null,
     "country": "India"
+  },
+  {
+    "name": "Accenture",
+    "careers_url": "https://accenture.wd103.myworkdayjobs.com/en-US/accentureCareers",
+    "ats_type": "workday",
+    "ats_identifier": "accenture.wd103.myworkdayjobs.com|accenture|accentureCareers"
+  },
+  {
+    "name": "Applied Materials",
+    "careers_url": "https://amat.wd1.myworkdayjobs.com/en-US/External",
+    "ats_type": "workday",
+    "ats_identifier": "amat.wd1.myworkdayjobs.com|amat|External"
+  },
+  {
+    "name": "Continental",
+    "careers_url": "https://careers.smartrecruiters.com/Continental",
+    "ats_type": "smartrecruiters",
+    "ats_identifier": "Continental"
+  },
+  {
+    "name": "Fractal",
+    "careers_url": "https://fractal.wd1.myworkdayjobs.com/en-US/Careers",
+    "ats_type": "workday",
+    "ats_identifier": "fractal.wd1.myworkdayjobs.com|fractal|Careers",
+    "country": "India"
+  },
+  {
+    "name": "HP",
+    "careers_url": "https://hp.wd5.myworkdayjobs.com/en-US/ExternalCareerSite",
+    "ats_type": "workday",
+    "ats_identifier": "hp.wd5.myworkdayjobs.com|hp|ExternalCareerSite"
+  },
+  {
+    "name": "Match Group (Tinder, Hinge)",
+    "careers_url": "https://jobs.lever.co/matchgroup",
+    "ats_type": "lever",
+    "ats_identifier": "matchgroup"
+  },
+  {
+    "name": "Meesho",
+    "careers_url": "https://jobs.lever.co/meesho",
+    "ats_type": "lever",
+    "ats_identifier": "meesho",
+    "country": "India"
+  },
+  {
+    "name": "Adidas",
+    "careers_url": "https://careers.adidas-group.com/jobs",
+    "ats_type": "custom",
+    "ats_identifier": null
+  },
+  {
+    "name": "Amazon",
+    "careers_url": "https://www.amazon.jobs/en/search",
+    "ats_type": "custom",
+    "ats_identifier": null
+  },
+  {
+    "name": "BigBasket",
+    "careers_url": "https://careers.bigbasket.com/",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Blinkit",
+    "careers_url": "https://blinkit.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Cognizant",
+    "careers_url": "https://careers.cognizant.com/global-en/jobs/",
+    "ats_type": "custom",
+    "ats_identifier": null
+  },
+  {
+    "name": "Dassault Systemes",
+    "careers_url": "https://www.3ds.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null
+  },
+  {
+    "name": "Dell",
+    "careers_url": "https://jobs.dell.com/",
+    "ats_type": "custom",
+    "ats_identifier": null
+  },
+  {
+    "name": "Deloitte",
+    "careers_url": "https://apply.deloitte.com/careers/SearchJobs",
+    "ats_type": "custom",
+    "ats_identifier": null
+  },
+  {
+    "name": "Firstclub",
+    "careers_url": "https://www.firstclub.in/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "Flipkart",
+    "careers_url": "https://www.flipkartcareers.com/",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "General Motors",
+    "careers_url": "https://search-careers.gm.com/en/jobs/",
+    "ats_type": "custom",
+    "ats_identifier": null
+  },
+  {
+    "name": "Google",
+    "careers_url": "https://www.google.com/about/careers/applications/jobs/results/",
+    "ats_type": "custom",
+    "ats_identifier": null
+  },
+  {
+    "name": "HSBC",
+    "careers_url": "https://mycareer.hsbc.com/en_GB/external",
+    "ats_type": "custom",
+    "ats_identifier": null
+  },
+  {
+    "name": "Infosys",
+    "careers_url": "https://career.infosys.com/joblist",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "L&T",
+    "careers_url": "https://www.larsentoubro.com/corporate/careers/",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "MSI",
+    "careers_url": "https://www.msi.com/about/careers/",
+    "ats_type": "custom",
+    "ats_identifier": null
+  },
+  {
+    "name": "Meta",
+    "careers_url": "https://www.metacareers.com/jobs/",
+    "ats_type": "custom",
+    "ats_identifier": null
+  },
+  {
+    "name": "Nike",
+    "careers_url": "https://careers.nike.com/",
+    "ats_type": "custom",
+    "ats_identifier": null
+  },
+  {
+    "name": "Schneider Electric",
+    "careers_url": "https://www.se.com/ww/en/about-us/careers/job-search.jsp",
+    "ats_type": "custom",
+    "ats_identifier": null
+  },
+  {
+    "name": "Societe Generale",
+    "careers_url": "https://careers.societegenerale.com/en",
+    "ats_type": "custom",
+    "ats_identifier": null
+  },
+  {
+    "name": "Zepto",
+    "careers_url": "https://www.zeptonow.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India"
+  },
+  {
+    "name": "happn",
+    "careers_url": "https://www.welcometothejungle.com/en/companies/happn/jobs",
+    "ats_type": "custom",
+    "ats_identifier": null
   }
 ]

@@ -37,6 +37,7 @@ import csv
 import functools
 import json
 import re
+import threading
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -60,6 +61,12 @@ from .rate_limit import RateLimiterGroup
 GLOBAL_CONCURRENCY = 10
 PER_COMPANY_TIMEOUT_S = 60.0
 AUTO_DEACTIVATE_AFTER = 5
+
+# Serializes SQLite writes across the worker threads spawned by
+# asyncio.to_thread. Fetches stay concurrent; only one persist/failure
+# transaction holds the DB at a time, so SQLite never hits writer lock
+# contention (the source of "database is locked").
+_DB_WRITE_LOCK = threading.Lock()
 
 
 # Country/region tokens that, when already present in a scraped location
@@ -422,7 +429,7 @@ def _load_company_snapshot(company_id: int) -> _CompanySnapshot | None:
 
 
 def _record_company_failure(run_id: int, company_id: int, error: str) -> _PerCompanyResult:
-    with session_scope() as s:
+    with _DB_WRITE_LOCK, session_scope() as s:
         s.add(
             ScrapeRunCompany(
                 scrape_run_id=run_id,
@@ -479,7 +486,7 @@ def _persist_company(
         by_fp[fp] = nj
     items = list(by_fp.items())
 
-    with session_scope() as s:
+    with _DB_WRITE_LOCK, session_scope() as s:
         # Process in 500-job chunks so memory and writer lock-hold stay
         # bounded for large boards (Workday tenants, Stripe — 1000+ postings).
         # The existing-row SELECT is bounded by the chunk size; new rows are

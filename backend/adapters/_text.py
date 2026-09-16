@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import html as _html
 import re
+from typing import Any
 
 
 _TAG_RE = re.compile(r"<[^>]+>")
@@ -26,6 +27,25 @@ def strip_html(s: str | None) -> str | None:
     text = _WS_RE.sub(" ", text)
     text = _NEWLINES_RE.sub("\n\n", text).strip()
     return text or None
+
+
+def as_text(value: Any) -> str:
+    """Coerce a scraped field to a clean string.
+
+    Some ATS APIs return a list (multiple locations), number, or dict where a
+    string is expected; calling .strip() on those raised
+    "'list' object has no attribute 'strip'". Lists/tuples are joined with
+    ", "; dicts collapse to "" (adapters handle dict shapes explicitly).
+    """
+    if value is None:
+        return ""
+    if isinstance(value, str):
+        return value.strip()
+    if isinstance(value, (list, tuple)):
+        return ", ".join(p for p in (as_text(v) for v in value) if p)
+    if isinstance(value, dict):
+        return ""
+    return str(value).strip()
 
 
 def detect_remote_type(*candidates: str | None) -> str | None:
