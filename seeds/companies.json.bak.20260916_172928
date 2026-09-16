@@ -3612,6 +3612,19 @@
     "country": "India"
   },
   {
+    "name": "NextDynamix Tech",
+    "careers_url": "http://www.nextdynamix.com/careers",
+    "ats_type": "custom",
+    "ats_identifier": null,
+    "country": "India",
+    "custom_selectors": {
+      "list_url": "http://www.nextdynamix.com/careers",
+      "list_item": "article",
+      "title": "h2",
+      "apply_url": "a[href]@href"
+    }
+  },
+  {
     "name": "NMT Technologies",
     "careers_url": "https://www.nmttechnologies.com/careers",
     "ats_type": "custom",

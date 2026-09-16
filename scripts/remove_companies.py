@@ -30,6 +30,7 @@ DEFAULT_REMOVE: tuple[str, ...] = (
     "Spiral Mantra Private Limited",
     "Polestar",
     "Polestar Tech Consultancy",
+    "NextDynamix Tech"
 )
 
 

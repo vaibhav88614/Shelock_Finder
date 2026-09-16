@@ -1,461 +1,486 @@
-PS D:\Mine\Projects\Shelock_Finder> (Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned) ; (& d:\Mine\Projects\Shelock_Finder\.venv\Scripts\Activate.ps1)
-(.venv) PS D:\Mine\Projects\Shelock_Finder> python run.py serve                                                                                                          
+(.venv) PS D:\Mine\Projects\Shelock_Finder> git pull
+remote: Enumerating objects: 34, done.
+remote: Counting objects: 100% (34/34), done.
+remote: Compressing objects: 100% (19/19), done.
+remote: Total 20 (delta 14), reused 6 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (20/20), 5.72 KiB | 78.00 KiB/s, done.
+From https://github.com/vaibhav88614/Shelock_Finder
+   4ff4a4e..3dfb07b  main       -> origin/main
+Updating 4ff4a4e..3dfb07b
+Fast-forward
+ backend/adapters/_text.py     |  20 ++++
+ backend/adapters/ashby.py     |  14 +--
+ backend/adapters/lever.py     |  11 +-
+ backend/adapters/personio.py  |  14 +--
+ backend/adapters/recruitee.py |  10 +-
+ backend/scrape.py             |  11 +-
+ command_excute.txt            |   5 +
+ req.txt                       |  50 +++++++++
+ res.txt                       |  34 ------
+ run.py                        |  24 ++++
+ scripts/remove_companies.py   | 113 +++++++++++++++++++
+ seeds/companies.json          | 256 +++++++++++++++++++++++++++++++-----------
+ 12 files changed, 437 insertions(+), 125 deletions(-)
+ create mode 100644 command_excute.txt
+ create mode 100644 req.txt
+ create mode 100644 scripts/remove_companies.py
+(.venv) PS D:\Mine\Projects\Shelock_Finder> python run.py migrate
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+Migrations applied.
+(.venv) PS D:\Mine\Projects\Shelock_Finder> python run.py remove-companies --yes
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+22:21:35 | INFO    |   - Polestar (id=179, ats=recruitee)
+22:21:35 | INFO    |   - Polestar Tech Consultancy (id=506, ats=custom)
+22:21:35 | INFO    |   - Spiral Mantra Private Limited (id=567, ats=custom)
+22:21:35 | INFO    |   - Unified Infotech (id=621, ats=custom)
+22:21:35 | INFO    |   - ValueCoders (id=628, ats=custom)
+Deleted 5 companies (requested 5).
+  scrape_run_companies rows cascaded: 65
+  seeds/companies.json entries touched: 0
+  companies:
+    - Polestar
+    - Polestar Tech Consultancy
+    - Spiral Mantra Private Limited
+    - Unified Infotech
+    - ValueCoders
+(.venv) PS D:\Mine\Projects\Shelock_Finder> python run.py seed
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+22:21:49 | INFO    | Seed complete: 29 new companies inserted (687 total in file).
+Seed complete. 29 new company rows inserted.
+(.venv) PS D:\Mine\Projects\Shelock_Finder> python run.py infer-selectors --all-custom
+22:22:05 | INFO    | infer-selectors: 337 custom companies to process (without selectors).
+(.venv) PS D:\Mine\Projects\Shelock_Finder> python run.py infer-selectors --all-custom --playwright
+22:22:24 | INFO    | infer-selectors: 337 custom companies to process (without selectors).
+22:23:48 | INFO    | httpx pass: 22 inferred, 315 unresolved.
+22:25:35 | INFO    | playwright pass: 2 newly inferred (of 80 tried).
+==================================================================
+infer-selectors: targets=337  inferred=24  needs-review=313  applied_to_seeds=24
+==================================================================
+Inferred report: D:\Mine\Projects\Shelock_Finder\data\selectors_inferred.csv
+Review list:     D:\Mine\Projects\Shelock_Finder\data\selectors_review.csv
+
+Updated 24 companies in D:\Mine\Projects\Shelock_Finder\seeds\companies.json. Run `python run.py seed` to apply to the DB.
+(.venv) PS D:\Mine\Projects\Shelock_Finder> python run.py seed 
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+22:34:02 | INFO    | Seed complete: 0 new companies inserted (687 total in file).
+Seed complete. 0 new company rows inserted.
+(.venv) PS D:\Mine\Projects\Shelock_Finder> python run.py serve
 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
-19:00:17 | INFO    | Starting scrape: 280 companies, retention=15 days, since_override=none
-19:00:17 | INFO    | Opened scrape_run id=23 at 2026-09-16T13:30:17.184520
-19:00:26 | INFO    | company id=4 ok: found=265 new=3
-19:00:28 | INFO    | company id=24 ok: found=7 new=1
-19:00:28 | INFO    | company id=6 ok: found=110 new=2
-19:00:30 | INFO    | company id=7 ok: found=62 new=4
-19:00:36 | INFO    | company id=1 ok: found=647 new=38
-19:00:38 | INFO    | company id=43 ok: found=32 new=2
-19:00:38 | INFO    | company id=23 ok: found=16 new=0
-19:00:38 | INFO    | company id=16 ok: found=453 new=24
-19:00:38 | INFO    | company id=8 ok: found=60 new=1
-19:00:38 | INFO    | company id=10 ok: found=73 new=0
-19:00:38 | INFO    | company id=46 ok: found=95 new=6
-19:00:38 | INFO    | company id=17 ok: found=44 new=1
-19:00:38 | INFO    | company id=31 ok: found=217 new=7
-19:00:39 | INFO    | company id=15 ok: found=148 new=8
-19:00:39 | INFO    | company id=38 ok: found=21 new=1
-19:00:39 | INFO    | company id=34 ok: found=169 new=8
-19:00:40 | INFO    | company id=21 ok: found=154 new=8
-19:00:40 | INFO    | company id=11 ok: found=223 new=6
-19:00:44 | INFO    | company id=57 ok: found=63 new=2
-19:00:44 | INFO    | company id=3 ok: found=595 new=11
-19:00:44 | INFO    | company id=28 ok: found=107 new=6
-19:00:44 | INFO    | company id=33 ok: found=240 new=11
-19:00:44 | INFO    | company id=25 ok: found=10 new=0
-19:00:44 | INFO    | company id=54 ok: found=219 new=13
-19:00:44 | INFO    | company id=47 ok: found=69 new=3
-19:00:45 | INFO    | company id=59 ok: found=27 new=3
-19:00:45 | INFO    | company id=50 ok: found=85 new=2
-19:00:45 | INFO    | company id=49 ok: found=358 new=13
-19:00:45 | INFO    | company id=14 ok: found=33 new=2
-19:00:45 | INFO    | company id=51 ok: found=57 new=4
-19:00:46 | INFO    | company id=65 ok: found=5 new=0
-19:00:46 | INFO    | company id=35 ok: found=408 new=15
-19:00:46 | INFO    | company id=64 ok: found=152 new=9
-19:00:46 | INFO    | company id=27 ok: found=83 new=3
-19:00:46 | INFO    | company id=67 ok: found=0 new=0
-19:00:47 | INFO    | company id=36 ok: found=358 new=16
-19:00:47 | INFO    | company id=55 ok: found=30 new=3
-19:00:47 | INFO    | company id=20 ok: found=127 new=1
-19:00:47 | INFO    | company id=75 ok: found=25 new=1
-19:00:47 | INFO    | company id=80 ok: found=288 new=10
-19:00:48 | INFO    | company id=53 ok: found=205 new=4
-19:00:48 | INFO    | company id=37 ok: found=21 new=0
-19:00:48 | INFO    | company id=30 ok: found=153 new=32
-19:00:48 | INFO    | company id=22 ok: found=101 new=5
-19:00:48 | INFO    | company id=5 ok: found=148 new=5
-19:00:48 | INFO    | company id=102 ok: found=12 new=3
-19:00:48 | INFO    | company id=79 ok: found=34 new=0
-19:00:48 | INFO    | company id=94 ok: found=9 new=0
-19:00:48 | INFO    | company id=40 ok: found=199 new=11
-19:00:49 | INFO    | company id=41 ok: found=13 new=0
-19:00:49 | INFO    | company id=78 ok: found=56 new=5
-19:00:49 | INFO    | company id=97 ok: found=1 new=0
-19:00:49 | INFO    | company id=58 ok: found=72 new=3
-19:00:49 | INFO    | company id=56 ok: found=55 new=2
-19:00:49 | INFO    | company id=72 ok: found=180 new=5
-19:00:49 | INFO    | company id=111 ok: found=2 new=0
-19:00:49 | INFO    | company id=32 ok: found=48 new=4
-19:00:49 | INFO    | company id=110 ok: found=2 new=0
-19:00:49 | INFO    | company id=66 ok: found=17 new=2
-19:00:49 | INFO    | company id=104 ok: found=2 new=0
-19:00:49 | WARNING | Auto-deactivating company 'Netflix' after 5 consecutive failures.
-19:00:49 | WARNING | company id=83 failed: Lever board 'netflix' not found (404)
-19:00:49 | INFO    | company id=115 ok: found=34 new=4
-19:00:50 | INFO    | company id=71 ok: found=223 new=12
-19:00:51 | INFO    | company id=120 ok: found=0 new=0
-19:00:51 | INFO    | company id=2 ok: found=159 new=12
-19:00:51 | INFO    | company id=107 ok: found=3 new=0
-19:00:51 | INFO    | company id=131 ok: found=1 new=0
-19:00:52 | INFO    | company id=117 ok: found=56 new=3
-19:00:52 | INFO    | company id=81 ok: found=28 new=1
-19:00:52 | INFO    | company id=129 ok: found=108 new=1
-19:00:52 | INFO    | company id=133 ok: found=94 new=1
-19:00:52 | INFO    | company id=48 ok: found=272 new=13
-19:00:52 | INFO    | company id=135 ok: found=34 new=1
-19:00:52 | WARNING | Auto-deactivating company 'Vellum' after 5 consecutive failures.
-19:00:52 | INFO    | company id=100 ok: found=67 new=3
-19:00:52 | INFO    | company id=122 ok: found=34 new=1
-19:00:52 | ERROR   | company id=9 persist failed
-Traceback (most recent call last):
+22:34:50 | INFO    | Starting scrape: 302 companies, retention=15 days, since_override=none
+22:34:50 | INFO    | Opened scrape_run id=24 at 2026-09-16T17:04:50.495326
+22:34:54 | INFO    | company id=8 ok: found=60 new=0
+22:34:57 | INFO    | company id=6 ok: found=110 new=0
+22:35:01 | INFO    | company id=5 ok: found=148 new=0
+22:35:03 | INFO    | company id=2 ok: found=162 new=2
+22:35:04 | INFO    | company id=17 ok: found=44 new=0
+22:35:09 | INFO    | company id=16 ok: found=456 new=5
+22:35:09 | INFO    | company id=7 ok: found=63 new=1
+22:35:09 | INFO    | company id=9 ok: found=9 new=1
+22:35:11 | INFO    | company id=12 ok: found=142 new=0
+22:35:11 | INFO    | company id=23 ok: found=16 new=0
+22:35:11 | INFO    | company id=24 ok: found=6 new=0
+22:35:13 | INFO    | company id=3 ok: found=599 new=4
+22:35:14 | INFO    | company id=27 ok: found=83 new=0
+22:35:18 | INFO    | company id=1 ok: found=649 new=6
+22:35:19 | INFO    | company id=30 ok: found=154 new=2
+22:35:19 | INFO    | company id=15 ok: found=147 new=2
+22:35:20 | INFO    | company id=34 ok: found=168 new=0
+22:35:20 | INFO    | company id=37 ok: found=21 new=0
+22:35:20 | INFO    | company id=43 ok: found=32 new=0
+22:35:21 | INFO    | company id=36 ok: found=356 new=0
+22:35:22 | INFO    | company id=40 ok: found=196 new=0
+22:35:22 | INFO    | company id=33 ok: found=240 new=1
+22:35:22 | INFO    | company id=38 ok: found=21 new=0
+22:35:22 | INFO    | company id=47 ok: found=68 new=0
+22:35:22 | INFO    | company id=46 ok: found=93 new=0
+22:35:23 | INFO    | company id=4 ok: found=265 new=4
+22:35:24 | INFO    | company id=48 ok: found=268 new=0
+22:35:24 | INFO    | company id=20 ok: found=127 new=2
+22:35:25 | INFO    | company id=35 ok: found=407 new=2
+22:35:25 | INFO    | company id=10 ok: found=73 new=0
+22:35:25 | INFO    | company id=32 ok: found=48 new=0
+22:35:25 | INFO    | company id=53 ok: found=205 new=2
+22:35:27 | INFO    | company id=49 ok: found=359 new=2
+22:35:27 | INFO    | company id=11 ok: found=221 new=0
+22:35:27 | INFO    | company id=21 ok: found=154 new=0
+22:35:27 | INFO    | company id=51 ok: found=57 new=0
+22:35:28 | INFO    | company id=58 ok: found=70 new=0
+22:35:28 | INFO    | company id=52 ok: found=59 new=0
+22:35:28 | INFO    | company id=31 ok: found=217 new=0
+22:35:28 | INFO    | company id=54 ok: found=218 new=0
+22:35:28 | INFO    | company id=41 ok: found=13 new=0
+22:35:29 | INFO    | company id=22 ok: found=101 new=0
+22:35:29 | INFO    | company id=28 ok: found=113 new=6
+22:35:29 | INFO    | company id=57 ok: found=64 new=1
+22:35:29 | INFO    | company id=14 ok: found=33 new=0
+22:35:30 | INFO    | company id=64 ok: found=154 new=1
+22:35:30 | INFO    | company id=66 ok: found=17 new=0
+22:35:30 | INFO    | company id=50 ok: found=85 new=0
+22:35:30 | INFO    | company id=25 ok: found=10 new=0
+22:35:30 | INFO    | company id=67 ok: found=0 new=0
+22:35:30 | INFO    | company id=75 ok: found=25 new=0
+22:35:30 | INFO    | company id=59 ok: found=27 new=0
+22:35:30 | INFO    | company id=68 ok: found=11 new=0
+22:35:30 | INFO    | company id=55 ok: found=30 new=0
+22:35:30 | INFO    | company id=95 ok: found=18 new=0
+22:35:30 | INFO    | company id=86 ok: found=43 new=1
+22:35:30 | INFO    | company id=78 ok: found=55 new=1
+22:35:30 | INFO    | company id=81 ok: found=28 new=1
+22:35:30 | INFO    | company id=79 ok: found=33 new=0
+22:35:31 | INFO    | company id=45 ok: found=496 new=8
+22:35:31 | INFO    | company id=90 ok: found=35 new=0
+22:35:32 | INFO    | company id=80 ok: found=290 new=3
+22:35:32 | INFO    | company id=72 ok: found=179 new=0
+22:35:33 | INFO    | company id=71 ok: found=221 new=0
+22:35:33 | INFO    | company id=94 ok: found=9 new=0
+22:35:33 | INFO    | company id=102 ok: found=12 new=0
+22:35:33 | INFO    | company id=85 ok: found=90 new=0
+22:35:33 | INFO    | company id=93 ok: found=51 new=0
+22:35:33 | INFO    | company id=104 ok: found=2 new=0
+22:35:33 | INFO    | company id=110 ok: found=2 new=0
+22:35:33 | INFO    | company id=107 ok: found=3 new=0
+22:35:34 | INFO    | company id=117 ok: found=56 new=0
+22:35:34 | INFO    | company id=111 ok: found=1 new=0
+22:35:34 | INFO    | company id=120 ok: found=0 new=0
+22:35:34 | INFO    | company id=115 ok: found=34 new=0
+22:35:34 | INFO    | company id=125 ok: found=70 new=0
+22:35:35 | INFO    | company id=129 ok: found=108 new=0
+22:35:35 | INFO    | company id=124 ok: found=114 new=0
+22:35:35 | INFO    | company id=128 ok: found=7 new=0
+22:35:36 | INFO    | company id=116 ok: found=48 new=0
+22:35:36 | INFO    | company id=131 ok: found=1 new=0
+22:35:36 | WARNING | company id=145 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:36 | WARNING | company id=145 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=152 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=152 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=152 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=152 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=152 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=152 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=152 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=152 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=152 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=152 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=152 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=152 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:37 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | INFO    | company id=123 ok: found=813 new=2
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:39 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
+22:35:40 | INFO    | company id=119 ok: found=140 new=0
+22:35:40 | INFO    | company id=130 ok: found=2 new=0
+22:35:40 | INFO    | company id=135 ok: found=34 new=0
+22:35:40 | INFO    | company id=140 ok: found=67 new=1
+22:35:40 | INFO    | company id=138 ok: found=141 new=0
+22:35:41 | INFO    | company id=100 ok: found=67 new=0
+22:35:42 | INFO    | company id=143 ok: found=324 new=5
+22:35:42 | INFO    | company id=65 ok: found=5 new=0
+22:35:42 | INFO    | company id=134 ok: found=36 new=0
+22:35:42 | INFO    | company id=133 ok: found=95 new=1
+22:35:42 | INFO    | company id=137 ok: found=19 new=0
+22:35:43 | INFO    | company id=141 ok: found=241 new=0
+22:35:43 | INFO    | company id=97 ok: found=1 new=0
+22:35:43 | INFO    | company id=136 ok: found=17 new=0
+22:35:43 | INFO    | company id=96 ok: found=2 new=0
+22:35:43 | INFO    | company id=101 ok: found=1 new=0
+22:35:43 | INFO    | company id=148 ok: found=0 new=0
+22:35:43 | INFO    | company id=155 ok: found=0 new=0
+22:35:43 | INFO    | company id=145 ok: found=0 new=0
+22:35:43 | INFO    | company id=158 ok: found=0 new=0
+22:35:43 | INFO    | company id=152 ok: found=1 new=0
+22:35:43 | INFO    | company id=150 ok: found=0 new=0
+22:35:43 | INFO    | company id=159 ok: found=0 new=0
+22:35:43 | INFO    | company id=56 ok: found=57 new=2
+22:35:43 | INFO    | company id=157 ok: found=0 new=0
+22:35:43 | INFO    | company id=163 ok: found=0 new=0
+22:35:43 | INFO    | company id=161 ok: found=0 new=0
+22:35:43 | INFO    | company id=162 ok: found=0 new=0
+22:35:43 | INFO    | company id=165 ok: found=0 new=0
+22:35:43 | INFO    | company id=167 ok: found=0 new=0
+22:35:43 | INFO    | company id=166 ok: found=0 new=0
+22:35:43 | INFO    | company id=122 ok: found=35 new=0
+22:35:43 | INFO    | company id=172 ok: found=2 new=0
+22:35:43 | INFO    | company id=168 ok: found=4 new=0
+22:35:43 | INFO    | company id=170 ok: found=44 new=0
+22:35:43 | INFO    | company id=153 ok: found=2 new=0
+22:35:43 | INFO    | company id=160 ok: found=0 new=0
+22:35:43 | INFO    | company id=147 ok: found=0 new=0
+22:35:43 | INFO    | company id=181 ok: found=11 new=0
+22:35:44 | INFO    | company id=139 ok: found=208 new=0
+22:35:44 | INFO    | company id=149 ok: found=28 new=2
+22:35:44 | INFO    | company id=156 ok: found=11 new=0
+22:35:45 | INFO    | company id=84 ok: found=313 new=0
+22:35:45 | INFO    | company id=164 ok: found=733 new=11
+22:35:45 | INFO    | company id=154 ok: found=5 new=0
+22:35:45 | INFO    | company id=169 ok: found=2 new=0
+22:35:45 | INFO    | company id=151 ok: found=16 new=0
+22:35:45 | INFO    | company id=186 ok: found=34 new=0
+22:35:45 | INFO    | company id=195 ok: found=28 new=2
+22:35:45 | INFO    | company id=182 ok: found=1 new=0
+22:35:45 | INFO    | company id=193 ok: found=18 new=0
+22:35:45 | INFO    | company id=174 ok: found=45 new=0
+22:35:46 | INFO    | company id=178 ok: found=78 new=0
+22:35:46 | INFO    | company id=173 ok: found=15 new=0
+22:35:46 | INFO    | company id=235 ok: found=0 new=0
+22:35:46 | INFO    | company id=188 ok: found=69 new=1
+22:35:46 | INFO    | company id=180 ok: found=1 new=0
+22:35:47 | INFO    | company id=205 ok: found=40 new=6
+22:35:47 | INFO    | company id=199 ok: found=40 new=1
+22:35:47 | INFO    | company id=196 ok: found=40 new=23
+22:35:47 | INFO    | company id=238 ok: found=4 new=0
+22:35:47 | INFO    | company id=207 ok: found=40 new=39
+22:35:48 | INFO    | company id=237 ok: found=3 new=0
+22:35:48 | INFO    | company id=220 ok: found=15 new=0
+22:35:49 | INFO    | company id=198 ok: found=40 new=6
+22:35:49 | INFO    | company id=210 ok: found=40 new=12
+22:35:49 | INFO    | company id=239 ok: found=5 new=0
+22:35:49 | INFO    | company id=247 ok: found=8 new=0
+22:35:50 | INFO    | company id=254 ok: found=0 new=0
+22:35:50 | INFO    | company id=206 ok: found=40 new=39
+22:35:50 | INFO    | company id=213 ok: found=40 new=5
+22:35:50 | INFO    | company id=272 ok: found=12 new=0
+22:35:50 | INFO    | company id=308 ok: found=4 new=0
+22:35:51 | WARNING | company id=258 failed: Custom GET https://www.augurs.in/career HTTP 404
+22:35:51 | INFO    | company id=271 ok: found=3 new=0
+22:35:52 | WARNING | dropped job missing title/apply_url: company_id=219, external_id='1200588', title=''
+22:35:52 | INFO    | company id=219 ok: found=40 new=6
+22:35:52 | INFO    | company id=275 ok: found=1 new=0
+22:35:53 | INFO    | company id=280 ok: found=12 new=0
+22:35:53 | INFO    | company id=260 ok: found=26 new=0
+22:35:53 | WARNING | Auto-deactivating company 'Ashapura Softech' after 5 consecutive failures.
+22:35:53 | WARNING | company id=255 failed: Custom GET https://ashapurasoftech.com/careers HTTP 404
+22:35:53 | INFO    | company id=304 ok: found=7 new=0
+22:35:54 | INFO    | company id=291 ok: found=5 new=0
+22:35:54 | INFO    | company id=303 ok: found=0 new=0
+22:35:55 | INFO    | company id=256 ok: found=0 new=0
+22:35:55 | INFO    | company id=249 ok: found=4 new=0
+22:35:55 | INFO    | company id=295 ok: found=14 new=0
+22:35:56 | INFO    | company id=317 ok: found=24 new=0
+22:35:56 | INFO    | company id=274 ok: found=23 new=0
+22:35:56 | INFO    | company id=262 ok: found=3 new=0
+22:35:57 | INFO    | company id=240 ok: found=0 new=0
+22:35:57 | INFO    | company id=348 ok: found=5 new=0
+22:35:58 | INFO    | company id=311 ok: found=2 new=0
+22:35:58 | INFO    | company id=314 ok: found=12 new=0
+22:35:59 | INFO    | company id=197 ok: found=40 new=27
+22:35:59 | INFO    | company id=289 ok: found=0 new=0
+22:35:59 | INFO    | company id=362 ok: found=6 new=0
+22:35:59 | INFO    | company id=355 ok: found=3 new=0
+22:36:00 | INFO    | company id=326 ok: found=3 new=0
+22:36:00 | INFO    | company id=359 ok: found=60 new=9
+22:36:00 | INFO    | company id=337 ok: found=8 new=0
+22:36:01 | INFO    | company id=338 ok: found=2 new=0
+22:36:01 | INFO    | company id=335 ok: found=22 new=0
+22:36:02 | INFO    | company id=356 ok: found=16 new=0
+22:36:03 | INFO    | company id=347 ok: found=13 new=0
+22:36:03 | INFO    | company id=327 ok: found=6 new=0
+22:36:03 | INFO    | company id=344 ok: found=174 new=0
+22:36:04 | INFO    | company id=383 ok: found=20 new=0
+22:36:04 | INFO    | company id=368 ok: found=4 new=0
+22:36:04 | INFO    | company id=382 ok: found=15 new=0
+22:36:05 | INFO    | company id=215 ok: found=683 new=683
+22:36:05 | INFO    | company id=321 ok: found=17 new=0
+22:36:06 | INFO    | company id=421 ok: found=5 new=0
+22:36:06 | INFO    | company id=386 ok: found=5 new=0
+22:36:06 | INFO    | company id=349 ok: found=3 new=0
+22:36:07 | INFO    | company id=429 ok: found=6 new=0
+22:36:07 | INFO    | company id=384 ok: found=61 new=0
+22:36:07 | INFO    | company id=378 ok: found=25 new=0
+22:36:07 | INFO    | company id=424 ok: found=8 new=0
+22:36:07 | INFO    | company id=409 ok: found=2 new=0
+22:36:08 | INFO    | company id=390 ok: found=33 new=0
+22:36:08 | INFO    | company id=450 ok: found=4 new=0
+22:36:08 | INFO    | company id=454 ok: found=0 new=0
+22:36:08 | INFO    | company id=405 ok: found=3 new=0
+22:36:09 | INFO    | company id=394 ok: found=32 new=0
+22:36:09 | INFO    | company id=463 ok: found=6 new=0
+22:36:10 | INFO    | company id=443 ok: found=3 new=0
+22:36:10 | INFO    | company id=425 ok: found=113 new=0
+22:36:10 | INFO    | company id=458 ok: found=7 new=0
+22:36:11 | INFO    | company id=442 ok: found=22 new=0
+22:36:11 | INFO    | company id=404 ok: found=3 new=0
+22:36:12 | WARNING | dropped job missing title/apply_url: company_id=212, external_id='10158652', title=''
+22:36:13 | INFO    | company id=212 ok: found=657 new=7
+22:36:13 | INFO    | company id=447 ok: found=18 new=0
+22:36:13 | WARNING | company id=518 failed: Custom GET https://www.pythonindia.in/career HTTP 403
+22:36:14 | INFO    | company id=455 ok: found=19 new=0
+22:36:14 | INFO    | company id=501 ok: found=33 new=0
+22:36:14 | INFO    | company id=369 ok: found=22 new=0
+22:36:14 | INFO    | company id=470 ok: found=5 new=4
+22:36:14 | INFO    | company id=437 ok: found=0 new=0
+22:36:14 | INFO    | company id=473 ok: found=3 new=3
+22:36:15 | INFO    | company id=537 ok: found=1 new=0
+22:36:15 | INFO    | company id=510 ok: found=10 new=0
+22:36:15 | INFO    | company id=532 ok: found=27 new=0
+22:36:15 | INFO    | company id=483 ok: found=2 new=0
+22:36:16 | INFO    | company id=466 ok: found=3 new=0
+22:36:16 | INFO    | company id=490 ok: found=22 new=0
+22:36:16 | INFO    | company id=549 ok: found=0 new=0
+22:36:16 | INFO    | company id=541 ok: found=54 new=0
+22:36:17 | INFO    | company id=533 ok: found=125 new=0
+22:36:17 | WARNING | Auto-deactivating company 'NetSet Software Solutions' after 5 consecutive failures.
+22:36:17 | WARNING | company id=468 failed: Custom GET https://www.netsetsoftware.com/careers HTTP 404
+22:36:17 | INFO    | company id=550 ok: found=3 new=0
+22:36:17 | INFO    | company id=538 ok: found=3 new=0
+22:36:18 | INFO    | company id=476 ok: found=8 new=0
+22:36:18 | INFO    | company id=564 ok: found=12 new=0
+22:36:18 | INFO    | company id=580 ok: found=0 new=0
+22:36:19 | INFO    | company id=582 ok: found=11 new=0
+22:36:19 | INFO    | company id=573 ok: found=0 new=0
+22:36:19 | INFO    | company id=585 ok: found=23 new=0
+22:36:19 | INFO    | company id=579 ok: found=6 new=0
+22:36:19 | INFO    | company id=607 ok: found=4 new=0
+22:36:20 | INFO    | company id=571 ok: found=2 new=0
+22:36:20 | INFO    | company id=536 ok: found=9 new=0
+22:36:21 | INFO    | company id=485 ok: found=1 new=0
+22:36:22 | INFO    | company id=622 ok: found=10 new=0
+22:36:22 | INFO    | company id=597 ok: found=22 new=0
+22:36:23 | INFO    | company id=610 ok: found=6 new=0
+22:36:23 | INFO    | company id=584 ok: found=0 new=0
+22:36:24 | INFO    | company id=644 ok: found=3 new=0
+22:36:24 | INFO    | company id=626 ok: found=0 new=0
+22:36:25 | INFO    | company id=583 ok: found=11 new=0
+22:36:28 | INFO    | company id=654 ok: found=53 new=0
+22:36:28 | INFO    | company id=602 ok: found=8 new=0
+22:36:28 | INFO    | company id=566 ok: found=3 new=0
+22:36:30 | INFO    | company id=620 ok: found=2 new=0
+22:36:30 | INFO    | company id=637 ok: found=6 new=0
+22:36:31 | INFO    | company id=639 ok: found=33 new=0
+22:36:31 | INFO    | company id=662 ok: found=2 new=0
+22:36:32 | INFO    | company id=652 ok: found=5 new=0
+22:36:32 | INFO    | company id=630 ok: found=5 new=0
+22:36:32 | INFO    | company id=642 ok: found=5 new=0
+22:36:33 | INFO    | company id=649 ok: found=69 new=0
+22:36:33 | INFO    | company id=658 ok: found=8 new=0
+22:36:34 | INFO    | company id=593 ok: found=4 new=0
+22:36:35 | INFO    | company id=667 ok: found=40 new=40
+22:36:35 | INFO    | company id=651 ok: found=33 new=0
+22:36:35 | INFO    | company id=665 ok: found=40 new=40
+22:36:36 | WARNING | Playwright[Druva]: wait_for 'div[class*="col" i]' timed out
+22:36:36 | INFO    | company id=350 ok: found=5 new=0
+22:36:37 | INFO    | company id=671 ok: found=20 new=20
+22:36:37 | INFO    | company id=655 ok: found=15 new=1
+22:36:37 | WARNING | company id=681 failed: CustomAdapter requires custom_selectors on the Company row
+22:36:37 | INFO    | company id=673 ok: found=12 new=6
+22:36:37 | WARNING | company id=675 failed: CustomAdapter requires custom_selectors on the Company row
+22:36:37 | INFO    | company id=664 ok: found=40 new=40
+22:36:37 | WARNING | company id=677 failed: CustomAdapter requires custom_selectors on the Company row
+22:36:37 | WARNING | company id=679 failed: CustomAdapter requires custom_selectors on the Company row
+22:36:37 | WARNING | company id=684 failed: CustomAdapter requires custom_selectors on the Company row
+22:36:38 | INFO    | company id=666 ok: found=812 new=812
+22:36:38 | WARNING | company id=674 failed: CustomAdapter requires custom_selectors on the Company row
+22:36:38 | INFO    | company id=672 ok: found=16 new=16
+22:36:38 | INFO    | company id=676 ok: found=14 new=12
+22:36:38 | INFO    | company id=670 ok: found=49 new=49
+22:36:38 | WARNING | company id=686 failed: CustomAdapter requires custom_selectors on the Company row
+22:36:38 | WARNING | company id=687 failed: CustomAdapter requires custom_selectors on the Company row
+22:36:39 | INFO    | company id=594 ok: found=0 new=0
+22:36:39 | INFO    | company id=683 ok: found=57 new=57
+22:36:39 | WARNING | company id=691 failed: CustomAdapter requires custom_selectors on the Company row
+22:36:40 | INFO    | company id=669 ok: found=71 new=71
+22:36:41 | INFO    | company id=682 ok: found=20 new=20
+22:36:41 | WARNING | company id=685 failed: CustomAdapter requires custom_selectors on the Company row
+22:36:41 | INFO    | company id=688 ok: found=30 new=30
+22:36:41 | INFO    | company id=668 ok: found=40 new=40
+22:36:41 | WARNING | company id=692 failed: CustomAdapter requires custom_selectors on the Company row
+22:36:41 | WARNING | company id=689 failed: CustomAdapter requires custom_selectors on the Company row
+22:36:41 | WARNING | company id=680 failed: CustomAdapter requires custom_selectors on the Company row
+22:36:41 | INFO    | company id=690 ok: found=5 new=5
+22:36:42 | INFO    | company id=608 ok: found=4 new=0
+22:36:43 | INFO    | company id=678 ok: found=16 new=13
+22:36:55 | WARNING | Playwright[StartxLabs Technologies Private Limited]: wait_for 'div[class*="career" i]' timed out
+22:36:55 | INFO    | company id=574 ok: found=0 new=0
+22:36:56 | WARNING | Playwright[Sinergia Labs]: wait_for 'article[class*="job" i]' timed out
+22:36:56 | INFO    | company id=551 ok: found=9 new=0
+22:37:01 | WARNING | Playwright[The Tech Clouds]: wait_for '[class*="jobs" i] li' timed out
+22:37:01 | INFO    | company id=609 ok: found=132 new=0
+22:37:05 | WARNING | Playwright[ZipNom Technologies Private Limited]: wait_for 'li[class*="job" i]' timed out
+22:37:05 | INFO    | company id=661 ok: found=0 new=0
+22:37:06 | INFO    | Delta CSV written: last_run_new_jobs_20260916_170450.csv (2227 rows)
+22:37:06 | INFO    | Scrape complete: run_id=24 companies=302 ok=285 failed=17 jobs_found=18049 jobs_new=2227 delta_csv=last_run_new_jobs_20260916_170450.csv
+(.venv) PS D:\Mine\Projects\Shelock_Finder> python run.py remove-companies --yes                   
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+22:59:28 | INFO    |   - NextDynamix Tech (id=473, ats=custom)
+22:59:28 | INFO    | Seed backup written to D:\Mine\Projects\Shelock_Finder\seeds\companies.json.bak.20260916_172928
+Deleted 1 companies (requested 6).
+  scrape_run_companies rows cascaded: 16
+  seeds/companies.json entries touched: 1
+  companies:
+    - NextDynamix Tech
+  not found (already absent):
+    - ValueCoders
+    - Unified Infotech
+    - Spiral Mantra Private Limited
+    - Polestar
+    - Polestar Tech Consultancy
+(.venv) PS D:\Mine\Projects\Shelock_Finder> python run.py infer-selectors --all-custom --playwright
+22:59:42 | INFO    | infer-selectors: 313 custom companies to process (without selectors).
+23:01:46 | INFO    | httpx pass: 0 inferred, 313 unresolved.
+23:03:54 | INFO    | playwright pass: 0 newly inferred (of 80 tried).
+==================================================================
+infer-selectors: targets=313  inferred=0  needs-review=313  applied_to_seeds=0
+==================================================================
+Inferred report: D:\Mine\Projects\Shelock_Finder\data\selectors_inferred.csv
+Review list:     D:\Mine\Projects\Shelock_Finder\data\selectors_review.csv
 
-  File "D:\Mine\Projects\Shelock_Finder\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
-    self.dialect.do_execute(
-  File "D:\Mine\Projects\Shelock_Finder\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
-    cursor.execute(statement, parameters)
-
-sqlite3.OperationalError: database is locked
-
-
-The above exception was the direct cause of the following exception:
-
-
-Traceback (most recent call last):
-
-  File "C:\Program Files\Python313\Lib\threading.py", line 1012, in _bootstrap
-    self._bootstrap_inner()
-  File "C:\Program Files\Python313\Lib\threading.py", line 1041, in _bootstrap_inner
-    self.run()
-  File "D:\Mine\Projects\Shelock_Finder\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
-    result = context.run(func, *args)
-
-  File "D:\Mine\Projects\Shelock_Finder\backend\api\scrape_runs.py", line 60, in _job
-    run_scrape(ats=ats, no_playwright=no_playwright)
-
-  File "D:\Mine\Projects\Shelock_Finder\backend\scrape.py", line 147, in run_scrape
-    return asyncio.run(_orchestrate(company_ids))
-
-  File "C:\Program Files\Python313\Lib\asyncio\runners.py", line 195, in run
-    return runner.run(main)
-  File "C:\Program Files\Python313\Lib\asyncio\runners.py", line 118, in run
-    return self._loop.run_until_complete(task)
-  File "C:\Program Files\Python313\Lib\asyncio\base_events.py", line 706, in run_until_complete
-    self.run_forever()
-  File "C:\Program Files\Python313\Lib\asyncio\base_events.py", line 677, in run_forever
-    self._run_once()
-  File "C:\Program Files\Python313\Lib\asyncio\base_events.py", line 2034, in _run_once
-    handle._run()
-  File "C:\Program Files\Python313\Lib\asyncio\events.py", line 89, in _run
-    self._context.run(self._callback, *self._args)
-
-> File "D:\Mine\Projects\Shelock_Finder\backend\scrape.py", line 369, in _scrape_one
-    return await asyncio.to_thread(
-
-  File "C:\Program Files\Python313\Lib\asyncio\threads.py", line 25, in to_thread
-    return await loop.run_in_executor(None, func_call)
-  File "C:\Program Files\Python313\Lib\concurrent\futures\thread.py", line 59, in run
-    result = self.fn(*self.args, **self.kwargs)
-
-  File "D:\Mine\Projects\Shelock_Finder\backend\scrape.py", line 565, in _persist_company
-    s.flush()
-
-  File "D:\Mine\Projects\Shelock_Finder\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4352, in flush
-    self._flush(objects)
-  File "D:\Mine\Projects\Shelock_Finder\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4487, in _flush
-    with util.safe_reraise():
-  File "D:\Mine\Projects\Shelock_Finder\.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
-    raise exc_value.with_traceback(exc_tb)
-  File "D:\Mine\Projects\Shelock_Finder\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4448, in _flush
-    flush_context.execute()
-  File "D:\Mine\Projects\Shelock_Finder\.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
-    rec.execute(self)
-  File "D:\Mine\Projects\Shelock_Finder\.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
-    util.preloaded.orm_persistence.save_obj(
-  File "D:\Mine\Projects\Shelock_Finder\.venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 85, in save_obj
-    _emit_update_statements(
-  File "D:\Mine\Projects\Shelock_Finder\.venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 912, in _emit_update_statements
-    c = connection.execute(
-  File "D:\Mine\Projects\Shelock_Finder\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1418, in execute
-    return meth(
-  File "D:\Mine\Projects\Shelock_Finder\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 515, in _execute_on_connection
-    return connection._execute_clauseelement(
-  File "D:\Mine\Projects\Shelock_Finder\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1640, in _execute_clauseelement
-    ret = self._execute_context(
-  File "D:\Mine\Projects\Shelock_Finder\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
-    return self._exec_single_context(
-  File "D:\Mine\Projects\Shelock_Finder\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
-    self._handle_dbapi_exception(
-  File "D:\Mine\Projects\Shelock_Finder\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
-    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
-  File "D:\Mine\Projects\Shelock_Finder\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
-    self.dialect.do_execute(
-  File "D:\Mine\Projects\Shelock_Finder\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
-    cursor.execute(statement, parameters)
-
-sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) database is locked
-[SQL: UPDATE jobs SET is_remote=?, last_seen_at=? WHERE jobs.id = ?]
-[parameters: (1, '2026-09-16 13:30:17.184520', 9897)]
-(Background on this error at: https://sqlalche.me/e/20/e3q8)
-19:00:53 | INFO    | company id=125 ok: found=70 new=1
-19:00:53 | INFO    | company id=52 ok: found=61 new=4
-19:00:53 | INFO    | company id=84 ok: found=316 new=3
-19:00:53 | INFO    | company id=124 ok: found=114 new=4
-19:00:53 | INFO    | company id=130 ok: found=2 new=0
-19:00:53 | INFO    | company id=136 ok: found=17 new=0
-19:00:53 | INFO    | company id=96 ok: found=2 new=0
-19:00:53 | INFO    | company id=93 ok: found=51 new=0
-19:00:53 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:53 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:53 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:53 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:53 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:53 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:53 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:53 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:53 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:53 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:53 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:53 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:53 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:53 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:53 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:53 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:53 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:53 | WARNING | company id=150 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:53 | WARNING | company id=145 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:53 | WARNING | company id=145 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | INFO    | company id=68 ok: found=11 new=1
-19:00:54 | INFO    | company id=141 ok: found=241 new=0
-19:00:54 | INFO    | company id=156 ok: found=11 new=1
-19:00:54 | WARNING | company id=9 failed: persist failed: OperationalError('(sqlite3.OperationalError) database is locked')
-19:00:54 | WARNING | company id=152 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=152 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=152 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=152 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=152 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=152 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=152 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=152 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=152 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=152 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=152 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=152 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:54 | WARNING | company id=153 normalize() failed for one entry: 'list' object has no attribute 'strip'
-19:00:55 | INFO    | company id=86 ok: found=42 new=3
-19:00:55 | INFO    | company id=123 ok: found=813 new=38
-19:00:55 | INFO    | company id=119 ok: found=141 new=4
-19:00:55 | INFO    | company id=147 ok: found=0 new=0
-19:00:55 | INFO    | company id=161 ok: found=0 new=0
-19:00:55 | INFO    | company id=95 ok: found=18 new=0
-19:00:55 | INFO    | company id=150 ok: found=0 new=0
-19:00:55 | INFO    | company id=148 ok: found=0 new=0
-19:00:55 | INFO    | company id=116 ok: found=48 new=2
-19:00:55 | INFO    | company id=160 ok: found=0 new=0
-19:00:55 | INFO    | company id=155 ok: found=0 new=0
-19:00:55 | INFO    | company id=163 ok: found=0 new=0
-19:00:55 | INFO    | company id=149 ok: found=26 new=3
-19:00:55 | INFO    | company id=159 ok: found=0 new=0
-19:00:55 | INFO    | company id=157 ok: found=0 new=0
-19:00:55 | INFO    | company id=162 ok: found=0 new=0
-19:00:55 | INFO    | company id=169 ok: found=2 new=0
-19:00:55 | INFO    | company id=152 ok: found=1 new=0
-19:00:55 | INFO    | company id=165 ok: found=0 new=0
-19:00:55 | INFO    | company id=153 ok: found=2 new=0
-19:00:55 | INFO    | company id=168 ok: found=4 new=0
-19:00:55 | INFO    | company id=154 ok: found=5 new=0
-19:00:55 | WARNING | company id=132 failed: Ashby org 'vellum' not found (404)
-19:00:55 | INFO    | company id=166 ok: found=0 new=0
-19:00:55 | INFO    | company id=181 ok: found=11 new=1
-19:00:55 | INFO    | company id=139 ok: found=208 new=2
-19:00:56 | INFO    | company id=170 ok: found=44 new=1
-19:00:56 | INFO    | company id=182 ok: found=1 new=0
-19:00:56 | INFO    | company id=172 ok: found=2 new=0
-19:00:56 | INFO    | company id=143 ok: found=325 new=11
-19:00:56 | INFO    | company id=145 ok: found=0 new=0
-19:00:56 | INFO    | company id=140 ok: found=66 new=2
-19:00:56 | INFO    | company id=158 ok: found=0 new=0
-19:00:56 | INFO    | company id=186 ok: found=34 new=1
-19:00:56 | INFO    | company id=134 ok: found=36 new=0
-19:00:56 | INFO    | company id=138 ok: found=141 new=2
-19:00:56 | INFO    | company id=164 ok: found=725 new=33
-19:00:57 | INFO    | company id=174 ok: found=45 new=5
-19:00:57 | INFO    | company id=151 ok: found=16 new=1
-19:00:57 | INFO    | company id=101 ok: found=1 new=0
-19:00:57 | INFO    | company id=180 ok: found=1 new=0
-19:00:57 | INFO    | company id=45 ok: found=490 new=26
-19:00:57 | INFO    | company id=167 ok: found=0 new=0
-19:00:57 | INFO    | company id=193 ok: found=18 new=1
-19:00:57 | INFO    | company id=85 ok: found=90 new=6
-19:00:57 | INFO    | company id=195 ok: found=26 new=3
-19:00:57 | INFO    | company id=178 ok: found=81 new=5
-19:00:57 | INFO    | company id=90 ok: found=36 new=5
-19:00:57 | INFO    | company id=128 ok: found=7 new=0
-19:00:57 | INFO    | company id=12 ok: found=143 new=4
-19:00:57 | INFO    | company id=137 ok: found=20 new=0
-19:00:58 | INFO    | company id=173 ok: found=15 new=3
-19:00:58 | INFO    | company id=197 ok: found=40 new=36
-19:00:59 | INFO    | company id=205 ok: found=40 new=10
-19:00:59 | INFO    | company id=188 ok: found=68 new=3
-19:01:00 | WARNING | company id=215 failed: Workday comcast/Comcast_Careers HTTP 410: {"errorCode":"ERR_TENANT_MIGRATED","errorCaseId":"989018MU452KRI","httpStatus":410,"message":"","messageParams":{"outageUrl":"https://wd5.myworkday.com/wday/drs/outage?t\u003dcomcast\u0026s\u003dcomca
-19:01:00 | INFO    | company id=207 ok: found=40 new=39
-19:01:00 | INFO    | company id=237 ok: found=3 new=0
-19:01:01 | INFO    | company id=198 ok: found=40 new=32
-19:01:01 | INFO    | company id=206 ok: found=40 new=40
-19:01:01 | INFO    | company id=235 ok: found=0 new=0
-19:01:01 | INFO    | company id=213 ok: found=40 new=27
-19:01:03 | INFO    | company id=254 ok: found=0 new=0
-19:01:03 | INFO    | company id=210 ok: found=40 new=39
-19:01:04 | INFO    | company id=247 ok: found=8 new=0
-19:01:05 | INFO    | company id=196 ok: found=40 new=38
-19:01:05 | INFO    | company id=219 ok: found=40 new=38
-19:01:05 | INFO    | company id=199 ok: found=40 new=3
-19:01:05 | INFO    | company id=256 ok: found=0 new=0
-19:01:05 | INFO    | company id=238 ok: found=4 new=0
-19:01:05 | INFO    | company id=220 ok: found=15 new=0
-19:01:06 | WARNING | company id=258 failed: Custom GET https://www.augurs.in/career HTTP 404
-19:01:07 | WARNING | company id=255 failed: Custom GET https://ashapurasoftech.com/careers HTTP 404
-19:01:07 | INFO    | company id=239 ok: found=5 new=1
-19:01:08 | INFO    | company id=280 ok: found=12 new=0
-19:01:08 | INFO    | company id=260 ok: found=26 new=0
-19:01:08 | INFO    | company id=303 ok: found=0 new=0
-19:01:08 | INFO    | company id=272 ok: found=12 new=0
-19:01:08 | INFO    | company id=291 ok: found=5 new=0
-19:01:09 | INFO    | company id=308 ok: found=4 new=0
-19:01:09 | INFO    | company id=240 ok: found=0 new=0
-19:01:11 | INFO    | company id=335 ok: found=22 new=0
-19:01:11 | INFO    | company id=311 ok: found=2 new=0
-19:01:13 | INFO    | company id=317 ok: found=24 new=0
-19:01:14 | INFO    | company id=304 ok: found=7 new=0
-19:01:15 | INFO    | company id=337 ok: found=8 new=0
-19:01:17 | INFO    | company id=289 ok: found=0 new=0
-19:01:18 | INFO    | company id=338 ok: found=2 new=0
-19:01:18 | INFO    | company id=271 ok: found=3 new=0
-19:01:19 | INFO    | company id=314 ok: found=12 new=1
-19:01:19 | INFO    | company id=327 ok: found=6 new=0
-19:01:20 | INFO    | company id=274 ok: found=23 new=1
-19:01:20 | INFO    | company id=326 ok: found=3 new=0
-19:01:21 | INFO    | company id=275 ok: found=1 new=0
-19:01:21 | INFO    | company id=356 ok: found=16 new=0
-19:01:21 | INFO    | company id=355 ok: found=3 new=0
-19:01:22 | INFO    | company id=347 ok: found=13 new=0
-19:01:22 | INFO    | company id=349 ok: found=3 new=0
-19:01:22 | INFO    | company id=249 ok: found=4 new=0
-19:01:23 | INFO    | company id=368 ok: found=4 new=0
-19:01:23 | INFO    | company id=359 ok: found=55 new=0
-19:01:24 | INFO    | company id=382 ok: found=15 new=0
-19:01:24 | INFO    | company id=262 ok: found=3 new=0
-19:01:24 | INFO    | company id=295 ok: found=14 new=0
-19:01:24 | INFO    | company id=321 ok: found=17 new=3
-19:01:24 | INFO    | company id=344 ok: found=174 new=0
-19:01:25 | INFO    | company id=348 ok: found=5 new=0
-19:01:25 | INFO    | company id=383 ok: found=20 new=0
-19:01:25 | INFO    | company id=384 ok: found=61 new=0
-19:01:26 | WARNING | Auto-deactivating company 'INFINTOR SOLUTIONS' after 5 consecutive failures.
-19:01:26 | WARNING | company id=411 failed: Custom GET https://www.infintor.com/careers HTTP 404
-19:01:26 | INFO    | company id=212 ok: found=651 new=86
-19:01:26 | INFO    | company id=362 ok: found=6 new=0
-19:01:26 | INFO    | company id=405 ok: found=3 new=0
-19:01:27 | INFO    | company id=386 ok: found=5 new=0
-19:01:27 | INFO    | company id=421 ok: found=5 new=0
-19:01:27 | INFO    | company id=429 ok: found=6 new=0
-19:01:27 | INFO    | company id=424 ok: found=8 new=0
-19:01:27 | INFO    | company id=454 ok: found=0 new=0
-19:01:28 | INFO    | company id=463 ok: found=6 new=0
-19:01:28 | INFO    | company id=443 ok: found=3 new=0
-19:01:29 | INFO    | company id=378 ok: found=25 new=0
-19:01:29 | INFO    | company id=409 ok: found=2 new=0
-19:01:30 | INFO    | company id=458 ok: found=7 new=0
-19:01:30 | INFO    | company id=450 ok: found=4 new=0
-19:01:30 | INFO    | company id=404 ok: found=3 new=0
-19:01:30 | WARNING | company id=518 failed: Custom GET https://www.pythonindia.in/career HTTP 403
-19:01:31 | INFO    | company id=394 ok: found=32 new=0
-19:01:31 | INFO    | company id=455 ok: found=19 new=0
-19:01:31 | INFO    | company id=470 ok: found=0 new=0
-19:01:32 | WARNING | company id=473 failed: Custom GET http://www.nextdynamix.com/careers HTTP 429
-19:01:32 | WARNING | company id=468 failed: Custom GET https://www.netsetsoftware.com/careers HTTP 404
-19:01:32 | INFO    | company id=483 ok: found=2 new=0
-19:01:33 | INFO    | company id=476 ok: found=8 new=3
-19:01:33 | INFO    | company id=466 ok: found=3 new=0
-19:01:34 | INFO    | company id=369 ok: found=22 new=0
-19:01:35 | INFO    | company id=425 ok: found=113 new=0
-19:01:35 | INFO    | company id=390 ok: found=33 new=0
-19:01:35 | INFO    | company id=506 ok: found=9 new=4
-19:01:35 | INFO    | company id=501 ok: found=33 new=0
-19:01:36 | INFO    | company id=510 ok: found=10 new=0
-19:01:36 | INFO    | company id=490 ok: found=22 new=0
-19:01:36 | INFO    | company id=442 ok: found=22 new=0
-19:01:36 | INFO    | company id=537 ok: found=1 new=0
-19:01:37 | INFO    | company id=541 ok: found=54 new=0
-19:01:37 | INFO    | company id=447 ok: found=18 new=0
-19:01:38 | INFO    | company id=564 ok: found=12 new=0
-19:01:38 | INFO    | company id=533 ok: found=125 new=0
-19:01:38 | INFO    | company id=532 ok: found=27 new=0
-19:01:38 | INFO    | company id=549 ok: found=62 new=0
-19:01:39 | INFO    | company id=485 ok: found=1 new=0
-19:01:39 | INFO    | company id=437 ok: found=0 new=0
-19:01:40 | INFO    | company id=571 ok: found=2 new=0
-19:01:40 | INFO    | company id=538 ok: found=3 new=0
-19:01:40 | INFO    | company id=536 ok: found=9 new=0
-19:01:40 | INFO    | company id=573 ok: found=0 new=0
-19:01:40 | WARNING | company id=550 failed: Custom GET https://www.simform.com/careers HTTP 403
-19:01:41 | INFO    | company id=594 ok: found=0 new=0
-19:01:42 | INFO    | company id=567 ok: found=51 new=0
-19:01:43 | INFO    | company id=585 ok: found=23 new=0
-19:01:43 | INFO    | company id=579 ok: found=6 new=0
-19:01:44 | INFO    | company id=582 ok: found=11 new=0
-19:01:44 | INFO    | company id=597 ok: found=22 new=0
-19:01:45 | INFO    | company id=607 ok: found=4 new=0
-19:01:45 | INFO    | company id=580 ok: found=0 new=0
-19:01:46 | INFO    | company id=620 ok: found=2 new=0
-19:01:46 | INFO    | company id=622 ok: found=10 new=0
-19:01:46 | INFO    | company id=584 ok: found=0 new=0
-19:01:46 | INFO    | company id=610 ok: found=6 new=0
-19:01:47 | INFO    | company id=566 ok: found=3 new=0
-19:01:48 | INFO    | company id=602 ok: found=8 new=1
-19:01:48 | INFO    | company id=626 ok: found=0 new=0
-19:01:49 | INFO    | company id=628 ok: found=87 new=0
-19:01:49 | INFO    | company id=621 ok: found=17 new=1
-19:01:49 | INFO    | company id=593 ok: found=4 new=0
-19:01:49 | INFO    | company id=644 ok: found=3 new=0
-19:01:50 | INFO    | company id=630 ok: found=5 new=0
-19:01:50 | INFO    | company id=583 ok: found=11 new=0
-19:01:51 | INFO    | company id=649 ok: found=69 new=0
-19:01:51 | INFO    | company id=654 ok: found=53 new=0
-19:01:51 | INFO    | company id=642 ok: found=5 new=0
-19:01:52 | INFO    | company id=637 ok: found=6 new=0
-19:01:52 | INFO    | company id=608 ok: found=4 new=0
-19:01:54 | INFO    | company id=652 ok: found=5 new=0
-19:01:55 | INFO    | company id=662 ok: found=2 new=0
-19:01:56 | INFO    | company id=658 ok: found=8 new=1
-19:01:56 | INFO    | company id=655 ok: found=15 new=0
-19:01:56 | INFO    | company id=639 ok: found=33 new=0
-19:01:57 | INFO    | company id=651 ok: found=33 new=0
-19:01:59 | WARNING | Playwright[Druva]: wait_for 'div[class*="col" i]' timed out
-19:01:59 | INFO    | company id=350 ok: found=5 new=0
-19:02:15 | WARNING | Playwright[StartxLabs Technologies Private Limited]: wait_for 'div[class*="career" i]' timed out
-19:02:15 | INFO    | company id=574 ok: found=0 new=0
-19:02:20 | WARNING | Playwright[Sinergia Labs]: wait_for 'article[class*="job" i]' timed out
-19:02:20 | INFO    | company id=551 ok: found=9 new=0
-19:02:22 | WARNING | Playwright[ZipNom Technologies Private Limited]: wait_for 'li[class*="job" i]' timed out
-19:02:22 | WARNING | Playwright[The Tech Clouds]: wait_for '[class*="jobs" i] li' timed out
-19:02:22 | INFO    | company id=661 ok: found=0 new=0
-19:02:23 | INFO    | company id=609 ok: found=132 new=0
-19:02:26 | INFO    | Delta CSV written: last_run_new_jobs_20260916_133017.csv (964 rows)
-19:02:26 | INFO    | Scrape complete: run_id=23 companies=280 ok=269 failed=11 jobs_found=16268 jobs_new=964 delta_csv=last_run_new_jobs_20260916_133017.csv
-
-
-
-
-
-
-
-
-
-
+Updated 0 companies in D:\Mine\Projects\Shelock_Finder\seeds\companies.json. Run `python run.py seed` to apply to the DB.
+(.venv) PS D:\Mine\Projects\Shelock_Finder> python run.py seed                                     
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+23:05:07 | INFO    | Seed complete: 0 new companies inserted (686 total in file).
+Seed complete. 0 new company rows inserted.
+(.venv) PS D:\Mine\Projects\Shelock_Finder> 
