@@ -449,3 +449,47 @@ sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) database is locked
 19:02:23 | INFO    | company id=609 ok: found=132 new=0
 19:02:26 | INFO    | Delta CSV written: last_run_new_jobs_20260916_133017.csv (964 rows)
 19:02:26 | INFO    | Scrape complete: run_id=23 companies=280 ok=269 failed=11 jobs_found=16268 jobs_new=964 delta_csv=last_run_new_jobs_20260916_133017.csv
+
+
+
+
+
+
+
+
+
+
+
+Dassault Systemes
+Fractal
+HSBC
+Continental
+Cognizent
+L&T
+Mindtree
+Societe Generale
+General Motors
+Applied Materials
+Google
+Meta
+Amazon
+Flipkart
+Meesho
+Swiggy
+Zomato
+Firstclub
+Zepto
+Nike
+Adidas
+Dell
+MSI
+Nvidia
+
+
+Silicon Signals i am having a cdn error , it fetches the job but it doesn't show the posting name and the link in open link is cdn error link
+
+
+Remove value Coders
+Remove Unified InfoTech
+Remove Spiral Mantra Private Limited
+Remove Polestar
