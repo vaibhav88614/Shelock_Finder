@@ -19,7 +19,7 @@ from dateutil import parser as dateparser
 from loguru import logger
 
 from ._experience import parse_experience
-from ._text import detect_remote_type, strip_html
+from ._text import as_text, detect_remote_type, strip_html
 from .base import AdapterError, BaseAdapter, NormalizedJob, RawJob
 
 
@@ -59,7 +59,7 @@ class TeamtailorAdapter(BaseAdapter):
     def normalize(self, raw: RawJob, company) -> NormalizedJob:  # noqa: ANN001
         external_id = raw.get("id")
         external_id = str(external_id) if external_id is not None else None
-        title = (raw.get("title") or "").strip()
+        title = as_text(raw.get("title"))
         apply_url = (
             raw.get("careersite_job_url")
             or raw.get("url")
@@ -85,8 +85,8 @@ class TeamtailorAdapter(BaseAdapter):
                     parts = [first.get(k) for k in ("city", "region", "country", "name")]
                     location = ", ".join(p for p in parts if isinstance(p, str) and p) or None
 
-        department = (raw.get("department") or "").strip() or None
-        employment_type = (raw.get("employment_type") or raw.get("contract_type") or "").strip() or None
+        department = as_text(raw.get("department")) or None
+        employment_type = as_text(raw.get("employment_type") or raw.get("contract_type")) or None
 
         desc_parts = [raw.get("pitch"), raw.get("body"), raw.get("description")]
         joined = "\n\n".join(p for p in desc_parts if isinstance(p, str) and p)

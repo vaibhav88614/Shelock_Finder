@@ -14,6 +14,9 @@ httpx==0.27.2
 beautifulsoup4==4.12.3
 lxml==5.3.0
 playwright==1.48.0
+# TLS/JA3 browser impersonation for the jsonapi adapter's optional "impersonate"
+# mode, used to reach APIs behind bot walls that reject the default httpx client.
+curl_cffi==0.16.3
 
 # Utilities
 loguru==0.7.2

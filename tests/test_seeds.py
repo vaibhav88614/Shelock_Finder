@@ -54,10 +54,13 @@ def test_seed_ats_types_registered(seeds: list[dict]) -> None:
 
 def test_seed_detect_agrees(seeds: list[dict]) -> None:
     """detect_ats() must classify each non-custom row consistent with its declared ats_type."""
+    # Manually-configured adapter types aren't URL-detectable (selectors/API config
+    # is supplied by hand), so they're exempt from the detect_ats round-trip check.
+    manual = {"custom", "playwright", "jsonapi"}
     mismatches: list[str] = []
     for row in seeds:
         declared = row["ats_type"]
-        if declared == "custom":
+        if declared in manual:
             continue
         detected_type, _ = detect_ats(row["careers_url"])
         if detected_type != declared:

@@ -23,7 +23,7 @@ from dateutil import parser as dateparser
 from loguru import logger
 
 from ._experience import parse_experience
-from ._text import detect_remote_type, strip_html
+from ._text import as_text, detect_remote_type, strip_html
 from .base import AdapterError, BaseAdapter, NormalizedJob, RawJob
 
 
@@ -77,7 +77,7 @@ class WorkableAdapter(BaseAdapter):
     def normalize(self, raw: RawJob, company) -> NormalizedJob:  # noqa: ANN001
         external_id = raw.get("shortcode") or raw.get("id") or raw.get("code")
         external_id = str(external_id) if external_id else None
-        title = (raw.get("title") or raw.get("full_title") or "").strip()
+        title = as_text(raw.get("title") or raw.get("full_title"))
 
         sub = (company.ats_identifier or "").strip()
         apply_url = (
@@ -98,8 +98,8 @@ class WorkableAdapter(BaseAdapter):
                 parts = [first.get(k) for k in ("city", "region", "country")]
                 location = ", ".join(p for p in parts if isinstance(p, str) and p) or None
 
-        department = (raw.get("department") or raw.get("function") or "").strip() or None
-        employment_type = (raw.get("employment_type") or "").strip() or None
+        department = as_text(raw.get("department") or raw.get("function")) or None
+        employment_type = as_text(raw.get("employment_type")) or None
 
         desc_parts: list[str | None] = [
             raw.get("description"),

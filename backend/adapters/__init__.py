@@ -14,6 +14,7 @@ from .ashby import AshbyAdapter
 from .base import AdapterError, BaseAdapter, NormalizedJob, RawJob, fingerprint
 from .custom import CustomAdapter
 from .greenhouse import GreenhouseAdapter
+from .jsonapi import JsonApiAdapter
 from .lever import LeverAdapter
 from .personio import PersonioAdapter
 from .playwright_adapter import PlaywrightAdapter
@@ -36,6 +37,7 @@ ADAPTERS: dict[str, type[BaseAdapter]] = {
     TeamtailorAdapter.ats_type: TeamtailorAdapter,
     CustomAdapter.ats_type: CustomAdapter,
     PlaywrightAdapter.ats_type: PlaywrightAdapter,
+    JsonApiAdapter.ats_type: JsonApiAdapter,
 }
 
 
@@ -53,6 +55,7 @@ __all__ = [
     "BaseAdapter",
     "CustomAdapter",
     "GreenhouseAdapter",
+    "JsonApiAdapter",
     "LeverAdapter",
     "NormalizedJob",
     "PersonioAdapter",

@@ -21,7 +21,7 @@ from dateutil import parser as dateparser
 from loguru import logger
 
 from ._experience import parse_experience
-from ._text import detect_remote_type, strip_html
+from ._text import as_text, detect_remote_type, strip_html
 from .base import AdapterError, BaseAdapter, NormalizedJob, RawJob
 
 
@@ -68,7 +68,7 @@ class SmartRecruitersAdapter(BaseAdapter):
     def normalize(self, raw: RawJob, company) -> NormalizedJob:  # noqa: ANN001
         external_id = (raw.get("id") or raw.get("uuid") or "")
         external_id = str(external_id) if external_id else None
-        title = (raw.get("name") or "").strip()
+        title = as_text(raw.get("name"))
 
         # Build a stable apply URL from the company + posting id.
         token = (company.ats_identifier or "").strip()
@@ -88,15 +88,15 @@ class SmartRecruitersAdapter(BaseAdapter):
         department = None
         dept = raw.get("department") or {}
         if isinstance(dept, dict):
-            department = (dept.get("label") or dept.get("title") or "").strip() or None
+            department = as_text(dept.get("label") or dept.get("title")) or None
         function = raw.get("function") or {}
         if not department and isinstance(function, dict):
-            department = (function.get("label") or "").strip() or None
+            department = as_text(function.get("label")) or None
 
         employment_type = None
         emp = raw.get("typeOfEmployment") or {}
         if isinstance(emp, dict):
-            employment_type = (emp.get("label") or "").strip() or None
+            employment_type = as_text(emp.get("label")) or None
 
         # Description fields the list endpoint may carry:
         description_parts: list[str] = []
