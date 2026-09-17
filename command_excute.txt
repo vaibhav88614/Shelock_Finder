@@ -3,3 +3,9 @@ python run.py remove-companies --yes      # hard-delete the 4 removed cos from D
 python run.py seed                        # loads all adds/edits + Comcast fix
 python run.py infer-selectors --all-custom --playwright   # derive selectors for the 22 custom adds
 python run.py serve                       # or: python run.py scrape
+
+
+git pull
+python -m pip install -r backend/requirements.txt
+python run.py seed
+python run.py scrape
